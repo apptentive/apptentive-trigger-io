@@ -21,6 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5866EE941746A56000A3D258 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE931746A56000A3D258 /* CoreTelephony.framework */; };
+		5866EE961746A5AC00A3D258 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE951746A5AC00A3D258 /* StoreKit.framework */; };
+		5866EE981746AAC500A3D258 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE971746AAC500A3D258 /* CoreText.framework */; };
+		5866EE9A1746AAE100A3D258 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE991746AAE100A3D258 /* CoreData.framework */; };
+		5866EE9C1746AB0E00A3D258 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE9B1746AB0E00A3D258 /* QuartzCore.framework */; };
 		B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826315C2A393006798D7 /* AssetsLibrary.framework */; };
 		B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826B15C2A44F006798D7 /* SystemConfiguration.framework */; };
 		B307826E15C2A47B006798D7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B307826D15C2A47B006798D7 /* assets */; };
@@ -65,6 +70,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5866EE931746A56000A3D258 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		5866EE951746A5AC00A3D258 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5866EE971746AAC500A3D258 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		5866EE991746AAE100A3D258 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5866EE9B1746AB0E00A3D258 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B307826315C2A393006798D7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B307826B15C2A44F006798D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B307826D15C2A47B006798D7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
@@ -85,6 +95,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5866EE9C1746AB0E00A3D258 /* QuartzCore.framework in Frameworks */,
+				5866EE9A1746AAE100A3D258 /* CoreData.framework in Frameworks */,
+				5866EE981746AAC500A3D258 /* CoreText.framework in Frameworks */,
+				5866EE961746A5AC00A3D258 /* StoreKit.framework in Frameworks */,
+				5866EE941746A56000A3D258 /* CoreTelephony.framework in Frameworks */,
 				B3F0CB92163AD60B005E099F /* libForgeModule.a in Frameworks */,
 				B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */,
 				B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */,
@@ -110,6 +125,7 @@
 		B3FC516C15C14B2A003574D9 = {
 			isa = PBXGroup;
 			children = (
+				5866EE9B1746AB0E00A3D258 /* QuartzCore.framework */,
 				B3E5837A162714AD00BD59DD /* ForgeModule.xcodeproj */,
 				B3FC518115C14B2A003574D9 /* ForgeInspector */,
 				B3FC517A15C14B2A003574D9 /* Frameworks */,
@@ -128,6 +144,10 @@
 		B3FC517A15C14B2A003574D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5866EE991746AAE100A3D258 /* CoreData.framework */,
+				5866EE971746AAC500A3D258 /* CoreText.framework */,
+				5866EE951746A5AC00A3D258 /* StoreKit.framework */,
+				5866EE931746A56000A3D258 /* CoreTelephony.framework */,
 				B307826B15C2A44F006798D7 /* SystemConfiguration.framework */,
 				B307826315C2A393006798D7 /* AssetsLibrary.framework */,
 				B3FC519415C14B3C003574D9 /* ForgeCore.bundle */,

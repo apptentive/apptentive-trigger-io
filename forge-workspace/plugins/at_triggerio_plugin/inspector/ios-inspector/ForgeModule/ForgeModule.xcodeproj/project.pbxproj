@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5866EE901746A3C500A3D258 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE7F1746A13500A3D258 /* libApptentiveConnect.a */; };
 		58DAC042174568CC007E5E26 /* alert_API.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E583941627155C00BD59DD /* alert_API.m */; };
 		58ED0C3A17455C5900A978F4 /* apptentive_plugin_API.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED0C3917455C5900A978F4 /* apptentive_plugin_API.m */; };
 		B31B6D5215C13D5200854074 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31B6D5115C13D5200854074 /* Foundation.framework */; };
@@ -41,6 +42,20 @@
 			remoteGlobalIDString = 49D1118C13341A7C00603373;
 			remoteInfo = ApptentiveResources;
 		};
+		5866EE8C1746A3B700A3D258 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 496DC37E1333D35600743F65;
+			remoteInfo = ApptentiveConnect;
+		};
+		5866EE8E1746A3BA00A3D258 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 49D1118B13341A7C00603373;
+			remoteInfo = ApptentiveResources;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5866EE901746A3C500A3D258 /* libApptentiveConnect.a in Frameworks */,
 				B3FC524815C17B2C003574D9 /* SystemConfiguration.framework in Frameworks */,
 				B3FC524215C177EA003574D9 /* AssetsLibrary.framework in Frameworks */,
 				B3FC51FF15C1523D003574D9 /* CoreGraphics.framework in Frameworks */,
@@ -164,6 +180,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				5866EE8F1746A3BA00A3D258 /* PBXTargetDependency */,
+				5866EE8D1746A3B700A3D258 /* PBXTargetDependency */,
 			);
 			name = ForgeModule;
 			productName = ForgeCore;
@@ -276,6 +294,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5866EE8D1746A3B700A3D258 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ApptentiveConnect;
+			targetProxy = 5866EE8C1746A3B700A3D258 /* PBXContainerItemProxy */;
+		};
+		5866EE8F1746A3BA00A3D258 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ApptentiveResources;
+			targetProxy = 5866EE8E1746A3BA00A3D258 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B31B6D5A15C13D5200854074 /* Debug */ = {
