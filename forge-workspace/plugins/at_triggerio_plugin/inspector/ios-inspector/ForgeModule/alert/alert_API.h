@@ -12,4 +12,8 @@
 
 + (void)show:(ForgeTask*)task text:(NSString *)text;
 
-@end
++ (void)succeed:(ForgeTask*)task;
++ (void)fail:(ForgeTask *)task;
++ (void)setDecelerationRate:(ForgeTask *)task decelerationRate:(NSNumber *)rate;
+
+ @end

@@ -10,9 +10,7 @@
 
 @interface apptentive_plugin_API : NSObject
 
-+ (void)succeed:(ForgeTask*)task;
-+ (void)fail:(ForgeTask *)task;
-
-+ (void)setDecelerationRate:(ForgeTask *)task decelerationRate:(NSNumber *)rate;
++ (void)initialName:(ForgeTask *)task;
++ (void)unreadMessageCount:(ForgeTask *)task;
 
 @end

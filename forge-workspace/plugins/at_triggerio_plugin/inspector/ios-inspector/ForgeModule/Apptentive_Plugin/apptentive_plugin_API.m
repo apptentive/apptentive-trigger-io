@@ -7,23 +7,20 @@
 //
 
 #import "apptentive_plugin_API.h"
+#import "ATConnect.h"
 
 @implementation apptentive_plugin_API
 
-+ (void)succeed:(ForgeTask *)task
++ (void)initialName:(ForgeTask *)task
 {
-    [task success:@"Your task succeeded"];
+    NSString *initialName =  [[ATConnect sharedConnection] initialName];
+    [task success:initialName];
 }
 
-+ (void)fail:(ForgeTask *)task
++(void)unreadMessageCount:(ForgeTask *)task
 {
-    [task error:@"Your task failed"];
-}
-
-+ (void)setDecelerationRate:(ForgeTask *)task decelerationRate:(NSNumber *)rate
-{
-    [[[ForgeApp sharedApp] webView] scrollView].decelerationRate = [rate floatValue];
-    [task success:[NSString stringWithFormat:@"Set deceleration rate to %f", [rate floatValue]]];
+    NSUInteger *unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
+    [task success:[NSNumber numberWithInteger:unreadMessageCount]];
 }
 
 @end
