@@ -19,7 +19,32 @@
 		B3FC524815C17B2C003574D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC524715C17B2C003574D9 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5866EE7E1746A13500A3D258 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 496DC37F1333D35600743F65;
+			remoteInfo = ApptentiveConnect;
+		};
+		5866EE801746A13500A3D258 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 496DC38C1333D35600743F65;
+			remoteInfo = ApptentiveConnectTests;
+		};
+		5866EE821746A13500A3D258 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 49D1118C13341A7C00603373;
+			remoteInfo = ApptentiveResources;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = Apptentive/ApptentiveConnect/ApptentiveConnect.xcodeproj; sourceTree = "<group>"; };
 		58ED0C3817455C5900A978F4 /* apptentive_plugin_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apptentive_plugin_API.h; path = Apptentive_Plugin/apptentive_plugin_API.h; sourceTree = "<group>"; };
 		58ED0C3917455C5900A978F4 /* apptentive_plugin_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = apptentive_plugin_API.m; path = Apptentive_Plugin/apptentive_plugin_API.m; sourceTree = "<group>"; };
 		B31B6D4E15C13D5200854074 /* libForgeModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libForgeModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +87,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5866EE791746A13500A3D258 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5866EE7F1746A13500A3D258 /* libApptentiveConnect.a */,
+				5866EE811746A13500A3D258 /* ApptentiveConnectTests.octest */,
+				5866EE831746A13500A3D258 /* ApptentiveResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		58ED0C3717455BFF00A978F4 /* Apptentive_Plugin */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +109,7 @@
 		B31B6D4315C13D5200854074 = {
 			isa = PBXGroup;
 			children = (
+				5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */,
 				58ED0C3717455BFF00A978F4 /* Apptentive_Plugin */,
 				B3E583921627155C00BD59DD /* alert */,
 				B31B6D5015C13D5200854074 /* Frameworks */,
@@ -173,6 +209,12 @@
 			mainGroup = B31B6D4315C13D5200854074;
 			productRefGroup = B31B6D4F15C13D5200854074 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5866EE791746A13500A3D258 /* Products */;
+					ProjectRef = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B31B6D4D15C13D5200854074 /* ForgeModule */,
@@ -180,6 +222,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5866EE7F1746A13500A3D258 /* libApptentiveConnect.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libApptentiveConnect.a;
+			remoteRef = 5866EE7E1746A13500A3D258 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5866EE811746A13500A3D258 /* ApptentiveConnectTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ApptentiveConnectTests.octest;
+			remoteRef = 5866EE801746A13500A3D258 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5866EE831746A13500A3D258 /* ApptentiveResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ApptentiveResources.bundle;
+			remoteRef = 5866EE821746A13500A3D258 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B31B6D6B15C1467100854074 /* Resources */ = {
