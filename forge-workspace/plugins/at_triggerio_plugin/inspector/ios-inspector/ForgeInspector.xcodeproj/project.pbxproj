@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		49AB22781746EB4000175F4D /* plugin.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3E58386162714AD00BD59DD /* plugin.bundle */; };
 		5866EE941746A56000A3D258 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE931746A56000A3D258 /* CoreTelephony.framework */; };
 		5866EE961746A5AC00A3D258 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE951746A5AC00A3D258 /* StoreKit.framework */; };
 		5866EE981746AAC500A3D258 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE971746AAC500A3D258 /* CoreText.framework */; };
@@ -260,6 +261,7 @@
 			files = (
 				B3FC519515C14B3C003574D9 /* ForgeCore.bundle in Resources */,
 				B307826E15C2A47B006798D7 /* assets in Resources */,
+				49AB22781746EB4000175F4D /* plugin.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

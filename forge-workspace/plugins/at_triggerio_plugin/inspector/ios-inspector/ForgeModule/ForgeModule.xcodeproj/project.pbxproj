@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49AB227C1746ED1300175F4D /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5866EE831746A13500A3D258 /* ApptentiveResources.bundle */; };
 		5866EE901746A3C500A3D258 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE7F1746A13500A3D258 /* libApptentiveConnect.a */; };
 		5866EEA01746B5EC00A3D258 /* apptentive_plugin_EventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 5866EE9F1746B5EC00A3D258 /* apptentive_plugin_EventListener.m */; };
 		58DAC042174568CC007E5E26 /* alert_API.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E583941627155C00BD59DD /* alert_API.m */; };
@@ -22,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		49AB22761746E9DE00175F4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 49D1118B13341A7C00603373;
+			remoteInfo = ApptentiveResources;
+		};
 		5866EE7E1746A13500A3D258 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */;
@@ -204,6 +212,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				49AB22771746E9DE00175F4D /* PBXTargetDependency */,
 			);
 			name = ForgeModuleResources;
 			productName = ForgeCoreResources;
@@ -275,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49AB227C1746ED1300175F4D /* ApptentiveResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +312,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		49AB22771746E9DE00175F4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ApptentiveResources;
+			targetProxy = 49AB22761746E9DE00175F4D /* PBXContainerItemProxy */;
+		};
 		5866EE8D1746A3B700A3D258 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ApptentiveConnect;
