@@ -1,0 +1,14 @@
+{
+	"description": "Steps performed at build time in order to enable plugin",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"additionalProperties": false,
+		"properties": {
+			"do": {
+				"required": true,
+				"type": "object"
+			}
+		}
+	}
+}

@@ -1,0 +1,7 @@
+{
+    "description": "My plugin template", 
+    "name": "at_triggerio_plugin", 
+    "platform_version": "v1.4.34", 
+    "uuid": "04f7f62ebe5011e29e6012313d00dc45", 
+    "version": "0.1"
+}

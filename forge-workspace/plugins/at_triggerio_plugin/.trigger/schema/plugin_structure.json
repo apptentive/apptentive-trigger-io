@@ -1,0 +1,77 @@
+{
+	"type": "directory",
+	"children": {
+		"manifest.json": {
+			"type": "file",
+			"required": true,
+			"validators": {
+				"json_schema": {
+					"schema": "manifest"
+				}
+			}
+		},
+		"android": {
+			"type": "directory",
+			"children": {
+				"plugin.jar": {
+					"type": "file",
+					"required": true,
+					"validators": {
+						"android_plugin": {}
+					}
+				},
+				"build_steps.json": {
+					"type": "file",
+					"validators": {
+						"json_schema": {
+							"schema": "build_steps"
+						}
+					}
+				},
+				"res": {
+					"type": "directory",
+					"additionalChildren": {
+						"type": "directory",
+						"additionalChildren": {
+							"type": "file"
+						}
+					}
+				},
+				"libs": {
+					"type": "directory"
+				}
+			},
+			"additionalChildren": false
+		},
+		"ios": {
+			"type": "directory",
+			"children": {
+				"plugin.a": {
+					"type": "file",
+					"required": true,
+					"validators": {
+						"ios_plugin": {}
+					}
+				},
+				"build_steps.json": {
+					"type": "file",
+					"validators": {
+						"json_schema": {
+							"schema": "build_steps"
+						}
+					}
+				},
+				"bundles": {
+					"type": "directory",
+					"additionalChildren": {
+						"validators": {
+							"valid_bundle": {}
+						}
+					}
+				}
+			},
+			"additionalChildren": false
+		}
+	},
+	"additionalChildren": false
+}

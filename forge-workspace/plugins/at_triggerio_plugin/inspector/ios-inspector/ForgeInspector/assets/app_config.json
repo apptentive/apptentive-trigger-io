@@ -1,0 +1,8 @@
+{
+  "modules": [
+    "inspector", 
+    "alert", 
+    "at_triggerio_plugin",
+    "apptentive_plugin"
+  ]
+}
