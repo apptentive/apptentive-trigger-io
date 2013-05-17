@@ -17,7 +17,25 @@
     [task success:initialName];
 }
 
-+(void)unreadMessageCount:(ForgeTask *)task
++ (void)setInitialName:(ForgeTask *)task initialName:(NSString *)initialName
+{
+    [[ATConnect sharedConnection] setInitialName:initialName];
+    [task success:initialName];
+}
+
++ (void)initialEmailAddress:(ForgeTask *)task
+{
+    NSString *initialEmailAddress =  [[ATConnect sharedConnection] initialEmailAddress];
+    [task success:initialEmailAddress];
+}
+
++ (void)setInitialEmailAddress:(ForgeTask *)task initialEmailAddress:(NSString *)initialEmailAddress
+{
+    [[ATConnect sharedConnection] setInitialEmailAddress:initialEmailAddress];
+    [task success:initialEmailAddress];
+}
+
++ (void)unreadMessageCount:(ForgeTask *)task
 {
     NSUInteger *unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
     [task success:[NSNumber numberWithInteger:unreadMessageCount]];
