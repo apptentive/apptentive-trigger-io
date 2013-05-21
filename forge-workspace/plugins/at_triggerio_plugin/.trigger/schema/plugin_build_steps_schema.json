@@ -5,6 +5,10 @@
 		"type": "object",
 		"additionalProperties": false,
 		"properties": {
+			"when": {
+				"required": false,
+				"type": "object"
+			},
 			"do": {
 				"required": true,
 				"type": "object"

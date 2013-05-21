@@ -5,13 +5,17 @@ import shutil
 import zipfile
 import hashlib
 import sys
+import subprocess
+import re
 from datetime import datetime
 
-from trigger import forge_tool
-import build_steps
+import build
+import utils
 
 def _hash_folder(hash, path, ignore=[]):
 	'''Update a hash with all of the file/dirnames in a folder as well as all the file contents that aren't in ignore'''
+	if not os.path.exists(path):
+		return
 	for dirpath, dirnames, filenames in os.walk(path):
 		for filename in filenames:
 			full_path = os.path.join(dirpath, filename)
@@ -39,6 +43,10 @@ def _update_target(target, cookies):
 
 	# If we don't have an inspector build... get it
 	if not os.path.exists(os.path.join(plugin_dynamic_path, 'cache', '%s.zip' % target)):
+
+		# Do this import here so we can run without the toolkit
+		from trigger import forge_tool
+
 		with open(os.path.join(plugin_dynamic_path, 'platform_version.txt')) as platform_version_file:
 			platform_version = platform_version_file.read()
 
@@ -56,20 +64,20 @@ def _update_target(target, cookies):
 		})
 		data['target'] = target
 
-		build = {
+		build_state = {
 			"state": "pending"
 		}
-		while build['state'] in ('pending', 'working'):
-			build = forge_tool.singleton.remote._api_post('plugin/inspector_build/', data=data, cookies=cookies)
-			data['id'] = build['id']
+		while build_state['state'] in ('pending', 'working'):
+			build_state = forge_tool.singleton.remote._api_post('plugin/inspector_build/', data=data, cookies=cookies)
+			data['id'] = build_state['id']
 
-			if build['state'] in ('pending', 'working'):
+			if build_state['state'] in ('pending', 'working'):
 				time.sleep(3)
 
-		if build['state'] != 'complete':
-			raise Exception('build failed: %s' % build['log_output'])
+		if build_state['state'] != 'complete':
+			raise Exception('build failed: %s' % build_state['log_output'])
 
-		forge_tool.singleton.remote._get_file(build['file_output'], os.path.join(plugin_dynamic_path, 'cache', '%s.zip' % target))
+		forge_tool.singleton.remote._get_file(build_state['file_output'], os.path.join(plugin_dynamic_path, 'cache', '%s.zip' % target))
 
 	# If we already have an inspector move it out of the way
 	moved_to = None
@@ -87,6 +95,8 @@ def hash_android():
 	'''Get the current hash for the Android plugin files'''
 	hash = hashlib.sha1()
 	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'android')), ['plugin.jar'])
+	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'tests')))
+	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'javascript')))
 	with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'platform_version.txt'))) as platform_version_file:
 		hash.update(platform_version_file.read())
 	return hash.hexdigest()
@@ -112,25 +122,124 @@ def update_android(cookies, **kw):
 			shutil.copytree(os.path.join(previous_path, 'src'), os.path.join(current_path, 'ForgeModule', 'src'))
 		else:
 			shutil.copytree(os.path.join(previous_path, 'ForgeModule', 'src'), os.path.join(current_path, 'ForgeModule', 'src'))
-		shutil.rmtree(os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
-		if os.path.exists(os.path.join(previous_path, 'assets', 'src')):
-			shutil.copytree(os.path.join(previous_path, 'assets', 'src'), os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
-		else:
-			shutil.copytree(os.path.join(previous_path, 'ForgeInspector', 'assets', 'src'), os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
+
+	# Prepare example module code
+	with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'manifest.json'))) as manifest_file:
+		manifest = json.load(manifest_file)
+	
+	plugin_name = str(manifest['name'])
+
+	for root, dirnames, filenames in os.walk(os.path.join(current_path, 'ForgeModule')):
+		for filename in filenames:
+			with open(os.path.join(root, filename), 'rb') as source:
+				lines = source.readlines()
+			if 'templatemodule' in os.path.join(root, filename):
+				os.remove(os.path.join(root, filename))
+				old_dir = os.path.split(os.path.join(root, filename))[0]
+				if len(os.listdir(old_dir)) == 0:
+					os.removedirs(old_dir)
+				new_dir = os.path.split(os.path.join(root, filename).replace('templatemodule', plugin_name))[0]
+				if not os.path.isdir(new_dir):
+					os.makedirs(new_dir)
+			with open(os.path.join(root, filename).replace('templatemodule', plugin_name), 'wb') as output:
+				for line in lines:
+					output.write(line.replace('templatemodule', plugin_name))
 
 	# Update inspector with plugin specific build details
 	try:
-		build_steps.apply_plugin_to_android_project(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin')), os.path.join(current_path, 'ForgeInspector'), skip_jar=True)
+		build.apply_plugin_to_android_project(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin')), os.path.join(current_path, 'ForgeInspector'), skip_jar=True, example_config=True, include_tests=True, local_build_steps=os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
+		# In the Android inspectors case we want any libs to be attached to the ForgeModule project, not the ForgeInspector
+		if os.path.exists(os.path.join(current_path, 'ForgeInspector', 'libs')):
+			for file_ in os.listdir(os.path.join(current_path, 'ForgeInspector', 'libs')):
+				if not file_.startswith("."):
+					shutil.move(
+						os.path.join(current_path, 'ForgeInspector', 'libs', file_),
+						os.path.join(current_path, 'ForgeModule', 'libs'))
+
+
+		if os.path.exists(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'android', 'res'))):
+
+			if not os.path.exists(os.path.join(current_path, 'ForgeModule', 'trigger-gen')):
+				os.makedirs(os.path.join(current_path, 'ForgeModule', 'trigger-gen'))
+
+			# Generate magic R.java
+			if sys.platform.startswith('darwin'):
+				aapt_exec = 'aapt_osx'
+			elif sys.platform.startswith('win'):
+				aapt_exec = 'aapt.exe'
+			else:
+				aapt_exec = 'aapt_linux'
+
+			with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'platform_version.txt'))) as platform_version_file:
+				platform_version = platform_version_file.read().strip()
+
+			subprocess.check_call([
+				utils.ensure_lib_available(cookies, platform_version, aapt_exec),
+				'package', '-m',
+				'-M', os.path.join(current_path, 'ForgeModule', 'AndroidManifest.xml'),
+				'-S', os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'android', 'res')),
+				'-J', os.path.join(current_path, 'ForgeModule', 'trigger-gen'),
+				'-I', utils.ensure_lib_available(cookies, platform_version, 'android-platform.apk')
+				])
+
+		
+			for root, dirnames, filenames in os.walk(os.path.join(current_path, 'ForgeModule', 'trigger-gen')):
+				for filename in filenames: 
+					# Tweak R.java to be magic
+					with open(os.path.join(root, filename)) as source:
+						content = source.read()
+
+					content = content.replace("final ", "")
+ 					content = content.replace("public class R", """import java.lang.reflect.Field;
+
+public class R""")
+					content = re.sub(r'\/\* AUTO-GENERATED.*?\*\/', '''/* This file was generated as part of a ForgeModule.
+ *
+ * You may move this file to another package if you require, however do not modify its contents.
+ * To add more resources rebuild the inspector project.
+ */''', content, flags=re.MULTILINE | re.DOTALL)
+
+					content = re.sub('''    public static class (\w+) {(.*?)\n    }''', r'''    public static class \1 {\2
+        static {
+            try {
+                Class<?> realR = Class.forName("io.trigger.forge.android.inspector.R");
+                for (Class<?> c : realR.getClasses()) {
+                    if (c.getSimpleName().equals("\1")) {
+                        for (Field f : \1.class.getDeclaredFields()) {
+                            try {
+                                f.set(null, c.getDeclaredField(f.getName()).get(null));
+                            } catch (IllegalArgumentException e) {
+                            } catch (IllegalAccessException e) {
+                            } catch (NoSuchFieldException e) {
+                            }
+                        }
+                        break;
+                    }
+                }               
+            } catch (ClassNotFoundException e) {
+            }
+        }
+    }''', content, flags=re.MULTILINE | re.DOTALL)
+
+					with open(os.path.join(root, filename), 'w') as output:
+						output.write(content)
+
 	except Exception as e:
 		shutil.rmtree(current_path)
-		shutil.move(previous_path, current_path)
-		raise Exception("Applying build steps failed, check build steps and re-update inspector: %s" % e)
+		try:
+			raise
+			#raise Exception("Applying build steps failed, check build steps and re-update inspector: %s" % e)
+		finally:
+			try:
+				shutil.move(previous_path, current_path)
+			except Exception:
+				pass
 
 	# Prefix eclipse project names with plugin name
 	with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'manifest.json'))) as manifest_file:
 		manifest = json.load(manifest_file)
 		plugin_name = manifest['name']
-	for project in ('ForgeCore', 'ForgeInspector', 'ForgeModule'):
+	for project in ('ForgeInspector', 'ForgeModule'):
 		with open(os.path.join(current_path, project, '.project')) as project_file:
 			project_conf = project_file.read()
 		project_conf = project_conf.replace('<name>Forge', '<name>%s_Forge' % plugin_name)
@@ -142,9 +251,11 @@ def update_android(cookies, **kw):
 		hash_file.write(hash_android())
 
 def hash_ios():
-	'''Get the current hash for the Android plugin files'''
+	'''Get the current hash for the iOS plugin files'''
 	hash = hashlib.sha1()
 	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'ios')), ['plugin.a'])
+	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'tests')))
+	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'javascript')))
 	with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'platform_version.txt'))) as platform_version_file:
 		hash.update(platform_version_file.read())
 	return hash.hexdigest()
@@ -170,17 +281,76 @@ def update_ios(cookies, **kw):
 	if previous_path is not None:
 		shutil.rmtree(os.path.join(current_path, 'ForgeModule'))
 		shutil.copytree(os.path.join(previous_path, 'ForgeModule'), os.path.join(current_path, 'ForgeModule'))
-		shutil.rmtree(os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
-		shutil.copytree(os.path.join(previous_path, 'ForgeInspector', 'assets', 'src'), os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
+	else:
+		# Prepare example module code
+		with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'manifest.json'))) as manifest_file:
+			manifest = json.load(manifest_file)
+		
+		plugin_name = str(manifest['name'])
+
+		for root, dirnames, filenames in os.walk(os.path.join(current_path, 'ForgeModule')):
+			for filename in filenames:
+				with open(os.path.join(root, filename), 'r') as source:
+					lines = source.readlines()
+				if 'templatemodule' in filename:
+					os.remove(os.path.join(root, filename))
+				with open(os.path.join(root, filename.replace('templatemodule', plugin_name)), 'w') as output:
+					for line in lines:
+						output.write(line.replace('templatemodule', plugin_name))
 
 	# Update inspector with plugin specific build details
 	try:
-		build_steps.apply_plugin_to_ios_project(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin')), current_path, skip_a=True)
+		build.apply_plugin_to_ios_project(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin')), current_path, skip_a=True, example_config=True, include_tests=True, local_build_steps=os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
 	except Exception as e:
 		shutil.rmtree(current_path)
-		shutil.move(previous_path, current_path)
-		raise Exception("Applying build steps failed, check build steps and re-update inspector: %s" % e)
+		try:
+			raise
+			#raise Exception("Applying build steps failed, check build steps and re-update inspector: %s" % e)
+		finally:
+			try:
+				shutil.move(previous_path, current_path)
+			except Exception:
+				pass
 
 	# Create hash for inspector
 	with open(os.path.join(current_path, '.hash'), 'w') as hash_file:
 		hash_file.write(hash_ios())
+
+def hash_osx():
+	'''Get the current hash for the Android plugin files'''
+	hash = hashlib.sha1()
+	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'tests')))
+	_hash_folder(hash, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin', 'javascript')))
+	with open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'platform_version.txt'))) as platform_version_file:
+		hash.update(platform_version_file.read())
+	return hash.hexdigest()
+
+def update_osx(cookies, **kw):
+	if not sys.platform.startswith('darwin'):
+		raise Exception("OSX inspector can only be used on OS X.")
+
+	previous_path = _update_target('osx-inspector', cookies=cookies)
+	current_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'inspector', 'osx-inspector'))
+
+	# If we're updating copy the plugin source from the previous inspector
+	if previous_path is not None:
+		shutil.rmtree(os.path.join(current_path, 'ForgeModule'))
+		shutil.copytree(os.path.join(previous_path, 'ForgeModule'), os.path.join(current_path, 'ForgeModule'))
+
+	# Update inspector with plugin specific build details
+	try:
+		build.apply_plugin_to_osx_project(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'plugin')), current_path, skip_framework=True, example_config=True, include_tests=True, local_build_steps=os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
+	except Exception:
+		shutil.rmtree(current_path)
+		try:
+			raise
+			#raise Exception("Applying build steps failed, check build steps and re-update inspector: %s" % e)
+		finally:
+			try:
+				shutil.move(previous_path, current_path)
+			except Exception:
+				pass
+
+	# Create hash for inspector
+	with open(os.path.join(current_path, '.hash'), 'w') as hash_file:
+		hash_file.write(hash_osx())

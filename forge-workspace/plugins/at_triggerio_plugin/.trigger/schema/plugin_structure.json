@@ -10,6 +10,33 @@
 				}
 			}
 		},
+		"config_schema.json": {
+			"type": "file"
+		},
+		"config_example.json": {
+			"type": "file"
+		},
+		"javascript": {
+			"type": "directory",
+			"children": {
+				"plugin.js": {
+					"type": "file",
+					"required": true
+				}
+			},
+			"additionalChildren": false
+		},
+		"tests": {
+			"type": "directory",
+			"children": {
+				"automated.js": {
+					"type": "file"
+				},
+				"interactive.js": {
+					"type": "file"
+				}
+			}
+		},
 		"android": {
 			"type": "directory",
 			"children": {

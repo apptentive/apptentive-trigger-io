@@ -20,6 +20,21 @@ def create_template(uuid, name, path, **kw):
 
 		json.dump(manifest, manifest_file, indent=4, sort_keys=True)
 
+	# Copy template module
+	template_path = os.path.abspath(os.path.join(os.path.split(__file__)[0],'templatemodule'))
+
+	for root, dirnames, filenames in os.walk(template_path):
+		for filename in filenames:
+			relative_path = os.path.join(root, filename)[len(template_path)+1:]
+			with open(os.path.join(root, filename), 'r') as source:
+				lines = source.readlines()
+			new_dir = os.path.split(os.path.join(path, 'plugin', relative_path.replace('templatemodule', name)))[0]
+			if not os.path.isdir(new_dir):
+				os.makedirs(new_dir)
+			with open(os.path.join(path, 'plugin', relative_path.replace('templatemodule', name)), 'w') as output:
+				for line in lines:
+					output.write(line.replace('templatemodule', name))
+
 	return load(path, manifest)
 
 def load(path, manifest, **kw):

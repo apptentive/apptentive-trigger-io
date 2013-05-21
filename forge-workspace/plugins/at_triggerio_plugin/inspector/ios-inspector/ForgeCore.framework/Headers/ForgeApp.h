@@ -29,5 +29,8 @@
 + (ForgeApp*)sharedApp;
 - (id)nativeEvent:(SEL)selector withArgs:(NSArray*)args;
 - (void)event:(NSString*)name withParam:(id)params;
+- (NSDictionary*)configForPlugin:(NSString*)name;
+- (NSString*)assetsFolderLocationWithPrefs:(NSUserDefaults*)prefs;
+- (NSString*)bundleLocationRelativeToAssets;
 
 @end

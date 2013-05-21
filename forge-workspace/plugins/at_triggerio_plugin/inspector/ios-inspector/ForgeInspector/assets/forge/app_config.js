@@ -1,0 +1,1 @@
+window.forge = {}; window.forge.config = {"plugins": {"inspector": {"hash": "notahash"}, "at_triggerio_plugin": {"hash": "examplehash"}}};

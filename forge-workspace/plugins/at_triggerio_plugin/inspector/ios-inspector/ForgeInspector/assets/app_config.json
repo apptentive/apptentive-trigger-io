@@ -1,8 +1,1 @@
-{
-  "modules": [
-    "inspector", 
-    "alert", 
-    "at_triggerio_plugin",
-    "apptentive_plugin"
-  ]
-}
+{"plugins": {"inspector": {"hash": "notahash"}, "at_triggerio_plugin": {"hash": "examplehash"}}}

@@ -1,6 +1,13 @@
 # XXX should consolidate this with lib
+import os
+import sys
+import subprocess
+import json
+import hashlib
+import urlparse
+import stat
+from os import path
 import logging
-
 
 LOG = logging.getLogger(__name__)
 
@@ -90,3 +97,83 @@ def _handle_all(obj, steps, fn, allow_set):
 # End data transform
 #
 # # # # # # # # # # # # # # # # # # # 
+
+class PopenWithoutNewConsole(subprocess.Popen):
+	"""Wrapper around Popen that adds the appropriate options to prevent launching
+	a new console window everytime we want to launch a subprocess.
+	"""
+	_old_popen = subprocess.Popen
+
+	def __init__(self, *args, **kwargs):
+		if sys.platform.startswith("win") and 'startupinfo' not in kwargs:
+			startupinfo = subprocess.STARTUPINFO()
+			startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+			startupinfo.wShowWindow = subprocess.SW_HIDE
+			kwargs['startupinfo'] = startupinfo
+
+		self._old_popen.__init__(self, *args, **kwargs)
+
+def ensure_lib_available(cookies, platform_version, file):
+	plugin_dynamic_path = path.split(path.abspath(__file__))[0]
+
+	# In case of forge-inspector check for file
+	server_path = path.abspath(path.join(plugin_dynamic_path, '..', '..', '..', '..', 'generate', 'lib', file))
+	if path.isfile(server_path):
+		return server_path
+
+	lib_dir = path.abspath(path.join(plugin_dynamic_path, '..', '..', '.lib'))
+	hash_path = path.abspath(path.join(plugin_dynamic_path, '..', 'hash.json'))
+	if not path.exists(lib_dir):
+		os.makedirs(lib_dir)
+		
+	# Hide directory on windows
+	if sys.platform == 'win32':
+		try:
+			PopenWithoutNewConsole(['attrib', '+h', lib_dir]).wait()
+		except Exception:
+			# don't care if we fail to hide the templates dir
+			pass
+	
+	from trigger import forge_tool
+	remote = forge_tool.singleton.remote
+
+	server_details = urlparse.urlparse(remote.server)	
+
+	if not path.exists(hash_path):
+		url = "{protocol}://{netloc}/lib-static/{platform_version}/{file}".format(
+			protocol=server_details.scheme,
+			netloc=server_details.netloc,
+			platform_version=platform_version,
+			file='hash.json'
+		)
+		remote._get_file(url, hash_path, cookies=cookies)
+
+	with open(hash_path, 'r') as hash_file:
+		hashes = json.load(hash_file)
+	
+	file_path = path.join(lib_dir, file)
+
+	if path.exists(file_path) and file in hashes:
+		# Check hash
+		with open(file_path, 'rb') as cur_file:
+			hash = hashlib.md5(cur_file.read()).hexdigest()
+			if hash == hashes[file]:
+				# File exists and is correct
+				LOG.debug("File: %s, already downloaded and correct." % file)
+				return file_path
+
+	# File doesn't exist, or has the wrong hash or has no known hash - download
+	LOG.info("Downloading lib file: %s, this will only happen when a new file is available." % file)
+	
+	url = "{protocol}://{netloc}/lib-static/{platform_version}/{file}".format(
+		protocol=server_details.scheme,
+		netloc=server_details.netloc,
+		platform_version=platform_version,
+		file=file
+	)
+	remote._get_file(url, file_path, cookies=cookies)
+	
+	# Make file executable.
+	os.chmod(file_path, stat.S_IRUSR | stat.S_IWUSR | stat.S_IXUSR | stat.S_IRGRP | stat.S_IWGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
+	
+	return file_path

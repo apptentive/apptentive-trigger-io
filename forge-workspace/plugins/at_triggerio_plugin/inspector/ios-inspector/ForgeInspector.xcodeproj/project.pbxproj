@@ -21,15 +21,20 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		49AB22781746EB4000175F4D /* plugin.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3E58386162714AD00BD59DD /* plugin.bundle */; };
-		5866EE941746A56000A3D258 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE931746A56000A3D258 /* CoreTelephony.framework */; };
-		5866EE961746A5AC00A3D258 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE951746A5AC00A3D258 /* StoreKit.framework */; };
-		5866EE981746AAC500A3D258 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE971746AAC500A3D258 /* CoreText.framework */; };
-		5866EE9A1746AAE100A3D258 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE991746AAE100A3D258 /* CoreData.framework */; };
-		5866EE9C1746AB0E00A3D258 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE9B1746AB0E00A3D258 /* QuartzCore.framework */; };
 		B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826315C2A393006798D7 /* AssetsLibrary.framework */; };
 		B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826B15C2A44F006798D7 /* SystemConfiguration.framework */; };
 		B307826E15C2A47B006798D7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B307826D15C2A47B006798D7 /* assets */; };
+		B33F897B171479080050FB45 /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8970171479080050FB45 /* Default-568h@2x~iphone.png */; };
+		B33F897C171479080050FB45 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8971171479080050FB45 /* Default-Landscape@2x~ipad.png */; };
+		B33F897D171479080050FB45 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8972171479080050FB45 /* Default-Landscape~ipad.png */; };
+		B33F897E171479080050FB45 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8973171479080050FB45 /* Default-Portrait@2x~ipad.png */; };
+		B33F897F171479080050FB45 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8974171479080050FB45 /* Default-Portrait~ipad.png */; };
+		B33F8980171479080050FB45 /* Default@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8975171479080050FB45 /* Default@2x~iphone.png */; };
+		B33F8981171479080050FB45 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8976171479080050FB45 /* Default~iphone.png */; };
+		B33F8982171479080050FB45 /* ipad-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8977171479080050FB45 /* ipad-retina.png */; };
+		B33F8983171479080050FB45 /* ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8978171479080050FB45 /* ipad.png */; };
+		B33F8984171479080050FB45 /* normal.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F8979171479080050FB45 /* normal.png */; };
+		B33F8985171479080050FB45 /* retina.png in Resources */ = {isa = PBXBuildFile; fileRef = B33F897A171479080050FB45 /* retina.png */; };
 		B3F0CB92163AD60B005E099F /* libForgeModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3E58384162714AD00BD59DD /* libForgeModule.a */; };
 		B3FC517C15C14B2A003574D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC517B15C14B2A003574D9 /* UIKit.framework */; };
 		B3FC517E15C14B2A003574D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FC517D15C14B2A003574D9 /* Foundation.framework */; };
@@ -71,14 +76,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5866EE931746A56000A3D258 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		5866EE951746A5AC00A3D258 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		5866EE971746AAC500A3D258 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		5866EE991746AAE100A3D258 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		5866EE9B1746AB0E00A3D258 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B307826315C2A393006798D7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B307826B15C2A44F006798D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B307826D15C2A47B006798D7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		B33F8970171479080050FB45 /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		B33F8971171479080050FB45 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		B33F8972171479080050FB45 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		B33F8973171479080050FB45 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		B33F8974171479080050FB45 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		B33F8975171479080050FB45 /* Default@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x~iphone.png"; sourceTree = "<group>"; };
+		B33F8976171479080050FB45 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
+		B33F8977171479080050FB45 /* ipad-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-retina.png"; sourceTree = "<group>"; };
+		B33F8978171479080050FB45 /* ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad.png; sourceTree = "<group>"; };
+		B33F8979171479080050FB45 /* normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal.png; sourceTree = "<group>"; };
+		B33F897A171479080050FB45 /* retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retina.png; sourceTree = "<group>"; };
 		B3E5837A162714AD00BD59DD /* ForgeModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ForgeModule.xcodeproj; path = ForgeModule/ForgeModule.xcodeproj; sourceTree = SOURCE_ROOT; };
 		B3FC517715C14B2A003574D9 /* ForgeInspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForgeInspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3FC517B15C14B2A003574D9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -96,11 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5866EE9C1746AB0E00A3D258 /* QuartzCore.framework in Frameworks */,
-				5866EE9A1746AAE100A3D258 /* CoreData.framework in Frameworks */,
-				5866EE981746AAC500A3D258 /* CoreText.framework in Frameworks */,
-				5866EE961746A5AC00A3D258 /* StoreKit.framework in Frameworks */,
-				5866EE941746A56000A3D258 /* CoreTelephony.framework in Frameworks */,
 				B3F0CB92163AD60B005E099F /* libForgeModule.a in Frameworks */,
 				B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */,
 				B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */,
@@ -126,7 +132,6 @@
 		B3FC516C15C14B2A003574D9 = {
 			isa = PBXGroup;
 			children = (
-				5866EE9B1746AB0E00A3D258 /* QuartzCore.framework */,
 				B3E5837A162714AD00BD59DD /* ForgeModule.xcodeproj */,
 				B3FC518115C14B2A003574D9 /* ForgeInspector */,
 				B3FC517A15C14B2A003574D9 /* Frameworks */,
@@ -145,10 +150,6 @@
 		B3FC517A15C14B2A003574D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5866EE991746AAE100A3D258 /* CoreData.framework */,
-				5866EE971746AAC500A3D258 /* CoreText.framework */,
-				5866EE951746A5AC00A3D258 /* StoreKit.framework */,
-				5866EE931746A56000A3D258 /* CoreTelephony.framework */,
 				B307826B15C2A44F006798D7 /* SystemConfiguration.framework */,
 				B307826315C2A393006798D7 /* AssetsLibrary.framework */,
 				B3FC519415C14B3C003574D9 /* ForgeCore.bundle */,
@@ -172,6 +173,17 @@
 		B3FC518215C14B2A003574D9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B33F8970171479080050FB45 /* Default-568h@2x~iphone.png */,
+				B33F8971171479080050FB45 /* Default-Landscape@2x~ipad.png */,
+				B33F8972171479080050FB45 /* Default-Landscape~ipad.png */,
+				B33F8973171479080050FB45 /* Default-Portrait@2x~ipad.png */,
+				B33F8974171479080050FB45 /* Default-Portrait~ipad.png */,
+				B33F8975171479080050FB45 /* Default@2x~iphone.png */,
+				B33F8976171479080050FB45 /* Default~iphone.png */,
+				B33F8977171479080050FB45 /* ipad-retina.png */,
+				B33F8978171479080050FB45 /* ipad.png */,
+				B33F8979171479080050FB45 /* normal.png */,
+				B33F897A171479080050FB45 /* retina.png */,
 				B3FC518315C14B2A003574D9 /* ForgeInspector-Info.plist */,
 				B3FC518715C14B2A003574D9 /* main.m */,
 				B3FC518915C14B2A003574D9 /* ForgeInspector-Prefix.pch */,
@@ -216,9 +228,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				English,
-				es,
-				ru,
 			);
 			mainGroup = B3FC516C15C14B2A003574D9;
 			productRefGroup = B3FC517815C14B2A003574D9 /* Products */;
@@ -261,7 +270,17 @@
 			files = (
 				B3FC519515C14B3C003574D9 /* ForgeCore.bundle in Resources */,
 				B307826E15C2A47B006798D7 /* assets in Resources */,
-				49AB22781746EB4000175F4D /* plugin.bundle in Resources */,
+				B33F897B171479080050FB45 /* Default-568h@2x~iphone.png in Resources */,
+				B33F897C171479080050FB45 /* Default-Landscape@2x~ipad.png in Resources */,
+				B33F897D171479080050FB45 /* Default-Landscape~ipad.png in Resources */,
+				B33F897E171479080050FB45 /* Default-Portrait@2x~ipad.png in Resources */,
+				B33F897F171479080050FB45 /* Default-Portrait~ipad.png in Resources */,
+				B33F8980171479080050FB45 /* Default@2x~iphone.png in Resources */,
+				B33F8981171479080050FB45 /* Default~iphone.png in Resources */,
+				B33F8982171479080050FB45 /* ipad-retina.png in Resources */,
+				B33F8983171479080050FB45 /* ipad.png in Resources */,
+				B33F8984171479080050FB45 /* normal.png in Resources */,
+				B33F8985171479080050FB45 /* retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,7 +348,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -343,7 +361,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 armv7";
@@ -357,18 +375,16 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "i386 armv7";
 			};
 			name = Release;
@@ -382,9 +398,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ForgeInspector/ForgeInspector-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "ForgeInspector/ForgeInspector-Info.plist";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -399,9 +417,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ForgeInspector/ForgeInspector-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "ForgeInspector/ForgeInspector-Info.plist";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

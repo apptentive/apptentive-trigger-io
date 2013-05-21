@@ -18,6 +18,7 @@
 #import "ForgeEventListener.h"
 #import "ForgeFile.h"
 #import "ForgeUtil.h"
+#import "BorderControl.h"
 
 // Utilities
 #import "ALAsset+Data.h"

@@ -32,6 +32,8 @@
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
 + (void)applicationDidEnterBackground:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;
++ (void)applicationWillResume:(UIApplication *)application;
++ (void)applicationIsReloading;
 + (void)preFirstWebViewLoad;
 + (void)firstWebViewLoad;
 + (NSNumber*)application:(UIApplication *)application handleOpenURL:(NSURL *)url;
