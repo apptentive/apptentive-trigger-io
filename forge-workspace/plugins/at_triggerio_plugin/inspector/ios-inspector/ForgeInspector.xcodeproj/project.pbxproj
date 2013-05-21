@@ -21,6 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		58431A61174C2E9A008CD3A8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58431A60174C2E9A008CD3A8 /* CoreText.framework */; };
+		58431A63174C2EAD008CD3A8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58431A62174C2EAD008CD3A8 /* CoreTelephony.framework */; };
+		58431A65174C2EC3008CD3A8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58431A64174C2EC3008CD3A8 /* CoreData.framework */; };
+		58431A67174C2ED3008CD3A8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58431A66174C2ED3008CD3A8 /* StoreKit.framework */; };
+		58431A69174C2F09008CD3A8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58431A68174C2F09008CD3A8 /* QuartzCore.framework */; };
 		B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826315C2A393006798D7 /* AssetsLibrary.framework */; };
 		B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826B15C2A44F006798D7 /* SystemConfiguration.framework */; };
 		B307826E15C2A47B006798D7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B307826D15C2A47B006798D7 /* assets */; };
@@ -76,6 +81,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58431A60174C2E9A008CD3A8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		58431A62174C2EAD008CD3A8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		58431A64174C2EC3008CD3A8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		58431A66174C2ED3008CD3A8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		58431A68174C2F09008CD3A8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B307826315C2A393006798D7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B307826B15C2A44F006798D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B307826D15C2A47B006798D7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
@@ -107,6 +117,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58431A69174C2F09008CD3A8 /* QuartzCore.framework in Frameworks */,
+				58431A67174C2ED3008CD3A8 /* StoreKit.framework in Frameworks */,
+				58431A65174C2EC3008CD3A8 /* CoreData.framework in Frameworks */,
+				58431A63174C2EAD008CD3A8 /* CoreTelephony.framework in Frameworks */,
+				58431A61174C2E9A008CD3A8 /* CoreText.framework in Frameworks */,
 				B3F0CB92163AD60B005E099F /* libForgeModule.a in Frameworks */,
 				B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */,
 				B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */,
@@ -150,6 +165,11 @@
 		B3FC517A15C14B2A003574D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58431A68174C2F09008CD3A8 /* QuartzCore.framework */,
+				58431A66174C2ED3008CD3A8 /* StoreKit.framework */,
+				58431A64174C2EC3008CD3A8 /* CoreData.framework */,
+				58431A62174C2EAD008CD3A8 /* CoreTelephony.framework */,
+				58431A60174C2E9A008CD3A8 /* CoreText.framework */,
 				B307826B15C2A44F006798D7 /* SystemConfiguration.framework */,
 				B307826315C2A393006798D7 /* AssetsLibrary.framework */,
 				B3FC519415C14B3C003574D9 /* ForgeCore.bundle */,
