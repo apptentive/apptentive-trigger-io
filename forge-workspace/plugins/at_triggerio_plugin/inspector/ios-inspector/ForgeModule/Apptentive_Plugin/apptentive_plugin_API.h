@@ -10,12 +10,35 @@
 
 @interface apptentive_plugin_API : NSObject
 
-+ (void)initialName:(ForgeTask *)task;
-+ (void)setInitialName:(ForgeTask *)task initialName:(NSString *)initialName;
+{}
+#pragma mark - Shared Features
 
-+ (void)initialEmailAddress:(ForgeTask *)task;
-+ (void)setInitialEmailAddress:(ForgeTask *)task initialEmailAddress:(NSString *)initialEmailAddress;
++ (void)apiKey:(ForgeTask *)task;
++ (void)setApiKey:(ForgeTask *)task apiKey:(NSString *)apiKey;
 
++ (void)initialUserName:(ForgeTask *)task;
++ (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName;
+
++ (void)initialUserEmailAddress:(ForgeTask *)task;
++ (void)setInitialUserEmailAddress:(ForgeTask *)task initialUserEmailAddress:(NSString *)initialUserEmailAddress;
+
++ (void)addCustomData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key;
++ (void)removeCustomData:(ForgeTask *)task key:(NSString *)key;
+
+#pragma mark - Message Center
+
++ (void)presentMessageCenter:(ForgeTask *)task;
 + (void)unreadMessageCount:(ForgeTask *)task;
+
+#pragma mark - Ratings Flow
+
++ (void)logSignificantEvent:(ForgeTask *)task;
+
+#pragma mark - Surveys
+
++ (void)hasSurveyAvailableWithNoTags:(ForgeTask *)task;
++ (void)hasSurveyAvailableWithTags:(ForgeTask *)task tags:(NSSet *)tags;
++ (void)presentSurveyControllerWithNoTags:(ForgeTask *)task;
++ (void)presentSurveyControllerWithTags:(ForgeTask *)task tags:(NSSet *)tags;
 
 @end

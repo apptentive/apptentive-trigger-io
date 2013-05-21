@@ -10,4 +10,8 @@
 
 @interface apptentive_plugin_EventListener : ForgeEventListener
 
++ (void)unreadMessageCountChanged:(NSNotification *)notification;
++ (void)surveyBecameAvailable:(NSNotification *)notification;
++ (void)surveyWasSent:(NSNotification *)notification;
+
 @end

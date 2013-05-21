@@ -8,37 +8,110 @@
 
 #import "apptentive_plugin_API.h"
 #import "ATConnect.h"
+#import "ATAppRatingFlow.h"
+#import "ATSurveys.h"
 
 @implementation apptentive_plugin_API
 
-+ (void)initialName:(ForgeTask *)task
+{}
+#pragma mark - Shared Features
+
++ (void)apiKey:(ForgeTask *)task
 {
-    NSString *initialName =  [[ATConnect sharedConnection] initialName];
-    [task success:initialName];
+    NSString *apiKey = [[ATConnect sharedConnection] apiKey];
+    [task success:apiKey];
 }
 
-+ (void)setInitialName:(ForgeTask *)task initialName:(NSString *)initialName
++ (void)setApiKey:(ForgeTask *)task apiKey:(NSString *)apiKey
 {
-    [[ATConnect sharedConnection] setInitialName:initialName];
-    [task success:initialName];
+    [[ATConnect sharedConnection] setApiKey:apiKey];
+    [task success:nil];
 }
 
-+ (void)initialEmailAddress:(ForgeTask *)task
++ (void)initialUserName:(ForgeTask *)task
 {
-    NSString *initialEmailAddress =  [[ATConnect sharedConnection] initialEmailAddress];
-    [task success:initialEmailAddress];
+    NSString *initialUserName = [[ATConnect sharedConnection] initialUserName];
+    [task success:initialUserName];
 }
 
-+ (void)setInitialEmailAddress:(ForgeTask *)task initialEmailAddress:(NSString *)initialEmailAddress
++ (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName
 {
-    [[ATConnect sharedConnection] setInitialEmailAddress:initialEmailAddress];
-    [task success:initialEmailAddress];
+    [[ATConnect sharedConnection] setInitialUserName:initialUserName];
+    [task success:nil];
+}
+
++ (void)initialUserEmailAddress:(ForgeTask *)task
+{
+    NSString *initialUserEmailAddress = [[ATConnect sharedConnection] initialUserEmailAddress];
+    [task success:initialUserEmailAddress];
+}
+
++ (void)setInitialUserEmailAddress:(ForgeTask *)task initialUserEmailAddress:(NSString *)initialUserEmailAddress
+{
+    [[ATConnect sharedConnection] setInitialUserEmailAddress:initialUserEmailAddress];
+    [task success:nil];
+}
+
+//Trigger.io method parameters "can only be of type NSString, NSNumber, NSDictionary or NSArray"
+//Thus we may need dedicated methods for each type, rather than `(NSObject<NSCoding> *)`
++ (void)addCustomData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key
+{
+    [[ATConnect sharedConnection] addCustomData:object withKey:key];
+    [task success:nil];
+}
+
++ (void)removeCustomData:(ForgeTask *)task key:(NSString *)key
+{
+    [[ATConnect sharedConnection] removeCustomDataWithKey:key];
+    [task success:nil];
+}
+
+#pragma mark - Message Center
+
++ (void)presentMessageCenter:(ForgeTask *)task
+{    
+    [[ATConnect sharedConnection] presentMessageCenterFromViewController:[[ForgeApp sharedApp] viewController]];
+    [task success:nil];
 }
 
 + (void)unreadMessageCount:(ForgeTask *)task
 {
     NSUInteger *unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
     [task success:[NSNumber numberWithInteger:unreadMessageCount]];
+}
+
+#pragma mark - Ratings Flow
+
++ (void)logSignificantEvent:(ForgeTask *)task
+{
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    [task success:nil];
+}
+
+#pragma mark - Surveys
+
++ (void)hasSurveyAvailableWithNoTags:(ForgeTask *)task
+{
+    BOOL hasSurvey = [ATSurveys hasSurveyAvailableWithNoTags];
+    [task success:[NSNumber numberWithBool:hasSurvey]];
+}
+
++ (void)hasSurveyAvailableWithTags:(ForgeTask *)task tags:(NSSet *)tags
+{
+    BOOL hasSurvey = [ATSurveys hasSurveyAvailableWithTags:tags];
+    [task success:[NSNumber numberWithBool:hasSurvey]];
+}
+
++ (void)presentSurveyControllerWithNoTags:(ForgeTask *)task
+{
+    [ATSurveys presentSurveyControllerWithNoTagsFromViewController:[[ForgeApp sharedApp] viewController]];
+    [task success:nil];
+}
+
++ (void)presentSurveyControllerWithTags:(ForgeTask *)task tags:(NSSet *)tags
+{
+    [ATSurveys presentSurveyControllerWithTags:tags fromViewController:[[ForgeApp sharedApp] viewController]];
+    [task success:nil];
 }
 
 @end
