@@ -24,8 +24,8 @@
 		"reload": true
 	},
 	"plugins": {
-		"apptentive_plugin": {
-			"hash": "c7d32990ad6081b61a68db7a3d2edd09febaebd8",
+		"apptentive": {
+			"hash": "5249d9999f907739e871c9f0a58c05db94a7ebcd",
 			"type": "project"
 		}
 	}

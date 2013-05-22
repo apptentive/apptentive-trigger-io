@@ -1,3 +1,6 @@
 [submodule "forge-workspace/plugins/at_triggerio_plugin/inspector/ios-inspector/ForgeModule/Apptentive"]
 	path = forge-workspace/plugins/at_triggerio_plugin/inspector/ios-inspector/ForgeModule/Apptentive
 	url = https://pkamb@github.com/apptentive/apptentive-ios-private.git
+[submodule "forge-workspace/plugins/apptentive/inspector/ios-inspector/ForgeModule/Apptentive"]
+	path = forge-workspace/plugins/apptentive/inspector/ios-inspector/ForgeModule/Apptentive
+	url = https://pkamb@github.com/apptentive/apptentive-ios-private.git

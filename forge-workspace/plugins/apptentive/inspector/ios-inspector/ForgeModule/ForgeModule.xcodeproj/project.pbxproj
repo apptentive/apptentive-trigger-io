@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		49AB227C1746ED1300175F4D /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5866EE831746A13500A3D258 /* ApptentiveResources.bundle */; };
 		5866EE901746A3C500A3D258 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE7F1746A13500A3D258 /* libApptentiveConnect.a */; };
-		5866EEA01746B5EC00A3D258 /* apptentive_plugin_EventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 5866EE9F1746B5EC00A3D258 /* apptentive_plugin_EventListener.m */; };
+		5866EEA01746B5EC00A3D258 /* apptentive_EventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */; };
 		58DAC042174568CC007E5E26 /* alert_API.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E583941627155C00BD59DD /* alert_API.m */; };
-		58ED0C3A17455C5900A978F4 /* apptentive_plugin_API.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED0C3917455C5900A978F4 /* apptentive_plugin_API.m */; };
+		58ED0C3A17455C5900A978F4 /* apptentive_API.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED0C3917455C5900A978F4 /* apptentive_API.m */; };
 		B31B6D5215C13D5200854074 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31B6D5115C13D5200854074 /* Foundation.framework */; };
 		B31B6D6F15C1467100854074 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31B6D6E15C1467100854074 /* CoreFoundation.framework */; };
 		B37C3A5D162717A200B50A60 /* ForgeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B37C3A5C162717A200B50A60 /* ForgeCore.framework */; };
@@ -69,10 +69,10 @@
 
 /* Begin PBXFileReference section */
 		5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = Apptentive/ApptentiveConnect/ApptentiveConnect.xcodeproj; sourceTree = "<group>"; };
-		5866EE9E1746B5EC00A3D258 /* apptentive_plugin_EventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apptentive_plugin_EventListener.h; sourceTree = "<group>"; };
-		5866EE9F1746B5EC00A3D258 /* apptentive_plugin_EventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = apptentive_plugin_EventListener.m; sourceTree = "<group>"; };
-		58ED0C3817455C5900A978F4 /* apptentive_plugin_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apptentive_plugin_API.h; path = Apptentive_Plugin/apptentive_plugin_API.h; sourceTree = "<group>"; };
-		58ED0C3917455C5900A978F4 /* apptentive_plugin_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = apptentive_plugin_API.m; path = Apptentive_Plugin/apptentive_plugin_API.m; sourceTree = "<group>"; };
+		5866EE9E1746B5EC00A3D258 /* apptentive_EventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apptentive_EventListener.h; sourceTree = "<group>"; };
+		5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = apptentive_EventListener.m; sourceTree = "<group>"; };
+		58ED0C3817455C5900A978F4 /* apptentive_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apptentive_API.h; path = Apptentive_Plugin/apptentive_API.h; sourceTree = "<group>"; };
+		58ED0C3917455C5900A978F4 /* apptentive_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = apptentive_API.m; path = Apptentive_Plugin/apptentive_API.m; sourceTree = "<group>"; };
 		B31B6D4E15C13D5200854074 /* libForgeModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libForgeModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31B6D5115C13D5200854074 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B31B6D6D15C1467100854074 /* plugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = plugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,10 +127,10 @@
 		58ED0C3717455BFF00A978F4 /* Apptentive_Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				58ED0C3817455C5900A978F4 /* apptentive_plugin_API.h */,
-				58ED0C3917455C5900A978F4 /* apptentive_plugin_API.m */,
-				5866EE9E1746B5EC00A3D258 /* apptentive_plugin_EventListener.h */,
-				5866EE9F1746B5EC00A3D258 /* apptentive_plugin_EventListener.m */,
+				58ED0C3817455C5900A978F4 /* apptentive_API.h */,
+				58ED0C3917455C5900A978F4 /* apptentive_API.m */,
+				5866EE9E1746B5EC00A3D258 /* apptentive_EventListener.h */,
+				5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */,
 			);
 			name = Apptentive_Plugin;
 			sourceTree = "<group>";
@@ -297,8 +297,8 @@
 			files = (
 				B392D61816271BDE00926ECF /* alert_EventListener.m in Sources */,
 				58DAC042174568CC007E5E26 /* alert_API.m in Sources */,
-				58ED0C3A17455C5900A978F4 /* apptentive_plugin_API.m in Sources */,
-				5866EEA01746B5EC00A3D258 /* apptentive_plugin_EventListener.m in Sources */,
+				58ED0C3A17455C5900A978F4 /* apptentive_API.m in Sources */,
+				5866EEA01746B5EC00A3D258 /* apptentive_EventListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
