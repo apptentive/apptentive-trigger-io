@@ -10,6 +10,10 @@
 		49AB227C1746ED1300175F4D /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5866EE831746A13500A3D258 /* ApptentiveResources.bundle */; };
 		5866EE901746A3C500A3D258 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE7F1746A13500A3D258 /* libApptentiveConnect.a */; };
 		5866EEA01746B5EC00A3D258 /* apptentive_EventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */; };
+		58BA05AE174D35C20094AB9C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BA05AD174D35C20094AB9C /* CoreData.framework */; };
+		58BA05B1174D35CA0094AB9C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BA05B0174D35CA0094AB9C /* CoreText.framework */; };
+		58BA05B3174D35CF0094AB9C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BA05B2174D35CF0094AB9C /* CoreTelephony.framework */; };
+		58BA05B5174D35D40094AB9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BA05B4174D35D40094AB9C /* QuartzCore.framework */; };
 		58DAC042174568CC007E5E26 /* alert_API.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E583941627155C00BD59DD /* alert_API.m */; };
 		58ED0C3A17455C5900A978F4 /* apptentive_API.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ED0C3917455C5900A978F4 /* apptentive_API.m */; };
 		B31B6D5215C13D5200854074 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31B6D5115C13D5200854074 /* Foundation.framework */; };
@@ -71,6 +75,10 @@
 		5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = Apptentive/ApptentiveConnect/ApptentiveConnect.xcodeproj; sourceTree = "<group>"; };
 		5866EE9E1746B5EC00A3D258 /* apptentive_EventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apptentive_EventListener.h; sourceTree = "<group>"; };
 		5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = apptentive_EventListener.m; sourceTree = "<group>"; };
+		58BA05AD174D35C20094AB9C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		58BA05B0174D35CA0094AB9C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		58BA05B2174D35CF0094AB9C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		58BA05B4174D35D40094AB9C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		58ED0C3817455C5900A978F4 /* apptentive_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apptentive_API.h; path = Apptentive_Plugin/apptentive_API.h; sourceTree = "<group>"; };
 		58ED0C3917455C5900A978F4 /* apptentive_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = apptentive_API.m; path = Apptentive_Plugin/apptentive_API.m; sourceTree = "<group>"; };
 		B31B6D4E15C13D5200854074 /* libForgeModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libForgeModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +101,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58BA05B5174D35D40094AB9C /* QuartzCore.framework in Frameworks */,
+				58BA05B3174D35CF0094AB9C /* CoreTelephony.framework in Frameworks */,
+				58BA05B1174D35CA0094AB9C /* CoreText.framework in Frameworks */,
+				58BA05AE174D35C20094AB9C /* CoreData.framework in Frameworks */,
 				5866EE901746A3C500A3D258 /* libApptentiveConnect.a in Frameworks */,
 				B3FC524815C17B2C003574D9 /* SystemConfiguration.framework in Frameworks */,
 				B3FC524215C177EA003574D9 /* AssetsLibrary.framework in Frameworks */,
@@ -138,6 +150,10 @@
 		B31B6D4315C13D5200854074 = {
 			isa = PBXGroup;
 			children = (
+				58BA05B4174D35D40094AB9C /* QuartzCore.framework */,
+				58BA05B2174D35CF0094AB9C /* CoreTelephony.framework */,
+				58BA05B0174D35CA0094AB9C /* CoreText.framework */,
+				58BA05AD174D35C20094AB9C /* CoreData.framework */,
 				5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */,
 				58ED0C3717455BFF00A978F4 /* Apptentive_Plugin */,
 				B3E583921627155C00BD59DD /* alert */,

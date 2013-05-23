@@ -25,8 +25,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadMessageCountChanged:) name:ATMessageCenterUnreadCountChangedNotification object:nil];
 
     //Rating Flow
-    ATAppRatingFlow *sharedRatingFlow = [ATAppRatingFlow sharedRatingFlow];
-    sharedRatingFlow.appID = @"<your iTunes app ID>";
+    ATAppRatingFlow *sharedRatingFlow = [ATAppRatingFlow sharedRatingFlowWithAppID:@"<your iTunes app ID>"];
     [sharedRatingFlow showRatingFlowFromViewControllerIfConditionsAreMet:[[ForgeApp sharedApp] viewController]];
     
     //Survey Notifications
