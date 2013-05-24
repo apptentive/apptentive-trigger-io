@@ -82,6 +82,12 @@
 
 #pragma mark - Ratings Flow
 
++ (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task
+{
+    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:[[ForgeApp sharedApp] viewController]];
+    [task success:nil];
+}
+
 + (void)logSignificantEvent:(ForgeTask *)task
 {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];

@@ -21,11 +21,12 @@
 			]
 		},
 		"tools": true,
-		"reload": true
+		"reload": true,
+		"notification": true
 	},
 	"plugins": {
 		"apptentive": {
-			"hash": "38319393f9002bb589867042eef1035793553de1",
+			"hash": "be0dfca9fdd58323e08291dadff436e1b46f3406",
 			"type": "project"
 		}
 	}

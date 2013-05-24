@@ -32,6 +32,7 @@
 
 #pragma mark - Ratings Flow
 
++ (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task;
 + (void)logSignificantEvent:(ForgeTask *)task;
 
 #pragma mark - Surveys
