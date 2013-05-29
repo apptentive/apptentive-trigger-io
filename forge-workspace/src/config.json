@@ -26,8 +26,9 @@
 	},
 	"plugins": {
 		"apptentive": {
-			"hash": "d7d773983eb70a8afd8f9e6a448df0ff08df07ea",
+			"hash": "b357f82c7e74c48b55ad774c69563933b9e13287",
 			"type": "project"
 		}
-	}
+	},
+	"uuid": "62a29794c26911e2b36c12313d00dc45"
 }
