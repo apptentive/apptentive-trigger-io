@@ -1,6 +1,6 @@
 {
     "author": "peter@apptentive.com", 
-    "config_hash": "78d707e84c665af220f383aa94c77a3923cd4c7a", 
+    "config_hash": "781ba7ea3692c5caec0a0359984cebdb76265e23", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -35,7 +35,7 @@
     "platform_version": "v1.4.47", 
     "plugins": {
         "apptentive": {
-            "hash": "82072b318db4dded3994cbc7cf9ff079b8e88cec", 
+            "hash": "dcebe3b558218fe57d951bc077f0606b755c5b03", 
             "type": "project"
         }, 
         "contact": {
