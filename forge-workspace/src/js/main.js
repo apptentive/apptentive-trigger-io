@@ -20,7 +20,6 @@ $(function () {
 		forge.internal.call('apptentive.setApiKey',
 							{apiKey:$('input.setApiKey').val()}, 
 							function(success) {
-								//$('input.setApiKey').val("");
 							},
 							function(error) {
 								forge.logging.info("Error!");
@@ -95,9 +94,6 @@ $(function () {
 	});
 	
 	$('button.removeCustomData').click(function () {	
-		//var lab = $('input.removeCustomData').val(),
-		//forge.logging.log(lab);
-		
 		forge.internal.call('apptentive.removeCustomData',
 							{
 								key:$('input.removeCustomData').val(),
@@ -219,8 +215,3 @@ $(function () {
 	});
 	
 });
-
-
-
-
-
