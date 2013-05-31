@@ -1,46 +1,226 @@
 $(function () {
-	$('h1').click(function () {
-		forge.logging.info("clicked");
-		
-
+	
+	/*
+	//Shared
+	*/
+	
+	$('button.apiKey').click(function () {		
+		forge.internal.call('apptentive.apiKey',
+							{}, 
+							function(success) {
+								$('p.apiKey').text(success);
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	$('button.setApiKey').click(function () {		
 		forge.internal.call('apptentive.setApiKey',
-							{apiKey:"c751735c80f35059c7e474f5f61635e02751ae36819a30d47ee71efefc48d018"},
-							function(success)
-							{
-								forge.logging.info("Success setting API key");
+							{apiKey:$('input.setApiKey').val()}, 
+							function(success) {
+								//$('input.setApiKey').val("");
 							},
-							function(error)
-							{
-								forge.logging.info("Error setting API key");
+							function(error) {
+								forge.logging.info("Error!");
 							}
 		);
-
+	});
+	
+	$('button.initialUserName').click(function () {		
 		
-		forge.internal.call('apptentive.presentSurveyControllerWithNoTags',
-							{},
-							function(success)
-							{
-								forge.logging.info("Success presenting survey controller");
+		forge.logging.info("start!");
+		
+		forge.internal.call('apptentive.initialUserName',
+							{}, 
+							function(success) {
+								$('p.initialUserName').text(success);
 							},
-							function(error)
-							{
-								forge.logging.info("Error presenting survey controller");
+							function(error) {
+								forge.logging.info("Error!");
 							}
 		);
 	});
 	
-	$('p').click(function () {
 	
+	$('button.setInitialUserName').click(function () {		
+		forge.internal.call('apptentive.setInitialUserName',
+							{initialUserName:$('input.setInitialUserName').val()}, 
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	$('button.initialUserEmailAddress').click(function () {				
+		forge.internal.call('apptentive.initialUserEmailAddress',
+							{}, 
+							function(success) {								
+								$('p.initialUserEmailAddress').text(success);
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+		
+	});
+	
+	
+	$('button.setInitialUserEmailAddress').click(function () {				
+		forge.internal.call('apptentive.setInitialUserEmailAddress',
+							{initialUserEmailAddress:$('input.setInitialUserEmailAddress').val()}, 
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	$('button.addCustomData').click(function () {				
+		forge.internal.call('apptentive.addCustomData',
+							{
+								object:$('input.addCustomData.object').val(),
+								key:$('input.addCustomData.key').val()
+							}, 
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	$('button.removeCustomData').click(function () {	
+		//var lab = $('input.removeCustomData').val(),
+		//forge.logging.log(lab);
+		
+		forge.internal.call('apptentive.removeCustomData',
+							{
+								key:$('input.removeCustomData').val(),
+							}, 
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	/*
+	//Message Center
+	*/
+	
+	$('button.presentMessageCenter').click(function () {				
 		forge.internal.call('apptentive.presentMessageCenter',
-							{},
-							function(success)
-							{
-								forge.logging.info("Success presenting message center!");
+							{}, 
+							function(success) {
 							},
-							function(error)
-							{
-								forge.logging.info("Error presenting message center!");
+							function(error) {
+								forge.logging.info("Error!");
 							}
 		);
 	});
-})
+	
+	$('button.unreadMessageCount').click(function () {				
+		forge.internal.call('apptentive.unreadMessageCount',
+							{}, 
+							function(success) {
+								$('p.unreadMessageCount').text(success);
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	/*
+	//Ratings Flow
+	*/
+	
+	$('button.showRatingFlowIfConditionsAreMet').click(function () {						
+		forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet',
+							{}, 
+							function(success) {
+								
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	$('button.logSignificantEvent').click(function () {						
+		forge.internal.call('apptentive.logSignificantEvent',
+							{}, 
+							function(success) {
+								
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	/*
+	//Surveys
+	*/
+	
+	$('button.hasSurveyAvailableWithNoTags').click(function () {							
+		forge.internal.call('apptentive.hasSurveyAvailableWithNoTags',
+							{}, 
+							function(success) {
+								$('p.hasSurveyAvailableWithNoTags').text(success);
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	$('button.hasSurveyAvailableWithTags').click(function () {		
+		var surveyTags = $('input.hasSurveyAvailableWithTags').val().split(" ");
+		forge.internal.call('apptentive.hasSurveyAvailableWithTags',
+							{tags:surveyTags}, 
+							function(success) {
+								$('p.hasSurveyAvailableWithTags').text(success);
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	$('button.presentSurveyControllerWithNoTags').click(function () {		
+		forge.internal.call('apptentive.presentSurveyControllerWithNoTags',
+							{}, 
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+	
+	$('button.presentSurveyControllerWithTags').click(function () {	
+		var surveyTags = $('input.presentSurveyControllerWithTags').val().split(" ");
+		forge.internal.call('apptentive.presentSurveyControllerWithTags',
+							{tags:surveyTags}, 
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error!");
+							}
+		);
+	});
+	
+});
+
+
+
+
+

@@ -52,8 +52,6 @@
     [task success:nil];
 }
 
-//Trigger.io method parameters "can only be of type NSString, NSNumber, NSDictionary or NSArray"
-//Thus we may need dedicated methods for each type, rather than `(NSObject<NSCoding> *)`
 + (void)addCustomData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key
 {
     [[ATConnect sharedConnection] addCustomData:object withKey:key];

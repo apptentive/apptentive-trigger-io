@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "781ba7ea3692c5caec0a0359984cebdb76265e23", 
+    "config_hash": "90b7e2eee1390261337c757c194864e271adce3e", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -35,7 +35,7 @@ window.forge = {}; window.forge.config = {
     "platform_version": "v1.4.47", 
     "plugins": {
         "apptentive": {
-            "hash": "dcebe3b558218fe57d951bc077f0606b755c5b03", 
+            "hash": "4fd6ab0d656cc8f52dd77a7e2c6d86043709321a", 
             "type": "project"
         }, 
         "contact": {
