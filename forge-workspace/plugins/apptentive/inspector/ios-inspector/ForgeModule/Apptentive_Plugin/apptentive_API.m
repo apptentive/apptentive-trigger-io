@@ -102,9 +102,9 @@
     [task success:[NSNumber numberWithBool:hasSurvey]];
 }
 
-+ (void)hasSurveyAvailableWithTags:(ForgeTask *)task tags:(NSSet *)tags
++ (void)hasSurveyAvailableWithTags:(ForgeTask *)task tags:(NSArray *)tags
 {
-    BOOL hasSurvey = [ATSurveys hasSurveyAvailableWithTags:tags];
+    BOOL hasSurvey = [ATSurveys hasSurveyAvailableWithTags:[NSSet setWithArray:tags]];
     [task success:[NSNumber numberWithBool:hasSurvey]];
 }
 
@@ -114,9 +114,9 @@
     [task success:nil];
 }
 
-+ (void)presentSurveyControllerWithTags:(ForgeTask *)task tags:(NSSet *)tags
++ (void)presentSurveyControllerWithTags:(ForgeTask *)task tags:(NSArray *)tags
 {
-    [ATSurveys presentSurveyControllerWithTags:tags fromViewController:[[ForgeApp sharedApp] viewController]];
+    [ATSurveys presentSurveyControllerWithTags:[NSSet setWithArray:tags] fromViewController:[[ForgeApp sharedApp] viewController]];
     [task success:nil];
 }
 
