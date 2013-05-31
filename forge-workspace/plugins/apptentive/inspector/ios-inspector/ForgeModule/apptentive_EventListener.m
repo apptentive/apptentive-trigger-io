@@ -33,13 +33,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyWasSent:) name:ATSurveySentNotification object:nil];
 }
 
-+ (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    //Rating Flow
-    ATAppRatingFlow *sharedRatingFlow = [ATAppRatingFlow sharedRatingFlow];
-    [sharedRatingFlow showRatingFlowFromViewControllerIfConditionsAreMet:[[ForgeApp sharedApp] viewController]];
-}
-
 + (void)unreadMessageCountChanged:(NSNotification *)notification
 {
     [[ForgeApp sharedApp] event:@"apptentive.unreadMessageCountChanged" withParam:notification.userInfo];
