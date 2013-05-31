@@ -1,6 +1,6 @@
 {
     "author": "peter@apptentive.com", 
-    "config_hash": "478024dcc661905db4338df4d92752cc7989a537", 
+    "config_hash": "78d707e84c665af220f383aa94c77a3923cd4c7a", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -35,25 +35,10 @@
     "platform_version": "v1.4.47", 
     "plugins": {
         "apptentive": {
-            "hash": "b357f82c7e74c48b55ad774c69563933b9e13287", 
+            "hash": "82072b318db4dded3994cbc7cf9ff079b8e88cec", 
             "type": "project"
         }, 
         "contact": {
-            "hash": "notahash"
-        }, 
-        "display": {
-            "config": {
-                "fullscreen": {
-                    "android": false, 
-                    "ios": false
-                }, 
-                "orientations": {
-                    "android": "landscape", 
-                    "default": "any", 
-                    "ipad": "landscape", 
-                    "iphone": "portrait"
-                }
-            }, 
             "hash": "notahash"
         }, 
         "file": {
@@ -75,9 +60,6 @@
                     "https://*/*"
                 ]
             }, 
-            "hash": "notahash"
-        }, 
-        "tabbar": {
             "hash": "notahash"
         }
     }, 
