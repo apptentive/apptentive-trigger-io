@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5803C1981757C0500087D0E7 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5803C1971757C0500087D0E7 /* ApptentiveResources.bundle */; };
+		582F3A75178F3ABC00C54C5B /* apptentive_EventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F3A74178F3ABC00C54C5B /* apptentive_EventListener.m */; };
 		5866EE901746A3C500A3D258 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5866EE7F1746A13500A3D258 /* libApptentiveConnect.a */; };
-		5866EEA01746B5EC00A3D258 /* apptentive_EventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */; };
 		58BA05AE174D35C20094AB9C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BA05AD174D35C20094AB9C /* CoreData.framework */; };
 		58BA05B1174D35CA0094AB9C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BA05B0174D35CA0094AB9C /* CoreText.framework */; };
 		58BA05B3174D35CF0094AB9C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BA05B2174D35CF0094AB9C /* CoreTelephony.framework */; };
@@ -79,9 +79,9 @@
 
 /* Begin PBXFileReference section */
 		5803C1971757C0500087D0E7 /* ApptentiveResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ApptentiveResources.bundle; sourceTree = "<group>"; };
+		582F3A73178F3ABC00C54C5B /* apptentive_EventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apptentive_EventListener.h; path = Apptentive_Plugin/apptentive_EventListener.h; sourceTree = "<group>"; };
+		582F3A74178F3ABC00C54C5B /* apptentive_EventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = apptentive_EventListener.m; path = Apptentive_Plugin/apptentive_EventListener.m; sourceTree = "<group>"; };
 		5866EE781746A13500A3D258 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = Apptentive/ApptentiveConnect/ApptentiveConnect.xcodeproj; sourceTree = "<group>"; };
-		5866EE9E1746B5EC00A3D258 /* apptentive_EventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apptentive_EventListener.h; sourceTree = "<group>"; };
-		5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = apptentive_EventListener.m; sourceTree = "<group>"; };
 		58BA05AD174D35C20094AB9C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		58BA05B0174D35CA0094AB9C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		58BA05B2174D35CF0094AB9C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -146,8 +146,8 @@
 			children = (
 				58ED0C3817455C5900A978F4 /* apptentive_API.h */,
 				58ED0C3917455C5900A978F4 /* apptentive_API.m */,
-				5866EE9E1746B5EC00A3D258 /* apptentive_EventListener.h */,
-				5866EE9F1746B5EC00A3D258 /* apptentive_EventListener.m */,
+				582F3A73178F3ABC00C54C5B /* apptentive_EventListener.h */,
+				582F3A74178F3ABC00C54C5B /* apptentive_EventListener.m */,
 			);
 			name = Apptentive_Plugin;
 			sourceTree = "<group>";
@@ -320,7 +320,7 @@
 				B392D61816271BDE00926ECF /* alert_EventListener.m in Sources */,
 				58DAC042174568CC007E5E26 /* alert_API.m in Sources */,
 				58ED0C3A17455C5900A978F4 /* apptentive_API.m in Sources */,
-				5866EEA01746B5EC00A3D258 /* apptentive_EventListener.m in Sources */,
+				582F3A75178F3ABC00C54C5B /* apptentive_EventListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
