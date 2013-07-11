@@ -32,6 +32,8 @@
 
 #pragma mark - Ratings Flow
 
++ (void)appName:(ForgeTask *)task;
++ (void)setAppName:(ForgeTask *)task appName:(NSString *)appName;
 + (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task;
 + (void)logSignificantEvent:(ForgeTask *)task;
 

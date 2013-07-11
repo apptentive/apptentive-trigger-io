@@ -80,6 +80,18 @@
 
 #pragma mark - Ratings Flow
 
++ (void)appName:(ForgeTask *)task
+{
+    NSString *appName = [[ATAppRatingFlow sharedRatingFlow] appName];
+    [task success:appName];
+}
+
++ (void)setAppName:(ForgeTask *)task appName:(NSString *)appName
+{
+    [[ATAppRatingFlow sharedRatingFlow] setAppName:appName];
+    [task success:nil];
+}
+
 + (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task
 {
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:[[ForgeApp sharedApp] viewController]];
