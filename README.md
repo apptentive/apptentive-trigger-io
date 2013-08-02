@@ -10,6 +10,34 @@ The module will soon be available through the [Trigger.io Modules](https://trigg
 
 A packaged version of the Apptentive module can be found under the [Release](https://github.com/apptentive/apptentive-trigger-io/releases) tab of this repository.
 
+##JavaScript syntax for Trigger.io modules
+
+To make an Apptentive API call from JavaScript the following code is used:
+
+    forge.internal.call(
+        'alert.show',
+        {
+			text: 'Test',
+			anotherParameter: 'demo'
+		},
+        function (success) {
+			alert('Success!')
+		},
+        function (error) {
+			alert('Error: ' + error.message)
+		}
+    )
+
+The `forge.internal.call` method sends a message to the native module with 4 parameters:
+
+ - `alert.show` is a string representing the native module and method to be called. In this case the Trigger.io module `alert` will call the method `show`.
+ - The second parameter is an object containing data to be passed as parameters to the native method.
+ - The third parameter is a success callback function, which may be called with data returned from native code.
+ - The forth parameter is an error callback function, which also be called with data.
+
+More information:
+https://trigger.io/docs/current/api/native_modules/api_methods.html
+
 ##Using the Apptentive module
 
 Once you have successfully installed the module, you can begin using Apptentive in your Trigger.io app.
@@ -20,21 +48,21 @@ First, set your Apptentive API key:
 		{
 			apiKey:"GET_YOUR_API_KEY_FROM_APPTENTIVE.COM"
 		}, 
-		success,
-		error
+		function(success) {},
+		function(error) {}
 	);
 
 It is very important that you set your Apptentive API key, which you can get by signing up [on our website](http://www.apptentive.com/).
 
 You can then begin using the features of Apptentive. For example, you could add a "Give Feedback" button to your interface that collects feedback via Apptentive's Message Center. 
 
-    forge.internal.call('apptentive.presentMessageCenter', {}, success, error);
+    forge.internal.call('apptentive.presentMessageCenter', {}, {}, {});
    
 ##Message Center
 
 Get feedback from your customers with the Apptentive Message Center.
 
-	forge.internal.call('apptentive.presentMessageCenter', {}, success, error);
+	forge.internal.call('apptentive.presentMessageCenter', {}, {}, {});
 
 The first time you present the Message Center, the user will be presented with an email feedback form. Thereafter, they will be taken to the Message Center. If you reply to your customers' feedback via the Apptentive website, the replies will be pushed to their in-app Message Center. 
 
@@ -62,18 +90,18 @@ You can pre-load Apptentive with information about the user, which makes their M
 
 	forge.internal.call('apptentive.setInitialUserName',
 		{
-			initialUserEmailAddress:"Peter"
+			initialUserName:"Peter"
 		}, 
-		success,
-		error
+		function(success) {},
+		function(error) {}
 	);
 
 	forge.internal.call('apptentive.setInitialUserEmailAddress',
 		{
 			initialUserEmailAddress:"peter@example.com"
 		}, 
-		success,
-		error
+		function(success) {},
+		function(error) {}
 	);
 
 You can also store arbitrary information about the user, which is then visible in your Message Center:
@@ -83,8 +111,8 @@ You can also store arbitrary information about the user, which is then visible i
 	    	object:"Seattle"
 			key:"city"
 		}, 
-		success,
-		error
+		function(success) {},
+		function(error) {}
 	);
 
 Similarly, you can remove custom data:
@@ -95,8 +123,8 @@ Similarly, you can remove custom data:
 		{
 			key:"city",
 		}, 
-		success,
-		error
+		function(success) {},
+		function(error) {}
 	);
 
 ##App Store Rating Flow
@@ -105,13 +133,13 @@ Apptentive also provides an App Store rating flow. A ratings dialog will be disp
 
 Display the rating flow at a certain point in your code with:
 
-	forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet', {}, success, error);
+	forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet', {}, {}, {});
 
 The rating flow will only be shown if all conditions (number of launches, significant events, etc.) have been met.
 
 Log significant events, such as completing a level, with:
 
-	forge.internal.call('apptentive.logSignificantEvent', {}, success, error);
+	forge.internal.call('apptentive.logSignificantEvent', {}, {}, {});
 
 ##In-App Surveys
 
@@ -153,11 +181,11 @@ You can also listen for our `apptentive.surveyBecameAvailable` notification:
 If surveys are available, present the surveys in the app:
 
 	//No tags
-	forge.internal.call('apptentive.presentSurveyControllerWithNoTags', {}, success, error);
+	forge.internal.call('apptentive.presentSurveyControllerWithNoTags', {}, {}, {});
 	
 	//With tags
 	var surveyTags = ["testSurvey", "testTag"];
-	forge.internal.call('apptentive.presentSurveyControllerWithTags', {tags:surveyTags}, success, error);
+	forge.internal.call('apptentive.presentSurveyControllerWithTags', {tags:surveyTags}, {}, {});
 
 We will then send a notification when the survey has been sent to Apptentive:
 
