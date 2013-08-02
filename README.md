@@ -10,7 +10,7 @@ The module will soon be available through the [Trigger.io Modules](https://trigg
 
 A packaged version of the Apptentive module can be found under the [Release](https://github.com/apptentive/apptentive-trigger-io/releases) tab of this repository.
 
-##Using the Apptentive module in your Trigger.io app
+##Using the Apptentive module
 
 Once you have successfully installed the module, you can begin using Apptentive in your Trigger.io app.
 
@@ -61,23 +61,25 @@ You can also listen for our `ATMessageCenterUnreadCountChangedNotification` noti
 You can pre-load Apptentive with information about the user, which makes their Message Center experience easier:
 
 	forge.internal.call('apptentive.setInitialUserName',
-	{
-		initialUserEmailAddress:"Peter", 
-			success,
-			error
+		{
+			initialUserEmailAddress:"Peter"
+		}, 
+		success,
+		error
 	);
 
 	forge.internal.call('apptentive.setInitialUserEmailAddress',
-	{
-		initialUserEmailAddress:"peter@example.com", 
-			success,
-			error
+		{
+			initialUserEmailAddress:"peter@example.com"
+		}, 
+		success,
+		error
 	);
 
 You can also store arbitrary information about the user, which is then visible in your Message Center:
 
 	forge.internal.call('apptentive.addCustomData',
-    {
+    	{
 	    	object:"Seattle"
 			key:"city"
 		}, 
@@ -90,9 +92,9 @@ Similarly, you can remove custom data:
 	apptentiveModule.removeCustomDataWithKey("city");
 	
 	forge.internal.call('apptentive.removeCustomData',
-	{
-		key:"city",
-	}, 
+		{
+			key:"city",
+		}, 
 		success,
 		error
 	);
