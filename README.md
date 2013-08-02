@@ -72,9 +72,76 @@ Similarly, you can remove custom data:
 		success,
 		error
 	);
+
+##App Store Rating Flow
+
+Apptentive also provides an App Store rating flow. A ratings dialog will be displayed based on the number of launches of your application, the amount of time the user has been using it, and the number of significant events the user has completed (for example, levels passed). All of these variables can be modified on Apptentive.com.
+
+Display the rating flow at a certain point in your code with:
+
+	forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet', {}, success, error);
+
+The rating flow will only be shown if all conditions (number of launches, significant events, etc.) have been met.
+
+Log significant events, such as completing a level, with:
+
+	forge.internal.call('apptentive.logSignificantEvent', {}, success, error);
+
+##In-App Surveys
+
+Surveys can be created on our website and presented, in-app, to users.
+
+You can check if there are any available surveys that have been downloaded from the server:
+
+    //No tags
+	forge.internal.call('apptentive.hasSurveyAvailableWithNoTags',
+		{}, 
+		function(success) {
+			alert(success);
+		},
+		function(error) {
+			forge.logging.info("Error!");
+		}
+    );
+
+	//With tags
+	var surveyTags = ["testSurvey", "testTag"];
+	forge.internal.call('apptentive.hasSurveyAvailableWithTags',
+		{
+			tags:surveyTags
+		}, 
+		function(success) {
+			alert(success);
+		},
+		function(error) {
+			forge.logging.info("Error!");
+		}
+	);
+
+You can also listen for our `apptentive.surveyBecameAvailable` notification:
+
+    forge.internal.addEventListener("apptentive.surveyBecameAvailable", function () {
+        alert("New Apptentive surveys!");
+    });
+
+If surveys are available, present the surveys in the app:
+
+	//No tags
+	forge.internal.call('apptentive.presentSurveyControllerWithNoTags', {}, success, error);
+	
+	//With tags
+	var surveyTags = ["testSurvey", "testTag"];
+	forge.internal.call('apptentive.presentSurveyControllerWithTags', {tags:surveyTags}, success, error);
+
+We will then send a notification when the survey has been sent to Apptentive:
+
+    forge.internal.addEventListener("apptentive.surveyWasSent", function () {
+        alert("Survey was sent to Apptentive!");
+    });
+
 ##Questions? Comments? Help using Apptentive?
 
-Please let us know how we can improve this document or the Apptentive Titanium module!
+Please let us know how we can improve this document or the Apptentive Trigger.io module!
 
 https://github.com/apptentive/apptentive-trigger-io/issues
 
