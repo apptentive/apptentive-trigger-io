@@ -6,6 +6,30 @@ The Apptentive Trigger.io module allows you to add a quick and easy in-app-feedb
 
 The module will soon be available through the [Trigger.io Modules](https://trigger.io/modules/) page.
 
+##Available as a packaged module
+
+A packaged version of the Apptentive module can be found under the [Release](https://github.com/apptentive/apptentive-trigger-io/releases) tab of this repository.
+
+##Using the Apptentive module in your Trigger.io app
+
+Once you have successfully installed the module, you can begin using Apptentive in your Trigger.io app.
+
+First, set your Apptentive API key:
+
+	forge.internal.call('apptentive.setApiKey',
+		{
+			apiKey:"GET_YOUR_API_KEY_FROM_APPTENTIVE.COM"
+		}, 
+		success,
+		error
+	);
+
+It is very important that you set your Apptentive API key, which you can get by signing up [on our website](http://www.apptentive.com/).
+
+You can then begin using the features of Apptentive. For example, you could add a "Give Feedback" button to your interface that collects feedback via Apptentive's Message Center. 
+
+    forge.internal.call('apptentive.presentMessageCenter', {}, success, error);
+   
 ##Message Center
 
 Get feedback from your customers with the Apptentive Message Center.
@@ -103,7 +127,7 @@ You can check if there are any available surveys that have been downloaded from 
 			forge.logging.info("Error!");
 		}
     );
-
+   
 	//With tags
 	var surveyTags = ["testSurvey", "testTag"];
 	forge.internal.call('apptentive.hasSurveyAvailableWithTags',
