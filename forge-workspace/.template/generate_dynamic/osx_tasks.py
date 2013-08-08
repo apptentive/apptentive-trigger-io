@@ -5,13 +5,13 @@ import shutil
 import time
 
 from lib import task
-from utils import run_shell
+from module_dynamic.utils import run_shell
 
 LOG = logging.getLogger(__name__)
 
 @task
 def run_osx(build):
-	args = [os.path.join('development', 'osx', 'Forge.app', 'Contents', 'MacOS', 'ForgeTemplate')]
+	args = [os.path.join('development', 'osx', 'Forge.app', 'Contents', 'MacOS', 'ForgeInspector')]
 	# Bring app to foreground after 1 second
 	subprocess.Popen(["osascript", "-e", "delay 1", "-e", 'tell application "%s" to activate' % build.config['name']])
 	run_shell(*args, command_log_level=logging.INFO, check_for_interrupt=True)

@@ -3,9 +3,7 @@ import logging
 import os
 from os import path
 from pprint import pformat
-import lib
-import pkgutil
-import sys
+from module_dynamic import lib
 
 class ConfigurationError(lib.BASE_EXCEPTION):
 	'''Indicates there is a problem with a command.'''
@@ -226,11 +224,13 @@ class Build(object):
 	tasks = {}
 	predicates = {}
 	
-	def __init__(self, config, source_dir, output_dir, external=True,
-			remove_attribution=True, usercode=None, ignore_patterns=None,
+	def __init__(self, config, source_dir, output_dir,
+			system_config=None,
+			external=True, usercode=None, ignore_patterns=None,
 			enabled_platforms=('chrome', 'firefox', 'safari', 'ie', 'android', 'web', 'wp'),
-			log=None, template_only=False, test=False, forge_root=None,
-			local_config=None, extra_args=None, override_plugins='plugins', **kw):
+			log=None, template_only=False, forge_root=None,
+			local_config=None, extra_args=None, override_modules=False,
+			meta_config={}, **kw):
 		'''Create Forge apps, according to the supplied configuration parameters.
 	
 		:param config: application configuration: any values which are required by the template files
@@ -238,7 +238,6 @@ class Build(object):
 		:param source_dir: directory holding the platform source
 		:param output_dir: directory to which this generation process will write to
 		:param external: is this a Forge build for internal debugging (i.e. un-minified for, not for customer eyes)?
-		:param remove_attribution: flag to remove (built on Forge) attribution in description
 		:param usercode: location of the customer's code
 		:param ignore_patterns: a set of patterns that prevent certain usercode files being injected
 		:param enabled_platforms: a sequence of platform names to build for
@@ -246,9 +245,10 @@ class Build(object):
 		:param log: a :class:`logging.Logger` instance
 		:param template_only: ``True``: we just creating the platform files; ``False``
 			we should also include the customer's code to create full apps
-		:param test: Use the current changeset hash as the UUID
 		:param forge_root: directory the Forge tools have been extracted to
 		:param local_config: tool configuration read in from a local configuration file
+		:param override_modules: Use local modules rather than downloading them
+		:param meta_config: Extra details to be used when parsing the config, currently the URL locations of modules to download
 		:param extra_args: as-yet unhandled command-line arguments
 		'''
 		super(Build, self).__init__()
@@ -258,19 +258,22 @@ class Build(object):
 		self.source_dir = path.abspath(source_dir)
 		self.output_dir = path.abspath(output_dir)
 		self.external = external
-		self.remove_attribution = remove_attribution
 		self.usercode = usercode if usercode else path.join(self.source_dir, 'user')
 		self.ignore_patterns = ignore_patterns if ignore_patterns else []
 		self.log.debug('Enabled platforms: %s' % list(enabled_platforms))
 		self.enabled_platforms = enabled_platforms
 		self.template_only = template_only
-		self.test = test
 		self.forge_root = forge_root
-		self.unpackaged = {} # will hold locations of unpackaged source trees
-		self.packaged = {} # will hold locations of packaged binaries
+		self.unpackaged = {}  # will hold locations of unpackaged source trees
+		self.packaged = {}  # will hold locations of packaged binaries
 		self.tool_config = ToolConfig(self.log, local_config, extra_args, self.enabled_platforms)
 		self.orig_wd = os.getcwd()
-		self.override_plugins = override_plugins
+		self.override_modules = override_modules
+		if system_config is not None and "android_sdk_root" in system_config:
+			system_config["android_sdk_dir"] = os.path.join(system_config['android_sdk_root'], '22.0.4')
+			system_config.pop("android_sdk_root")
+		self.system_config = system_config
+		self.meta_config = meta_config
 		
 	def add_steps(self, steps):
 		'''Append a number of steps to the script that this runner will execute
@@ -334,4 +337,3 @@ class Build(object):
 	
 	def __repr__(self):
 		return '<ForgeTask ({0})>'.format(", ".join(self.enabled_platforms))
-

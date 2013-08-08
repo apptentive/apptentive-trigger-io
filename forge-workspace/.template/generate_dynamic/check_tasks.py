@@ -7,9 +7,9 @@ import subprocess
 import sys
 
 from build import ConfigurationError
-import lib
-from lib import task, BASE_EXCEPTION
-from utils import path_to_lib
+from module_dynamic import lib
+from module_dynamic.lib import BASE_EXCEPTION
+from lib import task, path_to_lib
 
 log = logging.getLogger(__name__)
 
@@ -63,13 +63,19 @@ def check_local_config_schema(build):
 		if not path.isfile(local_conf_filename):
 			log.warning("Local configuration file '{file}' does not exist!".format(file=local_conf_filename))
 	
-	with open(path.join(path_to_lib(), "local_config_schema.json")) as local_conf_schema_file:
-		local_conf_schema = json.load(local_conf_schema_file)
+	with open(local_conf_filename) as local_conf_file:
+		local_conf = json.load(local_conf_file)
+
+	from forge.remote import Remote
+	from forge import build_config
+	remote = Remote(build_config.load())
+	local_conf_schema = remote._api_get('platform/{platform_version}/local_config_schema'.format(
+			platform_version=build.config['platform_version']))
 	
 	try:
-		validictory.validate(build.tool_config.all_config(), local_conf_schema)
+		validictory.validate(local_conf, local_conf_schema)
 	except validictory.validator.UnexpectedPropertyError as e:
-		log.warning('Unexpected setting: "{error}". This will be ignored'.format(
+		log.warning('Unexpected setting: "{error}" in "{file}". This will be ignored.'.format(
 			file=local_conf_filename,
 			error=e)
 		)

@@ -10,14 +10,8 @@ _icon_path_for_customer = {
 }
 
 locations = {
-	'android': 'development/android/assets/src',
-	'ios': 'development/ios/*/assets/src',
-	'chrome': 'development/chrome/src',
 	'firefox': 'development/firefox/resources/f/data/src',
 	'safari': 'development/forge.safariextension/src',
-	'ie': 'development/ie/src',
-	'web': 'development/web/src',
-	'wp': 'development/wp/assets/src',
 }
 
 def create_all_js():
@@ -73,42 +67,42 @@ def customer_phase():
 		{'when': {'platform_is': 'wp'}, 'do': {'populate_icons': ("wp", [62, 99, 173])}},
 
 		{'when': {'platform_is': 'safari', 'icon_available': ('safari', '32')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["safari"]["32"]}',
+			'from': '${modules["icons"]["config"]["safari"]["32"]}',
 			'to': icon("safari", 'icon-32.png')
 		}}},
 		{'when': {'platform_is': 'safari', 'icon_available': ('safari', '48')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["safari"]["48"]}',
+			'from': '${modules["icons"]["config"]["safari"]["48"]}',
 			'to': icon("safari", 'icon-48.png')
 		}}},
 		{'when': {'platform_is': 'safari', 'icon_available': ('safari', '64')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["safari"]["64"]}',
+			'from': '${modules["icons"]["config"]["safari"]["64"]}',
 			'to': icon("safari", 'icon-64.png')
 		}}},
 		
 		{'when': {'platform_is': 'firefox', 'icon_available': ('firefox', '32')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["firefox"]["32"]}',
+			'from': '${modules["icons"]["config"]["firefox"]["32"]}',
 			'to': icon("firefox", 'icon.png')
 		}}},
 		{'when': {'platform_is': 'firefox', 'icon_available': ('firefox', '64')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["firefox"]["64"]}',
+			'from': '${modules["icons"]["config"]["firefox"]["64"]}',
 			'to': icon("firefox", 'icon64.png')
 		}}},
 
 		{'when': {'platform_is': 'wp', 'icon_available': ('wp', '64')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["wp"]["62"]}',
+			'from': '${modules["icons"]["config"]["wp"]["62"]}',
 			'to': icon("wp", 'ApplicationIcon.png')
 		}}},
 		{'when': {'platform_is': 'wp', 'icon_available': ('wp', '99')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["wp"]["99"]}',
+			'from': '${modules["icons"]["config"]["wp"]["99"]}',
 			'to': icon("wp", 'Marketplace.png')
 		}}},
 		{'when': {'platform_is': 'wp', 'icon_available': ('wp', '173')}, 'do': {'copy_files': {
-			'from': '${plugins["icons"]["config"]["wp"]["173"]}',
+			'from': '${modules["icons"]["config"]["wp"]["173"]}',
 			'to': icon("wp", 'Background.png')
 		}}},
 
 		{'when': {'platform_is': 'wp', 'have_wp_launch': ()}, 'do': {'copy_files': {
-			'from': '${plugins["launchimage"]["config"]["wp-landscape"]}',
+			'from': '${modules["launchimage"]["config"]["wp-landscape"]}',
 			'to': icon("wp", "SplashScreenImage.jpg")
 		}}},
 	]

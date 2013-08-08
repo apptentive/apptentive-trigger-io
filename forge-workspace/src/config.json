@@ -1,34 +1,43 @@
 {
-	"config_version": "2",
+	"config_version": "4",
 	"name": "Apptentive Demo",
 	"author": "peter@apptentive.com",
-	"version": "0.1",
-	"platform_version": "v1.4",
-	"description": "An empty app created by default",
 	"modules": {
-		"logging": {
-			"level": "DEBUG"
+		"media": {
+			"version": "2.0",
+			"config": {}
 		},
-		"contact": true,
-		"file": true,
-		"is": true,
-		"media": true,
-		"prefs": true,
 		"request": {
-			"permissions": [
-				"http://*/*",
-				"https://*/*"
-			]
+			"version": "2.0",
+			"config": {
+				"permissions": [
+					"http://*/*",
+					"https://*/*"
+				]
+			}
 		},
-		"tools": true,
-		"reload": true,
-		"notification": true
-	},
-	"plugins": {
-		"apptentive": {
-			"hash": "be5f0092003fa44823c3704c60883eb549d67fea",
-			"type": "project"
+		"contact": {
+			"version": "2.0"
+		},
+		"file": {
+			"version": "2.0"
+		},
+		"notification": {
+			"version": "2.0"
+		},
+		"prefs": {
+			"version": "2.0"
 		}
 	},
-	"uuid": "62a29794c26911e2b36c12313d00dc45"
+	"platform_version": "v2.0.0",
+	"version": "0.1",
+	"core": {
+		"general": {
+			"reload": true,
+			"logging": {
+				"level": "DEBUG"
+			}
+		}
+	},
+	"description": "An empty app created by default"
 }

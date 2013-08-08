@@ -160,15 +160,16 @@ def include_platform_in_html(debug=False):
 		}}},
 	]
 
-def include_name():
+def include_name(build):
+	json_safe_name = build.config["name"].replace('"', '\\"')
+	xml_safe_name = build.config["name"].replace('"', '\\"').replace("'", "\\'")
+
 	return [
-		{'do': {'populate_xml_safe_name': ()}},
-		{'do': {'populate_json_safe_name': ()}},
 		{'when': {'platform_is': 'android'}, 'do': {'set_attribute_value_xml': {
 			"file": 'development/android/AndroidManifest.xml',
 			"element": "application",
 			"attribute": "android:label",
-			"value": "${xml_safe_name}"
+			"value": xml_safe_name
 		}}},
 		{'when': {'platform_is': 'ios'}, 'do': {'set_in_biplist': {
 			"filename": 'development/ios/*/Info.plist',
@@ -192,25 +193,25 @@ def include_name():
 		}}},
 		{'when': {'platform_is': 'chrome'}, 'do': {'find_and_replace': {
 			"in": ('development/chrome/manifest.json',),
-			"find": "APP_NAME_HERE", "replace": "${json_safe_name}"
+			"find": "APP_NAME_HERE", "replace": json_safe_name
 		}}},
 		{'when': {'platform_is': 'firefox'}, 'do': {'find_and_replace': {
 			"in": ('development/firefox/install.rdf',),
-			"find": "APP_NAME_HERE", "replace": "${xml_safe_name}"
+			"find": "APP_NAME_HERE", "replace": xml_safe_name
 		}}},
 		{'when': {'platform_is': 'safari'}, 'do': {'find_and_replace': {
 			"in": ('development/forge.safariextension/Info.plist',),
-			"find": "APP_NAME_HERE", "replace": "${xml_safe_name}"
+			"find": "APP_NAME_HERE", "replace": xml_safe_name
 		}}},
 		{'when': {'platform_is': 'ie'}, 'do': {'find_and_replace': {
 			"in": ('development/ie/manifest.json',
 				'development/ie/dist/setup-x86.nsi',
 				'development/ie/dist/setup-x64.nsi',
-			), "find": "APP_NAME_HERE", "replace": "${json_safe_name}"
+			), "find": "APP_NAME_HERE", "replace": json_safe_name
 		}}},
 		{'when': {'platform_is': 'wp'}, 'do': {'find_and_replace': {
 			"in": ('development/wp/Properties/WMAppManifest.xml',),
-			"find": "APP_NAME_HERE", "replace": "${xml_safe_name}"
+			"find": "APP_NAME_HERE", "replace": xml_safe_name
 		}}},
 	]
 
@@ -473,31 +474,31 @@ def include_config(debug=False):
 			}}},
 		]
 
-def run_plugin_build_steps(build):
+def run_module_build_steps(build):
 	return [
 		{'when': {'platform_is': 'android'}, 'do': {
-			'run_plugin_build_steps': {
+			'run_module_build_steps': {
 				'steps_path': 'development/android/build_steps',
 				'src_path': 'development/android/assets/src',
 				'project_path': 'development/android' 
 			}
 		}},
 		{'when': {'platform_is': 'ios'}, 'do': {
-			'run_plugin_build_steps': {
+			'run_module_build_steps': {
 				'steps_path': 'development/ios/build_steps',
 				'src_path': 'development/ios/device-ios.app/assets/src',
 				'project_path': 'development/ios/device-ios.app' 
 			}
 		}},
 		{'when': {'platform_is': 'ios'}, 'do': {
-			'run_plugin_build_steps': {
+			'run_module_build_steps': {
 				'steps_path': 'development/ios/build_steps',
 				'src_path': 'development/ios/simulator-ios.app/assets/src',
 				'project_path': 'development/ios/simulator-ios.app' 
 			}
 		}},
 		{'when': {'platform_is': 'osx'}, 'do': {
-			'run_plugin_build_steps': {
+			'run_module_build_steps': {
 				'steps_path': 'development/osx/build_steps',
 				'src_path': 'development/osx/Forge.app/Contents/Resources/assets/src',
 				'project_path': 'development/osx/Forge.app' 
@@ -506,24 +507,20 @@ def run_plugin_build_steps(build):
 		# Delete build steps folder?
 	]
 
-def migrate_to_plugins():
-	return [
-		{'do': {'migrate_to_plugins': ()}}
-	]
-
 def resolve_urls():
 	return [
 		{'do': {'resolve_urls': (
-			'plugins.activations.config.activations.[].scripts.[]',
-			'plugins.activations.config.activations.[].styles.[]',
-			'plugins.icons.config.chrome',
-			'plugins.icons.config.safari',
-			'plugins.icons.config.firefox',
-			'plugins.launchimage.config.android',
-			'plugins.launchimage.config.android-landscape',
-			'plugins.button.config.default_icon',
-			'plugins.button.config.default_popup',
-			'plugins.button.config.default_icons.*'
+			'modules.activations.config.activations.[].scripts.[]',
+			'modules.activations.config.activations.[].styles.[]',
+			'modules.icons.config.chrome.*',
+			'modules.icons.config.safari.*',
+			'modules.icons.config.firefox.*',
+			'modules.icons.config.ie.*',
+			'modules.launchimage.config.android',
+			'modules.launchimage.config.android-landscape',
+			'modules.button.config.default_icon',
+			'modules.button.config.default_popup',
+			'modules.button.config.default_icons.*'
 		)}},
 	]
 
@@ -587,11 +584,6 @@ def check_local_config_schema():
 		{'do': {'check_local_config_schema': ()}},
 	]
 
-def migrate_config():
-	return [
-		{'do': {'migrate_config': ()}},
-	]
-
 def clean_phase():
 	return [
 		{'when': {'platform_is': 'android'}, 'do': {'clean_android': ()}},
@@ -599,3 +591,4 @@ def clean_phase():
 		{'when': {'platform_is': 'web'}, 'do': {'clean_web': ()}},
 		{'when': {'platform_is': 'wp'}, 'do': {'clean_wp': ()}},
 	]
+

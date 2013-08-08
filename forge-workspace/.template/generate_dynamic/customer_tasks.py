@@ -13,23 +13,25 @@ from copy import copy
 import android_tasks
 from build import ConfigurationError
 import firefox_tasks
-import lib
-from lib import task, walk_with_depth, read_file_as_str, cd
+from module_dynamic import lib
+from module_dynamic.lib import walk_with_depth, read_file_as_str, cd
+from lib import task
 import ios_tasks
 import safari_tasks
 import ie_tasks
 import osx_tasks
-import utils
+from module_dynamic import utils
 import hashlib
 import pystache
+from module_dynamic import build_steps_local
 
 from xml.etree import ElementTree
 # Any namespaces must be registered or the parser will rename them
 ElementTree.register_namespace('android', 'http://schemas.android.com/apk/res/android')
 ElementTree.register_namespace('tools', 'http://schemas.android.com/tools')
 
-@task
-def migrate_to_plugins(build):
+"""@task
+def migrate_to_v2(build):
 	config = build.config
 	if config['config_version'] == "4":
 		return config
@@ -44,15 +46,13 @@ def migrate_to_plugins(build):
 		"author": config["author"],
 		"platform_version": config["platform_version"],
 		"version": config["version"],
-		"plugins": config.get("plugins", {}),
+		# TODO: Do something with existing plugins?
+		#"plugins": config.get("plugins", {}),
+		"modules": {},
 		"core": config.get("requirements", {}),
 		"config_hash": config.get("config_hash", "CONFIG_HASH_HERE"),
 		# TODO: Should this be here?
-		"logging": config["modules"].get("logging", {}),
-
-		# Extra stuff we've added to config
-		"android_sdk_dir": config.get("android_sdk_dir", None),
-		"plugin_url_prefix": config.get("plugin_url_prefix", None)
+		#"logging": config["modules"].get("logging", {}),
 	}
 
 	if "general" not in new_config["core"]:
@@ -68,8 +68,8 @@ def migrate_to_plugins(build):
 		new_config["homepage"] = config["homepage"]
 
 	if "partners" in config and "parse" in config["partners"]:
-		new_config["plugins"]["parse"] = {
-			"hash": "notahash",
+		new_config["modules"]["parse"] = {
+			"version": "1.0",
 			"config": config["partners"]["parse"]
 		}
 
@@ -80,10 +80,9 @@ def migrate_to_plugins(build):
 			config["modules"][module] = True
 
 		if module == "parameters":
-			# Duplicate paramter settings to old location for compatibility
-			new_config["modules"] = {
-				module: config["modules"][module]
-			}
+			# Move paramter settings to old location for compatibility
+			new_config["modules"][module] = config["modules"][module]
+			continue
 
 		if module == "requirements":
 			# These modules are now core and configured under top level core
@@ -105,23 +104,27 @@ def migrate_to_plugins(build):
 			new_config["core"]["general"]["reload"] = True
 			continue
 
-		if module in ["is", "event", "internal", "logging", "message", "tools"]:
+		if module == "logging":
+			new_config["core"]["general"]["logging"] = config["modules"][module]
+			continue
+
+		if module in ["is", "event", "internal", "message", "tools"]:
 			# These are now core, ignore them
 			continue
 
-		new_config["plugins"][module] = {
-			"hash": "notahash"
+		new_config["modules"][module] = {
+			"version": "1.0"
 		}
-		if config["modules"][module] == True:
+		if config["modules"][module] is True:
 			continue
 
 		if module == "activations":
-			new_config["plugins"]["activations"]["config"] = {
+			new_config["modules"]["activations"]["config"] = {
 				"activations": config["modules"]["activations"]
 			}
 			continue
 
-		new_config["plugins"][module]["config"] = config["modules"][module]
+		new_config["modules"][module]["config"] = config["modules"][module]
 
 	build.config = new_config
 
@@ -129,6 +132,7 @@ def migrate_to_plugins(build):
 		import validictory
 		with open(os.path.abspath(os.path.join(os.path.split(__file__)[0], '..', '..', 'configuration', 'schema_for_v2.json'))) as schema_file:
 			validictory.validate(build.config, json.load(schema_file))
+"""
 
 @task
 def add_element_to_xml(build, file, element, to=None, unless=None):
@@ -335,8 +339,6 @@ def write_config(build, filename, content):
 		clean_config.pop('json')
 	if 'android_sdk_dir' in clean_config:
 		clean_config.pop('android_sdk_dir')
-	if 'plugin_url_prefix' in clean_config:
-		clean_config.pop('plugin_url_prefix')
 	content = utils.render_string({'config': json.dumps(clean_config, indent=4, sort_keys=True)}, content)
 
 	with open(filename, 'w') as fileobj:
@@ -504,10 +506,10 @@ def wrap_activations(build, location):
 	'''Wrap user activation code to prevent running in frames if required
 	
 	'''
-	if "activations" in build.config['plugins'] and \
-	   "config" in build.config['plugins']['activations'] and \
-	   "activations" in build.config['plugins']['activations']['config']:
-		for activation in build.config['plugins']['activations']['config']['activations']:
+	if "activations" in build.config['modules'] and \
+	   "config" in build.config['modules']['activations'] and \
+	   "activations" in build.config['modules']['activations']['config']:
+		for activation in build.config['modules']['activations']['config']['activations']:
 			if not 'all_frames' in activation or activation['all_frames'] is False:
 				for script in activation['scripts']:
 					tmp_file = uuid.uuid4().hex
@@ -527,27 +529,19 @@ def populate_icons(build, platform, icon_list):
 	platform is a string platform, eg. "android"
 	icon_list is a list of string dimensions, eg. [36, 48, 72]
 	'''
-	if "icons" in build.config["plugins"] and "config" in build.config["plugins"]["icons"]:
-		if not platform in build.config["plugins"]["icons"]["config"]:
-			build.config["plugins"]["icons"]["config"][platform] = {}
+	if "icons" in build.config["modules"] and "config" in build.config["modules"]["icons"]:
+		if not platform in build.config["modules"]["icons"]["config"]:
+			build.config["modules"]["icons"]["config"][platform] = {}
 		for icon in icon_list:
 			str_icon = str(icon)
-			if not str_icon in build.config["plugins"]["icons"]["config"][platform]:
+			if not str_icon in build.config["modules"]["icons"]["config"][platform]:
 				try:
-					build.config["plugins"]["icons"]["config"][platform][str_icon] = \
-						build.config["plugins"]["icons"]["config"][str_icon]
+					build.config["modules"]["icons"]["config"][platform][str_icon] = \
+						build.config["modules"]["icons"]["config"][str_icon]
 				except KeyError:
 					build.log.warning('missing icon "%s" for platform "%s"' % (str_icon, platform))
 	else:
 		pass #no icons is valid, though it should have been caught priorly.
-
-@task
-def populate_xml_safe_name(build):
-	build.config['xml_safe_name'] = build.config["name"].replace('"', '\\"').replace("'", "\\'")
-
-@task
-def populate_json_safe_name(build):
-	build.config['json_safe_name'] = build.config["name"].replace('"', '\\"')
 
 @task
 def run_hook(build, **kw):
@@ -596,7 +590,6 @@ def remove_files(build, *removes):
 
 @task
 def populate_package_names(build):
-	build.config['package_name'] = re.sub("[^a-zA-Z0-9]", "", build.config["name"].lower()) + build.config["uuid"]
 	if "core" not in build.config:
 		build.config["core"] = {}
 	if "android" not in build.config["core"]:
@@ -618,7 +611,7 @@ def populate_package_names(build):
 		build.config["core"]["ie"] = {}
 	build.config["core"]["ie"]["package_name"] = ie_tasks._generate_package_name(build)
 
-@task	
+@task
 def populate_trigger_domain(build):
 	try:
 		from forge import build_config
@@ -643,7 +636,7 @@ def generate_sha1_manifest(build, input_folder, output_file):
 				filename = os.path.join(root, filename)
 				with open(filename, 'rb') as file:
 					hash = hashlib.sha1(file.read()).hexdigest()
-					manifest[hash]  = filename[len(input_folder)+1:].replace('\\','/')
+					manifest[hash] = filename[len(input_folder)+1:].replace('\\','/')
 		json.dump(manifest, out)
 
 @task
@@ -659,37 +652,17 @@ def check_index_html(build, src='src'):
 			raise Exception("index.html does not contain '<head>', this is required to add the Forge javascript library.")
 
 @task
-def run_plugin_build_steps(build, steps_path, src_path, project_path):
-	# XXX: This should be using build_steps_local in plugin_dynamic but for now that code is duplicated here
-	def copy_file_from_src(build_params, filename, dest):
-		filename = pystache.render(filename, build_params['app_config'])
-		dest = pystache.render(dest, build_params['app_config'])
-		if os.path.isfile(os.path.join(src_path, filename)):
-			shutil.copy2(os.path.join(src_path, filename), os.path.join(project_path, dest))
-
-	def icons_handle_prerendered(build_params):
-		if "ios" in build_params['app_config']["plugins"]["icons"]["config"] and build_params['app_config']["plugins"]["icons"]["config"]["ios"].get("prerendered"):
-			set_in_biplist(
-				build=build,
-				filename=os.path.join(project_path, "Info.plist"),
-				key="UIPrerenderedIcon",
-				value=True)
-			set_in_biplist(
-				build=build,
-				filename=os.path.join(project_path, "Info.plist"),
-				key="CFBundleIcons.CFBundlePrimaryIcon.UIPrerenderedIcon",
-				value=True)
-
-	if os.path.isdir(steps_path): 
-		plugins = os.listdir(steps_path)
-		for plugin in plugins:
-			build.log.debug("Running local build steps for: %s" % plugin)
-			with open(os.path.join(steps_path, plugin), 'r') as plugin_steps_file:
-				plugin_steps = json.load(plugin_steps_file)
-				for step in plugin_steps:
+def run_module_build_steps(build, steps_path, src_path, project_path):
+	if os.path.isdir(steps_path):
+		modules = os.listdir(steps_path)
+		for module in modules:
+			build.log.debug("Running local build steps for: %s" % module)
+			with open(os.path.join(steps_path, module), 'r') as module_steps_file:
+				module_steps = json.load(module_steps_file)
+				for step in module_steps:
 					if "do" in step:
 						for task in step['do']:
-							task_func = locals().get(task, None)
+							task_func = getattr(build_steps_local, task, None)
 							if task_func is not None:
 								# XXX: only supports dict of args, could be better?
 								build_params = {}

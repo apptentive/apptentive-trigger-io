@@ -8,7 +8,8 @@ import sys
 import os
 import tempfile
 
-from lib import BASE_EXCEPTION
+from module_dynamic.lib import BASE_EXCEPTION
+import migrate_tasks
 
 
 def log_build(build, action):
@@ -38,8 +39,8 @@ def generate_app_from_template(generate_module, build_to_run):
 	:param generate_module: the :mod:`generate.generate` module
 	:param build_to_run: a :class:`build.Build` instance
 	'''
+
 	add_check_settings_steps(generate_module, build_to_run)
-	build_to_run.add_steps(generate_module.customer_phases.migrate_to_plugins())
 	build_to_run.add_steps(generate_module.customer_phases.resolve_urls())
 	if os.path.isdir('hooks/prebuild'):
 		# Create a temp dir
@@ -55,14 +56,14 @@ def generate_app_from_template(generate_module, build_to_run):
 		build_to_run.add_steps(generate_module.customer_phases.validate_user_source())
 		build_to_run.add_steps(generate_module.customer_phases.copy_user_source_to_template(ignore_patterns=build_to_run.ignore_patterns))
 	build_to_run.add_steps(generate_module.customer_phases.include_platform_in_html())
-	build_to_run.add_steps(generate_module.customer_phases.include_name())
+	build_to_run.add_steps(generate_module.customer_phases.include_name(build_to_run))
 	build_to_run.add_steps(generate_module.customer_phases.include_uuid())
 	build_to_run.add_steps(generate_module.customer_phases.include_author())
 	build_to_run.add_steps(generate_module.customer_phases.include_description())
 	build_to_run.add_steps(generate_module.customer_phases.include_version())
 	build_to_run.add_steps(generate_module.customer_phases.include_reload())
 	build_to_run.add_steps(generate_module.customer_phases.include_requirements())
-	build_to_run.add_steps(generate_module.customer_phases.run_plugin_build_steps(build_to_run))
+	build_to_run.add_steps(generate_module.customer_phases.run_module_build_steps(build_to_run))
 	if (set(['ie', 'wp', 'web', 'chrome', 'safari', 'firefox']) & set(build_to_run.enabled_platforms)):
 		build_to_run.add_steps(generate_module.legacy_phases.customer_phase())
 	build_to_run.add_steps(generate_module.customer_phases.include_config())
@@ -72,12 +73,6 @@ def generate_app_from_template(generate_module, build_to_run):
 	
 	log_build(build_to_run, "generate")
 
-
-	# -- TODO - mutating the build while adding phases is evil and should be reconsidered ----
-	# XXX: Temporary server-side migration until we publicly deploy modules as plugins
-	# for server-side analog, see main.py
-	generate_module.customer_tasks.migrate_to_plugins(build_to_run)
-	# -- TODO --------------------------------------------------------------------------------
 	build_to_run.run()
 
 def run_app(generate_module, build_to_run):
@@ -89,8 +84,6 @@ def run_app(generate_module, build_to_run):
 
 	if len(build_to_run.enabled_platforms) != 1:
 		raise BASE_EXCEPTION("Expected to run exactly one platform at a time")
-
-	build_to_run.add_steps(generate_module.customer_phases.migrate_to_plugins())
 
 	target = list(build_to_run.enabled_platforms)[0]
 	if target == 'android':
@@ -147,8 +140,6 @@ def package_app(generate_module, build_to_run):
 	if len(build_to_run.enabled_platforms) != 1:
 		raise BASE_EXCEPTION("Expected to package exactly one platform at a time")
 
-	build_to_run.add_steps(generate_module.customer_phases.migrate_to_plugins())
-
 	build_to_run.add_steps(
 		generate_module.customer_phases.package(build_to_run.output_dir)
 	)
@@ -170,20 +161,6 @@ def check_settings(generate_module, build_to_run):
 
 	build_to_run.run()
 
-def add_migrate_app_steps(generate_module, build_to_run):
-	"""
-	Required steps to sniff test the JavaScript and local configuration
-	"""
-	build_to_run.add_steps(generate_module.customer_phases.migrate_config())
-
-def migrate_app(generate_module, build_to_run):
-	"""
-	Migrate the app to the next major platform (if possible)
-	"""
-	add_migrate_app_steps(generate_module, build_to_run)
-
-	build_to_run.run()
-
 def cleanup_after_interrupted_run(generate_module, build_to_run):
 	"""
 	Cleanup after a run operation that was interrupted forcefully.
@@ -193,3 +170,13 @@ def cleanup_after_interrupted_run(generate_module, build_to_run):
 	"""
 	build_to_run.add_steps(generate_module.customer_phases.clean_phase())
 	build_to_run.run()
+
+def migrate_app_to_current(path, **kw):
+	"""
+	Update an app compatible with an old platform version to be compatible with this one.
+	e.g. transform config.json
+	
+	:returns: True if some migration occured, False if no changes happened
+	"""
+	return migrate_tasks.migrate_to_config_version_4(path)
+

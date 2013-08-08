@@ -15,10 +15,11 @@ import sys
 import hashlib
 from zipfile import ZipFile, ZIP_DEFLATED
 
-import lib
-from lib import temp_file, task, read_file_as_str
-from utils import run_shell, ensure_lib_available, ProcessGroup
-from utils import which
+from module_dynamic import lib
+from module_dynamic.lib import temp_file, read_file_as_str
+from lib import task, ensure_lib_available
+from module_dynamic.utils import run_shell, ProcessGroup
+from module_dynamic.utils import which
 
 LOG = logging.getLogger(__name__)
 
@@ -134,13 +135,15 @@ class IOSRunner(object):
 	ID in your provisioning profile: {pp_id}
 	ID in your app:                  {app_id}
 
-You probably want to add something like this to your module configuration:
+You probably want to change the App configuration's package name in the Toolkit, or add something like this to config.json:
 
-	"package_names": {{
-		"ios": "{pp_bundle}"
+	"core": {{
+	    "ios": {{
+	        "package_name": "{pp_bundle}"
+	    }}
 	}}
 
-See "Preparing your apps for app stores" in our docs: [http://current-docs.trigger.io/releasing.html#ios]'''.format(
+See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/current/recipes/release/release_mobile.html]'''.format(
 				pp_id=ai_from_provisioning_prof,
 				app_id=ai_from_built_app,
 				pp_bundle=provisioning_profile_bundle,
@@ -360,33 +363,13 @@ See "Preparing your apps for app stores" in our docs: [http://current-docs.trigg
 			else:
 				return 'iPhone Developer'
 
-	def _create_entitlements_file(self, build, temp_file_path):
-		# XXX
-		# TODO: refactor _replace_in_file into common utility file
-		def _replace_in_file(filename, find, replace):
-			tmp_file = uuid.uuid4().hex
-			in_file_contents = read_file_as_str(filename)
-			in_file_contents = in_file_contents.replace(find, replace)
-			with codecs.open(tmp_file, 'w', encoding='utf8') as out_file:
-				out_file.write(in_file_contents)
-			os.remove(filename)
-			shutil.move(tmp_file, filename)
-	
+	def _create_entitlements_file(self, build, temp_file_path, plist_dict):
 		bundle_id = self._extract_app_id()
-		shutil.copy2(path.join(self._lib_path(), 'template.entitlements'), temp_file_path)
-		
-		_replace_in_file(temp_file_path, 'APP_ID', bundle_id)
-		
-		# XXX
-		# TODO: Better way of defining this
-		# Allow push notifications for Parse
-		if not "parse" in build.config['plugins']:
-			_replace_in_file(temp_file_path, '<key>aps-environment</key><string>development</string>', '')
-		
-		# Distribution mode specific changes
-		if self._is_distribution_profile():
-			_replace_in_file(temp_file_path, '<key>get-task-allow</key><true/>', '<key>get-task-allow</key><false/>')
-			_replace_in_file(temp_file_path, '<key>aps-environment</key><string>development</string>', '<key>aps-environment</key><string>production</string>')
+
+		entitlements_dict = plist_dict['Entitlements']
+		entitlements_dict['application-identifier'] = bundle_id
+
+		plistlib.writePlist(entitlements_dict, temp_file_path)
 	
 	def create_ipa_from_app(self, build, provisioning_profile, output_path_for_ipa, certificate_to_sign_with=None, relative_path_to_itunes_artwork=None, certificate_path=None, certificate_password=None, output_path_for_manifest=None):
 		"""Create an ipa from an app, with an embedded provisioning profile provided by the user, and
@@ -439,7 +422,7 @@ See "Preparing your apps for app stores" in our docs: [http://current-docs.trigg
 				path_to_itunes_artwork = None
 
 			with temp_file() as temp_file_path:
-				self._create_entitlements_file(build, temp_file_path)
+				self._create_entitlements_file(build, temp_file_path, plist_dict)
 				self._sign_app(build=build,
 					provisioning_profile=provisioning_profile,
 					certificate=certificate_to_sign_with,
@@ -453,7 +436,7 @@ See "Preparing your apps for app stores" in our docs: [http://current-docs.trigg
 			if path_to_itunes_artwork:
 				shutil.copy2(path_to_itunes_artwork, path.join(temp_dir, 'iTunesArtwork'))
 
-			with ZipFile(output_path_for_ipa, 'w') as out_ipa:
+			with ZipFile(output_path_for_ipa, 'w', compression=ZIP_DEFLATED) as out_ipa:
 				for root, dirs, files in os.walk(temp_dir):
 					for file in files:
 						LOG.debug('adding to IPA: {file}'.format(
@@ -586,7 +569,7 @@ See "Preparing your apps for app stores" in our docs: [http://current-docs.trigg
 		
 		if sys.platform.startswith('darwin'):
 			with temp_file() as temp_file_path:
-				self._create_entitlements_file(build, temp_file_path)
+				self._create_entitlements_file(build, temp_file_path, plist_dict)
 				
 				self._sign_app(build=build,
 					provisioning_profile=provisioning_profile,
@@ -727,7 +710,7 @@ def package_ios(build):
 
 	runner = IOSRunner(path.abspath('development'))
 	try:
-		relative_path_to_itunes_artwork = build.config['plugins']['icons']['config']['ios']['512']
+		relative_path_to_itunes_artwork = build.config['modules']['icons']['config']['ios']['512']
 	except KeyError:
 		relative_path_to_itunes_artwork = None
 

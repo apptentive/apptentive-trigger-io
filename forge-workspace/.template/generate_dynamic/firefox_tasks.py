@@ -3,8 +3,8 @@ import shutil
 import logging
 import sys
 
-from lib import task
-from utils import run_shell, ensure_lib_available
+from lib import task, ensure_lib_available
+from module_dynamic.utils import run_shell
 
 
 LOG = logging.getLogger(__name__)
@@ -16,7 +16,6 @@ def _clean_firefox(build_type_dir):
 	LOG.debug('Cleaning up after firefox run')
 	if os.path.isfile(backup_harness_options):
 		shutil.move(backup_harness_options, original_harness_options)
-
 
 @task
 def clean_firefox(build, build_type_dir):
@@ -36,9 +35,6 @@ def _run_python_code(build, extra_path, entry_point):
 		python = sys.executable
 		run_shell(python, python_runner, extra_path, entry_point, command_log_level=logging.INFO, check_for_interrupt=True)
 
-	
-
-
 @task
 def run_firefox(build, build_type_dir):
 	firefox_lib = ensure_lib_available(build, 'run-firefox.zip')
@@ -48,7 +44,6 @@ def run_firefox(build, build_type_dir):
 	finally:
 		_clean_firefox(build_type_dir)
 
-
 def _generate_package_name(build):
 	if "core" not in build.config:
 		build.config["core"] = {}
@@ -57,4 +52,3 @@ def _generate_package_name(build):
 	if "package_name" not in build.config["core"]["firefox"]:
 		build.config["core"]["firefox"]["package_name"] = build.config["uuid"]
 	return build.config["core"]["firefox"]["package_name"]
-

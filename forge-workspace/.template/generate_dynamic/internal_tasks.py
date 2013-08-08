@@ -2,7 +2,7 @@ import logging
 import json
 from os import path
 
-import utils
+import lib
 
 LOG = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ def config_changes_invalidate_templates(
 		return False
 
 	with open(
-			path.join(utils.path_to_lib(), "invalidating_config.json")
+			path.join(lib.path_to_lib(), "invalidating_config.json")
 			) as invalidating_config_file:
 		invalidating_config = json.load(invalidating_config_file)
 

@@ -7,9 +7,9 @@ from subprocess import PIPE, STDOUT
 import tempfile
 import time
 
-import lib
+from module_dynamic import lib
 from lib import task
-from utils import run_shell
+from module_dynamic.utils import run_shell
 
 LOG = logging.getLogger(__name__)
 

@@ -15,10 +15,11 @@ from urlparse import urljoin
 
 import requests
 
-import lib
-from lib import cd, task
-import utils
-from utils import run_shell, ShellError
+from module_dynamic import lib
+from module_dynamic.lib import cd
+from lib import task
+from module_dynamic import utils
+from module_dynamic.utils import run_shell, ShellError
 
 
 LOG = logging.getLogger(__name__)

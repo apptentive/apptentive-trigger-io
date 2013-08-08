@@ -2,6 +2,16 @@
 	"platform_version": true,
 	"homepage": true,
 	"modules": true,
-	"plugins": true
+	"core": {
+		"android": {
+			"minimum_version": true
+		},
+		"chrome": true,
+		"general": {
+			"logging": true
+		},
+		"ios": {
+			"device_family": true
+		}
+	}
 }
-

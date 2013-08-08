@@ -6,8 +6,9 @@ import uuid
 import hashlib
 from subprocess import PIPE, STDOUT
 
-import lib
-from lib import CouldNotLocate, task
+from module_dynamic import lib
+from module_dynamic.lib import CouldNotLocate
+from lib import task
 
 LOG = logging.getLogger(__name__)
 
