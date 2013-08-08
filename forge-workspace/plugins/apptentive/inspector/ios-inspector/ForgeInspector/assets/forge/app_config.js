@@ -1,1 +1,0 @@
-window.forge = {}; window.forge.config = {"plugins": {"inspector": {"hash": "notahash"}, "apptentive": {"hash": "examplehash"}}};
