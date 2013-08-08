@@ -1,16 +1,48 @@
+//
+//  apptentive_module_EventListener.m
+//  ForgeModule
+//
+//  Created by Peter Kamb on 8/7/13.
+//  Copyright (c) 2013 Apptentive. All rights reserved.
+//
+
 #import "apptentive_module_EventListener.h"
+#import "ATConnect.h"
+#import "ATAppRatingFlow.h"
+#import "ATSurveys.h"
 
 @implementation apptentive_module_EventListener
 
-//
-// Here you can implement event listeners.
-// These are functions which will get called when certain native events happen.
-//
++ (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    //Shared
+    ATConnect *connection __attribute__((unused)) = [ATConnect sharedConnection];
+    
+    //Message Center
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadMessageCountChanged:) name:ATMessageCenterUnreadCountChangedNotification object:nil];
+    
+    //Rating Flow
+    ATAppRatingFlow *sharedRatingFlow = [ATAppRatingFlow sharedRatingFlowWithAppID:@"<your iTunes app ID>"];
+    [sharedRatingFlow showRatingFlowFromViewControllerIfConditionsAreMet:[[ForgeApp sharedApp] viewController]];
+    
+    //Survey Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyBecameAvailable:) name:ATSurveyNewSurveyAvailableNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyWasSent:) name:ATSurveySentNotification object:nil];
+}
 
-// The example below passes an event through to JavaScript when the application is resumed.
-+ (void)applicationWillEnterForeground:(UIApplication *)application {
-	// It is good practise to namespace any events you send to JavaScript with your module name
-	[[ForgeApp sharedApp] event:@"apptentive_module.resume" withParam:nil];
++ (void)unreadMessageCountChanged:(NSNotification *)notification
+{
+    [[ForgeApp sharedApp] event:@"apptentive.unreadMessageCountChanged" withParam:notification.userInfo];
+}
+
++ (void)surveyBecameAvailable:(NSNotification *)notification
+{
+    [[ForgeApp sharedApp] event:@"apptentive.surveyBecameAvailable" withParam:notification.userInfo];
+}
+
++ (void)surveyWasSent:(NSNotification *)notification
+{
+    [[ForgeApp sharedApp] event:@"apptentive.surveyWasSent" withParam:notification.userInfo];
 }
 
 @end
