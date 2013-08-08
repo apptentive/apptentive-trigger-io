@@ -21,6 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		58A7A92117B4184E00C58C97 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A7A91F17B4184E00C58C97 /* CoreTelephony.framework */; };
+		58A7A92217B4184E00C58C97 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A7A92017B4184E00C58C97 /* CoreText.framework */; };
+		58A7A92417B4185900C58C97 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A7A92317B4185900C58C97 /* CoreData.framework */; };
+		58A7A92617B4186200C58C97 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A7A92517B4186200C58C97 /* QuartzCore.framework */; };
+		58A7A92817B4186A00C58C97 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A7A92717B4186A00C58C97 /* StoreKit.framework */; };
+		58A7A92A17B41BEE00C58C97 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58A7A92917B41BEE00C58C97 /* ApptentiveResources.bundle */; };
 		B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826315C2A393006798D7 /* AssetsLibrary.framework */; };
 		B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826B15C2A44F006798D7 /* SystemConfiguration.framework */; };
 		B307826E15C2A47B006798D7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B307826D15C2A47B006798D7 /* assets */; };
@@ -76,6 +82,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58A7A91F17B4184E00C58C97 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		58A7A92017B4184E00C58C97 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		58A7A92317B4185900C58C97 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		58A7A92517B4186200C58C97 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		58A7A92717B4186A00C58C97 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		58A7A92917B41BEE00C58C97 /* ApptentiveResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = ApptentiveResources.bundle; path = "/Users/pkamb/Library/Developer/Xcode/DerivedData/ForgeInspector-eokzugsbermabiaimjpajvvrzlmz/Build/Products/Debug-iphoneos/ApptentiveResources.bundle"; sourceTree = "<absolute>"; };
 		B307826315C2A393006798D7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B307826B15C2A44F006798D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B307826D15C2A47B006798D7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
@@ -107,6 +119,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58A7A92817B4186A00C58C97 /* StoreKit.framework in Frameworks */,
+				58A7A92617B4186200C58C97 /* QuartzCore.framework in Frameworks */,
+				58A7A92417B4185900C58C97 /* CoreData.framework in Frameworks */,
+				58A7A92117B4184E00C58C97 /* CoreTelephony.framework in Frameworks */,
+				58A7A92217B4184E00C58C97 /* CoreText.framework in Frameworks */,
 				B3F0CB92163AD60B005E099F /* libForgeModule.a in Frameworks */,
 				B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */,
 				B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */,
@@ -124,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				B3E58384162714AD00BD59DD /* libForgeModule.a */,
-				B3E58386162714AD00BD59DD /* templatemodule.bundle */,
+				B3E58386162714AD00BD59DD /* apptentive_module.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,6 +149,12 @@
 		B3FC516C15C14B2A003574D9 = {
 			isa = PBXGroup;
 			children = (
+				58A7A92917B41BEE00C58C97 /* ApptentiveResources.bundle */,
+				58A7A92717B4186A00C58C97 /* StoreKit.framework */,
+				58A7A92517B4186200C58C97 /* QuartzCore.framework */,
+				58A7A92317B4185900C58C97 /* CoreData.framework */,
+				58A7A91F17B4184E00C58C97 /* CoreTelephony.framework */,
+				58A7A92017B4184E00C58C97 /* CoreText.framework */,
 				B3E5837A162714AD00BD59DD /* ForgeModule.xcodeproj */,
 				B3FC518115C14B2A003574D9 /* ForgeInspector */,
 				B3FC517A15C14B2A003574D9 /* Frameworks */,
@@ -254,10 +277,10 @@
 			remoteRef = B3E58383162714AD00BD59DD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B3E58386162714AD00BD59DD /* templatemodule.bundle */ = {
+		B3E58386162714AD00BD59DD /* apptentive_module.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = templatemodule.bundle;
+			path = apptentive_module.bundle;
 			remoteRef = B3E58385162714AD00BD59DD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -269,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3FC519515C14B3C003574D9 /* ForgeCore.bundle in Resources */,
+				58A7A92A17B41BEE00C58C97 /* ApptentiveResources.bundle in Resources */,
 				B307826E15C2A47B006798D7 /* assets in Resources */,
 				B33F897B171479080050FB45 /* Default-568h@2x~iphone.png in Resources */,
 				B33F897C171479080050FB45 /* Default-Landscape@2x~ipad.png in Resources */,
