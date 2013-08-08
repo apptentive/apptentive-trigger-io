@@ -80,6 +80,18 @@
 
 #pragma mark - Ratings Flow
 
++ (void)appID:(ForgeTask *)task
+{
+    NSString *appID = [[ATAppRatingFlow sharedRatingFlow] appID];
+    [task success:appID];
+}
+
++ (void)setAppID:(ForgeTask *)task appID:(NSString *)appID
+{
+    [[ATAppRatingFlow sharedRatingFlow] setAppID:appID];
+    [task success:nil];
+}
+
 + (void)appName:(ForgeTask *)task
 {
     NSString *appName = [[ATAppRatingFlow sharedRatingFlow] appName];

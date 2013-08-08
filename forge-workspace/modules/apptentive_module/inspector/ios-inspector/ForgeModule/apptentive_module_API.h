@@ -32,6 +32,8 @@
 
 #pragma mark - Ratings Flow
 
++ (void)appID:(ForgeTask *)task;
++ (void)setAppID:(ForgeTask *)task appID:(NSString *)appID;
 + (void)appName:(ForgeTask *)task;
 + (void)setAppName:(ForgeTask *)task appName:(NSString *)appName;
 + (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task;
