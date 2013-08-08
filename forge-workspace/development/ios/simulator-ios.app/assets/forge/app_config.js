@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "9027f9f620e2405f76abec8618df71facbdedb87", 
+    "config_hash": "b4f1fb2b6358af2eccdc05bf5c39d7cda21830c4", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -10,6 +10,9 @@ window.forge = {}; window.forge.config = {
             "package_name": "62a29794c26911e2b36c12313d00dc45"
         }, 
         "general": {
+            "logging": {
+                "level": "DEBUG"
+            }, 
             "reload": true
         }, 
         "ie": {
@@ -26,32 +29,22 @@ window.forge = {}; window.forge.config = {
         }
     }, 
     "description": "An empty app created by default", 
-    "json_safe_name": "Apptentive Demo", 
-    "logging": {
-        "level": "DEBUG"
-    }, 
-    "name": "Apptentive Demo", 
-    "package_name": "apptentivedemo62a29794c26911e2b36c12313d00dc45", 
-    "platform_version": "v1.4.47", 
-    "plugins": {
-        "apptentive": {
-            "hash": "be5f0092003fa44823c3704c60883eb549d67fea", 
-            "type": "project"
-        }, 
+    "modules": {
         "contact": {
-            "hash": "notahash"
+            "version": "2.0"
         }, 
         "file": {
-            "hash": "notahash"
+            "version": "2.0"
         }, 
         "media": {
-            "hash": "notahash"
+            "config": {}, 
+            "version": "2.0"
         }, 
         "notification": {
-            "hash": "notahash"
+            "version": "2.0"
         }, 
         "prefs": {
-            "hash": "notahash"
+            "version": "2.0"
         }, 
         "request": {
             "config": {
@@ -60,11 +53,12 @@ window.forge = {}; window.forge.config = {
                     "https://*/*"
                 ]
             }, 
-            "hash": "notahash"
+            "version": "2.0"
         }
     }, 
+    "name": "Apptentive Demo", 
+    "platform_version": "v2.0.0", 
     "trigger_domain": "https://trigger.io", 
     "uuid": "62a29794c26911e2b36c12313d00dc45", 
-    "version": "0.1", 
-    "xml_safe_name": "Apptentive Demo"
+    "version": "0.1"
 };
