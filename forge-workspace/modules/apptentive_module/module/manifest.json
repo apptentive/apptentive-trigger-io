@@ -1,6 +1,6 @@
 {
-    "description": "My module template", 
+    "description": "Apptentive module for Trigger.io", 
     "name": "apptentive_module", 
     "platform_version": "v2.0.0", 
-    "version": "0.1"
+    "version": "0.6"
 }
