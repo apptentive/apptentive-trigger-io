@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		58A7A91A17B32E7300C58C97 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A7A8CB17B31E6900C58C97 /* libApptentiveConnect.a */; };
 		58A7A91D17B32E8D00C58C97 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58A7A8CF17B31E6900C58C97 /* ApptentiveResources.bundle */; };
+		58E6D95417B4264400CE7EBF /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58A7A8CF17B31E6900C58C97 /* ApptentiveResources.bundle */; };
 		B31B6D5215C13D5200854074 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31B6D5115C13D5200854074 /* Foundation.framework */; };
 		B31B6D6F15C1467100854074 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B31B6D6E15C1467100854074 /* CoreFoundation.framework */; };
 		B37C3A5D162717A200B50A60 /* ForgeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B37C3A5C162717A200B50A60 /* ForgeCore.framework */; };
@@ -72,9 +73,9 @@
 
 /* Begin PBXFileReference section */
 		58A7A8C417B31E6800C58C97 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = Apptentive/ApptentiveConnect/ApptentiveConnect.xcodeproj; sourceTree = "<group>"; };
-		58A7A8D117B31EF100C58C97 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = ATConnect.h; path = Apptentive/ApptentiveConnect/source/ATConnect.h; sourceTree = "<group>"; };
-		58A7A8D217B31EFA00C58C97 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = ATAppRatingFlow.h; path = "Apptentive/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
-		58A7A8D317B31F1500C58C97 /* ATSurveys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = ATSurveys.h; path = Apptentive/ApptentiveConnect/source/Surveys/ATSurveys.h; sourceTree = "<group>"; };
+		58A7A8D117B31EF100C58C97 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATConnect.h; path = Apptentive/ApptentiveConnect/source/ATConnect.h; sourceTree = "<group>"; };
+		58A7A8D217B31EFA00C58C97 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATAppRatingFlow.h; path = "Apptentive/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
+		58A7A8D317B31F1500C58C97 /* ATSurveys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATSurveys.h; path = Apptentive/ApptentiveConnect/source/Surveys/ATSurveys.h; sourceTree = "<group>"; };
 		B31B6D4E15C13D5200854074 /* libForgeModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libForgeModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31B6D5115C13D5200854074 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B31B6D6D15C1467100854074 /* apptentive_module.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = apptentive_module.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58E6D95417B4264400CE7EBF /* ApptentiveResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
