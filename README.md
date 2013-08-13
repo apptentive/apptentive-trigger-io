@@ -28,8 +28,8 @@ To make an Apptentive API call from JavaScript the following code is used:
 The `forge.moduleName.methodName` method sends a message to the native module with at least two parameters:
 
  - The initial parameters are the data parameters to be passed to the module's native code.
- - The penultimate parameter is a success callback function, which may be called with data returned from native code.
- - The final is an error callback function, which also be called with data.
+ - The penultimate parameter is a success callback function, which should be called with the data returned from native code.
+ - The final parameter is an error callback function, called with the returned error data.
 
 More information:
 https://trigger.io/docs/current/api/native_modules/api_methods.html
@@ -60,7 +60,7 @@ Check for the number of unread messages like so:
 
     forge.apptentive.unreadMessageCount(
 		function(success) {
-			//Update your interface with the new message count.
+			// Update your interface with the new message count.
 			alert("You have " + success + " unread messages.");
 		},
 		function(error) {
@@ -111,7 +111,7 @@ Surveys can be created on our website and presented, in-app, to users.
 
 You can check if there are any available surveys that have been downloaded from the server:
 
-    //No tags
+    // No tags
 	forge.apptentive.hasSurveyAvailableWithNoTags(
 		function(success) {
 			alert(success);
@@ -121,7 +121,7 @@ You can check if there are any available surveys that have been downloaded from 
 		}
     );
    
-	//With tags
+	// With tags
 	var surveyTags = ["testSurvey", "testTag"];
 	forge.apptentive.hasSurveyAvailableWithTags(
 		surveyTags,
@@ -141,10 +141,10 @@ You can also listen for our `apptentive.surveyBecameAvailable` notification:
 
 If surveys are available, present the surveys in the app:
 
-	//No tags
+	// No tags
 	forge.apptentive.presentSurveyControllerWithNoTags({}, {});
 	
-	//With tags
+	// With tags
 	var surveyTags = ["testSurvey", "testTag"];
 	forge.apptentive.presentSurveyControllerWithTags(surveyTags, {}, {});
 
