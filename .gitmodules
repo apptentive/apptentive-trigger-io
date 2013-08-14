@@ -1,4 +1,4 @@
 
-[submodule "forge-workspace/modules/apptentive_module/inspector/ios-inspector/ForgeModule/Apptentive"]
-	path = forge-workspace/modules/apptentive_module/inspector/ios-inspector/ForgeModule/Apptentive
+[submodule "forge-workspace/modules/apptentive/inspector/ios-inspector/ForgeModule/Apptentive"]
+	path = forge-workspace/modules/apptentive/inspector/ios-inspector/ForgeModule/Apptentive
 	url = https://pkamb@github.com/apptentive/apptentive-ios.git
