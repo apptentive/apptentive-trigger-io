@@ -68,17 +68,17 @@ forge.apptentive = {
 
 	// Events
 	unreadMessageCountChanged: {
-		addEventListener: function (callback) {
+		addListener: function (callback) {
 			forge.internal.addEventListener("apptentive.unreadMessageCountChanged", callback);
 		}
 	},
 	surveyBecameAvailable: {
-		addEventListener: function (callback) {
+		addListener: function (callback) {
 			forge.internal.addEventListener("apptentive.surveyBecameAvailable", callback);
 		}
 	},
 	surveyWasSent: {
-		addEventListener: function (callback) {
+		addListener: function (callback) {
 			forge.internal.addEventListener("apptentive.surveyWasSent", callback);
 		}
 	}
