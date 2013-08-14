@@ -70,7 +70,7 @@ Check for the number of unread messages like so:
 
 You can also listen for our `ATMessageCenterUnreadCountChangedNotification` notification:
 
-    forge.internal.addEventListener("apptentive.unreadMessageCountChanged", function () {
+    forge.apptentive.unreadMessageCountChanged.addListener(function () {
         alert("New Apptentive unread messages!");
     });
 
@@ -135,7 +135,7 @@ You can check if there are any available surveys that have been downloaded from 
 
 You can also listen for our `apptentive.surveyBecameAvailable` notification:
 
-    forge.internal.addEventListener("apptentive.surveyBecameAvailable", function () {
+    forge.apptentive.surveyBecameAvailable.addListener(function () {
         alert("New Apptentive surveys!");
     });
 
@@ -150,7 +150,7 @@ If surveys are available, present the surveys in the app:
 
 We will then send a notification when the survey has been sent to Apptentive:
 
-    forge.internal.addEventListener("apptentive.surveyWasSent", function () {
+    forge.apptentive.surveyWasSent.addListener(function () {
         alert("Survey was sent to Apptentive!");
     });
 

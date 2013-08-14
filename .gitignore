@@ -17,3 +17,7 @@ profile
 DerivedData
 .idea/
 .template/
+forge-workspace/modules/apptentive/.trigger/
+forge-workspace/modules/apptentive/inspector/ios-inspector/.hash
+forge-workspace/modules/apptentive/inspector/ios-inspector/ForgeInspector/assets/
+forge-workspace/modules/apptentive/inspector/ios-inspector.*
