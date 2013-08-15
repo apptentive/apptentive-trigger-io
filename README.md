@@ -4,11 +4,7 @@ The Apptentive Trigger.io module allows you to add a quick and easy in-app-feedb
 
 ##Available via Trigger.io
 
-The module will soon be available through the [Trigger.io Modules](https://trigger.io/modules/) page.
-
-##Available as a packaged module
-
-A packaged version of the Apptentive module can be found under the [Release](https://github.com/apptentive/apptentive-trigger-io/releases) tab of this repository.
+The official Apptentive module [is available via the Trigger.io Forge](https://trigger.io/modules/apptentive/).
 
 ##JavaScript syntax for Trigger.io modules
 
@@ -120,7 +116,7 @@ You can check if there are any available surveys that have been downloaded from 
 			forge.logging.info("Error!");
 		}
     );
-   
+
 	// With tags
 	var surveyTags = ["testSurvey", "testTag"];
 	forge.apptentive.hasSurveyAvailableWithTags(
@@ -143,7 +139,7 @@ If surveys are available, present the surveys in the app:
 
 	// No tags
 	forge.apptentive.presentSurveyControllerWithNoTags({}, {});
-	
+
 	// With tags
 	var surveyTags = ["testSurvey", "testTag"];
 	forge.apptentive.presentSurveyControllerWithTags(surveyTags, {}, {});
