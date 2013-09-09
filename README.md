@@ -1,14 +1,16 @@
-#Apptentive module for Trigger.io
+# Apptentive Tigger.io Module
 
 The Apptentive Trigger.io module allows you to add a quick and easy in-app-feedback mechanism to your Trigger.io applications. Feedback is sent to the Apptentive web service.
 
-##Available via Trigger.io
+## Install Guide
 
-The official Apptentive module [is available via the Trigger.io Forge](https://trigger.io/modules/apptentive/).
+The following steps will help guide you through implementing Apptentive in your app through Trigger.io. This guide assumes you have your app implemented in Trigger.io already.
 
-##JavaScript syntax for Trigger.io modules
+The official Apptentive module is available via the [Trigger.io Forge](https://trigger.io/modules/apptentive/).
 
-To make an Apptentive API call from JavaScript the following code is used:
+### Setup Apptentive
+
+To make an Apptentive API call from JavaScript, use the following code snippet:
 
     forge.moduleName.methodName(
 		"test",
@@ -27,24 +29,21 @@ The `forge.moduleName.methodName` method sends a message to the native module wi
  - The penultimate parameter is a success callback function, which should be called with the data returned from native code.
  - The final parameter is an error callback function, called with the returned error data.
 
-More information:
-https://trigger.io/docs/current/api/native_modules/api_methods.html
+You can find more information about these modules and methods [here](https://trigger.io/docs/current/api/native_modules/api_methods.html).
 
-##Using the Apptentive module
+### Implement Apptentive
 
 Once you have successfully installed the module, you can begin using Apptentive in your Trigger.io app.
 
-First, set your Apptentive API key:
+First, set your Apptentive API key like so:
 
-	forge.apptentive.setApiKey("GET_YOUR_API_KEY_FROM_APPTENTIVE.COM", {}, {});
+	forge.apptentive.setApiKey("YOUR APPTENTIVE API KEY", {}, {});
 
-It is very important that you set your Apptentive API key, which you can get by signing up [on our website](http://www.apptentive.com/).
+It is very important that you set your Apptentive API key, which you can get by signing up on our [website](http://www.apptentive.com/).
 
-You can then begin using the features of Apptentive. For example, you could add a "Give Feedback" button to your interface that collects feedback via Apptentive's Message Center. 
+You can now begin using Apptentive's features.
 
-    forge.apptentive.presentMessageCenter({}, {});
-   
-##Message Center
+#### Message Center
 
 Get feedback from your customers with the Apptentive Message Center.
 
@@ -64,30 +63,13 @@ Check for the number of unread messages like so:
 		}
     );
 
-You can also listen for our `ATMessageCenterUnreadCountChangedNotification` notification:
+You can also listen for our `ATMessageCenterUnreadCountChangedNotification` notification by adding the following:
 
     forge.apptentive.unreadMessageCountChanged.addListener(function () {
         alert("New Apptentive unread messages!");
     });
 
-##User info
-
-You can pre-load Apptentive with information about the user, which makes their Message Center experience easier:
-
-	forge.apptentive.setInitialUserName("Peter", {}, {});
-
-	forge.apptentive.setInitialUserEmailAddress("peter@example.com", {}, {});
-
-You can also store arbitrary information about the user, which is then visible in your Message Center:
-
-    forge.apptentive.addCustomData("object", "key", {}, {});
-	forge.apptentive.addCustomData("Seattle", "city", {}, {});
-
-Similarly, you can remove custom data:
-
-	forge.apptentive.removeCustomData("city", {}, {});
-
-##App Store Rating Flow
+#### Ratings
 
 Apptentive also provides an App Store rating flow. A ratings dialog will be displayed based on the number of launches of your application, the amount of time the user has been using it, and the number of significant events the user has completed (for example, levels passed). All of these variables can be modified on Apptentive.com.
 
@@ -101,7 +83,7 @@ Log significant events, such as completing a level, with:
 
 	forge.apptentive.logSignificantEvent({}, {});
 
-##In-App Surveys
+#### Surveys
 
 Surveys can be created on our website and presented, in-app, to users.
 
@@ -150,12 +132,19 @@ We will then send a notification when the survey has been sent to Apptentive:
         alert("Survey was sent to Apptentive!");
     });
 
-##Questions? Comments? Help using Apptentive?
+#### User Info
 
-Please let us know how we can improve this document or the Apptentive Trigger.io module!
+You can pre-load Apptentive with information about the user, which makes their Message Center experience easier. For example: 
 
-https://github.com/apptentive/apptentive-trigger-io/issues
+	forge.apptentive.setInitialUserName("Peter", {}, {});
 
-If you have any other questions, please contact us and we will get back to you quickly.
+	forge.apptentive.setInitialUserEmailAddress("peter@example.com", {}, {});
 
-http://www.apptentive.com/contact
+You can also store arbitrary information about the user, which is then visible in your Message Center:
+
+    forge.apptentive.addCustomData("object", "key", {}, {});
+	forge.apptentive.addCustomData("Seattle", "city", {}, {});
+
+Similarly, you can remove custom data:
+
+	forge.apptentive.removeCustomData("city", {}, {});
