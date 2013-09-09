@@ -6,9 +6,11 @@ The Apptentive Trigger.io module allows you to add a quick and easy in-app-feedb
 
 The following steps will help guide you through implementing Apptentive in your app through Trigger.io. This guide assumes you have your app implemented in Trigger.io already.
 
+### Get the Apptentive Module
+
 The official Apptentive module is available via the [Trigger.io Forge](https://trigger.io/modules/apptentive/).
 
-### Setup Apptentive
+### Setup the Apptentive Module
 
 To make an Apptentive API call from JavaScript, use the following code snippet:
 
