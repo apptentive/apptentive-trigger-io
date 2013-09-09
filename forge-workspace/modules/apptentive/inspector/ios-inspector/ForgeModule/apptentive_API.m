@@ -74,7 +74,7 @@
 
 + (void)unreadMessageCount:(ForgeTask *)task
 {
-    NSUInteger *unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
+    NSUInteger unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
     [task success:[NSNumber numberWithInteger:unreadMessageCount]];
 }
 
