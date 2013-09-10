@@ -1,0 +1,16 @@
+{
+	"general": {},
+	"ios": {
+		"profiles": {
+			"DEFAULT": {}
+		},
+		"simulatorsdk": "6.1",
+		"simulatorfamily": "iphone"
+	},
+	"android": {
+		"profiles": {
+			"DEFAULT": {}
+		},
+		"sdk": "/opt/android-sdk-macosx/"
+	}
+}
