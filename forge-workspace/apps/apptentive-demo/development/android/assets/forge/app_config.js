@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "ec59e80f869ab56c7c805a494dac443dd2c86a51", 
+    "config_hash": "b4d47ac37d03747fd0f5892ab96646934d2b908f", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -32,7 +32,7 @@ window.forge = {}; window.forge.config = {
     "modules": {
         "apptentive": {
             "config": {}, 
-            "version": "1.9.10"
+            "version": "1.9.13"
         }, 
         "contact": {
             "version": "2.0"
