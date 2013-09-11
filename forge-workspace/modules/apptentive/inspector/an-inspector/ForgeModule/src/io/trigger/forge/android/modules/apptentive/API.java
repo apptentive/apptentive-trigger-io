@@ -29,6 +29,10 @@ public class API {
 	}
 	
 	public static void presentMessageCenter(final ForgeTask task) {
-		Apptentive.showMessageCenter(ForgeApp.getActivity());
+		task.performUI(new Runnable() {
+			public void run() {
+				Apptentive.showMessageCenter(ForgeApp.getActivity());
+			}
+		});
 	}
 }
