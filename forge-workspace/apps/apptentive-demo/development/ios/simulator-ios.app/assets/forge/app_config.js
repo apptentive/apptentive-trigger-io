@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "2f16d6d8e112fb9d582de5fa773db2f406faf9a7", 
+    "config_hash": "cd1319edab3bfd5c9f995a0790e4a3b3f50f18e7", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -30,9 +30,9 @@ window.forge = {}; window.forge.config = {
     }, 
     "description": "An empty app created by default", 
     "modules": {
-        "apptentive_module": {
+        "apptentive": {
             "config": {}, 
-            "version": "0.5"
+            "version": "1.9.14"
         }, 
         "contact": {
             "version": "2.0"

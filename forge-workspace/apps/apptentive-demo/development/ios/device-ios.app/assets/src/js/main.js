@@ -4,8 +4,25 @@ $(function () {
 	//Shared
 	*/
 	
+	$('button.showAlert').click(function () {		
+		forge.internal.call('apptentive.showAlert',
+							{text:$('input.showAlert').val()}, 
+							function(success) {
+								forge.logging.info("Success!");
+								forge.logging.info("Success: " + success.message);
+							},
+							function(error) {
+								forge.logging.info("Error: " + error.message);
+							}
+		);
+	});
+
+	/*
+	//Shared
+	*/
+	
 	$('button.apiKey').click(function () {		
-		forge.internal.call('apptentive_module.apiKey',
+		forge.internal.call('apptentive.apiKey',
 							{}, 
 							function(success) {
 								$('p.apiKey').text(success);
@@ -17,7 +34,7 @@ $(function () {
 	});
 	
 	$('button.setApiKey').click(function () {		
-		forge.internal.call('apptentive_module.setApiKey',
+		forge.internal.call('apptentive.setApiKey',
 							{apiKey:$('input.setApiKey').val()}, 
 							function(success) {
 							},
@@ -31,7 +48,7 @@ $(function () {
 		
 		forge.logging.info("start!");
 		
-		forge.internal.call('apptentive_module.initialUserName',
+		forge.internal.call('apptentive.initialUserName',
 							{}, 
 							function(success) {
 								$('p.initialUserName').text(success);
@@ -44,7 +61,7 @@ $(function () {
 	
 	
 	$('button.setInitialUserName').click(function () {		
-		forge.internal.call('apptentive_module.setInitialUserName',
+		forge.internal.call('apptentive.setInitialUserName',
 							{initialUserName:$('input.setInitialUserName').val()}, 
 							function(success) {
 							},
@@ -55,7 +72,7 @@ $(function () {
 	});
 	
 	$('button.initialUserEmailAddress').click(function () {				
-		forge.internal.call('apptentive_module.initialUserEmailAddress',
+		forge.internal.call('apptentive.initialUserEmailAddress',
 							{}, 
 							function(success) {								
 								$('p.initialUserEmailAddress').text(success);
@@ -69,7 +86,7 @@ $(function () {
 	
 	
 	$('button.setInitialUserEmailAddress').click(function () {				
-		forge.internal.call('apptentive_module.setInitialUserEmailAddress',
+		forge.internal.call('apptentive.setInitialUserEmailAddress',
 							{initialUserEmailAddress:$('input.setInitialUserEmailAddress').val()}, 
 							function(success) {
 							},
@@ -80,7 +97,7 @@ $(function () {
 	});
 	
 	$('button.addCustomData').click(function () {				
-		forge.internal.call('apptentive_module.addCustomData',
+		forge.internal.call('apptentive.addCustomData',
 							{
 								object:$('input.addCustomData.object').val(),
 								key:$('input.addCustomData.key').val()
@@ -94,9 +111,9 @@ $(function () {
 	});
 	
 	$('button.removeCustomData').click(function () {	
-		forge.internal.call('apptentive_module.removeCustomData',
+		forge.internal.call('apptentive.removeCustomData',
 							{
-								key:$('input.removeCustomData').val(),
+								key:$('input.removeCustomData').val()
 							}, 
 							function(success) {
 							},
@@ -111,18 +128,18 @@ $(function () {
 	*/
 	
 	$('button.presentMessageCenter').click(function () {				
-		forge.internal.call('apptentive_module.presentMessageCenter',
+		forge.internal.call('apptentive.presentMessageCenter',
 							{}, 
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
 	
 	$('button.unreadMessageCount').click(function () {				
-		forge.internal.call('apptentive_module.unreadMessageCount',
+		forge.internal.call('apptentive.unreadMessageCount',
 							{}, 
 							function(success) {
 								$('p.unreadMessageCount').text(success);
@@ -138,7 +155,7 @@ $(function () {
 	*/
 	
 	$('button.showRatingFlowIfConditionsAreMet').click(function () {						
-		forge.internal.call('apptentive_module.showRatingFlowIfConditionsAreMet',
+		forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet',
 							{}, 
 							function(success) {
 								
@@ -150,7 +167,7 @@ $(function () {
 	});
 	
 	$('button.logSignificantEvent').click(function () {						
-		forge.internal.call('apptentive_module.logSignificantEvent',
+		forge.internal.call('apptentive.logSignificantEvent',
 							{}, 
 							function(success) {
 								
@@ -166,7 +183,7 @@ $(function () {
 	*/
 	
 	$('button.hasSurveyAvailableWithNoTags').click(function () {							
-		forge.internal.call('apptentive_module.hasSurveyAvailableWithNoTags',
+		forge.internal.call('apptentive.hasSurveyAvailableWithNoTags',
 							{}, 
 							function(success) {
 								$('p.hasSurveyAvailableWithNoTags').text(success);
@@ -179,7 +196,7 @@ $(function () {
 	
 	$('button.hasSurveyAvailableWithTags').click(function () {		
 		var surveyTags = $('input.hasSurveyAvailableWithTags').val().split(" ");
-		forge.internal.call('apptentive_module.hasSurveyAvailableWithTags',
+		forge.internal.call('apptentive.hasSurveyAvailableWithTags',
 							{tags:surveyTags}, 
 							function(success) {
 								$('p.hasSurveyAvailableWithTags').text(success);
@@ -191,7 +208,7 @@ $(function () {
 	});
 	
 	$('button.presentSurveyControllerWithNoTags').click(function () {		
-		forge.internal.call('apptentive_module.presentSurveyControllerWithNoTags',
+		forge.internal.call('apptentive.presentSurveyControllerWithNoTags',
 							{}, 
 							function(success) {
 							},
@@ -204,7 +221,7 @@ $(function () {
 	
 	$('button.presentSurveyControllerWithTags').click(function () {	
 		var surveyTags = $('input.presentSurveyControllerWithTags').val().split(" ");
-		forge.internal.call('apptentive_module.presentSurveyControllerWithTags',
+		forge.internal.call('apptentive.presentSurveyControllerWithTags',
 							{tags:surveyTags}, 
 							function(success) {
 							},
