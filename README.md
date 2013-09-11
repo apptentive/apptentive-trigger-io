@@ -39,7 +39,7 @@ Once you have successfully installed the module, you can begin using Apptentive 
 
 First, set your Apptentive API key like so:
 
-	forge.apptentive.setApiKey("YOUR APPTENTIVE API KEY", {}, {});
+	forge.apptentive.setApiKey("YOUR_APPTENTIVE_API_KEY", {}, {});
 
 It is very important that you set your Apptentive API key, which you can get by signing up on our [website](http://www.apptentive.com/).
 
@@ -65,7 +65,7 @@ Check for the number of unread messages like so:
 		}
     );
 
-You can also listen for our `ATMessageCenterUnreadCountChangedNotification` notification by adding the following:
+You can also listen for our `ATMessageCenterUnreadCountChangedNotification` notification:
 
     forge.apptentive.unreadMessageCountChanged.addListener(function () {
         alert("New Apptentive unread messages!");
