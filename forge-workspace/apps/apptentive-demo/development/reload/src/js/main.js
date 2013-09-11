@@ -113,7 +113,7 @@ $(function () {
 	$('button.removeCustomData').click(function () {	
 		forge.internal.call('apptentive.removeCustomData',
 							{
-								key:$('input.removeCustomData').val(),
+								key:$('input.removeCustomData').val()
 							}, 
 							function(success) {
 							},
@@ -133,7 +133,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});

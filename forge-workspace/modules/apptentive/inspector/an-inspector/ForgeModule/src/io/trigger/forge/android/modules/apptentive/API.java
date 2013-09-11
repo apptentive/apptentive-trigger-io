@@ -1,5 +1,6 @@
 package io.trigger.forge.android.modules.apptentive;
 
+import com.apptentive.android.sdk.Apptentive;
 import io.trigger.forge.android.core.ForgeApp;
 import io.trigger.forge.android.core.ForgeParam;
 import io.trigger.forge.android.core.ForgeTask;
@@ -25,5 +26,9 @@ public class API {
 				alert.show();
 			}
 		});
+	}
+	
+	public static void presentMessageCenter(final ForgeTask task) {
+		Apptentive.showMessageCenter(ForgeApp.getActivity());
 	}
 }
