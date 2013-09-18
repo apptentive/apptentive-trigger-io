@@ -1,6 +1,6 @@
 {
     "author": "peter@apptentive.com", 
-    "config_hash": "b4d47ac37d03747fd0f5892ab96646934d2b908f", 
+    "config_hash": "bf3890c4598109852374b25c357e0f628705ebe9", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -32,7 +32,7 @@
     "modules": {
         "apptentive": {
             "config": {}, 
-            "version": "1.9.13"
+            "version": "1.9.17"
         }, 
         "contact": {
             "version": "2.0"
@@ -61,7 +61,7 @@
         }
     }, 
     "name": "Apptentive Demo", 
-    "platform_version": "v2.0.0", 
+    "platform_version": "v2.0.1", 
     "trigger_domain": "https://trigger.io", 
     "uuid": "62a29794c26911e2b36c12313d00dc45", 
     "version": "0.1"

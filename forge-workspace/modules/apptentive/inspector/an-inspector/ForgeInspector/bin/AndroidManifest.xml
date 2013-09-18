@@ -1,37 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="io.trigger.forge.android.inspector"
-      android:versionCode="1"
-      android:versionName="1.0"
-      android:installLocation="auto" xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="io.trigger.forge.android.inspector" android:installLocation="auto" android:versionCode="1" android:versionName="1.0">
     
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="15" />
     
-    <uses-sdk android:targetSdkVersion="15" android:minSdkVersion="5"></uses-sdk>
-    
-    <application android:name="io.trigger.forge.android.core.ForgeApp" android:icon="@drawable/icon" android:label="ForgeInspector">
-        <activity android:name="io.trigger.forge.android.core.ForgeActivity"
-                  android:configChanges="mcc|mnc|locale|touchscreen|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale|screenSize"
-                  android:launchMode="singleTask"
-                  android:stateNotNeeded="true"
-                  android:theme="@android:style/Theme.Black.NoTitleBar">
+    <application android:icon="@drawable/icon" android:label="ForgeInspector" android:name="io.trigger.forge.android.core.ForgeApp">
+        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale|screenSize" android:launchMode="singleTask" android:name="io.trigger.forge.android.core.ForgeActivity" android:stateNotNeeded="true" android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
- 
-        <meta-data android:name="apptentive_api_key" android:value="00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6"/>
-        <activity android:name="com.apptentive.android.sdk.ViewActivity"
-                  android:theme="@style/Apptentive.Theme.Transparent"/>
-                <receiver android:name="com.apptentive.android.sdk.comm.NetworkStateReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.intent.action.PACKAGE_RESTARTED"/>
-            </intent-filter>
-        </receiver>
-        <provider android:name="io.trigger.forge.android.core.ForgeContentProvider" android:authorities="io.trigger.forge.android.inspector" android:exported="true" tools:ignore="ExportedContentProvider" />
-    </application>
-</manifest>
+        
+        <provider android:authorities="io.trigger.forge.android.inspector" android:exported="true" android:name="io.trigger.forge.android.core.ForgeContentProvider" tools:ignore="ExportedContentProvider" />
+    <activity android:name="com.apptentive.android.sdk.ViewActivity" android:theme="@style/Apptentive.Theme.Transparent" /><meta-data android:name="apptentive_api_key" android:value="00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6" /><receiver android:name="com.apptentive.android.sdk.comm.NetworkStateReceiver"><intent-filter><action android:name="android.intent.action.PACKAGE_RESTARTED" /></intent-filter></receiver></application>
+<uses-permission android:name="android.permission.GET_ACCOUNTS" /></manifest>

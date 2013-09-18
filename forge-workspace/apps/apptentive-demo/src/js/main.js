@@ -45,9 +45,6 @@ $(function () {
 	});
 	
 	$('button.initialUserName').click(function () {		
-		
-		forge.logging.info("start!");
-		
 		forge.internal.call('apptentive.initialUserName',
 							{}, 
 							function(success) {
@@ -99,8 +96,8 @@ $(function () {
 	$('button.addCustomData').click(function () {				
 		forge.internal.call('apptentive.addCustomData',
 							{
-								object:$('input.addCustomData.object').val(),
-								key:$('input.addCustomData.key').val()
+								key:$('input.addCustomData.key').val(),
+								value:$('input.addCustomData.value').val()
 							}, 
 							function(success) {
 							},

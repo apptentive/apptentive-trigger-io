@@ -32,7 +32,32 @@ public class API {
 		task.performUI(new Runnable() {
 			public void run() {
 				Apptentive.showMessageCenter(ForgeApp.getActivity());
+				task.success();
 			}
 		});
+	}
+	
+	public static void setInitialUserEmailAddress(final ForgeTask task, @ForgeParam("initialUserEmailAddress") final String initialUserEmailAddress) {
+		Apptentive.setUserEmail(initialUserEmailAddress);
+		task.success();
+	}
+	
+	public static void addCustomData(final ForgeTask task, @ForgeParam("key") final String key, @ForgeParam("value") final String value) {
+		// TODO
+		//Apptentive.setCustomData();
+	}
+	
+	// Ratings
+
+	public static void showRatingFlowIfConditionsAreMet(final ForgeTask task) {						
+		task.performUI(new Runnable() {
+			public void run() {
+				Apptentive.showRatingFlowIfConditionsAreMet(ForgeApp.getActivity());
+			}
+		});
+	}
+
+	public static void logSignificantEvent(final ForgeTask task) {						
+		Apptentive.logSignificantEvent(ForgeApp.getActivity());
 	}
 }

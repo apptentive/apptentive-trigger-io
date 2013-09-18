@@ -99,8 +99,8 @@ $(function () {
 	$('button.addCustomData').click(function () {				
 		forge.internal.call('apptentive.addCustomData',
 							{
-								object:$('input.addCustomData.object').val(),
-								key:$('input.addCustomData.key').val()
+								key:$('input.addCustomData.key').val(),
+								value:$('input.addCustomData.value').val()
 							}, 
 							function(success) {
 							},

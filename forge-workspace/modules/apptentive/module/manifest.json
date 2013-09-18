@@ -1,6 +1,6 @@
 {
-    "description": "Apptentive module for Trigger.io", 
-    "name": "apptentive", 
-    "platform_version": "v2.0.0", 
-    "version": "1.9.13"
+	"description": "Apptentive module for Trigger.io",
+	"name": "apptentive",
+	"platform_version": "v2.0.2",
+	"version": "1.9.18"
 }

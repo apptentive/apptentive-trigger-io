@@ -1,0 +1,15 @@
+# view AndroidManifest.xml #generated:17
+-keep class com.apptentive.android.sdk.ViewActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:17
+-keep class com.apptentive.android.sdk.comm.NetworkStateReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:9
+-keep class io.trigger.forge.android.core.ForgeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:8
+-keep class io.trigger.forge.android.core.ForgeApp { <init>(...); }
+
+# view AndroidManifest.xml #generated:16
+-keep class io.trigger.forge.android.core.ForgeContentProvider { <init>(...); }
+
