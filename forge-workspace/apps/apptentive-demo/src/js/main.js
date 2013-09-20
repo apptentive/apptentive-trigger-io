@@ -1,5 +1,22 @@
 $(function () {
-	
+
+	/*
+	// Events
+	*/
+
+	forge.logging.info("init!");
+	alert("init!");
+	forge.logging.info("Setting email.");
+	forge.internal.call('apptentive.initialUserEmailAddress',
+						{initialUserEmailAddress:"sky@apptentive.com"},
+						function(success) {								
+							$('p.initialUserEmailAddress').text(success);
+						},
+						function(error) {
+							forge.logging.info("Error!");
+						}
+	);		
+
 	/*
 	//Shared
 	*/
@@ -21,7 +38,7 @@ $(function () {
 	//Shared
 	*/
 	
-	$('button.apiKey').click(function () {		
+	$('button.apiKey').click(function () {
 		forge.internal.call('apptentive.apiKey',
 							{},
 							function(success) {
@@ -33,7 +50,7 @@ $(function () {
 		);
 	});
 	
-	$('button.setApiKey').click(function () {		
+	$('button.setApiKey').click(function () {
 		forge.internal.call('apptentive.setApiKey',
 							{apiKey:$('input.setApiKey').val()}, 
 							function(success) {
@@ -44,7 +61,7 @@ $(function () {
 		);
 	});
 	
-	$('button.initialUserName').click(function () {		
+	$('button.initialUserName').click(function () {
 		forge.internal.call('apptentive.initialUserName',
 							{},
 							function(success) {
@@ -56,7 +73,7 @@ $(function () {
 		);
 	});
 	
-	$('button.setInitialUserName').click(function () {		
+	$('button.setInitialUserName').click(function () {
 		forge.internal.call('apptentive.setInitialUserName',
 							{initialUserName:$('input.setInitialUserName').val()}, 
 							function(success) {
@@ -67,7 +84,7 @@ $(function () {
 		);
 	});
 	
-	$('button.initialUserEmailAddress').click(function () {				
+	$('button.initialUserEmailAddress').click(function () {
 		forge.internal.call('apptentive.initialUserEmailAddress',
 							{},
 							function(success) {								
@@ -79,7 +96,7 @@ $(function () {
 		);		
 	});
 	
-	$('button.setInitialUserEmailAddress').click(function () {				
+	$('button.setInitialUserEmailAddress').click(function () {
 		forge.internal.call('apptentive.setInitialUserEmailAddress',
 							{initialUserEmailAddress:$('input.setInitialUserEmailAddress').val()}, 
 							function(success) {
@@ -90,7 +107,7 @@ $(function () {
 		);
 	});
 
-	$('button.addCustomData').click(function () {				
+	$('button.addCustomData').click(function () {		
 		forge.internal.call('apptentive.addCustomData',
 							{
 								key:$('input.addCustomData.key').val(),

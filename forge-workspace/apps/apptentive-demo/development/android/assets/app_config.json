@@ -1,6 +1,6 @@
 {
     "author": "peter@apptentive.com", 
-    "config_hash": "bf3890c4598109852374b25c357e0f628705ebe9", 
+    "config_hash": "f646aee5cd47506f75a9726752ddfbf9774c7235", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -32,7 +32,7 @@
     "modules": {
         "apptentive": {
             "config": {}, 
-            "version": "1.9.17"
+            "version": "1.9.30"
         }, 
         "contact": {
             "version": "2.0"

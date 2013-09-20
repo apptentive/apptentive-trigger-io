@@ -35,23 +35,21 @@ public class API {
 
 	// getApiKey()?
 	// setApiKey()?
-	// getUserName()?
-	// setUserName()?
-	// getUserEmail()?
+	// getInitialUserName()?
+	// setInitialUserName()?
+	// getInitialUserEmail()?
 
 	public static void setInitialUserEmailAddress(final ForgeTask task, @ForgeParam("initialUserEmailAddress") final String initialUserEmailAddress) {
-		Apptentive.setUserEmail(initialUserEmailAddress);
+		Apptentive.setInitialUserEmail(initialUserEmailAddress);
 		task.success();
 	}
 	
 	public static void addCustomData(final ForgeTask task, @ForgeParam("key") final String key, @ForgeParam("value") final String value) {
-		// TODO
-		//Apptentive.setCustomData(key, value);
+		Apptentive.addCustomData(key, value);
 	}
 	
 	public static void removeCustomData(final ForgeTask task, @ForgeParam("key") final String key) {
-		// TODO
-		//Apptentive.removeCustomData(key);
+		Apptentive.removeCustomData(key);
 	}
 
 	// Ratings
