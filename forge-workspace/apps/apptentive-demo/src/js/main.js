@@ -4,16 +4,25 @@ $(function () {
 	// Events
 	*/
 
+	// Initialize settings.
 	forge.logging.info("init!");
 	alert("init!");
-	forge.logging.info("Setting email.");
-	forge.internal.call('apptentive.initialUserEmailAddress',
-						{initialUserEmailAddress:"sky@apptentive.com"},
+	//forge.logging.info("Setting email.");
+
+	// Listen for unread messages.
+	forge.logging.info("Listening for unreadMessageCountChanged event.");
+	forge.internal.addEventListener("apptentive.unreadMessageCountChanged", function(count) {
+		alert("Unread Messages: " + count);
+	});
+	
+	
+	forge.internal.call('apptentive.setInitialUserEmailAddress',
+						{emailAddress:"sky@apptentive.com"},
 						function(success) {								
 							$('p.initialUserEmailAddress').text(success);
 						},
 						function(error) {
-							forge.logging.info("Error!");
+							forge.logging.info("Error: " + error.message);
 						}
 	);		
 
@@ -45,7 +54,7 @@ $(function () {
 								$('p.apiKey').text(success);
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
@@ -56,7 +65,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
@@ -68,7 +77,7 @@ $(function () {
 								$('p.initialUserName').text(success);
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
@@ -79,7 +88,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
@@ -91,7 +100,7 @@ $(function () {
 								$('p.initialUserEmailAddress').text(success);
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);		
 	});
@@ -102,34 +111,34 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
 
-	$('button.addCustomData').click(function () {		
-		forge.internal.call('apptentive.addCustomData',
+	$('button.addCustomDeviceData').click(function () {		
+		forge.internal.call('apptentive.addCustomDeviceData',
 							{
-								key:$('input.addCustomData.key').val(),
-								value:$('input.addCustomData.value').val()
+								key:$('input.addCustomDeviceData.key').val(),
+								value:$('input.addCustomDeviceData.value').val()
 							},
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
 	
-	$('button.removeCustomData').click(function () {	
-		forge.internal.call('apptentive.removeCustomData',
+	$('button.removeCustomDeviceData').click(function () {	
+		forge.internal.call('apptentive.removeCustomDeviceData',
 							{
-								key:$('input.removeCustomData').val()
+								key:$('input.removeCustomDeviceData').val()
 							},
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
@@ -156,7 +165,7 @@ $(function () {
 								$('p.unreadMessageCount').text(success);
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
@@ -165,24 +174,24 @@ $(function () {
 	//Ratings Flow
 	*/
 	
-	$('button.showRatingFlowIfConditionsAreMet').click(function () {					
+	$('button.showRatingFlowIfConditionsAreMet').click(function () {
 		forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet',
 							{},
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
 	
-	$('button.logSignificantEvent').click(function () {				
+	$('button.logSignificantEvent').click(function () {
 		forge.internal.call('apptentive.logSignificantEvent',
 							{},
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
@@ -190,51 +199,28 @@ $(function () {
 	/*
 	//Surveys
 	*/
-	
-	$('button.hasSurveyAvailableWithNoTags').click(function () {
-		forge.internal.call('apptentive.hasSurveyAvailableWithNoTags',
-							{},
-							function(success) {
-								$('p.hasSurveyAvailableWithNoTags').text(success);
-							},
-							function(error) {
-								forge.logging.info("Error!");
-							}
-		);
-	});
-	
-	$('button.hasSurveyAvailableWithTags').click(function () {
-		var surveyTags = $('input.hasSurveyAvailableWithTags').val().split(" ");
-		forge.internal.call('apptentive.hasSurveyAvailableWithTags',
+
+	$('button.isSurveyAvailable').click(function () {
+		var surveyTags = $('input.isSurveyAvailable').val().split(" ");
+		forge.internal.call('apptentive.isSurveyAvailable',
 							{tags:surveyTags},
 							function(success) {
-								$('p.hasSurveyAvailableWithTags').text(success);
+								$('p.isSurveyAvailable').text(success);
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
 	
-	$('button.presentSurveyControllerWithNoTags').click(function () {
-		forge.internal.call('apptentive.presentSurveyControllerWithNoTags',
-							{},
-							function(success) {
-							},
-							function(error) {
-								forge.logging.info("Error!");
-							}
-		);
-	});
-	
-	$('button.presentSurveyControllerWithTags').click(function () {
-		var surveyTags = $('input.presentSurveyControllerWithTags').val().split(" ");
-		forge.internal.call('apptentive.presentSurveyControllerWithTags',
+	$('button.showSurvey').click(function () {
+		var surveyTags = $('input.showSurvey').val().split(" ");
+		forge.internal.call('apptentive.showSurvey',
 							{tags:surveyTags},
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error!");
+								forge.logging.info("Error: " + error.message);
 							}
 		);
 	});
