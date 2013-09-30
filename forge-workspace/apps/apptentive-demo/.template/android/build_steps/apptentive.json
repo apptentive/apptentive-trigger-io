@@ -18,7 +18,7 @@
 					"tag": "activity",
 					"attributes": {
 						"android:name": "com.apptentive.android.sdk.ViewActivity",
-						"android:theme": "@style/Apptentive.Theme.Transparent"  
+						"android:theme": "@style/Apptentive.Theme.Transparent"
 					}
 				}
 			}
@@ -30,7 +30,7 @@
 					"tag": "meta-data",
 					"attributes": {
 						"android:name": "apptentive_api_key",
-						"android:value": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6"  
+						"android:value": "{{modules.apptentive.config.apiKey}}"  
 					}
 				}
 			}

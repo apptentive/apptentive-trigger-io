@@ -1,39 +1,95 @@
 forge.apptentive = {
-	// methods
-	apiKey: function (success, error) {
-		forge.internal.call('apptentive.apiKey', {}, success, error);
-	},
-	setApiKey: function (apiKey, success, error) {
-		forge.internal.call('apptentive.setApiKey', {apiKey: apiKey}, success, error);
-	},
-	initialUserName: function (success, error) {
-		forge.internal.call('apptentive.initialUserName', {}, success, error);
-	},
+
+	// ************************************************************************************************************************************************
+	// Initialization
+	// These methods must be called when your javascript first executes.
+	// ************************************************************************************************************************************************
+
 	setInitialUserName: function (initialUserName, success, error) {
 		forge.internal.call('apptentive.setInitialUserName', {initialUserName: initialUserName}, success, error);
 	},
-	initialUserEmailAddress: function (success, error) {
-		forge.internal.call('apptentive.initialUserEmailAddress', {}, success, error);
-	},
+
 	setInitialUserEmailAddress: function (initialUserEmailAddress, success, error) {
 		forge.internal.call('apptentive.setInitialUserEmailAddress', {initialUserEmailAddress: initialUserEmailAddress}, success, error);
 	},
-	addCustomData: function (key, object, success, error) {
+
+	addCustomData: function (key, value, success, error) {
 		forge.internal.call('apptentive.addCustomData', {
-			object: object,
-			key: key
+			key: key,
+			value: value
 		}, success, error);
 	},
+
 	removeCustomData: function (key, success, error) {
 		forge.internal.call('apptentive.removeCustomData', {
 			key: key
 		}, success, error);
 	},
-	presentMessageCenter: function (success, error) {
-		forge.internal.call('apptentive.presentMessageCenter', {}, success, error);
+
+
+	// ************************************************************************************************************************************************
+	// Rating
+	// ************************************************************************************************************************************************
+
+	showRatingFlowIfConditionsAreMet: function (success, error) {
+		forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet', {}, success, error);
 	},
-	unreadMessageCount: function (success, error) {
-		forge.internal.call('apptentive.unreadMessageCount', {}, success, error);
+	logSignificantEvent: function (success, error) {
+		forge.internal.call('apptentive.logSignificantEvent', {}, success, error);
+	},
+
+
+	// ************************************************************************************************************************************************
+	// Message Center
+	// ************************************************************************************************************************************************
+
+	showMessageCenter: function (success, error) {
+		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
+	},
+	getUnreadMessageCount: function (success, error) {
+		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
+	},
+		
+
+	// ************************************************************************************************************************************************
+	// Survey
+	// ************************************************************************************************************************************************
+
+	isSurveyAvailable: function (tags, success, error) {
+		forge.internal.call('apptentive.isSurveyAvailable', {tags: tags}, success, error);
+	},
+
+	showSurvey: function (tags, success, error) {
+		forge.internal.call('apptentive.showSurvey', {tags: tags}, success, error);
+	},
+
+
+	// ************************************************************************************************************************************************
+	// SDK Events
+	// ************************************************************************************************************************************************
+
+	unreadMessageCountChanged: {
+		addListener: function (callback) {
+			forge.internal.addEventListener("apptentive.unreadMessageCountChanged", callback);
+		}
+	},
+
+	surveyFinished: {
+		addListener: function (callback) {
+			forge.internal.addEventListener("apptentive.surveyFinished", callback);
+		}
+	},
+
+
+	// ************************************************************************************************************************************************
+	// Debug only
+	// ************************************************************************************************************************************************
+
+	apiKey: function (success, error) {
+		forge.internal.call('apptentive.apiKey', {}, success, error);
+	},
+	setApiKey: function (apiKey, success, error) {
+		forge.internal.call('apptentive.setApiKey', {apiKey: apiKey}, success, error);
 	},
 	appID: function (success, error) {
 		forge.internal.call('apptentive.appID', {}, success, error);
@@ -47,39 +103,10 @@ forge.apptentive = {
 	setAppName: function (appName, success, error) {
 		forge.internal.call('apptentive.setAppName', {appName: appName}, success, error);
 	},
-	showRatingFlowIfConditionsAreMet: function (success, error) {
-		forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet', {}, success, error);
+	getInitialUserName: function (success, error) {
+		forge.internal.call('apptentive.getInitialUserName', {}, success, error);
 	},
-	logSignificantEvent: function (success, error) {
-		forge.internal.call('apptentive.logSignificantEvent', {}, success, error);
-	},
-	hasSurveyAvailableWithNoTags: function (success, error) {
-		forge.internal.call('apptentive.hasSurveyAvailableWithNoTags', {}, success, error);
-	},
-	hasSurveyAvailableWithTags: function (tags, success, error) {
-		forge.internal.call('apptentive.hasSurveyAvailableWithTags', {tags: tags}, success, error);
-	},
-	presentSurveyControllerWithNoTags: function (success, error) {
-		forge.internal.call('apptentive.presentSurveyControllerWithNoTags', {}, success, error);
-	},
-	presentSurveyControllerWithTags: function (tags, success, error) {
-		forge.internal.call('apptentive.presentSurveyControllerWithTags', {tags: tags}, success, error);
-	},
-
-	// Events
-	unreadMessageCountChanged: {
-		addListener: function (callback) {
-			forge.internal.addEventListener("apptentive.unreadMessageCountChanged", callback);
-		}
-	},
-	surveyBecameAvailable: {
-		addListener: function (callback) {
-			forge.internal.addEventListener("apptentive.surveyBecameAvailable", callback);
-		}
-	},
-	surveyWasSent: {
-		addListener: function (callback) {
-			forge.internal.addEventListener("apptentive.surveyWasSent", callback);
-		}
+	getInitialUserEmailAddress: function (success, error) {
+		forge.internal.call('apptentive.getInitialUserEmailAddress', {}, success, error);
 	}
 };

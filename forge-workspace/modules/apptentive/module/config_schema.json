@@ -1,0 +1,16 @@
+{
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"apiKey": {
+			"required": true,
+			"type": "string",
+			"description": "The Apptentive API key for your app. This key can be found under the Settings tab for your app on www.apptentive.com."
+		},
+		"appId": {
+			"required": false,
+			"type": "string",
+			"description": "Your app's app store id, if you are building for iOS"
+		}
+	}
+}

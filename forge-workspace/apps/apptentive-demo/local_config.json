@@ -1,16 +1,21 @@
 {
-	"general": {},
-	"ios": {
-		"profiles": {
-			"DEFAULT": {}
-		},
-		"simulatorsdk": "6.1",
-		"simulatorfamily": "iphone"
-	},
-	"android": {
-		"profiles": {
-			"DEFAULT": {}
-		},
-		"sdk": "/opt/android-sdk-macosx/"
-	}
+    "android": {
+        "profiles": {
+            "DEFAULT": {
+                "keystore": "", 
+                "keypass": "", 
+                "keyalias": "", 
+                "storepass": ""
+            }
+        }, 
+        "sdk": "/opt/android-sdk-macosx/"
+    }, 
+    "ios": {
+        "simulatorsdk": "6.1", 
+        "simulatorfamily": "iphone", 
+        "profiles": {
+            "DEFAULT": {}
+        }
+    }, 
+    "general": {}
 }
