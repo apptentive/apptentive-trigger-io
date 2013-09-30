@@ -85,28 +85,5 @@ forge.apptentive = {
 	// Debug only
 	// ************************************************************************************************************************************************
 
-	apiKey: function (success, error) {
-		forge.internal.call('apptentive.apiKey', {}, success, error);
-	},
-	setApiKey: function (apiKey, success, error) {
-		forge.internal.call('apptentive.setApiKey', {apiKey: apiKey}, success, error);
-	},
-	appID: function (success, error) {
-		forge.internal.call('apptentive.appID', {}, success, error);
-	},
-	setAppID: function (appID, success, error) {
-		forge.internal.call('apptentive.setAppID', {appID: appID}, success, error);
-	},
-	appName: function (success, error) {
-		forge.internal.call('apptentive.appName', {}, success, error);
-	},
-	setAppName: function (appName, success, error) {
-		forge.internal.call('apptentive.setAppName', {appName: appName}, success, error);
-	},
-	getInitialUserName: function (success, error) {
-		forge.internal.call('apptentive.getInitialUserName', {}, success, error);
-	},
-	getInitialUserEmailAddress: function (success, error) {
-		forge.internal.call('apptentive.getInitialUserEmailAddress', {}, success, error);
-	}
+	// Add setDebugMode()
 };
