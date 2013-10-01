@@ -1,8 +1,9 @@
 $(function () {
 
-	/*
-	// Events
-	*/
+	// ************************************************************************************************************************************************
+	// Actual initialization
+	// These methods must be called when your javascript first executes.
+	// ************************************************************************************************************************************************
 
 	// Initialize settings.
 	forge.logging.info("init!");
@@ -33,61 +34,11 @@ $(function () {
 	// Works on Android
 	forge.apptentive.showRatingFlowIfConditionsAreMet();
 
-	/*
-	//Shared
-	*/
-	
-	$('button.showAlert').click(function () {
-		forge.internal.call('apptentive.Debug.showAlert',
-							{text:$('input.showAlert').val()}, 
-							function(success) {
-								forge.logging.info("Success!");
-								forge.logging.info("Success: " + success.message);
-							},
-							function(error) {
-								forge.logging.info("Error: " + error.message);
-							}
-		);
-	});
 
-	/*
-	//Shared
-	*/
-	
-	$('button.apiKey').click(function () {
-		forge.internal.call('apptentive.apiKey',
-							{},
-							function(success) {
-								$('p.apiKey').text(success);
-							},
-							function(error) {
-								forge.logging.info("Error: " + error.message);
-							}
-		);
-	});
-	
-	$('button.setApiKey').click(function () {
-		forge.internal.call('apptentive.setApiKey',
-							{apiKey:$('input.setApiKey').val()}, 
-							function(success) {
-							},
-							function(error) {
-								forge.logging.info("Error: " + error.message);
-							}
-		);
-	});
-	
-	$('button.getInitialUserName').click(function () {
-		forge.internal.call('apptentive.getInitialUserName',
-							{},
-							function(success) {
-								$('p.getInitialUserName').text(success);
-							},
-							function(error) {
-								forge.logging.info("Error: " + error.message);
-							}
-		);
-	});
+	// ************************************************************************************************************************************************
+	// Initialization methods REMOVE
+	// These methods must be called when your javascript first executes.
+	// ************************************************************************************************************************************************
 	
 	$('button.setInitialUserName').click(function () {
 		forge.internal.call('apptentive.setInitialUserName',
@@ -98,18 +49,6 @@ $(function () {
 								forge.logging.info("Error: " + error.message);
 							}
 		);
-	});
-	
-	$('button.getInitialUserEmailAddress').click(function () {
-		forge.internal.call('apptentive.getInitialUserEmailAddress',
-							{},
-							function(success) {								
-								$('p.getInitialUserEmailAddress').text(success);
-							},
-							function(error) {
-								forge.logging.info("Error: " + error.message);
-							}
-		);		
 	});
 	
 	$('button.setInitialUserEmailAddress').click(function () {
@@ -146,9 +85,35 @@ $(function () {
 		);
 	});
 	
-	/*
-	//Message Center
-	*/
+
+	// ************************************************************************************************************************************************
+	// Rating
+	// ************************************************************************************************************************************************
+	
+	$('button.showRatingFlowIfConditionsAreMet').click(function () {
+		forge.apptentive.showRatingFlowIfConditionsAreMet(
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error: " + error.message);
+							}
+		);
+	});
+	
+	$('button.logSignificantEvent').click(function () {
+		forge.apptentive.logSignificantEvent(
+							function(success) {
+							},
+							function(error) {
+								forge.logging.info("Error: " + error.message);
+							}
+		);
+	});
+
+
+	// ************************************************************************************************************************************************
+	// Message Center
+	// ************************************************************************************************************************************************
 	
 	$('button.showMessageCenter').click(function () {
 		forge.apptentive.showMessageCenter(
@@ -170,34 +135,11 @@ $(function () {
 							}
 		);
 	});
+
 	
-	/*
-	//Ratings Flow
-	*/
-	
-	$('button.showRatingFlowIfConditionsAreMet').click(function () {
-		forge.apptentive.showRatingFlowIfConditionsAreMet(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.info("Error: " + error.message);
-							}
-		);
-	});
-	
-	$('button.logSignificantEvent').click(function () {
-		forge.apptentive.logSignificantEvent(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.info("Error: " + error.message);
-							}
-		);
-	});
-	
-	/*
-	//Surveys
-	*/
+	// ************************************************************************************************************************************************
+	// Survey
+	// ************************************************************************************************************************************************
 
 	$('button.isSurveyAvailable').click(function () {
 		var surveyTags = $('input.isSurveyAvailable').val().split(" ");

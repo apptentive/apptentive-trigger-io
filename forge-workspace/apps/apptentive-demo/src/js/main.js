@@ -41,8 +41,8 @@ $(function () {
 	// ************************************************************************************************************************************************
 	
 	$('button.setInitialUserName').click(function () {
-		forge.internal.call('apptentive.setInitialUserName',
-							{initialUserName:$('input.setInitialUserName').val()}, 
+		forge.apptentive.call('apptentive.setInitialUserName',
+							$('input.setInitialUserName').val(), 
 							function(success) {
 							},
 							function(error) {

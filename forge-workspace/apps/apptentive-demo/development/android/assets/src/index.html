@@ -39,97 +39,77 @@
 			</div>
 		</div>
 		<div class="container-narrow">
-			<h2>Apptentive Plugin</h2>
+			<h1>Apptentive Plugin</h1>
+			<h2>Instructions</h2>
+			<p>This app is for development purposes only. It is not an example app. Methods marked "iOS only" can only be used on Android at page load time. 
 			<hr>
 			
-			<h3>Debug</h3>
+			<h3>Initialization</h3>
+			
+			<strong>setApiKey</strong> (iOS only)
+			<input type="text" class="setApiKey" placeholder="API key&hellip;"></input>
+			<button class="setApiKey">Submit</button>
+
+			
+			<strong>setInitialUserName</strong> (iOS only)
+			<input type="text" class="setInitialUserName" placeholder="User name&hellip;"></input>
+			<button class="setInitialUserName">Submit</button>
+
+			
+			<strong>setInitialUserEmailAddress</strong> (iOS only)
+			<input type="text" class="setInitialUserEmailAddress" placeholder="Email&hellip;"></input>
+			<button class="setInitialUserEmailAddress">Submit</button>
+
+			
+			<strong>addCustomDeviceData</strong> (iOS only)
+			<input type="text" class="addCustomDeviceData object" placeholder="Key&hellip;"></input>
+			<input type="text" class="addCustomDeviceData key" placeholder="Value&hellip;"></input>
+			<button class="addCustomData">Add</button>
+
+			
+			<strong>removeCustomDeviceData</strong> (iOS only)
+			<input type="text" class="removeCustomDeviceData" placeholder="Key&hellip;"></input>
+			<button class="removeCustomDeviceData">Remove</button>
 			<hr>
 			
-			<h4>showAlert</h4>
-			<input type="text" class="showAlert"></input>
-			<button class="showAlert">Show Alert</button>
+
+			<h3>Ratings Flow</h3>
+
+			
+			<strong>showRatingFlowIfConditionsAreMet</strong>
+			<button class="showRatingFlowIfConditionsAreMet">Show</button>
+
+			
+			<strong>logSignificantEvent</strong>
+			<button class="logSignificantEvent">Log Event</button>	
 			<hr>
 			
-			<h3>Shared Features</h3>
-			<hr>
+
+			<h3>Message Center</h3>
+
 			
-			<h4>apiKey</h4>
-			<button class="apiKey">apiKey</button>
-			<p class="apiKey"></p>
-			<hr>
+			<strong>showMessageCenter</strong>
+			<button class="showMessageCenter">Show</button>
+
 			
-			<h4>setApiKey</h4>
-			<input type="text" class="setApiKey"></input>
-			<button class="setApiKey">setApiKey</button>
-			<hr>
-			
-			<h4>getInitialUserName</h4>
-			<button class="getInitialUserName">getInitialUserName</button>
-			<p class="getIinitialUserName"></p>
-			<hr>
-			
-			<h4>setInitialUserName</h4>
-			<input type="text" class="setInitialUserName"></input>
-			<button class="setInitialUserName">setInitialUserName</button>
-			<hr>
-			
-			<h4>getInitialUserEmailAddress</h4>
-			<button class= "getInitialUserEmailAddress">getInitialUserEmailAddress</button>
-			<p class="getInitialUserEmailAddress"></p>
-			<hr>
-			
-			<h4>setInitialUserEmailAddress</h4>
-			<input type="text" class="setInitialUserEmailAddress"></input>
-			<button class="setInitialUserEmailAddress">setInitialUserEmailAddress</button>
-			<hr>
-			
-			<h4>addCustomDeviceData</h4>
-			<input type="text" class="addCustomDeviceData object"></input>
-			<input type="text" class="addCustomDeviceData key"></input>
-			<button class="addCustomData">addCustomDeviceData</button>
-			<hr>
-			
-			<h4>removeCustomDeviceData</h4>
-			<input type="text" class="removeCustomDeviceData"></input>
-			<button class="removeCustomDeviceData">removeCustomDeviceData</button>
-			<hr>
-			
-			<h2>Message Center</h2>
-			<hr>
-			
-			<h4>showMessageCenter</h4>
-			<button class="showMessageCenter">showMessageCenter</button>
-			<hr>
-			
-			<h4>getUnreadMessageCount</h4>
-			<button class="getUnreadMessageCount">getUnreadMessageCount</button>
+			<strong>getUnreadMessageCount</strong>
+			<button class="getUnreadMessageCount">Get Count</button>
 			<p class="getUnreadMessageCount"></p>
 			<hr>
 			
-			<h2>Ratings Flow</h2>
-			<hr>
+
+			<h3>Surveys</h3>
+
 			
-			<h4>showRatingFlowIfConditionsAreMet</h4>
-			<button class="showRatingFlowIfConditionsAreMet">showRatingFlowIfConditionsAreMet</button>
-			<hr>
-			
-			<h4>logSignificantEvent</h4>
-			<button class="logSignificantEvent">logSignificantEvent</button>	
-			<hr>
-			
-			<h2>Surveys</h2>
-			<hr>
-			
-			<h4>isSurveyAvailable</h4>
-			<input type="text" class="isSurveyAvailable"></input>
-			<button class="isSurveyAvailable">isSurveyAvailable</button>
+			<strong>isSurveyAvailable</strong>
+			<input type="text" class="isSurveyAvailable" placeholder="Tags&hellip; (optional)"></input>
+			<button class="isSurveyAvailable">Check</button>
 			<p class="isSurveyAvailable"></p>
-			<hr>
+
 			
-			<h4>showSurvey</h4>
-			<input type="text" class="showSurvey"></input>
-			<button class="showSurvey">showSurvey</button>
-			<hr>
+			<strong>showSurvey</strong>
+			<input type="text" class="showSurvey" placeholder="Tags&hellip; (optional)"></input>
+			<button class="showSurvey">Show</button>
 		</div> 
 	</body>
 </html>
