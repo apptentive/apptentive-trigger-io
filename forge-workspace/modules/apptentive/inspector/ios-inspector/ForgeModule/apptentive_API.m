@@ -16,12 +16,6 @@
 {}
 #pragma mark - Apptentive Shared Features
 
-+ (void)setApiKey:(ForgeTask *)task apiKey:(NSString *)apiKey
-{
-    [[ATConnect sharedConnection] setApiKey:apiKey];
-    [task success:nil];
-}
-
 + (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName
 {
     [[ATConnect sharedConnection] setInitialUserName:initialUserName];
@@ -73,12 +67,6 @@
 }
 
 #pragma mark - Ratings Flow
-
-+ (void)setAppID:(ForgeTask *)task appID:(NSString *)appID
-{
-    [[ATAppRatingFlow sharedRatingFlow] setAppID:appID];
-    [task success:nil];
-}
 
 + (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task
 {

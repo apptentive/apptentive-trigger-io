@@ -13,8 +13,6 @@
 {}
 #pragma mark - Apptentive Shared Features
 
-+ (void)setApiKey:(ForgeTask *)task apiKey:(NSString *)apiKey;
-
 + (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName;
 
 + (void)setInitialUserEmailAddress:(ForgeTask *)task initialUserEmailAddress:(NSString *)initialUserEmailAddress;
@@ -32,7 +30,6 @@
 
 #pragma mark - Ratings Flow
 
-+ (void)setAppID:(ForgeTask *)task appID:(NSString *)appID;
 + (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task;
 + (void)logSignificantEvent:(ForgeTask *)task;
 
