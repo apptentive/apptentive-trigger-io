@@ -22,13 +22,13 @@ $(function () {
 	
 	// Works on Android
 	forge.apptentive.setInitialUserEmailAddress(
-						"sky@apptentive.com",
 						function(success) {								
 							$('p.initialUserEmailAddress').text(success);
 						},
 						function(error) {
 							forge.logging.info("Error: " + error.message);
-						}
+						},
+						"sky@apptentive.com"
 	);		
 
 	// Works on Android
@@ -42,46 +42,46 @@ $(function () {
 	
 	$('button.setInitialUserName').click(function () {
 		forge.apptentive.call('apptentive.setInitialUserName',
-							$('input.setInitialUserName').val(), 
 							function(success) {
 							},
 							function(error) {
 								forge.logging.info("Error: " + error.message);
-							}
+							},
+							$('input.setInitialUserName').val()
 		);
 	});
 	
 	$('button.setInitialUserEmailAddress').click(function () {
 		forge.apptentive.setInitialUserEmailAddress(
-							$('input.setInitialUserEmailAddress').val(), 
 							function(success) {
 							},
 							function(error) {
 								forge.logging.info("Error: " + error.message);
-							}
+							},
+							$('input.setInitialUserEmailAddress').val() 
 		);
 	});
 
 	$('button.addCustomDeviceData').click(function () {		
 		forge.apptentive.addCustomDeviceData(
-							$('input.addCustomDeviceData.key').val(),
-							$('input.addCustomDeviceData.value').val(),
 							function(success) {
 							},
 							function(error) {
 								forge.logging.info("Error: " + error.message);
-							}
+							}.
+							$('input.addCustomDeviceData.key').val(),
+							$('input.addCustomDeviceData.value').val()
 		);
 	});
 	
 	$('button.removeCustomDeviceData').click(function () {	
 		forge.apptentive.removeCustomDeviceData(
-							$('input.removeCustomDeviceData').val(),
 							function(success) {
 							},
 							function(error) {
 								forge.logging.info("Error: " + error.message);
-							}
+							},
+							$('input.removeCustomDeviceData').val()
 		);
 	});
 	
@@ -144,25 +144,25 @@ $(function () {
 	$('button.isSurveyAvailable').click(function () {
 		var surveyTags = $('input.isSurveyAvailable').val().split(" ");
 		forge.apptentive.isSurveyAvailable(
-							surveyTags,
 							function(success) {
 								$('p.isSurveyAvailable').text(success);
 							},
 							function(error) {
 								forge.logging.info("Error: " + error.message);
-							}
+							},
+							surveyTags
 		);
 	});
 	
 	$('button.showSurvey').click(function () {
 		var surveyTags = $('input.showSurvey').val().split(" ");
 		forge.apptentive.showSurvey(
-							surveyTags,
 							function(success) {
 							},
 							function(error) {
 								forge.logging.info("Error: " + error.message);
-							}
+							},
+							surveyTags
 		);
 	});
 });
