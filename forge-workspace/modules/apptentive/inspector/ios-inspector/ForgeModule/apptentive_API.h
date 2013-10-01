@@ -14,7 +14,6 @@
 #pragma mark - Apptentive Shared Features
 
 + (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName;
-
 + (void)setInitialUserEmailAddress:(ForgeTask *)task initialUserEmailAddress:(NSString *)initialUserEmailAddress;
 
 + (void)addCustomPersonData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key;
@@ -25,8 +24,8 @@
 
 #pragma mark - Message Center
 
-+ (void)presentMessageCenter:(ForgeTask *)task;
-+ (void)unreadMessageCount:(ForgeTask *)task;
++ (void)showMessageCenter:(ForgeTask *)task;
++ (void)getUnreadMessageCount:(ForgeTask *)task;
 
 #pragma mark - Ratings Flow
 
@@ -35,9 +34,7 @@
 
 #pragma mark - Surveys
 
-+ (void)hasSurveyAvailableWithNoTags:(ForgeTask *)task;
-+ (void)hasSurveyAvailableWithTags:(ForgeTask *)task tags:(NSSet *)tags;
-+ (void)presentSurveyControllerWithNoTags:(ForgeTask *)task;
-+ (void)presentSurveyControllerWithTags:(ForgeTask *)task tags:(NSSet *)tags;
++ (void)isSurveyAvailable:(ForgeTask *)task tags:(NSArray *)tags;
++ (void)showSurvey:(ForgeTask *)task tags:(NSArray *)tags;
 
 @end

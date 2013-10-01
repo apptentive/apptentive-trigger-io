@@ -54,13 +54,13 @@
 
 #pragma mark - Message Center
 
-+ (void)presentMessageCenter:(ForgeTask *)task
++ (void)showMessageCenter:(ForgeTask *)task
 {
     [[ATConnect sharedConnection] presentMessageCenterFromViewController:[[ForgeApp sharedApp] viewController]];
     [task success:nil];
 }
 
-+ (void)unreadMessageCount:(ForgeTask *)task
++ (void)getUnreadMessageCount:(ForgeTask *)task
 {
     NSUInteger unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
     [task success:[NSNumber numberWithInteger:unreadMessageCount]];
@@ -82,27 +82,24 @@
 
 #pragma mark - Surveys
 
-+ (void)hasSurveyAvailableWithNoTags:(ForgeTask *)task
++ (void)isSurveyAvailable:(ForgeTask *)task tags:(NSArray *)tags
 {
-    BOOL hasSurvey = [ATSurveys hasSurveyAvailableWithNoTags];
-    [task success:[NSNumber numberWithBool:hasSurvey]];
+    BOOL isSurveyAvailable;
+    if (tags && tags.count > 0) {
+        isSurveyAvailable = [ATSurveys hasSurveyAvailableWithTags:[NSSet setWithArray:tags]];
+    } else {
+        isSurveyAvailable = [ATSurveys hasSurveyAvailableWithNoTags];
+    }
+    [task success:[NSNumber numberWithBool:isSurveyAvailable]];
 }
 
-+ (void)hasSurveyAvailableWithTags:(ForgeTask *)task tags:(NSArray *)tags
++ (void)showSurvey:(ForgeTask *)task tags:(NSArray *)tags
 {
-    BOOL hasSurvey = [ATSurveys hasSurveyAvailableWithTags:[NSSet setWithArray:tags]];
-    [task success:[NSNumber numberWithBool:hasSurvey]];
-}
-
-+ (void)presentSurveyControllerWithNoTags:(ForgeTask *)task
-{
-    [ATSurveys presentSurveyControllerWithNoTagsFromViewController:[[ForgeApp sharedApp] viewController]];
-    [task success:nil];
-}
-
-+ (void)presentSurveyControllerWithTags:(ForgeTask *)task tags:(NSArray *)tags
-{
-    [ATSurveys presentSurveyControllerWithTags:[NSSet setWithArray:tags] fromViewController:[[ForgeApp sharedApp] viewController]];
+    if (tags && tags.count > 0) {
+        [ATSurveys presentSurveyControllerWithTags:[NSSet setWithArray:tags] fromViewController:[[ForgeApp sharedApp] viewController]];
+    } else {
+        [ATSurveys presentSurveyControllerWithNoTagsFromViewController:[[ForgeApp sharedApp] viewController]];
+    }
     [task success:nil];
 }
 
