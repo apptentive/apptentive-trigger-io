@@ -1,5 +1,6 @@
-# Xcode
 .DS_Store
+
+# Xcode
 build/
 *.pbxuser
 !default.pbxuser
@@ -15,5 +16,7 @@ xcuserdata
 profile
 *.moved-aside
 DerivedData
-.idea/
 .template/
+
+#Trigger
+forge-workspace/modules/apptentive/inspector/an-inspector.*
