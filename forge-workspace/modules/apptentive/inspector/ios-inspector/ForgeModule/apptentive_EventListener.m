@@ -36,11 +36,6 @@
     [[ForgeApp sharedApp] event:@"apptentive.unreadMessageCountChanged" withParam:notification.userInfo];
 }
 
-+ (void)surveyBecameAvailable:(NSNotification *)notification
-{
-    [[ForgeApp sharedApp] event:@"apptentive.surveyBecameAvailable" withParam:notification.userInfo];
-}
-
 + (void)surveyWasSent:(NSNotification *)notification
 {
     [[ForgeApp sharedApp] event:@"apptentive.surveyWasSent" withParam:notification.userInfo];
