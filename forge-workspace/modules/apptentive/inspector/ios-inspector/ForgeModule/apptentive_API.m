@@ -16,34 +16,16 @@
 {}
 #pragma mark - Apptentive Shared Features
 
-+ (void)apiKey:(ForgeTask *)task
-{
-    NSString *apiKey = [[ATConnect sharedConnection] apiKey];
-    [task success:apiKey];
-}
-
 + (void)setApiKey:(ForgeTask *)task apiKey:(NSString *)apiKey
 {
     [[ATConnect sharedConnection] setApiKey:apiKey];
     [task success:nil];
 }
 
-+ (void)initialUserName:(ForgeTask *)task
-{
-    NSString *initialUserName = [[ATConnect sharedConnection] initialUserName];
-    [task success:initialUserName];
-}
-
 + (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName
 {
     [[ATConnect sharedConnection] setInitialUserName:initialUserName];
     [task success:nil];
-}
-
-+ (void)initialUserEmailAddress:(ForgeTask *)task
-{
-    NSString *initialUserEmailAddress = [[ATConnect sharedConnection] initialUserEmailAddress];
-    [task success:initialUserEmailAddress];
 }
 
 + (void)setInitialUserEmailAddress:(ForgeTask *)task initialUserEmailAddress:(NSString *)initialUserEmailAddress
@@ -80,27 +62,9 @@
 
 #pragma mark - Ratings Flow
 
-+ (void)appID:(ForgeTask *)task
-{
-    NSString *appID = [[ATAppRatingFlow sharedRatingFlow] appID];
-    [task success:appID];
-}
-
 + (void)setAppID:(ForgeTask *)task appID:(NSString *)appID
 {
     [[ATAppRatingFlow sharedRatingFlow] setAppID:appID];
-    [task success:nil];
-}
-
-+ (void)appName:(ForgeTask *)task
-{
-    NSString *appName = [[ATAppRatingFlow sharedRatingFlow] appName];
-    [task success:appName];
-}
-
-+ (void)setAppName:(ForgeTask *)task appName:(NSString *)appName
-{
-    [[ATAppRatingFlow sharedRatingFlow] setAppName:appName];
     [task success:nil];
 }
 
