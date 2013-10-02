@@ -15,13 +15,18 @@
 
 + (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //Shared
-    ATConnect *connection __attribute__((unused)) = [ATConnect sharedConnection];
+    // Apptentive
+    NSString *apiKey = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"apiKey"];
+    [[ATConnect sharedConnection] setApiKey:apiKey];
     
-    //Message Center
+    // Rating Flow
+    NSString *appId = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"appId"];
+    [[ATAppRatingFlow sharedRatingFlow] setAppID:appId];
+    
+    // Message Center
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadMessageCountChanged:) name:ATMessageCenterUnreadCountChangedNotification object:nil];
         
-    //Survey Notifications
+    // Survey Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyBecameAvailable:) name:ATSurveyNewSurveyAvailableNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyWasSent:) name:ATSurveySentNotification object:nil];
 }
@@ -29,11 +34,6 @@
 + (void)unreadMessageCountChanged:(NSNotification *)notification
 {
     [[ForgeApp sharedApp] event:@"apptentive.unreadMessageCountChanged" withParam:notification.userInfo];
-}
-
-+ (void)surveyBecameAvailable:(NSNotification *)notification
-{
-    [[ForgeApp sharedApp] event:@"apptentive.surveyBecameAvailable" withParam:notification.userInfo];
 }
 
 + (void)surveyWasSent:(NSNotification *)notification

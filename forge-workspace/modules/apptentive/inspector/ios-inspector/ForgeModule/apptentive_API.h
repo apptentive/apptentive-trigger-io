@@ -13,37 +13,28 @@
 {}
 #pragma mark - Apptentive Shared Features
 
-+ (void)apiKey:(ForgeTask *)task;
-+ (void)setApiKey:(ForgeTask *)task apiKey:(NSString *)apiKey;
-
-+ (void)initialUserName:(ForgeTask *)task;
 + (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName;
-
-+ (void)initialUserEmailAddress:(ForgeTask *)task;
 + (void)setInitialUserEmailAddress:(ForgeTask *)task initialUserEmailAddress:(NSString *)initialUserEmailAddress;
 
-+ (void)addCustomData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key;
-+ (void)removeCustomData:(ForgeTask *)task key:(NSString *)key;
++ (void)addCustomPersonData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key;
++ (void)removeCustomPersonData:(ForgeTask *)task key:(NSString *)key;
+
++ (void)addCustomDeviceData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key;
++ (void)removeCustomDeviceData:(ForgeTask *)task key:(NSString *)key;
 
 #pragma mark - Message Center
 
-+ (void)presentMessageCenter:(ForgeTask *)task;
-+ (void)unreadMessageCount:(ForgeTask *)task;
++ (void)showMessageCenter:(ForgeTask *)task;
++ (void)getUnreadMessageCount:(ForgeTask *)task;
 
 #pragma mark - Ratings Flow
 
-+ (void)appID:(ForgeTask *)task;
-+ (void)setAppID:(ForgeTask *)task appID:(NSString *)appID;
-+ (void)appName:(ForgeTask *)task;
-+ (void)setAppName:(ForgeTask *)task appName:(NSString *)appName;
 + (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task;
 + (void)logSignificantEvent:(ForgeTask *)task;
 
 #pragma mark - Surveys
 
-+ (void)hasSurveyAvailableWithNoTags:(ForgeTask *)task;
-+ (void)hasSurveyAvailableWithTags:(ForgeTask *)task tags:(NSSet *)tags;
-+ (void)presentSurveyControllerWithNoTags:(ForgeTask *)task;
-+ (void)presentSurveyControllerWithTags:(ForgeTask *)task tags:(NSSet *)tags;
++ (void)isSurveyAvailable:(ForgeTask *)task tags:(NSArray *)tags;
++ (void)showSurvey:(ForgeTask *)task tags:(NSArray *)tags;
 
 @end
