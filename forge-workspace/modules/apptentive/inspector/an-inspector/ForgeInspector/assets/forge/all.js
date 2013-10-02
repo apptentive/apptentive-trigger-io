@@ -7,22 +7,22 @@ forge.apptentive = {
 	// These methods must be called when your javascript first executes.
 	// ************************************************************************************************************************************************
 
-	setInitialUserName: function (initialUserName, success, error) {
+	setInitialUserName: function (success, error, initialUserName) {
 		forge.internal.call('apptentive.setInitialUserName', {initialUserName: initialUserName}, success, error);
 	},
 
-	setInitialUserEmailAddress: function (initialUserEmailAddress, success, error) {
+	setInitialUserEmailAddress: function (success, error, initialUserEmailAddress) {
 		forge.internal.call('apptentive.setInitialUserEmailAddress', {initialUserEmailAddress: initialUserEmailAddress}, success, error);
 	},
 
-	addCustomData: function (key, value, success, error) {
+	addCustomData: function (success, error, key, value) {
 		forge.internal.call('apptentive.addCustomData', {
 			key: key,
 			value: value
 		}, success, error);
 	},
 
-	removeCustomData: function (key, success, error) {
+	removeCustomData: function (success, error, key) {
 		forge.internal.call('apptentive.removeCustomData', {
 			key: key
 		}, success, error);
@@ -57,11 +57,14 @@ forge.apptentive = {
 	// Survey
 	// ************************************************************************************************************************************************
 
-	isSurveyAvailable: function (tags, success, error) {
+	isSurveyAvailable: function (success, error, tags) {
 		forge.internal.call('apptentive.isSurveyAvailable', {tags: tags}, success, error);
 	},
 
-	showSurvey: function (tags, success, error) {
+	showSurvey: function (success, error, callback, tags) {
+		forge.logging.error("Adding listener.");
+		forge.internal.addEventListener("apptentive.surveyFinished", callback);
+		forge.logging.error("Done adding listener.");
 		forge.internal.call('apptentive.showSurvey', {tags: tags}, success, error);
 	},
 
@@ -78,7 +81,9 @@ forge.apptentive = {
 
 	surveyFinished: {
 		addListener: function (callback) {
+			forge.logging.error("Adding listener.");
 			forge.internal.addEventListener("apptentive.surveyFinished", callback);
+			forge.logging.error("Done adding listener.");
 		}
 	},
 

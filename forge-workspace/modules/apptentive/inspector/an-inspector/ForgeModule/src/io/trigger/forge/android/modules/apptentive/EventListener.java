@@ -18,7 +18,7 @@ public class EventListener extends ForgeEventListener {
 		Apptentive.setUnreadMessagesListener(new UnreadMessagesListener() {
 			@Override
 			public void onUnreadMessageCountChanged(int unreadMessages) {
-				ForgeApp.event("apptentive.unreadMessageCountChanged", new JsonPrimitive(unreadMessages));
+				ForgeApp.event("apptentive.unreadMessageCountChanged", new JsonPrimitive(new Integer(unreadMessages)));
 			}
 		});
 	}

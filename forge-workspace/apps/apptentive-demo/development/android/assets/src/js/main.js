@@ -6,32 +6,34 @@ $(function () {
 	// ************************************************************************************************************************************************
 
 	// Initialize settings.
-	forge.logging.info("init!");
-	//forge.logging.info("Setting email.");
+	forge.logging.warning("Initializing Apptentive.");
 
-	// Listen for unread messages.
-	forge.logging.info("Listening for unreadMessageCountChanged event.");
-	forge.internal.addEventListener("apptentive.unreadMessageCountChanged", function(count) {
-		alert("Unread Messages: " + count);
-	});
-	
-	// Example: Show Ratings Flow when the app regains focus.
-	forge.internal.addEventListener("apptentive.windowFocused", function() {
-		forge.apptentive.showRatingFlowIfConditionsAreMet();
-	});
-	
-	// Works on Android
+	forge.logging.warning("Setting initial email address.");
 	forge.apptentive.setInitialUserEmailAddress(
 						function(success) {								
 							$('p.initialUserEmailAddress').text(success);
 						},
 						function(error) {
-							forge.logging.info("Error: " + error.message);
+							forge.logging.error(error.message);
 						},
 						"sky@apptentive.com"
 	);		
 
-	// Works on Android
+	// Listen for unread messages.
+	forge.logging.warning("Listening for unreadMessageCountChanged event.");
+	forge.apptentive.addUnreadMessageCountChangedListener(function(count) {
+		forge.logging.warning("Unread message count changed: " + count);
+	});
+
+	// Listen for surveys being finished.
+	forge.logging.warning("Adding listener: apptentive.surveyFinished");
+	forge.apptentive.addSurveyFinishedListener(function(completed) {
+			forge.logging.warning("Survey Finished. Completed? " + completed);
+	});
+
+	forge.logging.warning("Finished initializing Apptentive.");
+
+	forge.logging.warning("Ratings from page load.");
 	forge.apptentive.showRatingFlowIfConditionsAreMet();
 
 
@@ -45,7 +47,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							},
 							$('input.setInitialUserName').val()
 		);
@@ -56,7 +58,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							},
 							$('input.setInitialUserEmailAddress').val() 
 		);
@@ -67,7 +69,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							}.
 							$('input.addCustomDeviceData.key').val(),
 							$('input.addCustomDeviceData.value').val()
@@ -79,7 +81,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							},
 							$('input.removeCustomDeviceData').val()
 		);
@@ -95,7 +97,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							}
 		);
 	});
@@ -105,7 +107,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							}
 		);
 	});
@@ -120,7 +122,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							}
 		);
 	});
@@ -131,7 +133,7 @@ $(function () {
 								$('p.getUnreadMessageCount').text(success);
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							}
 		);
 	});
@@ -148,7 +150,7 @@ $(function () {
 								$('p.isSurveyAvailable').text(success);
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							},
 							surveyTags
 		);
@@ -160,7 +162,7 @@ $(function () {
 							function(success) {
 							},
 							function(error) {
-								forge.logging.info("Error: " + error.message);
+								forge.logging.error(error.message);
 							},
 							surveyTags
 		);

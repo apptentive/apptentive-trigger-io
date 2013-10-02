@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "5c608e05b2532bcc81ecff802008fc7c1dbbafcb", 
+    "config_hash": "778b06daba3baba90d333c4b48bda95459534e5b", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -35,7 +35,7 @@ window.forge = {}; window.forge.config = {
                 "apiKey": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6", 
                 "appId": "Trigger Test"
             }, 
-            "version": "1.9.68"
+            "version": "1.9.84"
         }, 
         "contact": {
             "version": "2.0"

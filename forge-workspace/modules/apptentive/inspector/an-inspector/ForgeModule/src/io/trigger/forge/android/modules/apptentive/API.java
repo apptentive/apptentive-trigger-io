@@ -16,6 +16,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 
 public class API {
+	
+	// debug:
+	
+	public static void callListener(final ForgeTask task, @ForgeParam("name") final String name) {
+		ForgeApp.event(name);
+	}
 
 	// ************************************************************************************************************************************************
 	// Initialization
@@ -100,6 +106,7 @@ public class API {
 				Apptentive.showSurvey(ForgeApp.getActivity(), new OnSurveyFinishedListener() {
 					@Override
 					public void onSurveyFinished(boolean completed) {
+						Log.d("Firing apptentive.surveyFinishedsurvey event with parameter {%b}", completed);
 						ForgeApp.event("apptentive.surveyFinished", new JsonPrimitive(completed));
 					}
 				}, tags);
