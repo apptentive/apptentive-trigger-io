@@ -10,7 +10,7 @@
 		"appId": {
 			"required": false,
 			"type": "string",
-			"description": "Your app's app store id, if you are building for iOS"
+			"description": "The iOS App Store ID. If you are building for iOS, this is required."
 		}
 	}
 }
