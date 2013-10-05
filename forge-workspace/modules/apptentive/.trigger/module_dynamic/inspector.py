@@ -159,8 +159,8 @@ def update_android(cookies, **kw):
 
 		if os.path.exists(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'module', 'android', 'res'))):
 
-			if not os.path.exists(os.path.join(current_path, 'ForgeModule', 'trigger-gen')):
-				os.makedirs(os.path.join(current_path, 'ForgeModule', 'trigger-gen'))
+			if not os.path.exists(os.path.join(current_path, 'ForgeModule', 'src')):
+				os.makedirs(os.path.join(current_path, 'ForgeModule', 'src'))
 
 			# Generate magic R.java
 			if sys.platform.startswith('darwin'):
@@ -178,45 +178,51 @@ def update_android(cookies, **kw):
 				'package', '-m',
 				'-M', os.path.join(current_path, 'ForgeModule', 'AndroidManifest.xml'),
 				'-S', os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'module', 'android', 'res')),
-				'-J', os.path.join(current_path, 'ForgeModule', 'trigger-gen'),
+				'-J', os.path.join(current_path, 'ForgeModule', 'src'),
 				'-I', utils.ensure_lib_available(cookies, platform_version, 'android-platform.apk')
 				])
 
 		
-			for root, dirnames, filenames in os.walk(os.path.join(current_path, 'ForgeModule', 'trigger-gen')):
+			for root, dirnames, filenames in os.walk(os.path.join(current_path, 'ForgeModule', 'src')):
 				for filename in filenames: 
+					if filename != "R.java":
+						continue
 					# Tweak R.java to be magic
 					with open(os.path.join(root, filename)) as source:
 						content = source.read()
 
+					# Don't tweak already tweaked files
+					if content.find("import java.lang.reflect.Field") != -1:
+						continue
+
 					content = content.replace("final ", "")
- 					content = content.replace("public class R", """import java.lang.reflect.Field;
+					content = content.replace("public class R", """import java.lang.reflect.Field;
+import android.util.Log;
 
 public class R""")
 					content = re.sub(r'\/\* AUTO-GENERATED.*?\*\/', '''/* This file was generated as part of a ForgeModule.
  *
  * You may move this file to another package if you require, however do not modify its contents.
- * To add more resources rebuild the inspector project.
+ * To add more resources: rebuild the inspector project.
  */''', content, flags=re.MULTILINE | re.DOTALL)
 
 					content = re.sub('''    public static class (\w+) {(.*?)\n    }''', r'''    public static class \1 {\2
         static {
             try {
-                Class<?> realR = Class.forName("io.trigger.forge.android.inspector.R");
-                for (Class<?> c : realR.getClasses()) {
-                    if (c.getSimpleName().equals("\1")) {
-                        for (Field f : \1.class.getDeclaredFields()) {
-                            try {
-                                f.set(null, c.getDeclaredField(f.getName()).get(null));
-                            } catch (IllegalArgumentException e) {
-                            } catch (IllegalAccessException e) {
-                            } catch (NoSuchFieldException e) {
-                            }
-                        }
-                        break;
-                    }
-                }               
+                Class<?> realRClass = Class.forName("io.trigger.forge.android.inspector.R$\1");
+	            for (Field f : \1.class.getDeclaredFields()) {
+	                try {
+	                    f.set(null, realRClass.getDeclaredField(f.getName()).get(null));
+	                } catch (IllegalArgumentException e) {
+	                	Log.e("Forge", e.toString());
+	                } catch (IllegalAccessException e) {
+	                	Log.e("Forge", e.toString());
+	                } catch (NoSuchFieldException e) {
+	                	Log.e("Forge", e.toString());
+	                }
+	            }
             } catch (ClassNotFoundException e) {
+            	Log.e("Forge", e.toString());
             }
         }
     }''', content, flags=re.MULTILINE | re.DOTALL)
@@ -224,7 +230,7 @@ public class R""")
 					with open(os.path.join(root, filename), 'w') as output:
 						output.write(content)
 
-	except Exception as e:
+	except Exception:
 		shutil.rmtree(current_path)
 		try:
 			raise
@@ -301,7 +307,7 @@ def update_ios(cookies, **kw):
 	# Update inspector with module specific build details
 	try:
 		build.apply_module_to_ios_project(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'module')), current_path, skip_a=True, inspector_config=True, include_tests=True, local_build_steps=os.path.join(current_path, 'ForgeInspector', 'assets', 'src'))
-	except Exception as e:
+	except Exception:
 		shutil.rmtree(current_path)
 		try:
 			raise

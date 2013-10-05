@@ -13,15 +13,15 @@ forge.apptentive = {
 		forge.internal.call('apptentive.setInitialUserEmailAddress', {initialUserEmailAddress: initialUserEmailAddress}, success, error);
 	},
 
-	addCustomData: function (success, error, key, value) {
-		forge.internal.call('apptentive.addCustomData', {
+	addCustomDeviceData: function (success, error, key, value) {
+		forge.internal.call('apptentive.addCustomDeviceData', {
 			key: key,
 			value: value
 		}, success, error);
 	},
 
-	removeCustomData: function (success, error, key) {
-		forge.internal.call('apptentive.removeCustomData', {
+	removeCustomDeviceData: function (success, error, key) {
+		forge.internal.call('apptentive.removeCustomDeviceData', {
 			key: key
 		}, success, error);
 	},

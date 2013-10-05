@@ -33,11 +33,11 @@ public class API {
 	}
 	
 	public static void addCustomDeviceData(final ForgeTask task, @ForgeParam("key") final String key, @ForgeParam("value") final String value) {
-		Apptentive.addCustomDeviceData(key, value);
+		Apptentive.addCustomDeviceData(ForgeApp.getActivity(), key, value);
 	}
 	
 	public static void removeCustomDeviceData(final ForgeTask task, @ForgeParam("key") final String key) {
-		Apptentive.removeCustomDeviceData(key);
+		Apptentive.removeCustomDeviceData(ForgeApp.getActivity(), key);
 	}
 
 	// ************************************************************************************************************************************************

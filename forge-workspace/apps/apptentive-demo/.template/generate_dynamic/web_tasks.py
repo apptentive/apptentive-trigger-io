@@ -56,6 +56,7 @@ def _update_path_for_node(build):
 	'''
 	# configuration setting overrides all
 	manual = build.tool_config.get('web.node_path')
+
 	path_chunks = os.environ["PATH"].split(os.pathsep)
 	if manual is None:
 		possible_locations = defaultdict(list)
@@ -69,11 +70,21 @@ def _update_path_for_node(build):
 		# override given
 		if not isinstance(manual, list):
 			manual = [manual]
+
+		if sys.platform.startswith("win"):
+			# Popen will fail if os.environ has unicodes in on windows
+			# not sure what encoding environ values should be in
+			manual = [m.encode('ascii', errors='replace') for m in manual]
+
+		LOG.info('Adding node locations from local_config.json to PATH %r' % manual)
 		for manual_path in manual:
 			abs_manual_path = os.path.abspath(manual_path)
 			if abs_manual_path not in path_chunks:
 				path_chunks.insert(0, abs_manual_path)
-	os.environ["PATH"] = os.pathsep.join(path_chunks)
+	
+	new_path = os.pathsep.join(path_chunks)
+	LOG.debug('Setting PATH to %r' % new_path)
+	os.environ["PATH"] = new_path
 
 def _npm(build, *args, **kw):
 	if sys.platform.startswith("win"):
@@ -225,9 +236,9 @@ def _check_heroku_response(response):
 		msg = (
 			"Request to Heroku API went wrong\n"
 			"url: {url}\n"
-			"code: {code}"
-		).format(url=response.request.url, code=response.status_code)
-
+			"code: {code}\n"
+			"response: {content}"
+		).format(url=response.request.url, code=response.status_code, content=response.content)
 		if response.status_code == 401:
 			msg += "\n\nUnauthorized - make sure the value of web.profile.heroku_api_key is correct"
 
@@ -304,7 +315,7 @@ def _get_app_to_push_to(build, api_key):
 
 	LOG.info('Querying heroku about registered apps...')
 	apps = json.loads(_heroku_get(api_key, 'apps').content)
-	app_names = [app['name'] for app in apps]
+	app_names = [a['name'] for a in apps]
 
 	create_new_heroku_app = True
 	if app_names:

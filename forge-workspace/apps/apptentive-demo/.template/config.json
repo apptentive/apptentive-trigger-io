@@ -29,14 +29,14 @@
 			"version": "2.0"
 		},
 		"apptentive": {
-			"version": "1.9.84",
+			"version": "1.9.94",
 			"config": {
 				"apiKey": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6",
 				"appId": "Trigger Test"
 			}
 		}
 	},
-	"platform_version": "v2.0.1",
+	"platform_version": "v2.0.3",
 	"version": "0.1",
 	"core": {
 		"general": {

@@ -20,7 +20,7 @@ $(function () {
 	);		
 
 	forge.logging.warning("Adding device data.");
-	forge.apptentive.addDeviceData(
+	forge.apptentive.addCustomDeviceData(
 		function(success) {								
 			$('p.initialUserEmailAddress').text(success);
 		},
@@ -76,13 +76,13 @@ $(function () {
 		);
 	});
 
-	$('button.addCustomDeviceData').click(function () {		
+	$('button.addCustomDeviceData').click(function () {
 		forge.apptentive.addCustomDeviceData(
 			function(success) {
 			},
 			function(error) {
 				forge.logging.error(error.message);
-			}.
+			},
 			$('input.addCustomDeviceData.key').val(),
 			$('input.addCustomDeviceData.value').val()
 		);

@@ -10,14 +10,26 @@ $(function () {
 
 	forge.logging.warning("Setting initial email address.");
 	forge.apptentive.setInitialUserEmailAddress(
-						function(success) {								
-							$('p.initialUserEmailAddress').text(success);
-						},
-						function(error) {
-							forge.logging.error(error.message);
-						},
-						"sky@apptentive.com"
+		function(success) {								
+			$('p.initialUserEmailAddress').text(success);
+		},
+		function(error) {
+			forge.logging.error(error.message);
+		},
+		"sky@apptentive.com"
 	);		
+
+	forge.logging.warning("Adding device data.");
+	forge.apptentive.addCustomDeviceData(
+		function(success) {								
+			$('p.initialUserEmailAddress').text(success);
+		},
+		function(error) {
+			forge.logging.error(error.message);
+		},
+		"a",
+		"b"
+	);
 
 	// Listen for unread messages.
 	forge.logging.warning("Listening for unreadMessageCountChanged event.");
@@ -44,46 +56,46 @@ $(function () {
 	
 	$('button.setInitialUserName').click(function () {
 		forge.apptentive.call('apptentive.setInitialUserName',
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							},
-							$('input.setInitialUserName').val()
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			$('input.setInitialUserName').val()
 		);
 	});
 	
 	$('button.setInitialUserEmailAddress').click(function () {
 		forge.apptentive.setInitialUserEmailAddress(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							},
-							$('input.setInitialUserEmailAddress').val() 
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			$('input.setInitialUserEmailAddress').val() 
 		);
 	});
 
-	$('button.addCustomDeviceData').click(function () {		
+	$('button.addCustomDeviceData').click(function () {
 		forge.apptentive.addCustomDeviceData(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							}.
-							$('input.addCustomDeviceData.key').val(),
-							$('input.addCustomDeviceData.value').val()
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			$('input.addCustomDeviceData.key').val(),
+			$('input.addCustomDeviceData.value').val()
 		);
 	});
 	
 	$('button.removeCustomDeviceData').click(function () {	
 		forge.apptentive.removeCustomDeviceData(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							},
-							$('input.removeCustomDeviceData').val()
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			$('input.removeCustomDeviceData').val()
 		);
 	});
 	
@@ -94,21 +106,21 @@ $(function () {
 	
 	$('button.showRatingFlowIfConditionsAreMet').click(function () {
 		forge.apptentive.showRatingFlowIfConditionsAreMet(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							}
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			}
 		);
 	});
 	
 	$('button.logSignificantEvent').click(function () {
 		forge.apptentive.logSignificantEvent(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							}
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			}
 		);
 	});
 
@@ -119,22 +131,22 @@ $(function () {
 	
 	$('button.showMessageCenter').click(function () {
 		forge.apptentive.showMessageCenter(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							}
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			}
 		);
 	});
 	
 	$('button.getUnreadMessageCount').click(function () {
 		forge.apptentive.getUnreadMessageCount(
-							function(success) {
-								$('p.getUnreadMessageCount').text(success);
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							}
+			function(success) {
+				$('p.getUnreadMessageCount').text(success);
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			}
 		);
 	});
 
@@ -146,25 +158,25 @@ $(function () {
 	$('button.isSurveyAvailable').click(function () {
 		var surveyTags = $('input.isSurveyAvailable').val().split(" ");
 		forge.apptentive.isSurveyAvailable(
-							function(success) {
-								$('p.isSurveyAvailable').text(success);
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							},
-							surveyTags
+			function(success) {
+				$('p.isSurveyAvailable').text(success);
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			surveyTags
 		);
 	});
 	
 	$('button.showSurvey').click(function () {
 		var surveyTags = $('input.showSurvey').val().split(" ");
 		forge.apptentive.showSurvey(
-							function(success) {
-							},
-							function(error) {
-								forge.logging.error(error.message);
-							},
-							surveyTags
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			surveyTags
 		);
 	});
 });

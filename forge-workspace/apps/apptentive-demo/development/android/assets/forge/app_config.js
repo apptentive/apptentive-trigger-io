@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "778b06daba3baba90d333c4b48bda95459534e5b", 
+    "config_hash": "4120c8653d2c1563ff854c90c62dca4add62cc0b", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -35,7 +35,7 @@ window.forge = {}; window.forge.config = {
                 "apiKey": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6", 
                 "appId": "Trigger Test"
             }, 
-            "version": "1.9.84"
+            "version": "1.9.94"
         }, 
         "contact": {
             "version": "2.0"
@@ -64,7 +64,7 @@ window.forge = {}; window.forge.config = {
         }
     }, 
     "name": "Apptentive Demo", 
-    "platform_version": "v2.0.1", 
+    "platform_version": "v2.0.3", 
     "trigger_domain": "https://trigger.io", 
     "uuid": "62a29794c26911e2b36c12313d00dc45", 
     "version": "0.1"

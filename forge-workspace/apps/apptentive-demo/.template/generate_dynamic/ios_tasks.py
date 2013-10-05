@@ -367,6 +367,12 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 
 		entitlements_dict = plist_dict['Entitlements']
 		entitlements_dict['application-identifier'] = bundle_id
+		
+		# Remove iCloud keys as they need configuring rather than just copying from the provisioning profile
+		if 'com.apple.developer.ubiquity-container-identifiers' in entitlements_dict:
+			entitlements_dict.pop('com.apple.developer.ubiquity-container-identifiers')
+		if 'com.apple.developer.ubiquity-kvstore-identifier' in entitlements_dict:
+			entitlements_dict.pop('com.apple.developer.ubiquity-kvstore-identifier')
 
 		with open(temp_file_path, 'wb') as temp_file:
 			plistlib.writePlist(entitlements_dict, temp_file)

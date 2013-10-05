@@ -19,4 +19,5 @@ DerivedData
 .template/
 
 #Trigger
-forge-workspace/modules/apptentive/inspector/an-inspector.*
+ForgeInspector/
+an-inspector.*
