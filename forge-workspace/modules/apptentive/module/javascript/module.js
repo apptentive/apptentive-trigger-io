@@ -2,7 +2,6 @@ forge.apptentive = {
 
 	// ************************************************************************************************************************************************
 	// Initialization
-	// These methods must be called when your javascript first executes.
 	// ************************************************************************************************************************************************
 
 	setInitialUserName: function (success, error, initialUserName) {
@@ -22,6 +21,19 @@ forge.apptentive = {
 
 	removeCustomDeviceData: function (success, error, key) {
 		forge.internal.call('apptentive.removeCustomDeviceData', {
+			key: key
+		}, success, error);
+	},
+
+	addCustomPersonData: function (success, error, key, value) {
+		forge.internal.call('apptentive.addCustomPersonData', {
+			key: key,
+			value: value
+		}, success, error);
+	},
+
+	removeCustomPersonData: function (success, error, key) {
+		forge.internal.call('apptentive.removeCustomPersonData', {
 			key: key
 		}, success, error);
 	},

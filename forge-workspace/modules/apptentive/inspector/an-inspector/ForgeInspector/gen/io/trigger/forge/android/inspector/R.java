@@ -240,7 +240,6 @@ public final class R {
         /**  This is a Java format. 
  This is a Java format. 
  This is a Java format. 
- This is a Java format. 
          */
         public static final int apptentive_message_sent_timestamp_format=0x7f08002f;
         public static final int apptentive_no=0x7f080002;

@@ -236,7 +236,6 @@ public final class R {
         public static int apptentive_message_center_compose_hint=0x7f08002d;
         public static int apptentive_message_center_title=0x7f08002c;
         /**  This is a Java format. 
- This is a Java format. 
          */
         public static int apptentive_message_sent_timestamp_format=0x7f08002f;
         public static int apptentive_no=0x7f080002;

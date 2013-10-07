@@ -40,6 +40,14 @@ public class API {
 		Apptentive.removeCustomDeviceData(ForgeApp.getActivity(), key);
 	}
 
+	public static void addCustomPersonData(final ForgeTask task, @ForgeParam("key") final String key, @ForgeParam("value") final String value) {
+		Apptentive.addCustomPersonData(ForgeApp.getActivity(), key, value);
+	}
+	
+	public static void removeCustomPersonData(final ForgeTask task, @ForgeParam("key") final String key) {
+		Apptentive.removeCustomPersonData(ForgeApp.getActivity(), key);
+	}
+
 	// ************************************************************************************************************************************************
 	// Ratings
 	// ************************************************************************************************************************************************

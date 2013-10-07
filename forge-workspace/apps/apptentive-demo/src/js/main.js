@@ -99,6 +99,29 @@ $(function () {
 		);
 	});
 	
+	$('button.addCustomPersonData').click(function () {
+		forge.apptentive.addCustomPersonData(
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			$('input.addCustomPersonData.key').val(),
+			$('input.addCustomPersonData.value').val()
+		);
+	});
+	
+	$('button.removeCustomPersonData').click(function () {	
+		forge.apptentive.removeCustomPersonData(
+			function(success) {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			$('input.removeCustomPersonData').val()
+		);
+	});
+	
 
 	// ************************************************************************************************************************************************
 	// Rating
