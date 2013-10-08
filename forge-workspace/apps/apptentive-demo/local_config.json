@@ -11,7 +11,7 @@
         "sdk": "/opt/android-sdk-macosx/"
     }, 
     "ios": {
-        "simulatorsdk": "6.1", 
+        "simulatorsdk": "7.0", 
         "simulatorfamily": "iphone", 
         "profiles": {
             "DEFAULT": {}
