@@ -28,7 +28,7 @@ public class API {
 	// ************************************************************************************************************************************************
 
 	public static void setInitialUserEmailAddress(final ForgeTask task, @ForgeParam("initialUserEmailAddress") final String initialUserEmailAddress) {
-		Apptentive.setUserEmail(initialUserEmailAddress);
+		Apptentive.setInitialUserEmail(ForgeApp.getActivity(), initialUserEmailAddress);
 		task.success();
 	}
 	
