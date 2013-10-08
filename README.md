@@ -1,4 +1,4 @@
-# Apptentive Tigger.io Module
+# Apptentive Trigger.io Module
 
 The Apptentive Trigger.io module allows you to add a quick and easy in-app-feedback mechanism to your Trigger.io applications. Feedback is sent to the Apptentive web service.
 
