@@ -55,11 +55,24 @@ Get feedback from your customers with the Apptentive Message Center.
 
     forge.apptentive.showMessageCenter(success, error);
 
+###### Example
+
+    forge.apptentive.getUnreadMessageCount(
+        {},
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        }
+    );
+
 The first time you present the Message Center, the user will be presented with an email feedback form. Thereafter, they will be taken to the Message Center. If you reply to your customers' feedback via the Apptentive website, the replies will be pushed to their in-app Message Center. 
 
 Use `getUnreadMessageCount` to check for messages that the user has not yet read.
 
-    forge.apptentive.unreadMessageCount(
+    forge.apptentive.unreadMessageCount(success, error);
+
+###### Example
+
+    forge.apptentive.getUnreadMessageCount(
         function(count) {
             // Update your interface with the new message count.
             alert("You have " + count + " unread messages.");
@@ -70,6 +83,10 @@ Use `getUnreadMessageCount` to check for messages that the user has not yet read
     );
 
 You can also listen for our `unreadMessageCountChanged` notification.
+
+    forge.apptentive.addUnreadMessageCountChangedListener(callback);
+
+###### Example
 
     forge.apptentive.addUnreadMessageCountChangedListener(
         function (count) {
@@ -85,17 +102,39 @@ Display the rating flow at a certain point in your code with:
 
     forge.apptentive.showRatingFlowIfConditionsAreMet(success, error);
 
+###### Example
+
+    forge.apptentive.showRatingFlowIfConditionsAreMet(
+        {},
+        function (error) {
+            forge.logging.info("Error: " + error.message);
+        }
+    );
+
 The rating flow will only be shown if all conditions (number of launches, significant events, etc.) have been met.
 
 Log significant events, such as completing a level, with:
 
     forge.apptentive.logSignificantEvent(success, error);
 
+###### Example
+
+    forge.apptentive.logSignificantEvent(
+        {},
+        function (error) {
+            forge.logging.info("Error: " + error.message);
+        }
+    );
+
 #### Surveys
 
 Surveys can be created on our website and presented, in-app, to users.
 
 You can check if there are any available surveys that have been downloaded from the server:
+
+    forge.apptentive.isSurveyAvailable(success, error, tags);
+
+###### Example
 
     forge.apptentive.isSurveyAvailable(
         function(surveyIsAvailable) {
@@ -104,14 +143,28 @@ You can check if there are any available surveys that have been downloaded from 
         function(error) {
             forge.logging.info("Error: " + error.message);
         },
-        [] // If you would like to display a tagged survey, add the tag strings to this array.
+        ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
     );
 
 If surveys are available, present the surveys in the app:
 
-    forge.apptentive.presentSurveyControllerWithNoTags(sucess, error, tags);
+    forge.apptentive.showSurvey(success, error, tags);
+
+###### Example
+
+    forge.apptentive.showSurvey(
+        {},
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        },
+        ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
+    );
 
 We will then send a notification when the survey has been finished by the app user.
+
+    forge.apptentive.addSurveySentListener(callback);
+
+###### Example
 
     forge.apptentive.addSurveySentListener(
         function (completed) {
@@ -123,9 +176,29 @@ We will then send a notification when the survey has been finished by the app us
 
 You can pre-load Apptentive with information about the user, which makes their Message Center experience easier. For example: 
 
-    forge.apptentive.setInitialUserName(success, error, name);
+    forge.apptentive.setInitialUserName(success, error, initialUserName);
 
-    forge.apptentive.setInitialUserEmailAddress(success, error, email);
+###### Example
+
+    forge.apptentive.setInitialUserName(
+        {},
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        },
+        "John Doe"
+    );
+
+    forge.apptentive.setInitialUserEmailAddress(success, error, initialUserEmailAddress);
+
+###### Example
+
+    forge.apptentive.setInitialUserEmailAddress(
+        {},
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        },
+        "johndoe@example.com"
+    );
 
 You can also store arbitrary information about the device and person using the app, which is then visible in your Message Center:
 
@@ -133,8 +206,29 @@ You can also store arbitrary information about the device and person using the a
 
     forge.apptentive.addCustomPersonData(success, error, key, value);
 
+###### Example
+
+    forge.apptentive.addCustomDeviceData(
+        {},
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        },
+        "internalDeviceId",
+        "1234567890"
+    );
+
 Similarly, you can remove custom data:
 
     forge.apptentive.removeCustomDeviceData(success, error, key);
 
     forge.apptentive.removeCustomPersonData(success, error, key);
+
+###### Example
+
+    forge.apptentive.removeCustomPersonData(
+        {},
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        },
+        "internalPersonId"
+    );
