@@ -28,9 +28,9 @@
     [task success:nil];
 }
 
-+ (void)addCustomPersonData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key
++ (void)addCustomPersonData:(ForgeTask *)task key:(NSString *)key value:(NSObject<NSCoding> *)value
 {
-    [[ATConnect sharedConnection] addCustomPersonData:object withKey:key];
+    [[ATConnect sharedConnection] addCustomPersonData:value withKey:key];
     [task success:nil];
 }
 
@@ -40,9 +40,9 @@
     [task success:nil];
 }
 
-+ (void)addCustomDeviceData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key
++ (void)addCustomDeviceData:(ForgeTask *)task key:(NSString *)key value:(NSObject<NSCoding> *)value
 {
-    [[ATConnect sharedConnection] addCustomDeviceData:object withKey:key];
+    [[ATConnect sharedConnection] addCustomDeviceData:value withKey:key];
     [task success:nil];
 }
 

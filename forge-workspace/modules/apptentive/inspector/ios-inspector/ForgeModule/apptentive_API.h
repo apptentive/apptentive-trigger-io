@@ -16,10 +16,10 @@
 + (void)setInitialUserName:(ForgeTask *)task initialUserName:(NSString *)initialUserName;
 + (void)setInitialUserEmailAddress:(ForgeTask *)task initialUserEmailAddress:(NSString *)initialUserEmailAddress;
 
-+ (void)addCustomPersonData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key;
++ (void)addCustomPersonData:(ForgeTask *)task key:(NSString *)key value:(NSObject<NSCoding> *)value;
 + (void)removeCustomPersonData:(ForgeTask *)task key:(NSString *)key;
 
-+ (void)addCustomDeviceData:(ForgeTask *)task object:(NSObject<NSCoding> *)object key:(NSString *)key;
++ (void)addCustomDeviceData:(ForgeTask *)task key:(NSString *)key value:(NSObject<NSCoding> *)value;
 + (void)removeCustomDeviceData:(ForgeTask *)task key:(NSString *)key;
 
 #pragma mark - Message Center
