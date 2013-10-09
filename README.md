@@ -10,84 +10,86 @@ The following steps will help guide you through implementing Apptentive in your 
 
 The official Apptentive module is available via the [Trigger.io Forge](https://trigger.io/modules/apptentive/).
 
+### Configure the Apptentive Module
+
+The Apptentive Trigger Module requires configuration after you add it to your Trigger app. You must supply your Apptentive API Key. If you are building for iOS, you must also specify your Apple App Store App ID.
+
+
+You can configure your app through the Trigger Toolkit web app.
+
+1. In a browser, open Trigger Toolkit and Navigate to your Trigger app
+2. On the left hand side, click the `Public` link under `Modules`
+3. Scroll to the Apptentive module
+4. Fill in the apiKey and appId fields
+
+Note: Your Apptentive API Key is found in your app's settings page at [Apptentive](https://www.apptentive.com)
+
 ### Setup the Apptentive Module
 
-To make an Apptentive API call from JavaScript, use the following code snippet:
+To make an Apptentive API call from JavaScript, you will make method calls in the following fashion.
 
-    forge.moduleName.methodName(
-		"test",
-		"anotherParameter",
+    forge.apptentive.methodName(
         function (success) {
-			alert('Success!')
-		},
+            alert('Success!');
+        },
         function (error) {
-			alert('Error: ' + error.message)
-		}
-    )
+            alert('Error: ' + error.message);
+        },
+        "someParameter",
+        "anotherParameter",
+    );
 
-The `forge.moduleName.methodName` method sends a message to the native module with at least two parameters:
+The `forge.apptentive.methodName()` method sends a message to the native Apptentive module with at least two parameters:
 
- - The initial parameters are the data parameters to be passed to the module's native code.
- - The penultimate parameter is a success callback function, which should be called with the data returned from native code.
- - The final parameter is an error callback function, called with the returned error data.
+* The first parameter is a success callback function, which should be called with the data returned from native code.
+* The second parameter is an error callback function, called with the returned error data.
+* Any additional parameters are arguments to the method.
 
 You can find more information about these modules and methods [here](https://trigger.io/docs/current/api/native_modules/api_methods.html).
 
 ### Implement Apptentive
 
-Once you have successfully installed the module, you can begin using Apptentive in your Trigger.io app.
-
-First, set your Apptentive API key like so:
-
-	forge.apptentive.setApiKey("YOUR_APPTENTIVE_API_KEY", {}, {});
-
-It is very important that you set your Apptentive API key, which you can get by signing up on our [website](http://www.apptentive.com/).
-
-You can now begin using Apptentive's features.
-
 #### Message Center
 
 Get feedback from your customers with the Apptentive Message Center.
 
-	forge.apptentive.presentMessageCenter({}, {});
+    forge.apptentive.showMessageCenter(success, error);
 
 The first time you present the Message Center, the user will be presented with an email feedback form. Thereafter, they will be taken to the Message Center. If you reply to your customers' feedback via the Apptentive website, the replies will be pushed to their in-app Message Center. 
 
-Check for the number of unread messages like so:
+Use `getUnreadMessageCount` to check for messages that the user has not yet read.
 
     forge.apptentive.unreadMessageCount(
-		function(success) {
-			// Update your interface with the new message count.
-			alert("You have " + success + " unread messages.");
-		},
-		function(error) {
-			forge.logging.info("Error!");
-		}
+        function(count) {
+            // Update your interface with the new message count.
+            alert("You have " + count + " unread messages.");
+        },
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        }
     );
 
-You can also listen for our `ATMessageCenterUnreadCountChangedNotification` notification:
+You can also listen for our `unreadMessageCountChanged` notification.
 
-    forge.apptentive.unreadMessageCountChanged.addListener(function () {
-        alert("New Apptentive unread messages!");
-    });
+    forge.apptentive.addUnreadMessageCountChangedListener(
+        function (count) {
+            alert("There are now " + count + " unread messages.");
+        }
+    );
 
 #### Ratings
 
-Apptentive also provides an App Store rating flow. A ratings dialog will be displayed based on the number of launches of your application, the amount of time the user has been using it, and the number of significant events the user has completed (for example, levels passed). All of these variables can be modified on Apptentive.com.
-
-First, set your app's App Store ID:
-
-        forge.apptentive.setAppID("get_this_key_from_itunes_connect", {}, {});
+Apptentive also provides an App Store rating flow. A ratings dialog will be displayed based on the number of launches of your application, the amount of time the user has been using it, and the number of significant events the user has completed (for example, levels passed). All of these variables can be modified in your [Apptentive](https://www.apptentive.com) settings.
 
 Display the rating flow at a certain point in your code with:
 
-	forge.apptentive.showRatingFlowIfConditionsAreMet({}, {});
+    forge.apptentive.showRatingFlowIfConditionsAreMet(success, error);
 
 The rating flow will only be shown if all conditions (number of launches, significant events, etc.) have been met.
 
 Log significant events, such as completing a level, with:
 
-	forge.apptentive.logSignificantEvent({}, {});
+    forge.apptentive.logSignificantEvent(success, error);
 
 #### Surveys
 
@@ -95,62 +97,44 @@ Surveys can be created on our website and presented, in-app, to users.
 
 You can check if there are any available surveys that have been downloaded from the server:
 
-    // No tags
-	forge.apptentive.hasSurveyAvailableWithNoTags(
-		function(success) {
-			alert(success);
-		},
-		function(error) {
-			forge.logging.info("Error!");
-		}
+    forge.apptentive.isSurveyAvailable(
+        function(surveyIsAvailable) {
+            alert("Survey is available? " + surveyIsAvailable);
+        },
+        function(error) {
+            forge.logging.info("Error: " + error.message);
+        },
+        [] // If you would like to display a tagged survey, add the tag strings to this array.
     );
-
-	// With tags
-	var surveyTags = ["testSurvey", "testTag"];
-	forge.apptentive.hasSurveyAvailableWithTags(
-		surveyTags,
-		function(success) {
-			alert(success);
-		},
-		function(error) {
-			forge.logging.info("Error!");
-		}
-	);
-
-You can also listen for our `apptentive.surveyBecameAvailable` notification:
-
-    forge.apptentive.surveyBecameAvailable.addListener(function () {
-        alert("New Apptentive surveys!");
-    });
 
 If surveys are available, present the surveys in the app:
 
-	// No tags
-	forge.apptentive.presentSurveyControllerWithNoTags({}, {});
+    forge.apptentive.presentSurveyControllerWithNoTags(sucess, error, tags);
 
-	// With tags
-	var surveyTags = ["testSurvey", "testTag"];
-	forge.apptentive.presentSurveyControllerWithTags(surveyTags, {}, {});
+We will then send a notification when the survey has been finished by the app user.
 
-We will then send a notification when the survey has been sent to Apptentive:
-
-    forge.apptentive.surveyWasSent.addListener(function () {
-        alert("Survey was sent to Apptentive!");
-    });
+    forge.apptentive.addSurveySentListener(
+        function (completed) {
+            alert("Survey was " + (completed ? "completed", "skipped") + ", and sent to Apptentive");
+        }
+    );
 
 #### User Info
 
 You can pre-load Apptentive with information about the user, which makes their Message Center experience easier. For example: 
 
-	forge.apptentive.setInitialUserName("Peter", {}, {});
+    forge.apptentive.setInitialUserName(success, error, name);
 
-	forge.apptentive.setInitialUserEmailAddress("peter@example.com", {}, {});
+    forge.apptentive.setInitialUserEmailAddress(success, error, email);
 
-You can also store arbitrary information about the user, which is then visible in your Message Center:
+You can also store arbitrary information about the device and person using the app, which is then visible in your Message Center:
 
-    forge.apptentive.addCustomData("object", "key", {}, {});
-	forge.apptentive.addCustomData("Seattle", "city", {}, {});
+    forge.apptentive.addCustomDeviceData(success, error, key, value);
+
+    forge.apptentive.addCustomPersonData(success, error, key, value);
 
 Similarly, you can remove custom data:
 
-	forge.apptentive.removeCustomData("city", {}, {});
+    forge.apptentive.removeCustomDeviceData(success, error, key);
+
+    forge.apptentive.removeCustomPersonData(success, error, key);
