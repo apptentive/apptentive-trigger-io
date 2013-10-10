@@ -16,11 +16,11 @@
 + (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Apptentive
-    NSString *apiKey = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"apiKey"];
+    NSString *apiKey = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"API_Key"];
     [[ATConnect sharedConnection] setApiKey:apiKey];
     
     // Rating Flow
-    NSString *appId = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"appId"];
+    NSString *appId = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"App_ID"];
     [[ATAppRatingFlow sharedRatingFlow] setAppID:appId];
     
     // Message Center
