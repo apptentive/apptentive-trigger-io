@@ -5,7 +5,6 @@ import com.apptentive.android.sdk.Log;
 import com.apptentive.android.sdk.module.messagecenter.UnreadMessagesListener;
 import com.google.gson.JsonPrimitive;
 
-import android.os.Bundle;
 import io.trigger.forge.android.core.ForgeApp;
 import io.trigger.forge.android.core.ForgeEventListener;
 
@@ -18,7 +17,7 @@ public class EventListener extends ForgeEventListener {
 		Apptentive.setUnreadMessagesListener(new UnreadMessagesListener() {
 			@Override
 			public void onUnreadMessageCountChanged(int unreadMessages) {
-				ForgeApp.event("apptentive.unreadMessageCountChanged", new JsonPrimitive(new Integer(unreadMessages)));
+				ForgeApp.event("apptentive.unreadMessageCountChanged", new JsonPrimitive(Integer.valueOf(unreadMessages)));
 			}
 		});
 	}

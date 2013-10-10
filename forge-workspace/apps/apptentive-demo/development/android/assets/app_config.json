@@ -1,6 +1,6 @@
 {
     "author": "peter@apptentive.com", 
-    "config_hash": "28d53f2c1c8fccf69e170be7ad4e37d2811e3d19", 
+    "config_hash": "5077c109222f4d0c751fddbef8b548b35679d352", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -32,10 +32,11 @@
     "modules": {
         "apptentive": {
             "config": {
-                "apiKey": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6", 
-                "appId": "Trigger Test"
+                "API_Key": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6", 
+                "App_ID": "Trigger Test", 
+                "Debug_Mode": true
             }, 
-            "version": "1.9.99"
+            "version": "1.9.116"
         }, 
         "contact": {
             "version": "2.0"

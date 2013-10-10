@@ -154,7 +154,7 @@ $(function () {
 	
 	$('button.showMessageCenter').click(function () {
 		forge.apptentive.showMessageCenter(
-			function(success) {
+			function() {
 			},
 			function(error) {
 				forge.logging.error(error.message);
@@ -164,8 +164,8 @@ $(function () {
 	
 	$('button.getUnreadMessageCount').click(function () {
 		forge.apptentive.getUnreadMessageCount(
-			function(success) {
-				$('p.getUnreadMessageCount').text(success);
+			function(count) {
+				$('p.getUnreadMessageCount').text(count);
 			},
 			function(error) {
 				forge.logging.error(error.message);
@@ -194,7 +194,12 @@ $(function () {
 	$('button.showSurvey').click(function () {
 		var surveyTags = $('input.showSurvey').val().split(" ");
 		forge.apptentive.showSurvey(
-			function(success) {
+			function(surveyIsAvailable) {
+				if(surveyIsAvailable) {
+					forge.logging.info("Survey is available.");
+				} else {
+					forge.logging.info("Survey is not available.");
+				}				
 			},
 			function(error) {
 				forge.logging.error(error.message);

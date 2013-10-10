@@ -30,7 +30,43 @@
 					"tag": "meta-data",
 					"attributes": {
 						"android:name": "apptentive_api_key",
-						"android:value": "{{modules.apptentive.config.apiKey}}"  
+						"android:value": "{{modules.apptentive.config.API_Key}}"
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "meta-data",
+					"attributes": {
+						"android:name": "apptentive_debug",
+						"android:value": "{{modules.apptentive.config.Debug_Mode}}"  
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "meta-data",
+					"attributes": {
+						"android:name": "apptentive_sdk_distribution",
+						"android:value": "Trigger.io"  
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "meta-data",
+					"attributes": {
+						"android:name": "apptentive_sdk_distribution_version",
+						"android:value": "{{modules.apptentive.version}}"  
 					}
 				}
 			}
