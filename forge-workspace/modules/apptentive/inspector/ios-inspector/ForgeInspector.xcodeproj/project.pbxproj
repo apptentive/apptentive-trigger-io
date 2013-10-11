@@ -11,8 +11,8 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = B3E9B87515C2ED5F00590095 /* Build configuration list for PBXAggregateTarget "UniversalForgeModule" */;
 			buildPhases = (
-				B3E9B87815C2EDC300590095 /* ShellScript */,
-				58EA5B7817BAFB7400ECEB4B /* ShellScript */,
+				B3E9B87815C2EDC300590095 /* Run Script */,
+				58EA5B7817BAFB7400ECEB4B /* Run Script */,
 			);
 			dependencies = (
 			);
@@ -312,26 +312,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		58EA5B7817BAFB7400ECEB4B /* ShellScript */ = {
+		58EA5B7817BAFB7400ECEB4B /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd build/apptentive.bundle/ApptentiveResources.bundle\n/usr/libexec/PlistBuddy -c \"Set :ATInfoDistributionKey Trigger.io\" Info.plist";
+			shellPath = "/usr/bin/env python";
+			shellScript = "#! /usr/bin/env python\n\nimport json\nimport biplist\n\n# Get module version number from module manifest\nmanifest_path = \"../../module/manifest.json\"\nmanifest_file = open(manifest_path)\nmanifest = json.load(manifest_file)\nmanifest_file.close();\nmodule_version = manifest[\"version\"]\n\nbundle_plist_path = \"build/apptentive.bundle/ApptentiveResources.bundle/Info.plist\"\nplist = biplist.readPlist(bundle_plist_path)\n\n# ATInfoDistributionKey\nplist_distribution_key = \"ATInfoDistributionKey\"\nplist[plist_distribution_key] = \"Trigger.io\"\n\n# ATInfoDistributionVersionKey\nplist_distribution_version_key = \"ATInfoDistributionVersionKey\"\nplist[plist_distribution_version_key] = module_version\n\nbiplist.writePlist(plist, bundle_plist_path)";
 		};
-		B3E9B87815C2EDC300590095 /* ShellScript */ = {
+		B3E9B87815C2EDC300590095 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
