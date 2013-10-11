@@ -21,3 +21,5 @@ DerivedData
 #Trigger
 ForgeInspector/
 an-inspector.*
+forge-workspace/modules/apptentive/module/ios/*
+forge-workspace/modules/apptentive/inspector/ios-inspector/build/*
