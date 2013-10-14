@@ -39,106 +39,89 @@
 			</div>
 		</div>
 		<div class="container-narrow">
-			<h2>Apptentive Plugin</h2>
+			<h1>Apptentive Plugin</h1>
+			<h2>Instructions</h2>
+			<p>This app is for development purposes only. It is not an example app. Methods marked "iOS only" can be used by iOS asynchronously, but only at page load time if on Android. 
 			<hr>
 			
-			<h3>Debug</h3>
+
+			<!-- *********************************************************************************************** -->
+			<h3>Initialization</h3>
+			<!-- *********************************************************************************************** -->
+			
+			<strong>setInitialUserName</strong> (iOS only)
+			<input type="text" class="setInitialUserName" placeholder="User name&hellip;"></input>
+			<button class="setInitialUserName">Submit</button>
+
+			
+			<strong>setInitialUserEmailAddress</strong>
+			<input type="text" class="setInitialUserEmailAddress" placeholder="Email&hellip;"></input>
+			<button class="setInitialUserEmailAddress">Submit</button>
+
+			
+			<strong>addCustomDeviceData</strong>
+			<input type="text" class="addCustomDeviceData key" placeholder="Key&hellip;"></input>
+			<input type="text" class="addCustomDeviceData value" placeholder="Value&hellip;"></input>
+			<button class="addCustomDeviceData">Add</button>
+
+			
+			<strong>removeCustomDeviceData</strong>
+			<input type="text" class="removeCustomDeviceData" placeholder="Key&hellip;"></input>
+			<button class="removeCustomDeviceData">Remove</button>
 			<hr>
 			
-			<h4>showAlert</h4>
-			<input type="text" class="showAlert"></input>
-			<button class="showAlert">Show Alert</button>
+			<strong>addCustomPersonData</strong>
+			<input type="text" class="addCustomPersonData key" placeholder="Key&hellip;"></input>
+			<input type="text" class="addCustomPersonData value" placeholder="Value&hellip;"></input>
+			<button class="addCustomPersonData">Add</button>
+
+			
+			<strong>removeCustomPersonData</strong>
+			<input type="text" class="removeCustomPersonData" placeholder="Key&hellip;"></input>
+			<button class="removeCustomPersonData">Remove</button>
 			<hr>
 			
-			<h3>Shared Features</h3>
+
+			<!-- *********************************************************************************************** -->
+			<h3>Ratings Flow</h3>
+			<!-- *********************************************************************************************** -->
+			
+			<strong>showRatingFlowIfConditionsAreMet</strong>
+			<button class="showRatingFlowIfConditionsAreMet">Show</button>
+
+			
+			<strong>logSignificantEvent</strong>
+			<button class="logSignificantEvent">Log Event</button>	
 			<hr>
 			
-			<h4>apiKey</h4>
-			<button class="apiKey">apiKey</button>
-			<p class="apiKey"></p>
+
+			<!-- *********************************************************************************************** -->
+			<h3>Message Center</h3>
+			<!-- *********************************************************************************************** -->
+			
+			<strong>showMessageCenter</strong>
+			<button class="showMessageCenter">Show</button>
+
+			
+			<strong>getUnreadMessageCount</strong>
+			<button class="getUnreadMessageCount">Get Count</button>
+			<p class="getUnreadMessageCount"></p>
 			<hr>
 			
-			<h4>setApiKey</h4>
-			<input type="text" class="setApiKey"></input>
-			<button class="setApiKey">setApiKey</button>
-			<hr>
+
+			<!-- *********************************************************************************************** -->
+			<h3>Surveys</h3>
+			<!-- *********************************************************************************************** -->
 			
-			<h4>initialUserName</h4>
-			<button class="initialUserName">initialUserName</button>
-			<p class="initialUserName"></p>
-			<hr>
+			<strong>isSurveyAvailable</strong>
+			<input type="text" class="isSurveyAvailable" placeholder="Tags&hellip; (optional)"></input>
+			<button class="isSurveyAvailable">Check</button>
+			<p class="isSurveyAvailable"></p>
+
 			
-			<h4>setInitialUserName</h4>
-			<input type="text" class="setInitialUserName"></input>
-			<button class="setInitialUserName">setInitialUserName</button>
-			<hr>
-			
-			<h4>initialUserEmailAddress</h4>
-			<button class= "initialUserEmailAddress">initialUserEmailAddress</button>
-			<p class="initialUserEmailAddress"></p>
-			<hr>
-			
-			<h4>setInitialUserEmailAddress</h4>
-			<input type="text" class="setInitialUserEmailAddress"></input>
-			<button class="setInitialUserEmailAddress">setInitialUserEmailAddress</button>
-			<hr>
-			
-			<h4>addCustomData</h4>
-			<input type="text" class="addCustomData object"></input>
-			<input type="text" class="addCustomData key"></input>
-			<button class="addCustomData">addCustomData</button>
-			<hr>
-			
-			<h4>removeCustomData</h4>
-			<input type="text" class="removeCustomData"></input>
-			<button class="removeCustomData">removeCustomData</button>
-			<hr>
-			
-			<h2>Message Center</h2>
-			<hr>
-			
-			<h4>presentMessageCenter</h4>
-			<button class="presentMessageCenter">presentMessageCenter</button>
-			<hr>
-			
-			<h4>unreadMessageCount</h4>
-			<button class="unreadMessageCount">unreadMessageCount</button>
-			<p class="unreadMessageCount"></p>
-			<hr>
-			
-			<h2>Ratings Flow</h2>
-			<hr>
-			
-			<h4>showRatingFlowIfConditionsAreMet</h4>
-			<button class="showRatingFlowIfConditionsAreMet">showRatingFlowIfConditionsAreMet</button>
-			<hr>
-			
-			<h4>logSignificantEvent</h4>
-			<button class="logSignificantEvent">logSignificantEvent</button>	
-			<hr>
-			
-			<h2>Surveys</h2>
-			<hr>
-			
-			<h4>hasSurveyAvailableWithNoTags</h4>
-			<button class="hasSurveyAvailableWithNoTags">hasSurveyAvailableWithNoTags</button>
-			<p class="hasSurveyAvailableWithNoTags"></p>
-			<hr>
-			
-			<h4>hasSurveyAvailableWithTags</h4>
-			<input type="text" class="hasSurveyAvailableWithTags"></input>
-			<button class="hasSurveyAvailableWithTags">hasSurveyAvailableWithTags</button>
-			<p class="hasSurveyAvailableWithTags"></p>
-			<hr>
-			
-			<h4>presentSurveyControllerWithNoTags</h4>
-			<button class="presentSurveyControllerWithNoTags">presentSurveyControllerWithNoTags</button>
-			<hr>
-			
-			<h4>presentSurveyControllerWithTags</h4>
-			<input type="text" class="presentSurveyControllerWithTags"></input>
-			<button class="presentSurveyControllerWithTags">presentSurveyControllerWithTags</button>
-			<hr>
+			<strong>showSurvey</strong>
+			<input type="text" class="showSurvey" placeholder="Tags&hellip; (optional)"></input>
+			<button class="showSurvey">Show</button>
 		</div> 
 	</body>
 </html>

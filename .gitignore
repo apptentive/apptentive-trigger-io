@@ -23,4 +23,5 @@ ForgeInspector/
 an-inspector.*
 forge-workspace/modules/apptentive/module/ios/*
 forge-workspace/modules/apptentive/inspector/ios-inspector/build/*
+forge-workspace/apps/apptentive-demo/development/*
 forge-workspace/apps/apptentive-demo/.template/*
