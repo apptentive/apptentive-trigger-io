@@ -1,0 +1,21 @@
+{
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"API_Key": {
+			"required": true,
+			"type": "string",
+			"description": "The Apptentive API key for your app. This key can be found under the Settings tab for your app on www.apptentive.com."
+		},
+		"App_ID": {
+			"required": false,
+			"type": "string",
+			"description": "The Apple iOS App Store ID. If you are building for iOS, this is required."
+		},
+		"Debug_Mode": {
+			"required": false,
+			"type": "boolean",
+			"description": "Enables verbose logging. Leaving this on in production can affect performance."
+		}
+	}
+}

@@ -1,0 +1,96 @@
+[
+	{
+		"do": {
+			"android_add_permission": {
+				"permission": "android.permission.INTERNET"
+			},
+			"android_add_permission": {
+				"permission": "android.permission.ACCESS_NETWORK_STATE"
+			},
+			"android_add_permission": {
+				"permission": "android.permission.GET_ACCOUNTS"
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "activity",
+					"attributes": {
+						"android:name": "com.apptentive.android.sdk.ViewActivity",
+						"android:theme": "@style/Apptentive.Theme.Transparent"
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "meta-data",
+					"attributes": {
+						"android:name": "apptentive_api_key",
+						"android:value": "{{modules.apptentive.config.API_Key}}"
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "meta-data",
+					"attributes": {
+						"android:name": "apptentive_debug",
+						"android:value": "{{modules.apptentive.config.Debug_Mode}}"  
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "meta-data",
+					"attributes": {
+						"android:name": "apptentive_sdk_distribution",
+						"android:value": "Trigger.io"  
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "meta-data",
+					"attributes": {
+						"android:name": "apptentive_sdk_distribution_version",
+						"android:value": "{{modules.apptentive.version}}"  
+					}
+				}
+			}
+		}
+	}, {
+		"do": {
+			"android_add_to_application_manifest": {
+				"element": {
+					"tag": "receiver",
+					"attributes": {
+						"android:name": "com.apptentive.android.sdk.comm.NetworkStateReceiver"
+					},
+					"children": [{
+						"tag": "intent-filter",
+						"children": [{
+							"tag": "action",
+							"attributes": {
+								"android:name": "android.net.conn.CONNECTIVITY_CHANGE",
+								"android:name": "android.intent.action.PACKAGE_RESTARTED"
+							}
+						}]
+					}]
+				}
+			}
+		}
+	}
+]
