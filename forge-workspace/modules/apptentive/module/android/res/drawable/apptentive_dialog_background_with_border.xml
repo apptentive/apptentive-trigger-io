@@ -4,4 +4,6 @@
        android:shape="rectangle">
     <corners android:radius="1dp"/>
     <solid android:color="@color/apptentive_dialog_background"/>
+    <stroke android:color="@color/apptentive_survey_thank_you_dialog_border"
+            android:width="3dp"/>
 </shape>
