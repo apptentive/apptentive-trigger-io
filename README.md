@@ -28,16 +28,18 @@ Note: Your Apptentive API Key is found in your app's settings page at [Apptentiv
 
 To make an Apptentive API call from JavaScript, you will make method calls in the following fashion.
 
-    forge.apptentive.methodName(
-        function (success) {
-            alert('Success!');
-        },
-        function (error) {
-            alert('Error: ' + error.message);
-        },
-        "someParameter",
-        "anotherParameter",
-    );
+```javascript
+forge.apptentive.methodName(
+    function (success) {
+        alert('Success!');
+    },
+    function (error) {
+        alert('Error: ' + error.message);
+    },
+    "someParameter",
+    "anotherParameter",
+);
+```
 
 The `forge.apptentive.methodName()` method sends a message to the native Apptentive module with at least two parameters:
 
@@ -53,46 +55,58 @@ You can find more information about these modules and methods [here](https://tri
 
 Get feedback from your customers with the Apptentive Message Center.
 
-    forge.apptentive.showMessageCenter(success, error);
+```javascript
+forge.apptentive.showMessageCenter(success, error);
+```
 
 ###### Example
 
-    forge.apptentive.getUnreadMessageCount(
-        {},
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        }
-    );
+```javascript
+forge.apptentive.getUnreadMessageCount(
+    {},
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    }
+);
+```
 
-The first time you present the Message Center, the user will be presented with an email feedback form. Thereafter, they will be taken to the Message Center. If you reply to your customers' feedback via the Apptentive website, the replies will be pushed to their in-app Message Center. 
+The first time you present the Message Center, the user will be presented with an email feedback form. Thereafter, they will be taken to the Message Center. If you reply to your customers' feedback via the Apptentive website, the replies will be pushed to their in-app Message Center.
 
 Use `getUnreadMessageCount` to check for messages that the user has not yet read.
 
-    forge.apptentive.unreadMessageCount(success, error);
+```javascript
+forge.apptentive.unreadMessageCount(success, error);
+```
 
 ###### Example
 
-    forge.apptentive.getUnreadMessageCount(
-        function(count) {
-            // Update your interface with the new message count.
-            alert("You have " + count + " unread messages.");
-        },
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        }
-    );
+```javascript
+forge.apptentive.getUnreadMessageCount(
+    function(count) {
+        // Update your interface with the new message count.
+        alert("You have " + count + " unread messages.");
+    },
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    }
+);
+```
 
 You can also listen for our `unreadMessageCountChanged` notification.
 
-    forge.apptentive.addUnreadMessageCountChangedListener(callback);
+```javascript
+forge.apptentive.addUnreadMessageCountChangedListener(callback);
+```
 
 ###### Example
 
-    forge.apptentive.addUnreadMessageCountChangedListener(
-        function (count) {
-            alert("There are now " + count + " unread messages.");
-        }
-    );
+```javascript
+forge.apptentive.addUnreadMessageCountChangedListener(
+    function (count) {
+        alert("There are now " + count + " unread messages.");
+    }
+);
+```
 
 #### Ratings
 
@@ -100,31 +114,39 @@ Apptentive also provides an App Store rating flow. A ratings dialog will be disp
 
 Display the rating flow at a certain point in your code with:
 
-    forge.apptentive.showRatingFlowIfConditionsAreMet(success, error);
+```javascript
+forge.apptentive.showRatingFlowIfConditionsAreMet(success, error);
+```
 
 ###### Example
 
-    forge.apptentive.showRatingFlowIfConditionsAreMet(
-        {},
-        function (error) {
-            forge.logging.info("Error: " + error.message);
-        }
-    );
+```javascript
+forge.apptentive.showRatingFlowIfConditionsAreMet(
+    {},
+    function (error) {
+        forge.logging.info("Error: " + error.message);
+    }
+);
+```
 
 The rating flow will only be shown if all conditions (number of launches, significant events, etc.) have been met.
 
 Log significant events, such as completing a level, with:
 
-    forge.apptentive.logSignificantEvent(success, error);
+```javascript
+forge.apptentive.logSignificantEvent(success, error);
+```
 
 ###### Example
 
-    forge.apptentive.logSignificantEvent(
-        {},
-        function (error) {
-            forge.logging.info("Error: " + error.message);
-        }
-    );
+```javascript
+forge.apptentive.logSignificantEvent(
+    {},
+    function (error) {
+        forge.logging.info("Error: " + error.message);
+    }
+);
+```
 
 #### Surveys
 
@@ -132,103 +154,129 @@ Surveys can be created on our website and presented, in-app, to users.
 
 You can check if there are any available surveys that have been downloaded from the server:
 
-    forge.apptentive.isSurveyAvailable(success, error, tags);
+```javascript
+forge.apptentive.isSurveyAvailable(success, error, tags);
+```
 
 ###### Example
 
-    forge.apptentive.isSurveyAvailable(
-        function(surveyIsAvailable) {
-            alert("Survey is available? " + surveyIsAvailable);
-        },
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        },
-        ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
-    );
+```javascript
+forge.apptentive.isSurveyAvailable(
+    function(surveyIsAvailable) {
+        alert("Survey is available? " + surveyIsAvailable);
+    },
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    },
+    ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
+);
+```
 
 If surveys are available, present the surveys in the app:
 
-    forge.apptentive.showSurvey(success, error, tags);
+```javascript
+forge.apptentive.showSurvey(success, error, tags);
+```
 
 ###### Example
 
-    forge.apptentive.showSurvey(
-        {},
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        },
-        ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
-    );
+```javascript
+forge.apptentive.showSurvey(
+    {},
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    },
+    ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
+);
+```
 
 We will then send a notification when the survey has been finished by the app user.
 
-    forge.apptentive.addSurveySentListener(callback);
+```javascript
+forge.apptentive.addSurveySentListener(callback);
+```
 
 ###### Example
 
-    forge.apptentive.addSurveySentListener(
-        function (completed) {
-            alert("Survey was " + (completed ? "completed", "skipped") + ", and sent to Apptentive");
-        }
-    );
+```javascript
+forge.apptentive.addSurveySentListener(
+    function (completed) {
+        alert("Survey was " + (completed ? "completed", "skipped") + ", and sent to Apptentive");
+    }
+);
+```
 
 #### User Info
 
-You can pre-load Apptentive with information about the user, which makes their Message Center experience easier. For example: 
+You can pre-load Apptentive with information about the user, which makes their Message Center experience easier. For example:
 
-    forge.apptentive.setInitialUserName(success, error, initialUserName);
-
-###### Example
-
-    forge.apptentive.setInitialUserName(
-        {},
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        },
-        "John Doe"
-    );
-
-    forge.apptentive.setInitialUserEmailAddress(success, error, initialUserEmailAddress);
+```javascript
+forge.apptentive.setInitialUserName(success, error, initialUserName);
+```
 
 ###### Example
 
-    forge.apptentive.setInitialUserEmailAddress(
-        {},
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        },
-        "johndoe@example.com"
-    );
+```javascript
+forge.apptentive.setInitialUserName(
+    {},
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    },
+    "John Doe"
+);
+
+forge.apptentive.setInitialUserEmailAddress(success, error, initialUserEmailAddress);
+```
+
+###### Example
+
+```javascript
+forge.apptentive.setInitialUserEmailAddress(
+    {},
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    },
+    "johndoe@example.com"
+);
+```
 
 You can also store arbitrary information about the device and person using the app, which is then visible in your Message Center:
 
-    forge.apptentive.addCustomDeviceData(success, error, key, value);
+```javascript
+forge.apptentive.addCustomDeviceData(success, error, key, value);
 
-    forge.apptentive.addCustomPersonData(success, error, key, value);
+forge.apptentive.addCustomPersonData(success, error, key, value);
+```
 
 ###### Example
 
-    forge.apptentive.addCustomDeviceData(
-        {},
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        },
-        "internalDeviceId",
-        "1234567890"
-    );
+```javascript
+forge.apptentive.addCustomDeviceData(
+    {},
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    },
+    "internalDeviceId",
+    "1234567890"
+);
+```
 
 Similarly, you can remove custom data:
 
-    forge.apptentive.removeCustomDeviceData(success, error, key);
+```javascript
+forge.apptentive.removeCustomDeviceData(success, error, key);
 
-    forge.apptentive.removeCustomPersonData(success, error, key);
+forge.apptentive.removeCustomPersonData(success, error, key);
+```
 
 ###### Example
 
-    forge.apptentive.removeCustomPersonData(
-        {},
-        function(error) {
-            forge.logging.info("Error: " + error.message);
-        },
-        "internalPersonId"
-    );
+```javascript
+forge.apptentive.removeCustomPersonData(
+    {},
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    },
+    "internalPersonId"
+);
+```
