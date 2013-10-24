@@ -62,7 +62,7 @@ forge.apptentive.showMessageCenter(success, error);
 ###### Example
 
 ```javascript
-forge.apptentive.getUnreadMessageCount(
+forge.apptentive.showMessageCenter(
     {},
     function(error) {
         forge.logging.info("Error: " + error.message);
