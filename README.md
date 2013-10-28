@@ -10,6 +10,8 @@ The following steps will help guide you through implementing Apptentive in your 
 
 The official Apptentive module is available via the [Trigger.io Forge](https://trigger.io/modules/apptentive/).
 
+*Note: v1.2.5 is the current version. Due to a release discrepancy, v1.7 was release. Please ignore 1.7, or upgrade to 1.2.5.*
+
 ### Configure the Apptentive Module
 
 The Apptentive Trigger Module requires configuration after you add it to your Trigger app. You must supply your Apptentive API Key. If you are building for iOS, you must also specify your Apple App Store App ID.
