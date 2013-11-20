@@ -25,7 +25,12 @@
 #pragma mark - Message Center
 
 + (void)showMessageCenter:(ForgeTask *)task;
++ (void)showMessageCenterWithCustomData:(ForgeTask *)task customData:(NSDictionary *)customData;
 + (void)getUnreadMessageCount:(ForgeTask *)task;
+
+#pragma mark - Engagement
+
++ (void)engage:(ForgeTask *)task codePoint:(NSString *)codePoint;
 
 #pragma mark - Ratings Flow
 

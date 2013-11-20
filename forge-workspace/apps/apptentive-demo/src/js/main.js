@@ -162,6 +162,20 @@ $(function () {
 		);
 	});
 	
+	$('button.showMessageCenterWithCustomData').click(function () {			
+		forge.apptentive.showMessageCenterWithCustomData(
+			function() {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			{
+				'sentBy': 'trigger.io',
+				'hasCustomData': true
+			}
+		);	
+	});
+	
 	$('button.getUnreadMessageCount').click(function () {
 		forge.apptentive.getUnreadMessageCount(
 			function(count) {
@@ -173,7 +187,23 @@ $(function () {
 		);
 	});
 
+
+	// ************************************************************************************************************************************************
+	// Engagement
+	// ************************************************************************************************************************************************
 	
+	$('button.engageUpgradeMessage').click(function () {	
+		forge.apptentive.engage(
+			function() {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			'app.launch'
+		);
+	});	
+
+
 	// ************************************************************************************************************************************************
 	// Survey
 	// ************************************************************************************************************************************************

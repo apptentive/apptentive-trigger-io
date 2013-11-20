@@ -60,10 +60,24 @@
     [task success:nil];
 }
 
++ (void)showMessageCenterWithCustomData:(ForgeTask *)task customData:(NSDictionary *)customData
+{
+    [[ATConnect sharedConnection] presentMessageCenterFromViewController:[[ForgeApp sharedApp] viewController] withCustomData:customData];
+    [task success:nil];
+}
+
 + (void)getUnreadMessageCount:(ForgeTask *)task
 {
     NSUInteger unreadMessageCount = [[ATConnect sharedConnection] unreadMessageCount];
     [task success:[NSNumber numberWithInteger:unreadMessageCount]];
+}
+
+#pragma mark - Engagement
+
++ (void)engage:(ForgeTask *)task codePoint:(NSString *)codePoint
+{
+    [[ATConnect sharedConnection] engage:codePoint fromViewController:[[ForgeApp sharedApp] viewController]];
+    [task success:nil];
 }
 
 #pragma mark - Ratings Flow

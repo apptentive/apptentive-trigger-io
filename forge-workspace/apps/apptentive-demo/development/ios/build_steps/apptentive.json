@@ -61,5 +61,12 @@
                 "framework": "UIKit.framework"
             }
         }
+    }, 
+    {
+        "do": {
+            "add_ios_system_framework": {
+                "framework": "Accelerate.framework"
+            }
+        }
     }
 ]

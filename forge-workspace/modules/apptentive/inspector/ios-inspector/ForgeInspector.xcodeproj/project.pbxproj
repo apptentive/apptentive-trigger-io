@@ -22,9 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		"2417df63-faff-48d4-8acd-209f631eb31fbuild" /* apptentive.bundle in Resources */ = {isa = PBXBuildFile; fileRef = "2417df63-faff-48d4-8acd-209f631eb31ffile" /* apptentive.bundle */; };
 		"3fa5b701-273c-4ec8-8846-5a5db0b5ea38build" /* System/Library/Frameworks/CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "3fa5b701-273c-4ec8-8846-5a5db0b5ea38file" /* System/Library/Frameworks/CoreTelephony.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		"51c5e605-f800-4b88-90d4-13d01c460acabuild" /* System/Library/Frameworks/QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "51c5e605-f800-4b88-90d4-13d01c460acafile" /* System/Library/Frameworks/QuartzCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		5870F79F183D953300FD003C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5870F79E183D953300FD003C /* Accelerate.framework */; };
+		5870F7A1183DA13F00FD003C /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5870F7A0183DA13F00FD003C /* ApptentiveResources.bundle */; };
 		B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826315C2A393006798D7 /* AssetsLibrary.framework */; };
 		B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B307826B15C2A44F006798D7 /* SystemConfiguration.framework */; };
 		B307826E15C2A47B006798D7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B307826D15C2A47B006798D7 /* assets */; };
@@ -86,6 +87,8 @@
 		"2417df63-faff-48d4-8acd-209f631eb31ffile" /* apptentive.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = apptentive.bundle; sourceTree = "<group>"; };
 		"3fa5b701-273c-4ec8-8846-5a5db0b5ea38file" /* System/Library/Frameworks/CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		"51c5e605-f800-4b88-90d4-13d01c460acafile" /* System/Library/Frameworks/QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5870F79E183D953300FD003C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		5870F7A0183DA13F00FD003C /* ApptentiveResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = ApptentiveResources.bundle; path = "/Users/pkamb/Library/Developer/Xcode/DerivedData/ForgeInspector-fplnjsvupivxtucrqjhzwhmfeinh/Build/Products/Release-iphoneos/ApptentiveResources.bundle"; sourceTree = "<absolute>"; };
 		B307826315C2A393006798D7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B307826B15C2A44F006798D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B307826D15C2A47B006798D7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5870F79F183D953300FD003C /* Accelerate.framework in Frameworks */,
 				B3F0CB92163AD60B005E099F /* libForgeModule.a in Frameworks */,
 				B307826C15C2A44F006798D7 /* SystemConfiguration.framework in Frameworks */,
 				B307826415C2A393006798D7 /* AssetsLibrary.framework in Frameworks */,
@@ -150,6 +154,7 @@
 		B3FC516C15C14B2A003574D9 = {
 			isa = PBXGroup;
 			children = (
+				5870F7A0183DA13F00FD003C /* ApptentiveResources.bundle */,
 				B3E5837A162714AD00BD59DD /* ForgeModule.xcodeproj */,
 				B3FC518115C14B2A003574D9 /* ForgeInspector */,
 				B3FC517A15C14B2A003574D9 /* Frameworks */,
@@ -168,6 +173,7 @@
 		B3FC517A15C14B2A003574D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5870F79E183D953300FD003C /* Accelerate.framework */,
 				B307826B15C2A44F006798D7 /* SystemConfiguration.framework */,
 				B307826315C2A393006798D7 /* AssetsLibrary.framework */,
 				B3FC519415C14B3C003574D9 /* ForgeCore.bundle */,
@@ -305,7 +311,7 @@
 				B33F8983171479080050FB45 /* ipad.png in Resources */,
 				B33F8984171479080050FB45 /* normal.png in Resources */,
 				B33F8985171479080050FB45 /* retina.png in Resources */,
-				"2417df63-faff-48d4-8acd-209f631eb31fbuild" /* apptentive.bundle in Resources */,
+				5870F7A1183DA13F00FD003C /* ApptentiveResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +330,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/usr/bin/env python";
-			shellScript = "#! /usr/bin/env python\n\nimport os\nimport json\nimport biplist\nimport shutil\n\n# Get module version number from module manifest\nmanifest_path = \"../../module/manifest.json\"\nmanifest_file = open(manifest_path)\nmanifest = json.load(manifest_file)\nmanifest_file.close();\nmodule_version = manifest[\"version\"]\n\n# Modify distribution Info.plist\nbundle_plist_path = \"build/apptentive.bundle/ApptentiveResources.bundle/Info.plist\"\nplist = biplist.readPlist(bundle_plist_path)\nplist_distribution_key = \"ATInfoDistributionKey\"\nplist[plist_distribution_key] = \"Trigger.io\"\nplist_distribution_version_key = \"ATInfoDistributionVersionKey\"\nplist[plist_distribution_version_key] = module_version\nbiplist.writePlist(plist, bundle_plist_path)\n\n# Generate build_steps.json file.\nbuild_steps_json = [\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreData.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreText.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreGraphics.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreTelephony.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"Foundation.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"QuartzCore.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"StoreKit.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"SystemConfiguration.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"UIKit.framework\"}}}\n]\n\nwith open(\"build_steps.json\", \"w\") as f:\n    json.dump(build_steps_json, f, indent=4)\n\n# Move to final directory structure\nshutil.move(\"build_steps.json\", \"build/\")\nshutil.move(\"build/apptentive.bundle\", \"build/bundles/apptentive.bundle\")\n\n# Copy to module directory for upload to Trigger.io\nif os.path.exists(\"../../module/ios/\"):\n    shutil.rmtree(\"../../module/ios/\")\nshutil.copytree(\"build/\", \"../../module/ios/\");\n\n\n";
+			shellScript = "#! /usr/bin/env python\n\nimport os\nimport json\nimport biplist\nimport shutil\n\n# Get module version number from module manifest\nmanifest_path = \"../../module/manifest.json\"\nmanifest_file = open(manifest_path)\nmanifest = json.load(manifest_file)\nmanifest_file.close();\nmodule_version = manifest[\"version\"]\n\n# Modify distribution Info.plist\nbundle_plist_path = \"build/apptentive.bundle/ApptentiveResources.bundle/Info.plist\"\nplist = biplist.readPlist(bundle_plist_path)\nplist_distribution_key = \"ATInfoDistributionKey\"\nplist[plist_distribution_key] = \"Trigger.io\"\nplist_distribution_version_key = \"ATInfoDistributionVersionKey\"\nplist[plist_distribution_version_key] = module_version\nbiplist.writePlist(plist, bundle_plist_path)\n\n# Generate build_steps.json file.\nbuild_steps_json = [\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreData.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreText.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreGraphics.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"CoreTelephony.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"Foundation.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"QuartzCore.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"StoreKit.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"SystemConfiguration.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"UIKit.framework\"}}},\n    {'do': { \"add_ios_system_framework\" : {\"framework\":\"Accelerate.framework\"}}}\n]\n\nwith open(\"build_steps.json\", \"w\") as f:\n    json.dump(build_steps_json, f, indent=4)\n\n# Move to final directory structure\nshutil.move(\"build_steps.json\", \"build/\")\nshutil.move(\"build/apptentive.bundle\", \"build/bundles/apptentive.bundle\")\n\n# Copy to module directory for upload to Trigger.io\nif os.path.exists(\"../../module/ios/\"):\n    shutil.rmtree(\"../../module/ios/\")\nshutil.copytree(\"build/\", \"../../module/ios/\");\n\n\n";
 		};
 		B3E9B87815C2EDC300590095 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;

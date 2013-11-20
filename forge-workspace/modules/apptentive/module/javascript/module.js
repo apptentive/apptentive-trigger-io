@@ -38,7 +38,6 @@ forge.apptentive = {
 		}, success, error);
 	},
 
-
 	// ************************************************************************************************************************************************
 	// Rating
 	// ************************************************************************************************************************************************
@@ -50,7 +49,6 @@ forge.apptentive = {
 		forge.internal.call('apptentive.logSignificantEvent', {}, success, error);
 	},
 
-
 	// ************************************************************************************************************************************************
 	// Message Center
 	// ************************************************************************************************************************************************
@@ -58,11 +56,23 @@ forge.apptentive = {
 	showMessageCenter: function (success, error) {
 		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
 	},
+	showMessageCenterWithCustomData: function (success, error, customData) {
+		forge.internal.call('apptentive.showMessageCenterWithCustomData', {customData: customData}, success, error);
+	},
 	getUnreadMessageCount: function (success, error) {
 		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
 	},
-		
-
+	
+	// ************************************************************************************************************************************************
+	// Engagement
+	// ************************************************************************************************************************************************
+	
+	engage: function (success, error, codePoint) {
+		forge.internal.call('apptentive.engage', {
+			codePoint: codePoint
+		}, success, error);
+	},
+	
 	// ************************************************************************************************************************************************
 	// Survey
 	// ************************************************************************************************************************************************
@@ -75,7 +85,6 @@ forge.apptentive = {
 		forge.internal.call('apptentive.showSurvey', {tags: tags}, success, error);
 	},
 
-
 	// ************************************************************************************************************************************************
 	// SDK Events
 	// ************************************************************************************************************************************************
@@ -87,7 +96,6 @@ forge.apptentive = {
 	addSurveyFinishedListener: function (listener) {
 		forge.internal.addEventListener("apptentive.surveyFinished", listener);
 	},
-
 
 	// ************************************************************************************************************************************************
 	// Debug only

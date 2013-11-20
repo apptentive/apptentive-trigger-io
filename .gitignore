@@ -26,3 +26,4 @@ forge-workspace/modules/apptentive/inspector/ios-inspector/build/*
 forge-workspace=modules/apptentive/.trigger/*
 forge-workspace/apps/apptentive-demo/development/*
 forge-workspace/apps/apptentive-demo/.template/*
+forge-workspace/apps/apptentive-demo/development/ios/*
