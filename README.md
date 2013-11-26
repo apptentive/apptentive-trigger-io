@@ -84,8 +84,8 @@ forge.apptentive.showMessageCenterWithCustomData(
     },
 	{
 		'customDataKey': 'customDataValue',
-		'module': 'trigger.io
-	} 
+		'module': 'trigger.io'
+	}
 );
 ```
 
