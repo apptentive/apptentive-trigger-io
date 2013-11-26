@@ -162,6 +162,20 @@ $(function () {
 		);
 	});
 	
+	$('button.showMessageCenterWithCustomData').click(function () {			
+		forge.apptentive.showMessageCenterWithCustomData(
+			function() {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			{
+				'sentBy': 'trigger.io',
+				'hasCustomData': true
+			}
+		);	
+	});
+	
 	$('button.getUnreadMessageCount').click(function () {
 		forge.apptentive.getUnreadMessageCount(
 			function(count) {
@@ -179,13 +193,10 @@ $(function () {
 	// ************************************************************************************************************************************************
 	
 	$('button.engageUpgradeMessage').click(function () {	
-		forge.logging.error("touch");	
 		forge.apptentive.engage(
 			function() {
-				forge.logging.error("win");
 			},
 			function(error) {
-				forge.logging.error("error");
 				forge.logging.error(error.message);
 			},
 			'app.launch'
