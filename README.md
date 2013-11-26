@@ -74,6 +74,21 @@ forge.apptentive.showMessageCenter(
 
 The first time you present the Message Center, the user will be presented with an email feedback form. Thereafter, they will be taken to the Message Center. If you reply to your customers' feedback via the Apptentive website, the replies will be pushed to their in-app Message Center.
 
+Message Center can also be presented with custom data:
+
+```javascript
+forge.apptentive.showMessageCenterWithCustomData(
+	{},
+    function(error) {
+        forge.logging.info("Error: " + error.message);
+    },
+	{
+		'customDataKey': 'customDataValue',
+		'module': 'trigger.io
+	} 
+);
+```
+
 Use `getUnreadMessageCount` to check for messages that the user has not yet read.
 
 ```javascript
@@ -207,6 +222,25 @@ forge.apptentive.addSurveySentListener(
     }
 );
 ```
+
+#### Upgrade Messages
+
+Apptentive's Upgrade Message feature allows you to display a brief message when your app has been updated. You can speak directly to your users and let them know what has changed in the release.
+
+To present an upgrade message, engage the code point `app.launch` when your application becomes active:
+
+```javascript
+forge.apptentive.engage(
+	function() {
+	},
+	function(error) {
+		forge.logging.error(error.message);
+	},
+	'app.launch'
+);
+```
+
+Upgrade Messages are created and configured online via your Apptentive dashboard.
 
 #### User Info
 
