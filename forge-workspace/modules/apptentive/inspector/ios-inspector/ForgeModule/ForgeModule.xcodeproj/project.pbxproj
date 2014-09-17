@@ -74,8 +74,6 @@
 /* Begin PBXFileReference section */
 		58A7A8C417B31E6800C58C97 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = Apptentive/ApptentiveConnect/ApptentiveConnect.xcodeproj; sourceTree = "<group>"; };
 		58A7A8D117B31EF100C58C97 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATConnect.h; path = Apptentive/ApptentiveConnect/source/ATConnect.h; sourceTree = "<group>"; };
-		58A7A8D217B31EFA00C58C97 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATAppRatingFlow.h; path = "Apptentive/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
-		58A7A8D317B31F1500C58C97 /* ATSurveys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATSurveys.h; path = Apptentive/ApptentiveConnect/source/Surveys/ATSurveys.h; sourceTree = "<group>"; };
 		B31B6D4E15C13D5200854074 /* libForgeModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libForgeModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31B6D5115C13D5200854074 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B31B6D6D15C1467100854074 /* apptentive.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = apptentive.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,8 +134,6 @@
 				B3CC61F11716ECB500A1A8EF /* apptentive_EventListener.h */,
 				B3CC61F31716ECBB00A1A8EF /* apptentive_EventListener.m */,
 				58A7A8D117B31EF100C58C97 /* ATConnect.h */,
-				58A7A8D317B31F1500C58C97 /* ATSurveys.h */,
-				58A7A8D217B31EFA00C58C97 /* ATAppRatingFlow.h */,
 				B31B6D5015C13D5200854074 /* Frameworks */,
 				B31B6D4F15C13D5200854074 /* Products */,
 			);
