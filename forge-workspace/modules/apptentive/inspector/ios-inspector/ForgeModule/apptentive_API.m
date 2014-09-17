@@ -78,41 +78,4 @@
     [task success:nil];
 }
 
-#pragma mark - Ratings Flow
-
-+ (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task
-{
-    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:[[ForgeApp sharedApp] viewController]];
-    [task success:nil];
-}
-
-+ (void)logSignificantEvent:(ForgeTask *)task
-{
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    [task success:nil];
-}
-
-#pragma mark - Surveys
-
-+ (void)isSurveyAvailable:(ForgeTask *)task tags:(NSArray *)tags
-{
-    BOOL isSurveyAvailable;
-    if (tags && tags.count > 0) {
-        isSurveyAvailable = [ATSurveys hasSurveyAvailableWithTags:[NSSet setWithArray:tags]];
-    } else {
-        isSurveyAvailable = [ATSurveys hasSurveyAvailableWithNoTags];
-    }
-    [task success:[NSNumber numberWithBool:isSurveyAvailable]];
-}
-
-+ (void)showSurvey:(ForgeTask *)task tags:(NSArray *)tags
-{
-    if (tags && tags.count > 0) {
-        [ATSurveys presentSurveyControllerWithTags:[NSSet setWithArray:tags] fromViewController:[[ForgeApp sharedApp] viewController]];
-    } else {
-        [ATSurveys presentSurveyControllerWithNoTagsFromViewController:[[ForgeApp sharedApp] viewController]];
-    }
-    [task success:nil];
-}
-
 @end
