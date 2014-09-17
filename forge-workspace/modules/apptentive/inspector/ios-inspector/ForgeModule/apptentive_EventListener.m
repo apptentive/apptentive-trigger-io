@@ -15,11 +15,11 @@
 {
     // Apptentive
     NSString *apiKey = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"API_Key"];
-    [[ATConnect sharedConnection] setApiKey:apiKey];
+    [ATConnect sharedConnection].apiKey = apiKey;
     
     // Rating Flow
     NSString *appId = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"App_ID"];
-    [[ATAppRatingFlow sharedRatingFlow] setAppID:appId];
+    [ATConnect sharedConnection].appID = appId;
     
     // Message Center
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unreadMessageCountChanged:) name:ATMessageCenterUnreadCountChangedNotification object:nil];
