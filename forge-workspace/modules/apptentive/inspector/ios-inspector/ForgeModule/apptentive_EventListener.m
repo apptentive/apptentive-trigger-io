@@ -8,8 +8,6 @@
 
 #import "apptentive_EventListener.h"
 #import "ATConnect.h"
-#import "ATAppRatingFlow.h"
-#import "ATSurveys.h"
 
 @implementation apptentive_EventListener
 

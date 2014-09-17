@@ -8,8 +8,6 @@
 
 #import "apptentive_API.h"
 #import "ATConnect.h"
-#import "ATAppRatingFlow.h"
-#import "ATSurveys.h"
 
 @implementation apptentive_API
 
