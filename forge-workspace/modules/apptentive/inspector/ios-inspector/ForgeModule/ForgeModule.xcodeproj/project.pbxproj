@@ -119,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				58A7A8CB17B31E6900C58C97 /* libApptentiveConnect.a */,
-				58A7A8CD17B31E6900C58C97 /* ApptentiveConnectTests.octest */,
+				58A7A8CD17B31E6900C58C97 /* ApptentiveConnectTests.xctest */,
 				58A7A8CF17B31E6900C58C97 /* ApptentiveResources.bundle */,
 			);
 			name = Products;
@@ -243,10 +243,10 @@
 			remoteRef = 58A7A8CA17B31E6900C58C97 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		58A7A8CD17B31E6900C58C97 /* ApptentiveConnectTests.octest */ = {
+		58A7A8CD17B31E6900C58C97 /* ApptentiveConnectTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = ApptentiveConnectTests.octest;
+			path = ApptentiveConnectTests.xctest;
 			remoteRef = 58A7A8CC17B31E6900C58C97 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
