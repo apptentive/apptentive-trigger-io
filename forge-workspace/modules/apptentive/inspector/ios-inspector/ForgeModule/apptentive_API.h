@@ -32,14 +32,4 @@
 
 + (void)engage:(ForgeTask *)task codePoint:(NSString *)codePoint;
 
-#pragma mark - Ratings Flow
-
-+ (void)showRatingFlowIfConditionsAreMet:(ForgeTask *)task;
-+ (void)logSignificantEvent:(ForgeTask *)task;
-
-#pragma mark - Surveys
-
-+ (void)isSurveyAvailable:(ForgeTask *)task tags:(NSArray *)tags;
-+ (void)showSurvey:(ForgeTask *)task tags:(NSArray *)tags;
-
 @end
