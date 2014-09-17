@@ -24,6 +24,7 @@ LOG = logging.getLogger(__name__)
 
 SIMULATOR_IN_42 = "/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone Simulator.app/"
 SIMULATOR_IN_43 = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone Simulator.app"
+SIMULATOR_IN_60 = "/Applications/Xcode.app/Contents/Developer/Applications/iOS Simulator.app" # TODO Pending final release
 
 class IOSError(lib.BASE_EXCEPTION):
 	pass
@@ -166,7 +167,7 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 		else:
 			LOG.info('No Provisioned Devices, profile is Appstore')
 	
-	def _sign_app(self, build, provisioning_profile, entitlements_file, certificate=None, certificate_path=None, certificate_password=None):
+	def _sign_app(self, build, provisioning_profile, entitlements_file, certificate=None, certificate_path=None, certificate_password=None, ident=None):
 		app_folder_name = self._locate_ios_app(error_message="Couldn't find iOS app in order to sign it")
 		path_to_app = path.abspath(path.join(self.path_to_ios_build, 'ios', app_folder_name))
 
@@ -347,7 +348,8 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 			# Local
 			codesign = self._check_for_codesign()
 			resource_rules = path.abspath(path.join(path_to_app, 'ResourceRules.plist'))
-			run_shell(codesign, '--force', '--preserve-metadata',
+			run_shell(codesign, '--force',
+					'--identifier', ident,
 					'--entitlements', entitlements_file,
 					'--sign', certificate,
 					'--resource-rules={0}'.format(resource_rules),
@@ -385,7 +387,7 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 		:param provisioning_profile: Absolute path to the provisioning profile to embed in the ipa
 		:param output_path_for_ipa: Path to save the created IPA
 		:param certificate_to_sign_with: (Optional) The name of the certificate to sign the ipa with
-		:param relative_path_to_itunes_artwork: (Optional) A path to a 512x512 png picture for the App view in iTunes.
+		:param relative_path_to_itunes_artwork: (Deprecated) A path to a 512x512 png picture for the App view in iTunes.
 			This should be relative to the location of the user assets.
 		"""
 
@@ -435,13 +437,11 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 					entitlements_file=temp_file_path,
 					certificate_path=certificate_path,
 					certificate_password=certificate_password,
+					ident=_generate_package_name(build)
 				)
 			
 			shutil.copytree(path_to_app, path.join(path_to_payload, path.basename(path_to_app)))
 			
-			if path_to_itunes_artwork:
-				shutil.copy2(path_to_itunes_artwork, path.join(temp_dir, 'iTunesArtwork'))
-
 			with ZipFile(output_path_for_ipa, 'w', compression=ZIP_DEFLATED) as out_ipa:
 				for root, dirs, files in os.walk(temp_dir):
 					for file in files:
@@ -463,10 +463,6 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 					"kind": "display-image",
 					"needs-shine": True,
 					"url": "http://www.example.com/image.57x57.png",
-				},{
-					"kind": "full-size-image",
-					"needs-shine": True,
-					"url": "http://www.example.com/image.512x512.jpg",
 				}],
 				"metadata": {
 					"bundle-identifier": _generate_package_name(build),
@@ -510,7 +506,10 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 		
 		LOG.debug('Trying to run app %s' % path_to_app)
 
-		if path.exists(SIMULATOR_IN_43):
+		if path.exists(SIMULATOR_IN_60):
+			LOG.debug("Detected XCode version 6 or newer")
+			ios_sim_binary = "ios-sim-xc4.3"
+		elif path.exists(SIMULATOR_IN_43):
 			LOG.debug("Detected XCode version 4.3 or newer")
 			ios_sim_binary = "ios-sim-xc4.3"
 		elif path.exists(SIMULATOR_IN_42):
@@ -537,11 +536,22 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 			family = build.tool_config.get('ios.simulatorfamily')
 			if family is not None:
 				ios_sim_cmd = ios_sim_cmd + ['--family', family]
+			variant = build.tool_config.get('ios.simulatorvariant', 'tall')
+			if variant == "retina":
+				ios_sim_cmd = ios_sim_cmd + ['--retina']
+			elif variant == "tall":
+				ios_sim_cmd = ios_sim_cmd + ['--retina', '--tall']
+			elif variant == "64bit":
+				ios_sim_cmd = ios_sim_cmd + ['--retina', '--tall', '--64bit']
+			devicetypeid = build.tool_config.get('ios.devicetypeid')
+			if devicetypeid is not None: # Xcode 6+
+				ios_sim_cmd = ios_sim_cmd + ['--devicetypeid', devicetypeid]
 
 			LOG.info('Starting simulator')
 			process_group.spawn(
 				ios_sim_cmd,
-				fail_if=could_not_start_simulator
+				fail_if=could_not_start_simulator,
+				command_log_level=logging.INFO
 			)
 
 			LOG.info('Showing log output:')
@@ -582,13 +592,14 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 					provisioning_profile=provisioning_profile,
 					certificate=certificate,
 					entitlements_file=temp_file_path,
+					ident=_generate_package_name(build)
 				)
 			
-			fruitstrap = [ensure_lib_available(build, 'fruitstrap'), '-d', '-u', '-t', '10', '-b', path_to_app]
+			ios_deploy = [ensure_lib_available(build, 'ios-deploy'), '-d', '-u', '-t', '10', '-b', path_to_app]
 			if device and device.lower() != 'device':
-				# pacific device given
-				fruitstrap.append('-i')
-				fruitstrap.append(device)
+				# specific device given
+				ios_deploy.append('-i')
+				ios_deploy.append(device)
 				LOG.info('Installing app on device {device}: is it connected?'.format(device=device))
 			else:
 				LOG.info('Installing app on device: is it connected?')
@@ -596,12 +607,9 @@ See "Preparing your apps for app stores" in our docs: [https://trigger.io/docs/c
 			def filter_and_combine(logline):
 				return logline.rstrip()
 
-			ensure_lib_available(build, 'lldb_framework.zip', extract=True)
-
 			env = deepcopy(os.environ)
-			env['PATH'] = os.path.dirname(ensure_lib_available(build, 'lldb'))+":"+env['PATH']
 
-			run_shell(*fruitstrap, fail_silently=False, command_log_level=logging.INFO, filter=filter_and_combine, check_for_interrupt=True, env=env)
+			run_shell(*ios_deploy, fail_silently=False, command_log_level=logging.INFO, filter=filter_and_combine, check_for_interrupt=True, env=env)
 		elif sys.platform.startswith('win'):
 			with temp_file() as ipa_path:
 				self.create_ipa_from_app(
@@ -709,10 +717,7 @@ def package_ios(build):
 	certificate_password = build.tool_config.get('ios.profile.developer_certificate_password', '')
 
 	runner = IOSRunner(path.abspath('development'))
-	try:
-		relative_path_to_itunes_artwork = build.config['modules']['icons']['config']['ios']['512']
-	except KeyError:
-		relative_path_to_itunes_artwork = None
+	relative_path_to_itunes_artwork = None
 
 	file_name = "{name}-{time}".format(
 		name=re.sub("[^a-zA-Z0-9]", "", build.config["name"].lower()),

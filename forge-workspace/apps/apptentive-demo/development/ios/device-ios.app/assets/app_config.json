@@ -1,6 +1,6 @@
 {
     "author": "peter@apptentive.com", 
-    "config_hash": "c97ff40277c1f79a3fcf5f52a1d5c4fd98f7a410", 
+    "config_hash": "eab5b47d4a775e69e72b2e03f3136bfc82c64921", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -36,7 +36,7 @@
                 "App_ID": "294047845", 
                 "Debug_Mode": true
             }, 
-            "version": "1.2.3"
+            "version": "1.2.6"
         }, 
         "contact": {
             "version": "2.0"

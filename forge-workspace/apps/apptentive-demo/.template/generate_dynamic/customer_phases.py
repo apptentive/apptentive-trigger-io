@@ -403,7 +403,8 @@ def include_config(debug=False):
 			}}},
 			{'when': {'platform_is': 'android'}, 'do': {'write_config': {
 				"filename": 'android/ForgeInspector/assets/forge/app_config.js',
-				"content": "window.forge = {}; window.forge.config = ${config};"
+				"mapping_file": 'android/ForgeInspector/assets/module_mapping.json',
+				"content": "window.forge = {}; window.forge.config = ${config}; window.forge.module_mapping = ${module_mapping};"
 			}}},
 			{'when': {'platform_is': 'ios'}, 'do': {'write_config': {
 				"filename": 'ios/app/ForgeInspector/assets/app_config.json',
@@ -411,6 +412,7 @@ def include_config(debug=False):
 			}}},
 			{'when': {'platform_is': 'ios'}, 'do': {'write_config': {
 				"filename": 'ios/app/ForgeInspector/assets/forge/app_config.js',
+				"mapping_file": 'ios/app/ForgeInspector/assets/module_mapping.json',
 				"content": "window.forge = {}; window.forge.config = ${config};"
 			}}},
 		]
@@ -422,7 +424,8 @@ def include_config(debug=False):
 			}}},
 			{'when': {'platform_is': 'android'}, 'do': {'write_config': {
 				"filename": 'development/android/assets/forge/app_config.js',
-				"content": "window.forge = {}; window.forge.config = ${config};"
+				"mapping_file": 'development/android/assets/module_mapping.json',
+				"content": "window.forge = {}; window.forge.config = ${config}; window.forge.module_mapping = ${module_mapping};"
 			}}},
 			{'when': {'platform_is': 'ios'}, 'do': {'write_config': {
 				"filename": 'development/ios/device-ios.app/assets/app_config.json',
@@ -434,12 +437,15 @@ def include_config(debug=False):
 			}}},
 			{'when': {'platform_is': 'ios'}, 'do': {'write_config': {
 				"filename": 'development/ios/device-ios.app/assets/forge/app_config.js',
-				"content": "window.forge = {}; window.forge.config = ${config};"
+				"mapping_file": 'development/ios/device-ios.app/assets/module_mapping.json',
+				"content": "window.forge = {}; window.forge.config = ${config}; window.forge.module_mapping = ${module_mapping};"
 			}}},
 			{'when': {'platform_is': 'ios'}, 'do': {'write_config': {
 				"filename": 'development/ios/simulator-ios.app/assets/forge/app_config.js',
-				"content": "window.forge = {}; window.forge.config = ${config};"
+				"mapping_file": 'development/ios/simulator-ios.app/assets/module_mapping.json',
+				"content": "window.forge = {}; window.forge.config = ${config}; window.forge.module_mapping = ${module_mapping};"
 			}}},
+			
 			{'when': {'platform_is': 'osx'}, 'do': {'write_config': {
 				"filename": 'development/osx/Forge.app/Contents/Resources/assets/app_config.json',
 				"content": "${config}"
@@ -567,6 +573,16 @@ def package(build_type_dir):
 		{'when': {'platform_is': 'web'}, 'do': {'package_web': ()}},
 		{'when': {'platform_is': 'wp'}, 'do': {'package_wp': ()}},
 		{'when': {'platform_is': 'chrome'}, 'do': {'package_chrome': ()}},
+	]
+
+def serve(build_type_dir):
+	return [
+		{'when': {'platform_is': 'android'}, 'do': {'serve_android': ()}},
+		{'when': {'platform_is': 'ios'}, 'do': {'serve_ios': ()}},
+		{'when': {'platform_is': 'osx'}, 'do': {'serve_osx': ()}},
+		{'when': {'platform_is': 'web'}, 'do': {'serve_web': ()}},
+		{'when': {'platform_is': 'wp'}, 'do': {'serve_wp': ()}},
+		{'when': {'platform_is': 'chrome'}, 'do': {'serve_chrome': ()}},
 	]
 
 def make_installers():

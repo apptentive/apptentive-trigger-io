@@ -20,6 +20,7 @@ import ios_tasks
 import safari_tasks
 import ie_tasks
 import osx_tasks
+import serve_tasks
 from module_dynamic import utils
 import hashlib
 import pystache
@@ -332,14 +333,24 @@ def find_and_replace(build, *files, **kwargs):
 			_replace_in_file(build, _file, find, replace)
 
 @task
-def write_config(build, filename, content):
+def write_config(build, filename, content, mapping_file=None):
 	# We hang various things we shouldn't off config, this is pretty horrible
 	clean_config = copy(build.config)
 	if 'json' in clean_config:
 		clean_config.pop('json')
 	if 'android_sdk_dir' in clean_config:
 		clean_config.pop('android_sdk_dir')
-	content = utils.render_string({'config': json.dumps(clean_config, indent=4, sort_keys=True)}, content)
+
+	if mapping_file is None:
+		module_mapping = {}
+	else:
+		with open(mapping_file) as mapping_fileobj:
+			module_mapping = json.load(mapping_fileobj)
+
+	content = utils.render_string({
+			'config': json.dumps(clean_config, indent=4, sort_keys=True),
+			'module_mapping': json.dumps(module_mapping, indent=4, sort_keys=True)
+		}, content)
 
 	with open(filename, 'w') as fileobj:
 		fileobj.write(content)

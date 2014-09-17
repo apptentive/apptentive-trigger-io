@@ -7,6 +7,7 @@ import platform
 import sys
 import os
 import tempfile
+import json
 
 from module_dynamic.lib import BASE_EXCEPTION
 import migrate_tasks
@@ -86,6 +87,7 @@ def run_app(generate_module, build_to_run):
 		raise BASE_EXCEPTION("Expected to run exactly one platform at a time")
 
 	target = list(build_to_run.enabled_platforms)[0]
+	_disable_live(build_to_run, target)
 	if target == 'android':
 		interactive = build_to_run.tool_config.get('general.interactive', True)
 		sdk = build_to_run.tool_config.get('android.sdk')
@@ -103,7 +105,6 @@ def run_app(generate_module, build_to_run):
 		)
 	elif target == 'ios':
 		device = build_to_run.tool_config.get('ios.device')
-
 		build_to_run.add_steps(
 			generate_module.customer_phases.run_ios_phase(device)
 		)
@@ -131,20 +132,102 @@ def run_app(generate_module, build_to_run):
 			generate_module.customer_phases.run_chrome_phase()
 		)
 
-	
 	log_build(build_to_run, "run")
 	build_to_run.run()
+
 
 def package_app(generate_module, build_to_run):
 
 	if len(build_to_run.enabled_platforms) != 1:
 		raise BASE_EXCEPTION("Expected to package exactly one platform at a time")
 
+	target = list(build_to_run.enabled_platforms)[0]
+	_disable_live(build_to_run, target)
+
 	build_to_run.add_steps(
 		generate_module.customer_phases.package(build_to_run.output_dir)
 	)
 	log_build(build_to_run, "package")
 	build_to_run.run()
+
+
+def _disable_live(build, target):
+
+	def _disable_for_target(build, dest):	
+		app_config = os.path.join(dest, "app_config.json")
+		with open(app_config) as f:
+			config = json.load(f)
+			if "core" in config and "general" in config["core"] and "live" in config["core"]["general"]:
+				del config["core"]["general"]["live"]
+				with open(app_config, "w") as f:
+					json.dump(config, f, indent=4, sort_keys=True)
+
+	if target == 'ios':
+		_disable_for_target(build, os.path.join("development", "ios", "simulator-ios.app", "assets"))
+		_disable_for_target(build, os.path.join("development", "ios", "device-ios.app", "assets"))
+	elif target == 'android':
+		_disable_for_target(build, os.path.join("development", "android", "assets"))
+
+
+def serve_app(generate_module, build_to_run):
+
+	if len(build_to_run.enabled_platforms) != 1:
+		raise BASE_EXCEPTION("Expected to serve exactly one platform at a time")
+
+	build_to_run.add_steps(
+		generate_module.customer_phases.serve(build_to_run.output_dir)
+	)
+
+	target = list(build_to_run.enabled_platforms)[0]
+	if target == 'android':
+		interactive = build_to_run.tool_config.get('general.interactive', True)
+		sdk = build_to_run.tool_config.get('android.sdk')
+		device = build_to_run.tool_config.get('android.device')
+		purge = build_to_run.tool_config.get('android.purge')
+		build_to_run.add_steps(
+			generate_module.customer_phases.run_android_phase(
+				build_to_run.output_dir,
+				sdk=sdk,
+				device=device,
+				interactive=interactive,
+				purge=purge,
+			)
+		)
+	elif target == 'ios':
+		device = build_to_run.tool_config.get('ios.device')
+		build_to_run.add_steps(
+			generate_module.customer_phases.run_ios_phase(device)
+		)
+	elif target == 'osx':
+		build_to_run.add_steps(
+			generate_module.customer_phases.run_osx_phase()
+		)
+	elif target == 'firefox':
+		build_to_run.add_steps(
+			generate_module.customer_phases.run_firefox_phase(build_to_run.output_dir)
+		)
+	elif target == 'web':
+		build_to_run.add_steps(
+			generate_module.customer_phases.run_web_phase()
+		)
+	elif target == 'wp':
+		device = build_to_run.tool_config.get('wp.device')
+
+		build_to_run.add_steps(
+			generate_module.customer_phases.run_wp_phase(device)
+		)
+	elif target == 'chrome':
+		build_to_run.add_steps(
+			generate_module.customer_phases.run_chrome_phase()
+		)
+
+	log_build(build_to_run, "serve")
+	build_to_run.run()
+
+	# linux requires manual app startup for iOS so we can't exit yet
+	if target == 'ios' and sys.platform.startswith('linux'):
+		import time
+		time.sleep(3600)
 
 def add_check_settings_steps(generate_module, build_to_run):
 	"""
