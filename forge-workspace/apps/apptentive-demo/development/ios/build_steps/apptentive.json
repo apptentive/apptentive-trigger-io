@@ -68,5 +68,12 @@
                 "framework": "Accelerate.framework"
             }
         }
+    },
+    {
+        "do": {
+            "add_ios_system_framework": {
+                "framework": "AssetsLibrary.framework"
+            }
+        }
     }
 ]
