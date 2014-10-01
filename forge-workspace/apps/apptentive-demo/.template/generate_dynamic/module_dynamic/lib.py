@@ -425,7 +425,15 @@ def get_or_ask_for_local_config(build, required_info, question_title):
 
 		answers = response['data']
 		known_info.update(answers)
-		set_dotted_attributes(build, answers)
+		
+		# don't store sensitive data permanently
+		sensitive_data = response.get('sensitive_data', {})
+		for k, v in sensitive_data.items():
+			if v:
+				del answers[k]
+
+		if answers:
+			set_dotted_attributes(build, answers)
 
 	return known_info
 

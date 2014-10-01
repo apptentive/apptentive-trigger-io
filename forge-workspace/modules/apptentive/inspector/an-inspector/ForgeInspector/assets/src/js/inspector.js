@@ -1,7 +1,7 @@
 forge.inspector = {
 	getFixture: function (module, file) {
-		var location = window.location.origin + window.location.pathname;
-		var url = decodeURI(location.substring(0, location.length-10));
+		var location = window.location.href;
+		var url = decodeURI(location.substring(0, location.length-(10 + window.location.search.length + window.location.hash.length)));
 		url = url + 'fixtures/' + module + (file.substring(0, 1) == '/' ? '' : '/') + file;
 		return {
 			uri: url

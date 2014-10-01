@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2013, Apptentive, Inc. All Rights Reserved.
+  ~ Copyright (c) 2014, Apptentive, Inc. All Rights Reserved.
   ~ Please refer to the LICENSE file for the terms and conditions
   ~ under which redistribution and use of this file is permitted.
   -->
@@ -9,7 +9,35 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp">
-    <include layout="@layout/apptentive_message_center_email_validation_content"/>
+            android:paddingLeft="@dimen/apptentive_dialog_side_padding"
+            android:paddingRight="@dimen/apptentive_dialog_side_padding">
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:padding="16dp"
+                  android:background="@drawable/apptentive_dialog_background">
+        <TextView android:id="@+id/title"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="16dp"
+                  style="@style/ApptentiveInteractionDialogTitle"
+                  android:text="@string/apptentive_dialog_email_validation_failed_title"/>
+        <TextView android:id="@+id/body"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="24dp"
+                  style="@style/ApptentiveInteractionDialogBody"
+                  android:text="@string/apptentive_dialog_email_validation_failed_body"/>
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:orientation="horizontal">
+            <Button android:id="@+id/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    style="@style/ApptentiveInteractionPositiveButton"
+                    android:minEms="6"
+                    android:text="@string/apptentive_ok"/>
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

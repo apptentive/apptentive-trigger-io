@@ -335,6 +335,7 @@ def run_shell(*args, **kw):
 		runner()
 
 	if state.error:
+		LOG.debug('Failed to run: %s' % subprocess.list2cmdline(args))
 		raise state.error
 
 	if state.proc.wait() != 0:

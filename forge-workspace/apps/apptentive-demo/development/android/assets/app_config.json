@@ -1,9 +1,10 @@
 {
     "author": "peter@apptentive.com", 
-    "config_hash": "c97ff40277c1f79a3fcf5f52a1d5c4fd98f7a410", 
+    "config_hash": "6263891e62c8872235aacde429e1272c197ab5d4", 
     "config_version": "4", 
     "core": {
         "android": {
+            "minimum_version": "7", 
             "package_name": "io.trigger.forge62a29794c26911e2b36c12313d00dc45"
         }, 
         "firefox": {
@@ -32,11 +33,11 @@
     "modules": {
         "apptentive": {
             "config": {
-                "API_Key": "c28cf4f1709260fcd0cf8f84c375a3eabbd97ccf0b6cc88bee80e94371dffddc", 
+                "API_Key": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6", 
                 "App_ID": "294047845", 
                 "Debug_Mode": true
             }, 
-            "version": "1.2.3"
+            "version": "0.0.20"
         }, 
         "contact": {
             "version": "2.0"
@@ -65,7 +66,7 @@
         }
     }, 
     "name": "Apptentive Demo", 
-    "platform_version": "v2.0.3", 
+    "platform_version": "v2.2.3", 
     "trigger_domain": "https://trigger.io", 
     "uuid": "62a29794c26911e2b36c12313d00dc45", 
     "version": "0.1"

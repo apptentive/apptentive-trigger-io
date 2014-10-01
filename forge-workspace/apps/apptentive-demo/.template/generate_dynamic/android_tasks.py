@@ -14,9 +14,10 @@ import sys
 import tempfile
 import time
 import zipfile
+import errno
 
 from module_dynamic import lib
-from module_dynamic.lib import temp_file, ProgressBar
+from module_dynamic.lib import temp_file
 from lib import task, ensure_lib_available
 from module_dynamic.utils import run_shell, ShellError
 
@@ -27,7 +28,7 @@ class AndroidError(lib.BASE_EXCEPTION):
 
 # TODO: put jdk/jre info in here also, as they're often used together?
 # tuple type for passing around information about where android tools are located
-PathInfo = namedtuple('PathInfo', 'android adb aapt sdk')
+PathInfo = namedtuple('PathInfo', 'android adb aapt zipalign sdk')
 
 def _find_aapt(sdk):
 	"""aapt has moved in SDK v22 - look in possible locations"""
@@ -46,17 +47,38 @@ def _find_aapt(sdk):
 			"including platform tools.\n\n"
 			"Looked in: {locations}".format(locations="\n".join(locations)))
 
+def _find_zipalign(sdk):
+	"""zipalign has moved in SDK v23 - look in possible locations"""
+	locations = (
+		path.join(sdk, 'tools', 'zipalign'),
+		path.join(sdk, 'build-tools', '*', 'zipalign'),
+		path.join(sdk, 'tools', 'zipalign.exe'),
+		path.join(sdk, 'build-tools', '*', 'zipalign.exe'),
+	)
+	for location in locations:
+		if glob(location):
+			return glob(location)[-1]
+	else:
+		raise AndroidError("Couldn't find 'zipalign' tool! "
+			"You may need to update your Android SDK, "
+			"including build tools.\n\n"
+			"Looked in: {locations}".format(locations="\n".join(locations)))
+
+def _android_path_from_sdk(sdk):
+	return path.abspath(path.join(
+			sdk,
+			'tools',
+			'android.bat' if sys.platform.startswith('win') else 'android'
+		))
+
 def _create_path_info_from_sdk(sdk):
 	"""Helper for constructing a PathInfo object from just the android SDK
 	location"""
 	return PathInfo(
-		android=path.abspath(path.join(
-			sdk,
-			'tools',
-			'android.bat' if sys.platform.startswith('win') else 'android'
-		)),
+		android=_android_path_from_sdk(sdk),
 		adb=path.abspath(path.join(sdk, 'platform-tools', 'adb')),
 		aapt=_find_aapt(sdk),
+		zipalign=_find_zipalign(sdk),
 		sdk=sdk,
 	)
 
@@ -114,12 +136,16 @@ def _restart_adb(path_info):
 	run_detached([path_info.adb, 'start-server'], wait=True)
 
 def _android_sdk_url():
+	"""
+		These files contain the sdk folder from the Android 4.4 SDK download,
+		i.e. everything except eclipse, which includes the 4.4 platform and system image
+	"""
 	if sys.platform.startswith("win"):
-		return "https://trigger.io/redirect/android/windows"
+		return "https://s3.amazonaws.com/trigger-android-sdk/android-sdk-windows.zip"
 	elif sys.platform.startswith("darwin"):
-		return "https://trigger.io/redirect/android/macosx"
+		return "https://s3.amazonaws.com/trigger-android-sdk/android-sdk-macosx.zip"
 	elif sys.platform.startswith("linux"):
-		return "https://trigger.io/redirect/android/linux"
+		return "https://s3.amazonaws.com/trigger-android-sdk/android-sdk-linux.zip"
 
 def _download_sdk_for_windows(temp_d):
 	archive_path = path.join(temp_d, "sdk.zip")
@@ -134,7 +160,7 @@ def _download_sdk_for_windows(temp_d):
 
 	# TODO: should this really be hardcoded to C:\android-sdk-windows?
 	# wasn't sure if we were allowing user to specify location..
-	return _create_path_info_from_sdk("C:\\android-sdk-windows")
+	return "C:\\android-sdk-windows"
 
 def _download_sdk_for_mac(temp_d):
 	archive_path = path.join(temp_d, "sdk.zip")
@@ -147,10 +173,10 @@ def _download_sdk_for_mac(temp_d):
 	LOG.debug("unzip output")
 	LOG.debug(output)
 
-	return _create_path_info_from_sdk("/Applications/android-sdk-macosx/")
+	return "/Applications/android-sdk-macosx/"
 
 def _download_sdk_for_linux(temp_d):
-	archive_path = path.join(temp_d, "sdk.tgz")
+	archive_path = path.join(temp_d, "sdk.zip")
 	lib.download_with_progress_bar('Downloading Android SDK',
 			_android_sdk_url(), archive_path)
 
@@ -158,32 +184,30 @@ def _download_sdk_for_linux(temp_d):
 	if not path.isdir(path.expanduser("~/.forge")):
 		os.mkdir(path.expanduser("~/.forge"))
 
-	zip_process = lib.PopenWithoutNewConsole(["tar", "zxf", archive_path, "-C", path.expanduser("~/.forge")], stdout=PIPE, stderr=STDOUT)
+	zip_process = lib.PopenWithoutNewConsole(["unzip", archive_path, '-d', path.expanduser("~/.forge")], stdout=PIPE, stderr=STDOUT)
 	output = zip_process.communicate()[0]
 	LOG.debug("unzip output")
 	LOG.debug(output)
 
-	return _create_path_info_from_sdk(path.expanduser("~/.forge/android-sdk-linux/"))
+	return path.expanduser("~/.forge/android-sdk-linux/")
 
 
 def _install_sdk_automatically(build):
 	# Attempt download
 	temp_d = tempfile.mkdtemp()
 	try:
-		LOG.info('Downloading Android SDK (about 30MB, may take some time)')
+		LOG.info('Downloading Android SDK (about 300MB, may take some time)')
 		if sys.platform.startswith('win'):
-			path_info = _download_sdk_for_windows(temp_d)
+			sdk_path = _download_sdk_for_windows(temp_d)
 		elif sys.platform.startswith('darwin'):
-			path_info = _download_sdk_for_mac(temp_d)
+			sdk_path = _download_sdk_for_mac(temp_d)
 		elif sys.platform.startswith('linux'):
-			path_info = _download_sdk_for_linux(temp_d)
-
-		_update_sdk(path_info)
+			sdk_path = _download_sdk_for_linux(temp_d)
 
 		LOG.info('Android SDK update complete')
-		return path_info
+		return _create_path_info_from_sdk(sdk_path)
 
-	except Exception, e:
+	except Exception as e:
 		LOG.error(e)
 		lib.local_config_problem(
 			build,
@@ -192,43 +216,6 @@ def _install_sdk_automatically(build):
 		)
 	finally:
 		shutil.rmtree(temp_d, ignore_errors=True)
-
-def _update_sdk(path_info):
-	LOG.info('Updating SDK and downloading required Android platform '
-			'(about 90MB, may take some time)')
-	
-	APPROX_UPPER_BOUND_ON_ANDROID_OUTPUT = 60
-	android_process = lib.PopenWithoutNewConsole(
-		[path_info.android, "update", "sdk", "--no-ui", "--filter",
-			"platform-tool,tool,android-8"],
-		stdout=PIPE,
-		stderr=STDOUT,
-	)
-
-	with ProgressBar('Installing Android SDK Components') as bar:
-		finished = []
-
-		def kill_adb_occasionally():
-			"""When updating the android sdk, occasionally ADB will have a lock on
-			some files causing the update to fail. Killing it here helps the update succeed.
-			"""
-			while not finished:
-				time.sleep(5)
-				try:
-					# XXX: still time from check to use issue, but close enough
-					if not finished:
-						_kill_adb()
-				except Exception:
-					pass
-		adb_killing_thread = threading.Thread(target=kill_adb_occasionally)
-		adb_killing_thread.daemon = True
-		adb_killing_thread.start()
-
-		for i, line in enumerate(iter(android_process.stdout.readline, '')):
-			bar.progress(float(i) / APPROX_UPPER_BOUND_ON_ANDROID_OUTPUT)
-
-		finished.append(True)
-
 	
 def _ask_user_if_should_install_sdk():
 	if sys.platform.startswith('win'):
@@ -397,17 +384,13 @@ def run_detached(args, wait=True):
 				aggregated_output.write(output)
 				LOG.debug(output.rstrip('\r\n'))
 
-def _have_android_8_available(path_info):
-	targets = run_shell(path_info.android, 'list', 'targets', '-c').split('\n')
-	return 'android-8' in targets
-
 def _create_avd(path_info):
 	args = [
 		path_info.android,
 		"create",
 		"avd",
 		"-n", "forge",
-		"-t", "android-8",
+		"-t", "android-19",
 		"--skin", "HVGA",
 		"-p", path.join(path_info.sdk, 'forge-avd'),
 		#"-a",
@@ -424,14 +407,17 @@ def _create_avd(path_info):
 def _launch_avd(path_info):
 	run_detached(
 			[path.join(path_info.sdk, "tools", "emulator"),
-				"-avd", "forge"],
+				"-avd", "forge", "-gpu", "on"],
 			wait=False)
 	
 	LOG.info("Started emulator, waiting for device to boot")
 	_run_adb([path_info.adb, 'wait-for-device'], 120, path_info)
-	# adb shell can return too quickly without a small sleep here.
-	time.sleep(1)
-	_run_adb([path_info.adb, "shell", "pm", "path", "android"], 120, path_info)
+	# Keep polling for package manager being available on the device (takes some time on the emulator)
+	out = "Error"
+	while "Error" in out:
+		time.sleep(1)
+		out = _run_adb([path_info.adb, "shell", "pm", "path", "android"], 120, path_info)
+		LOG.debug(out)
 
 def _create_apk_with_aapt(build, out_apk_name, path_info, package_name, lib_path, dev_dir):
 	LOG.info('Creating APK with aapt')
@@ -497,8 +483,8 @@ def _sign_zipf_release(lib_path, jre, zipf_name, signed_zipf_name, signing_info)
 
 def _align_apk(path_info, signed_zipf_name, out_apk_name):
 	LOG.info('Aligning apk')
-
-	args = [path.join(path_info.sdk, 'tools', 'zipalign'), '-v', '4', signed_zipf_name, out_apk_name]
+	
+	args = [path_info.zipalign, '-v', '4', signed_zipf_name, out_apk_name]
 	run_shell(*args)
 
 def _generate_package_name(build):
@@ -529,17 +515,7 @@ def _create_avd_if_necessary(path_info):
 	if _have_avd(path_info):
 		LOG.info('Existing AVD found')
 	else:
-		try:
-			_create_avd(path_info)
-		except ShellError as e:
-			if _have_android_8_available(path_info):
-				raise
-
-			LOG.info('Error creating Android Virtual Device. Attempting to update Android SDK and retry')
-			_update_sdk(path_info)
-
-			LOG.info('Attempting to create Android Virtual Device again')
-			_create_avd(path_info)
+		_create_avd(path_info)
 
 def _get_available_devices(path_info, try_count=0):
 	proc_std = _run_adb([path_info.adb, 'devices'], timeout=10, path_info=path_info)
@@ -657,7 +633,6 @@ def run_android(build, build_type_dir, sdk, device, interactive=True,
 	# TODO: remove interactive parameter. this information is contained in the
 	# build, but we should never use this anyway, as we can now interact with
 	# the toolkit from here
-	jre = _get_jre()
 	path_info = _find_or_install_sdk(build)
 
 	LOG.info('Starting ADB if not running')
@@ -752,6 +727,7 @@ def _lookup_or_prompt_for_signing_info(build):
 		'android.profile.storepass': {
 			'type': 'string',
 			'_password': True,
+			'_sensitive': True,
 			'description': 'The password for your release keystore',
 			'title': 'Keystore password',
 			'_order': 2,
@@ -765,6 +741,7 @@ def _lookup_or_prompt_for_signing_info(build):
 		'android.profile.keypass': {
 			'type': 'string',
 			'_password': True,
+			'_sensitive': True,
 			'description': 'The password for your release key',
 			'title': 'Key password',
 			'_order': 4,

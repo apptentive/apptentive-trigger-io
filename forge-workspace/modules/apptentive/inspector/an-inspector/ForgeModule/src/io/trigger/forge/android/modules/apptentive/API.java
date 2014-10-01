@@ -24,9 +24,14 @@ public class API {
 	}
 
 	// ************************************************************************************************************************************************
-	// Initialization
+	// Data
 	// ************************************************************************************************************************************************
 
+	public static void setInitialUserName(final ForgeTask task, @ForgeParam("initialUserName") final String initialUserName) {
+		Apptentive.setInitialUserName(ForgeApp.getActivity(), initialUserName);
+		task.success();
+	}
+	
 	public static void setInitialUserEmailAddress(final ForgeTask task, @ForgeParam("initialUserEmailAddress") final String initialUserEmailAddress) {
 		Apptentive.setInitialUserEmail(ForgeApp.getActivity(), initialUserEmailAddress);
 		task.success();
@@ -48,20 +53,18 @@ public class API {
 		Apptentive.removeCustomPersonData(ForgeApp.getActivity(), key);
 	}
 
+	
 	// ************************************************************************************************************************************************
-	// Ratings
+	// Events
 	// ************************************************************************************************************************************************
-
-	public static void showRatingFlowIfConditionsAreMet(final ForgeTask task) {
-		task.performUI(new Runnable() {
-			public void run() {
-				Apptentive.showRatingFlowIfConditionsAreMet(ForgeApp.getActivity());
-			}
-		});
-	}
-
-	public static void logSignificantEvent(final ForgeTask task) {
-		Apptentive.logSignificantEvent(ForgeApp.getActivity());
+	public static boolean engage(final ForgeTask task, @ForgeParam("event") final String event) {
+		Log.e("Engage(\"%s\")", event);
+		return Apptentive.engage(ForgeApp.getActivity(), event);
+//		task.performUI(new Runnable() {
+//			public void run() {
+//				Apptentive.showRatingFlowIfConditionsAreMet(ForgeApp.getActivity());
+//			}
+//		});
 	}
 
 
@@ -84,43 +87,43 @@ public class API {
 	}
 
 
-	// ************************************************************************************************************************************************
-	// Surveys
-	// ************************************************************************************************************************************************
-	
-	public static void isSurveyAvailable(final ForgeTask task, @ForgeParam("tags") final JsonArray surveyTags) {
-		Log.e("Tags: " + surveyTags.toString());
-		String[] tags = new String[surveyTags.size()];
-		for (int i = 0; i < surveyTags.size(); i++) {
-			tags[i] = surveyTags.get(i).getAsString();
-		}
-		boolean available = Apptentive.isSurveyAvailable(ForgeApp.getActivity(), tags);
-		task.success(available);
-	}
-
-	public static void showSurvey(final ForgeTask task, @ForgeParam("tags") final JsonArray surveyTags) {
-		Log.e("Tags: " + surveyTags.toString());
-		// Remove duplicates and empty string tags.
-		Set<String> tagSet = new HashSet<String>();
-		for (int i = 0; i < surveyTags.size(); i++) {
-			String tag = surveyTags.get(i).getAsString();
-			if(tag.length() > 0) {
-				tagSet.add(tag);
-			}
-		}
-		final String[] tags = tagSet.toArray(new String[]{});
-		task.performUI(new Runnable() {
-			public void run() {
-				Apptentive.showSurvey(ForgeApp.getActivity(), new OnSurveyFinishedListener() {
-					@Override
-					public void onSurveyFinished(boolean completed) {
-						Log.d("Firing apptentive.surveyFinishedsurvey event with parameter {%b}", completed);
-						ForgeApp.event("apptentive.surveyFinished", new JsonPrimitive(completed));
-					}
-				}, tags);
-			}
-		});
-	}
+//	 ************************************************************************************************************************************************
+//	 Surveys
+//	 ************************************************************************************************************************************************
+//	
+//	public static void isSurveyAvailable(final ForgeTask task, @ForgeParam("tags") final JsonArray surveyTags) {
+//		Log.e("Tags: " + surveyTags.toString());
+//		String[] tags = new String[surveyTags.size()];
+//		for (int i = 0; i < surveyTags.size(); i++) {
+//			tags[i] = surveyTags.get(i).getAsString();
+//		}
+//		boolean available = Apptentive.isSurveyAvailable(ForgeApp.getActivity(), tags);
+//		task.success(available);
+//	}
+//
+//	public static void showSurvey(final ForgeTask task, @ForgeParam("tags") final JsonArray surveyTags) {
+//		Log.e("Tags: " + surveyTags.toString());
+//		// Remove duplicates and empty string tags.
+//		Set<String> tagSet = new HashSet<String>();
+//		for (int i = 0; i < surveyTags.size(); i++) {
+//			String tag = surveyTags.get(i).getAsString();
+//			if(tag.length() > 0) {
+//				tagSet.add(tag);
+//			}
+//		}
+//		final String[] tags = tagSet.toArray(new String[]{});
+//		task.performUI(new Runnable() {
+//			public void run() {
+//				Apptentive.showSurvey(ForgeApp.getActivity(), new OnSurveyFinishedListener() {
+//					@Override
+//					public void onSurveyFinished(boolean completed) {
+//						Log.d("Firing apptentive.surveyFinishedsurvey event with parameter {%b}", completed);
+//						ForgeApp.event("apptentive.surveyFinished", new JsonPrimitive(completed));
+//					}
+//				}, tags);
+//			}
+//		});
+//	}
 
 	
 	// ************************************************************************************************************************************************

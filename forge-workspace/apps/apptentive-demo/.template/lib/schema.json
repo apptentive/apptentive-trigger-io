@@ -67,6 +67,11 @@
 							"type": "boolean",
 							"required": false
 						},
+						"reload_forcewifi": {
+							"description": "Disable reload functionality on mobile data connections.",
+							"type": "boolean",
+							"required": false
+						},
 						"trusted_urls": {
 							"description": "Trusted remote URLs that can access Forge APIs.",
 							"type": "array",
@@ -86,6 +91,22 @@
                                     "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
                                 }
                             }
+						},
+						"live": {
+							"type": "object",
+							"required": false,
+							"properties": {
+                                "enabled": {
+                                    "required": false,
+                                    "description": "Boot app in Forge Live mode",
+                                    "type": "boolean"
+                                },
+								"url": {
+                                    "required": false,
+                                    "description": "URL to use for Forge Live mode",
+                                    "type": "string"
+								}
+                            }
 						}
 					}
 				},
@@ -98,7 +119,7 @@
 							"required": false,
 							"type": "string",
 							"description": "Minimum allowed iOS version for your app",
-							"enum": ["4.3","5.0","5.1","6.0"]
+							"enum": ["6.0","7.0","8.0"]
 						},
 						"device_family": {
 							"required": false,
@@ -109,6 +130,11 @@
 						"package_name": {
 							"type": "string",
 							"required": false
+						},
+						"webview": {
+							"type": "string",
+							"required": false,
+							"enum": ["UIWebView", "WKWebView"]
 						}
 					}
 				},
@@ -121,75 +147,18 @@
 							"required": false,
 							"type": "string",
 							"description": "Minimum allowed Android API level for your app",
-							"enum": ["5","6","7","8","9","10","11","12","13","14","15"]
+							"enum": ["5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"]
 						},
 						"disable_ics_acceleration": {
 							"required": false,
 							"type": "boolean",
 							"description": "Disable hardware acceleration on Android 4.0 (ICS) as there are known rendering issues with this version of Android."
 						},
-						"package_name": {
-							"type": "string",
-							"required": false
-						}
-					}
-				},
-				"safari": {
-					"required": false,
-					"type": "object",
-					"additionalProperties": false,
-					"properties": {
-						"package_name": {
-							"type": "string",
-							"required": false
-						}
-					}
-				},
-				"chrome": {
-					"required": false,
-					"type": "object",
-					"additionalProperties": false,
-					"properties": {
-						"content_security_policy": {
+						"remote_debugging": {
 							"required": false,
-							"type": "string"
+							"type": "boolean",
+							"description": "Allow remote debugging with Chrome DevTools on Android 4.4 or higher devices."
 						},
-						"web_accessible_resources": {
-							"required": false,
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						}
-					}
-				},
-				"firefox": {
-					"required": false,
-					"type": "object",
-					"additionalProperties": false,
-					"properties": {
-						"package_name": {
-							"type": "string",
-							"required": false
-						}
-					}
-				},
-				"osx": {
-					"required": false,
-					"type": "object",
-					"additionalProperties": false,
-					"properties": {
-						"package_name": {
-							"type": "string",
-							"required": false
-						}
-					}
-				},
-				"ie": {
-					"required": false,
-					"type": "object",
-					"additionalProperties": false,
-					"properties": {
 						"package_name": {
 							"type": "string",
 							"required": false

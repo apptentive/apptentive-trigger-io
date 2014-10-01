@@ -3,15 +3,6 @@
 	"additionalProperties": false,
 	"type": "object",
 	"properties": {
-		"profile": {
-			"type": "string",
-			"title": "Profile",
-			"description": "Active profile to use for building your app.",
-			"required": false,
-			"blank": false,
-			"_order": 1
-		},
-
 		"general": {
 			"required": false,
 			"type": "object",
@@ -31,6 +22,40 @@
 							"title": "External",
 							"description": "Use an external content delivery network to serve reload updates."
 						}
+					}
+				},
+				"live": {
+					"required": false,
+					"type": "object",
+					"additionalProperties": false,
+					"title": "Live",
+					"description": "Settings related to Forge Live functionality.",
+					"properties": {
+						"address": {
+							"type": "string",
+							"blank": false,
+							"required": false,
+							"title": "Live network address",
+							"description": "Network address to use for Live server if you have multiple network interfaces.",
+							"_order": 1
+						},
+						"port": {
+							"type": "string",
+							"blank": false,
+							"required": false,
+							"title": "Live network port",
+							"description": "Specify an alternate port to use for the Live server.",
+							"_order": 2
+						},
+						"node_path": {
+							"type": "string",
+							"blank": false,
+							"required": false,
+							"_dirpicker": true,
+							"title": "Node Path",
+							"description": "The path to your node installation",
+							"_order": 3
+						}						
 					}
 				}
 			},
@@ -56,7 +81,7 @@
 					"required": false,
 					"title": "Simulator Version",
 					"description": "If launching using the iOS simulator this allows you to set a simulator SDK version to use.",
-					"enum": ["6.1", "6.0", "5.1", "5.0"],
+					"enum": ["8.0", "7.1", "7.0", "6.1", "6.0", "5.1", "5.0"],
 					"_order": 2
 				},
 				"simulatorfamily": {
@@ -66,6 +91,31 @@
 					"description": "If launching using the iOS simulator this allows you to set a simulator device family to use.",
 					"enum": ["iphone", "ipad"],
 					"_order": 3
+				},
+				"simulatorvariant": {
+					"type": "string",
+					"required": false,
+					"title": "Simulator Variant",
+					"description": "If launching using the iOS simulator this allows you to set a simulator device variant to use.",
+					"enum": ["default", "retina", "tall", "64bit"],
+					"_order": 4
+				},
+				"devicetypeid": {
+					"type": "string",
+					"required": false,
+					"title": "Device Type ID",
+					"description": "If launching using the iOS simulator this allows you to set the id of the device type that should be simulated. (Xcode6+)",
+					"enum": [ "com.apple.CoreSimulator.SimDeviceType.iPhone-6",
+							  "com.apple.CoreSimulator.SimDeviceType.iPhone-6-Plus",
+							  "com.apple.CoreSimulator.SimDeviceType.iPhone-5",
+							  "com.apple.CoreSimulator.SimDeviceType.iPhone-5s",
+							  "com.apple.CoreSimulator.SimDeviceType.iPhone-4s",
+							  "com.apple.CoreSimulator.SimDeviceType.iPad-Air",
+							  "com.apple.CoreSimulator.SimDeviceType.iPad-Retina",
+							  "com.apple.CoreSimulator.SimDeviceType.iPad-2",
+							  "com.apple.CoreSimulator.SimDeviceType.Resizable-iPhone",
+							  "com.apple.CoreSimulator.SimDeviceType.Resizable-iPad" ],
+					"_order": 5
 				},
 				"profiles": {
 					"required": true,
@@ -110,7 +160,7 @@
 									"title": "Certificate Password",
 									"description": "<i>Not required for OS X.</i> Password for above certificate file.",
 									"_order": 4
- 								}
+								}
 							}
 						}
 					},
@@ -170,7 +220,7 @@
 					"blank": false,
 					"required": false,
 					"title": "Device",
-					"description": "Either 'simulator', 'device' or a specific device ID",
+					"description": "Either 'simulator' or a specific device ID",
 					"_order": 1
 				},
 				"sdk": {
@@ -201,7 +251,7 @@
 									"type": "string",
 									"blank": false,
 									"required": false,
-									"filepicker": true,
+									"_filepicker": true,
 									"title": "Key Store",
 									"description": "Path to the keystore you wish to use to sign packaged Android apps."
 								},
@@ -227,7 +277,7 @@
 									"_password": true,
 									"title": "Key Password",
 									"description": "Password for your key"
-								}								
+								}
 							}
 						}
 					},
@@ -238,7 +288,7 @@
 								"type": "string",
 								"blank": false,
 								"required": false,
-								"filepicker": true,
+								"_filepicker": true,
 								"title": "Key Store",
 								"description": "Path to the keystore you wish to use to sign packaged Android apps."
 							},
@@ -308,7 +358,7 @@
 									"blank": false,
 									"required": false,
 									"title": "Heroku App Name"
-								}								
+								}
 							}
 						}
 					},
@@ -326,79 +376,6 @@
 								"blank": false,
 								"required": false,
 								"title": "Heroku App Name"
-							}
-						}
-					}
-				}
-			}
-		},
-
-		"ie": {
-			"required": false,
-			"type": "object",
-			"additionalProperties": false,
-			"title": "Internet Explorer",
-			"properties": {
-				"profiles": {
-					"required": true,
-					"type": "object",
-					"properties": {
-						"DEFAULT": {
-							"_comment": "Fixed default profile to hold us over until we allow dynamic add/remove of profiles",
-							"type": "object",
-							"required": true,
-							"properties": {
-								"developer_certificate": {
-									"type": "string",
-									"blank": false,
-									"required": false,
-									"title": "Certificate",
-									"description": "Name of the p12 or pfx certificate file used to sign your IE extension with."
-								},
-								"developer_certificate_path": {
-									"type": "string",
-									"blank": false,
-									"required": false,
-									"_filepicker": true,
-									"title": "Certificate Path",
-									"description": "Path to the p12 or pfx certificate file used to sign your IE extension with."
-								},
-								"developer_certificate_password": {
-									"type": "string",
-									"blank": false,
-									"required": false,
-									"_password": true,
-									"title": "Certificate Password",
-									"description": "Password for the p12 of pfx certificate file."
-								}
-							}
-						}
-					},
-					"additionalProperties": {
-						"type": "object",
-						"properties": {
-							"developer_certificate": {
-								"type": "string",
-								"blank": false,
-								"required": false,
-								"title": "Certificate",
-								"description": "Name of the p12 or pfx certificate file used to sign your IE extension with."
-							},
-							"developer_certificate_path": {
-								"type": "string",
-								"blank": false,
-								"required": false,
-								"_filepicker": true,
-								"title": "Certificate Path",
-								"description": "Path to the p12 or pfx certificate file used to sign your IE extension with."
-							},
-							"developer_certificate_password": {
-								"type": "string",
-								"blank": false,
-								"required": false,
-								"_password": true,
-								"title": "Certificate Password",
-								"description": "Password for the p12 of pfx certificate file."
 							}
 						}
 					}

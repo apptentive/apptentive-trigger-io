@@ -1,11 +1,9 @@
 $(function () {
 
 	// ************************************************************************************************************************************************
-	// Actual initialization
-	// These methods must be called when your javascript first executes.
+	// Initialization
 	// ************************************************************************************************************************************************
 
-	// Initialize settings.
 	forge.logging.warning("Initializing Apptentive.");
 
 	forge.logging.warning("Setting initial email address.");
@@ -40,22 +38,18 @@ $(function () {
 	// Listen for surveys being finished.
 	forge.logging.warning("Adding listener: apptentive.surveyFinished");
 	forge.apptentive.addSurveyFinishedListener(function(completed) {
-			forge.logging.warning("Survey Finished. Completed? " + completed);
+		forge.logging.warning("Survey Finished. Completed? " + completed);
 	});
 
 	forge.logging.warning("Finished initializing Apptentive.");
 
-	forge.logging.warning("Ratings from page load.");
-	forge.apptentive.showRatingFlowIfConditionsAreMet();
-
 
 	// ************************************************************************************************************************************************
-	// Initialization methods REMOVE
-	// These methods must be called when your javascript first executes.
+	// Data Methods
 	// ************************************************************************************************************************************************
 	
 	$('button.setInitialUserName').click(function () {
-		forge.apptentive.call('apptentive.setInitialUserName',
+		forge.apptentive.setInitialUserName(
 			function(success) {
 			},
 			function(error) {
@@ -122,32 +116,6 @@ $(function () {
 		);
 	});
 	
-
-	// ************************************************************************************************************************************************
-	// Rating
-	// ************************************************************************************************************************************************
-	
-	$('button.showRatingFlowIfConditionsAreMet').click(function () {
-		forge.apptentive.showRatingFlowIfConditionsAreMet(
-			function(success) {
-			},
-			function(error) {
-				forge.logging.error(error.message);
-			}
-		);
-	});
-	
-	$('button.logSignificantEvent').click(function () {
-		forge.apptentive.logSignificantEvent(
-			function(success) {
-			},
-			function(error) {
-				forge.logging.error(error.message);
-			}
-		);
-	});
-
-
 	// ************************************************************************************************************************************************
 	// Message Center
 	// ************************************************************************************************************************************************
@@ -162,6 +130,20 @@ $(function () {
 		);
 	});
 	
+	$('button.showMessageCenterWithCustomData').click(function () {			
+		forge.apptentive.showMessageCenterWithCustomData(
+			function() {
+			},
+			function(error) {
+				forge.logging.error(error.message);
+			},
+			{
+				'sentBy': 'trigger.io',
+				'hasCustomData': true
+			}
+		);	
+	});
+	
 	$('button.getUnreadMessageCount').click(function () {
 		forge.apptentive.getUnreadMessageCount(
 			function(count) {
@@ -173,38 +155,19 @@ $(function () {
 		);
 	});
 
-	
-	// ************************************************************************************************************************************************
-	// Survey
-	// ************************************************************************************************************************************************
 
-	$('button.isSurveyAvailable').click(function () {
-		var surveyTags = $('input.isSurveyAvailable').val().split(" ");
-		forge.apptentive.isSurveyAvailable(
-			function(success) {
-				$('p.isSurveyAvailable').text(success);
-			},
-			function(error) {
-				forge.logging.error(error.message);
-			},
-			surveyTags
-		);
-	});
+	// ************************************************************************************************************************************************
+	// Engagement
+	// ************************************************************************************************************************************************
 	
-	$('button.showSurvey').click(function () {
-		var surveyTags = $('input.showSurvey').val().split(" ");
-		forge.apptentive.showSurvey(
-			function(surveyIsAvailable) {
-				if(surveyIsAvailable) {
-					forge.logging.info("Survey is available.");
-				} else {
-					forge.logging.info("Survey is not available.");
-				}				
+	$('button.engage').click(function () {	
+		forge.apptentive.engage(
+			function() {
 			},
 			function(error) {
 				forge.logging.error(error.message);
 			},
-			surveyTags
+			$('input.engage.event').val()
 		);
-	});
+	});	
 });
