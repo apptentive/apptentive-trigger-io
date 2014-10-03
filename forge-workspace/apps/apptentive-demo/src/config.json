@@ -4,11 +4,11 @@
 	"author": "peter@apptentive.com",
 	"modules": {
 		"media": {
-			"version": "2.0",
+			"version": "2.4",
 			"config": {}
 		},
 		"request": {
-			"version": "2.0",
+			"version": "2.6",
 			"config": {
 				"permissions": [
 					"http://*/*",
@@ -17,16 +17,16 @@
 			}
 		},
 		"contact": {
-			"version": "2.0"
+			"version": "2.5"
 		},
 		"file": {
-			"version": "2.0"
+			"version": "2.5"
 		},
 		"notification": {
-			"version": "2.0"
+			"version": "2.6"
 		},
 		"prefs": {
-			"version": "2.0"
+			"version": "2.1"
 		},
 		"apptentive": {
 			"version": "0.0.20",
