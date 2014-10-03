@@ -41,7 +41,7 @@
 		<div class="container-narrow">
 			<h1>Apptentive Plugin</h1>
 			<h2>Instructions</h2>
-			<p>This app is for development purposes only. It is not an example app. Methods marked "iOS only" can be used by iOS asynchronously, but only at page load time if on Android. 
+			<p>This app is for development purposes only. It is not an example app. 
 			<hr>
 			
 
@@ -49,21 +49,18 @@
 			<h3>Initialization</h3>
 			<!-- *********************************************************************************************** -->
 			
-			<strong>setInitialUserName</strong> (iOS only)
+			<strong>setInitialUserName</strong>
 			<input type="text" class="setInitialUserName" placeholder="User name&hellip;"></input>
 			<button class="setInitialUserName">Submit</button>
 
-			
 			<strong>setInitialUserEmailAddress</strong>
 			<input type="text" class="setInitialUserEmailAddress" placeholder="Email&hellip;"></input>
 			<button class="setInitialUserEmailAddress">Submit</button>
-
 			
 			<strong>addCustomDeviceData</strong>
 			<input type="text" class="addCustomDeviceData key" placeholder="Key&hellip;"></input>
 			<input type="text" class="addCustomDeviceData value" placeholder="Value&hellip;"></input>
 			<button class="addCustomDeviceData">Add</button>
-
 			
 			<strong>removeCustomDeviceData</strong>
 			<input type="text" class="removeCustomDeviceData" placeholder="Key&hellip;"></input>
@@ -74,7 +71,6 @@
 			<input type="text" class="addCustomPersonData key" placeholder="Key&hellip;"></input>
 			<input type="text" class="addCustomPersonData value" placeholder="Value&hellip;"></input>
 			<button class="addCustomPersonData">Add</button>
-
 			
 			<strong>removeCustomPersonData</strong>
 			<input type="text" class="removeCustomPersonData" placeholder="Key&hellip;"></input>
@@ -83,17 +79,13 @@
 			
 
 			<!-- *********************************************************************************************** -->
-			<h3>Ratings Flow</h3>
+			<h3>Events</h3>
 			<!-- *********************************************************************************************** -->
 			
-			<strong>showRatingFlowIfConditionsAreMet</strong>
-			<button class="showRatingFlowIfConditionsAreMet">Show</button>
+			<strong>engage()</strong>
+			<input type="text" class="engage event" placeholder="Event&hellip;"></input>
+			<button class="engage">Engage</button>
 
-			
-			<strong>logSignificantEvent</strong>
-			<button class="logSignificantEvent">Log Event</button>	
-			<hr>
-			
 
 			<!-- *********************************************************************************************** -->
 			<h3>Message Center</h3>
@@ -101,27 +93,15 @@
 			
 			<strong>showMessageCenter</strong>
 			<button class="showMessageCenter">Show</button>
-
+			
+			<strong>showMessageCenterWithCustomData</strong>
+			<button class="showMessageCenterWithCustomData">Show</button>
 			
 			<strong>getUnreadMessageCount</strong>
 			<button class="getUnreadMessageCount">Get Count</button>
 			<p class="getUnreadMessageCount"></p>
 			<hr>
 			
-
-			<!-- *********************************************************************************************** -->
-			<h3>Surveys</h3>
-			<!-- *********************************************************************************************** -->
-			
-			<strong>isSurveyAvailable</strong>
-			<input type="text" class="isSurveyAvailable" placeholder="Tags&hellip; (optional)"></input>
-			<button class="isSurveyAvailable">Check</button>
-			<p class="isSurveyAvailable"></p>
-
-			
-			<strong>showSurvey</strong>
-			<input type="text" class="showSurvey" placeholder="Tags&hellip; (optional)"></input>
-			<button class="showSurvey">Show</button>
 		</div> 
 	</body>
 </html>

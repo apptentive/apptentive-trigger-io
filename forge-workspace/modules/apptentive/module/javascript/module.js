@@ -5,11 +5,25 @@ forge.apptentive = {
 	// ************************************************************************************************************************************************
 
 	setInitialUserName: function (success, error, initialUserName) {
-		forge.internal.call('apptentive.setInitialUserName', {initialUserName: initialUserName}, success, error);
+		forge.internal.call(
+			'apptentive.setInitialUserName',
+			{
+				initialUserName: initialUserName
+			},
+			success,
+			error
+		);
 	},
 
 	setInitialUserEmailAddress: function (success, error, initialUserEmailAddress) {
-		forge.internal.call('apptentive.setInitialUserEmailAddress', {initialUserEmailAddress: initialUserEmailAddress}, success, error);
+		forge.internal.call(
+			'apptentive.setInitialUserEmailAddress',
+			{
+				initialUserEmailAddress: initialUserEmailAddress
+			},
+			success,
+			error
+		);
 	},
 
 	addCustomDeviceData: function (success, error, key, value) {
@@ -38,16 +52,6 @@ forge.apptentive = {
 		}, success, error);
 	},
 
-	// ************************************************************************************************************************************************
-	// Rating
-	// ************************************************************************************************************************************************
-
-	showRatingFlowIfConditionsAreMet: function (success, error) {
-		forge.internal.call('apptentive.showRatingFlowIfConditionsAreMet', {}, success, error);
-	},
-	logSignificantEvent: function (success, error) {
-		forge.internal.call('apptentive.logSignificantEvent', {}, success, error);
-	},
 
 	// ************************************************************************************************************************************************
 	// Message Center
@@ -67,16 +71,22 @@ forge.apptentive = {
 	// Engagement
 	// ************************************************************************************************************************************************
 	
-	engage: function (success, error, codePoint) {
+	engage: function (success, error, event) {
+		forge.logging.warning("About to call engage()");
 		forge.internal.call('apptentive.engage', {
-			codePoint: codePoint
+			event: event
 		}, success, error);
+		forge.logging.warning("engage() returned", error);
 	},
 	
+	log: function (success, error) {
+		forge.logging.warning("log()");
+	},
+	
+/*
 	// ************************************************************************************************************************************************
 	// Survey
 	// ************************************************************************************************************************************************
-
 	isSurveyAvailable: function (success, error, tags) {
 		forge.internal.call('apptentive.isSurveyAvailable', {tags: tags}, success, error);
 	},
@@ -84,16 +94,18 @@ forge.apptentive = {
 	showSurvey: function (success, error, tags) {
 		forge.internal.call('apptentive.showSurvey', {tags: tags}, success, error);
 	},
-
+*/
 	// ************************************************************************************************************************************************
 	// SDK Events
 	// ************************************************************************************************************************************************
 
 	addUnreadMessageCountChangedListener: function (listener) {
+		forge.logging.info("Added unreadMessageCountChanged Listener.");
 		forge.internal.addEventListener("apptentive.unreadMessageCountChanged", listener);
 	},
 
 	addSurveyFinishedListener: function (listener) {
+		forge.logging.info("Added surveyFinished Listener.");
 		forge.internal.addEventListener("apptentive.surveyFinished", listener);
 	},
 
