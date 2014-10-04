@@ -1,9 +1,10 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "eab5b47d4a775e69e72b2e03f3136bfc82c64921", 
+    "config_hash": "4020e220c009abcffc84ef00c8ec7cf6c16b4f9b", 
     "config_version": "4", 
     "core": {
         "android": {
+            "minimum_version": "7", 
             "package_name": "io.trigger.forge62a29794c26911e2b36c12313d00dc45"
         }, 
         "firefox": {
@@ -32,27 +33,27 @@ window.forge = {}; window.forge.config = {
     "modules": {
         "apptentive": {
             "config": {
-                "API_Key": "c28cf4f1709260fcd0cf8f84c375a3eabbd97ccf0b6cc88bee80e94371dffddc", 
+                "API_Key": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6", 
                 "App_ID": "294047845", 
                 "Debug_Mode": true
             }, 
-            "version": "1.2.6"
+            "version": "0.0.21"
         }, 
         "contact": {
-            "version": "2.0"
+            "version": "2.5"
         }, 
         "file": {
-            "version": "2.0"
+            "version": "2.5"
         }, 
         "media": {
             "config": {}, 
-            "version": "2.0"
+            "version": "2.4"
         }, 
         "notification": {
-            "version": "2.0"
+            "version": "2.6"
         }, 
         "prefs": {
-            "version": "2.0"
+            "version": "2.1"
         }, 
         "request": {
             "config": {
@@ -61,12 +62,20 @@ window.forge = {}; window.forge.config = {
                     "https://*/*"
                 ]
             }, 
-            "version": "2.0"
+            "version": "2.6"
         }
     }, 
     "name": "Apptentive Demo", 
-    "platform_version": "v2.0.3", 
+    "platform_version": "v2.2.4", 
     "trigger_domain": "https://trigger.io", 
     "uuid": "62a29794c26911e2b36c12313d00dc45", 
     "version": "0.1"
+}; window.forge.module_mapping = {
+    "apptentive": "apptentive", 
+    "contact": "contact", 
+    "file": "file", 
+    "media": "media", 
+    "notification": "notification", 
+    "prefs": "prefs", 
+    "request": "request"
 };
