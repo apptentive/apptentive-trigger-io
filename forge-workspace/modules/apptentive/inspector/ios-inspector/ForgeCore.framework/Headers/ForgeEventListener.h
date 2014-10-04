@@ -42,5 +42,13 @@
 + (NSNumber*)supportedInterfaceOrientations;
 + (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 + (NSNumber*)canBecomeFirstResponder;
++ (NSNumber*)canResignFirstResponder;
 + (void)remoteControlReceivedWithEvent:(UIEvent *) receivedEvent;
++ (NSNumber*)prefersStatusBarHidden;
++ (NSNumber*)preferredStatusBarStyle;
++ (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
++ (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
++ (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
++ (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+
 @end

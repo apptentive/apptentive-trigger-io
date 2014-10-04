@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ForgeViewController;
+#import "ForgeViewController.h"
 
 @interface ForgeAppDelegate : UIResponder <UIApplicationDelegate>
 

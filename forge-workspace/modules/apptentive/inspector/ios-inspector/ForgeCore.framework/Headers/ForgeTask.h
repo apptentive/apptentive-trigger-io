@@ -11,13 +11,13 @@
 @interface ForgeTask : NSObject
 {
 	UIBackgroundTaskIdentifier bgTask;
-	UIWebView* webView;
+	UIView* webView;
 }
 
 @property (readonly) NSString *callid;
 @property (readonly) NSDictionary *params;
 
-- (ForgeTask*) initWithID:(NSString*)newcallid andParams:(NSDictionary*)newparams andWebView:(UIWebView *)newWebView;
+- (ForgeTask*) initWithID:(NSString*)newcallid andParams:(NSDictionary*)newparams andWebView:(UIView *)newWebView;
 - (void) success:(id)result;
 - (void) error:(id)e;
 - (void) error:(NSString*)message type:(NSString*)type subtype:(NSString*)subtype;

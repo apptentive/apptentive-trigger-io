@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface ForgeLog : NSObject {
-	
-}
 
+}
++ (void)setLogLevel:(NSString*)level;
 + (void) d:(id)msg;
 + (void) i:(id)msg;
 + (void) w:(id)msg;

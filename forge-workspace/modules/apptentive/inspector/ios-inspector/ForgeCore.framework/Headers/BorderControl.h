@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ForgeViewController.h"
 
 @interface BorderControl : NSObject {
 }
 
-+ (void)runTask:(NSDictionary *)data forWebView:(UIWebView*)webView;
-+ (void)returnResult:(NSDictionary *)data toWebView:(UIWebView*)webView;
++ (void)runTask:(NSDictionary *)data forWebView:(UIView*)webView;
++ (void)returnResult:(NSDictionary *)data toWebView:(UIView*)webView;
 + (void)addAPIMethod:(NSString *)jsMethod withClass:(NSString *)className andSelector:(NSString *)selector;
 + (NSDictionary*)getAPIMethodInfo;
 
