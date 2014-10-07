@@ -90,6 +90,41 @@
 /// @name Extended Data for Events
 ///-------------------------------
 
++ (void)extendedDataDate:(ForgeTask *)task timeIntervalSince1970:(NSNumber *)timeInterval {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[timeInterval doubleValue]];
+    NSDictionary *extendedData = [ATConnect extendedDataDate:date];
+    [task success:extendedData];
+}
+
++ (void)extendedDataLocation:(ForgeTask *)task latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+    NSDictionary *extendedData = [ATConnect extendedDataLocationForLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
+    [task success:extendedData];
+}
+
++ (void)extendedDataCommerce:(ForgeTask *)task
+               transactionID:(NSString *)transactionID
+                 affiliation:(NSString *)affiliation
+                     revenue:(NSNumber *)revenue
+                    shipping:(NSNumber *)shipping
+                         tax:(NSNumber *)tax
+                    currency:(NSString *)currency
+               commerceItems:(NSArray *)commerceItems
+{
+    NSDictionary *extendedData = [ATConnect extendedDataCommerceWithTransactionID:transactionID affiliation:affiliation revenue:revenue shipping:shipping tax:tax currency:currency commerceItems:commerceItems];
+    [task success:extendedData];
+}
+
++ (void)extendedDataCommerceItem:(ForgeTask *)task
+                          itemID:(NSString *)itemID
+                            name:(NSString *)name
+                        category:(NSString *)category
+                           price:(NSNumber *)price
+                        quantity:(NSNumber *)quantity
+                        currency:(NSString *)currency
+{
+    NSDictionary *extendedData = [ATConnect extendedDataCommerceItemWithItemID:itemID name:name category:category price:price quantity:quantity currency:currency];
+    [task success:extendedData];
+}
 
 ///-------------------------------------
 /// @name Attach Text, Images, and Files
