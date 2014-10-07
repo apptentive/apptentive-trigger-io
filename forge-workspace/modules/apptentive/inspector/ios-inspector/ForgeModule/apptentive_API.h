@@ -74,6 +74,7 @@
 /// @name Open App Store
 ///---------------------------------
 
++ (void)openAppStore:(ForgeTask *)task;
 
 ///------------------------------------
 /// @name Integrate With Other Services

@@ -140,6 +140,10 @@
 /// @name Open App Store
 ///---------------------------------
 
++ (void)openAppStore:(ForgeTask *)task {
+    [[ATConnect sharedConnection] openAppStore];
+    [task success:nil];
+}
 
 ///------------------------------------
 /// @name Integrate With Other Services
