@@ -76,6 +76,9 @@
 /// @name Attach Text, Images, and Files
 ///-------------------------------------
 
+- (void)sendAttachment:(ForgeTask *)task text:(NSString *)text;
+- (void)sendAttachment:(ForgeTask *)task imagePath:(NSString *)imagePath;
+- (void)sendAttachment:(ForgeTask *)task filePath:(NSString *)filePath mimeType:(NSString *)mimeType;
 
 ///---------------------------------------
 /// @name Add Custom Device or Person Data

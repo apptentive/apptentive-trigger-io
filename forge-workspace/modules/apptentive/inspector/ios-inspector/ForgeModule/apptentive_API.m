@@ -130,6 +130,22 @@
 /// @name Attach Text, Images, and Files
 ///-------------------------------------
 
+- (void)sendAttachment:(ForgeTask *)task text:(NSString *)text {
+    [[ATConnect sharedConnection] sendAttachmentText:text];
+    [task success:nil];
+}
+
+- (void)sendAttachment:(ForgeTask *)task imagePath:(NSString *)imagePath {
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    [[ATConnect sharedConnection] sendAttachmentImage:image];
+    [task success:nil];
+}
+
+- (void)sendAttachment:(ForgeTask *)task filePath:(NSString *)filePath mimeType:(NSString *)mimeType {
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    [[ATConnect sharedConnection] sendAttachmentFile:fileData withMimeType:mimeType];
+    [task success:nil];
+}
 
 ///---------------------------------------
 /// @name Add Custom Device or Person Data
