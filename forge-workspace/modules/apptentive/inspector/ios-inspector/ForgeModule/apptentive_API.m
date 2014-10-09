@@ -200,4 +200,37 @@
 /// @name Integrate With Other Services
 ///------------------------------------
 
+- (void)addIntegration:(ForgeTask *)task integration:(NSString *)integration configuration:(NSDictionary *)configuration {
+    [[ATConnect sharedConnection] addIntegration:integration withConfiguration:configuration];
+    [task success:nil];
+}
+
+- (void)addIntegration:(ForgeTask *)task integration:(NSString *)integration deviceToken:(NSString *)deviceToken {
+    NSData* deviceTokenData = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
+    [[ATConnect sharedConnection] addIntegration:integration withDeviceToken:deviceTokenData];
+    [task success:nil];
+}
+
+- (void)removeIntegration:(ForgeTask *)task integration:(NSString *)integration {
+    [[ATConnect sharedConnection] removeIntegration:integration];
+}
+
+- (void)addUrbanAirshipIntegration:(ForgeTask *)task deviceToken:(NSString *)deviceToken {
+    NSData* deviceTokenData = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
+    [[ATConnect sharedConnection] addUrbanAirshipIntegrationWithDeviceToken:deviceTokenData];
+    [task success:nil];
+}
+
+- (void)addAmazonSNSIntegration:(ForgeTask *)task deviceToken:(NSString *)deviceToken {
+    NSData* deviceTokenData = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
+    [[ATConnect sharedConnection] addAmazonSNSIntegrationWithDeviceToken:deviceTokenData];
+    [task success:nil];
+}
+
+- (void)addParseIntegration:(ForgeTask *)task deviceToken:(NSString *)deviceToken {
+    NSData* deviceTokenData = [deviceToken dataUsingEncoding:NSUTF8StringEncoding];
+    [[ATConnect sharedConnection] addParseIntegrationWithDeviceToken:deviceTokenData];
+    [task success:nil];
+}
+
 @end

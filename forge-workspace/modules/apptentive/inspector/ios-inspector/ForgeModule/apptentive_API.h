@@ -103,4 +103,13 @@
 /// @name Integrate With Other Services
 ///------------------------------------
 
+- (void)addIntegration:(ForgeTask *)task integration:(NSString *)integration configuration:(NSDictionary *)configuration;
+- (void)addIntegration:(ForgeTask *)task integration:(NSString *)integration deviceToken:(NSString *)deviceToken;
+
+- (void)removeIntegration:(ForgeTask *)task integration:(NSString *)integration;
+
+- (void)addUrbanAirshipIntegration:(ForgeTask *)task deviceToken:(NSString *)deviceToken;
+- (void)addAmazonSNSIntegration:(ForgeTask *)task deviceToken:(NSString *)deviceToken;
+- (void)addParseIntegration:(ForgeTask *)task deviceToken:(NSString *)deviceToken;
+
 @end
