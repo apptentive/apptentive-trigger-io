@@ -43,6 +43,8 @@
 + (void)showMessageCenterWithCustomData:(ForgeTask *)task customData:(NSDictionary *)customData;
 + (void)getUnreadMessageCount:(ForgeTask *)task;
 
++ (void)didReceiveRemoteNotification:(ForgeTask *)task notificationUserInfo:(NSDictionary *)notificationUserInfo;
+
 + (void)engage:(ForgeTask *)task event:(NSString *)event;
 + (void)engage:(ForgeTask *)task event:(NSString *)event customData:(NSDictionary *)customData;
 + (void)engage:(ForgeTask *)task event:(NSString *)event customData:(NSDictionary *)customData extendedData:(NSArray *)extendedData;

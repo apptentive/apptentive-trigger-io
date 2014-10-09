@@ -71,6 +71,11 @@
     [task success:[NSNumber numberWithInteger:unreadMessageCount]];
 }
 
++ (void)didReceiveRemoteNotification:(ForgeTask *)task notificationUserInfo:(NSDictionary *)notificationUserInfo {
+    [[ATConnect sharedConnection] didReceiveRemoteNotification:notificationUserInfo fromViewController:[[ForgeApp sharedApp] viewController]];
+    [task success:nil];
+}
+
 + (void)engage:(ForgeTask *)task event:(NSString *)event {
     BOOL didEngage = [[ATConnect sharedConnection] engage:event fromViewController:[[ForgeApp sharedApp] viewController]];
     [task success:@(didEngage)];
