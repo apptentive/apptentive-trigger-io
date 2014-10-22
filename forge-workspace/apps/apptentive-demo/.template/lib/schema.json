@@ -84,29 +84,29 @@
 							"type": "object",
 							"required": false,
 							"properties": {
-                                "level": {
-                                    "required": true,
-                                    "description": "How verbose logging output should be",
-                                    "type": "string",
-                                    "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-                                }
-                            }
+								"level": {
+									"required": true,
+									"description": "How verbose logging output should be",
+									"type": "string",
+									"enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+								}
+							}
 						},
 						"live": {
 							"type": "object",
 							"required": false,
 							"properties": {
-                                "enabled": {
-                                    "required": false,
-                                    "description": "Boot app in Forge Live mode",
-                                    "type": "boolean"
-                                },
+								"enabled": {
+									"required": false,
+									"description": "Boot app in Forge Live mode",
+									"type": "boolean"
+								},
 								"url": {
-                                    "required": false,
-                                    "description": "URL to use for Forge Live mode",
-                                    "type": "string"
+									"required": false,
+									"description": "URL to use for Forge Live mode",
+									"type": "string"
 								}
-                            }
+							}
 						}
 					}
 				},
@@ -135,6 +135,11 @@
 							"type": "string",
 							"required": false,
 							"enum": ["UIWebView", "WKWebView"]
+						},
+						"backup_web_storage": {
+							"required": false,
+							"description": "Set to 'false' to prevent HTML5 storage data from being backed up by iCloud",
+							"type": "boolean"
 						}
 					}
 				},

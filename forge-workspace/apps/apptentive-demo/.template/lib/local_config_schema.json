@@ -81,7 +81,7 @@
 					"required": false,
 					"title": "Simulator Version",
 					"description": "If launching using the iOS simulator this allows you to set a simulator SDK version to use.",
-					"enum": ["8.0", "7.1", "7.0", "6.1", "6.0", "5.1", "5.0"],
+					"enum": ["8.1", "8.0", "7.1", "7.0", "6.1", "6.0", "5.1", "5.0"],
 					"_order": 2
 				},
 				"simulatorfamily": {

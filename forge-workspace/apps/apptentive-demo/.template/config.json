@@ -17,7 +17,7 @@
 			}
 		},
 		"contact": {
-			"version": "2.5"
+			"version": "2.6"
 		},
 		"file": {
 			"version": "2.5"
@@ -37,7 +37,7 @@
 			}
 		}
 	},
-	"platform_version": "v2.2.4",
+	"platform_version": "v2.2.5",
 	"version": "0.1",
 	"core": {
 		"general": {
