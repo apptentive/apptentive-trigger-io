@@ -91,6 +91,17 @@ forge.apptentive = {
 		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
 	},
 
+	didReceiveRemoteNotification: function (success, error, notificationUserInfo) {
+		forge.internal.call(
+			'apptentive.didReceiveRemoteNotification',
+			{
+				notificationUserInfo: notificationUserInfo
+			},
+			success,
+			error
+		);
+	},
+
 	engage: function (success, error, event) {
 		forge.internal.call(
 			'apptentive.engage', {
