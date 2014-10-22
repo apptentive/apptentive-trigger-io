@@ -67,6 +67,62 @@ forge.apptentive = {
 			error
 		);
 	},
+	
+	// ************************************************************************************************************************************************
+	// Presenting UI
+	// ************************************************************************************************************************************************
+
+	showMessageCenter: function (success, error) {
+		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
+	},
+		
+	showMessageCenterWithCustomData: function (success, error, customData) {
+		forge.internal.call(
+			'apptentive.showMessageCenterWithCustomData',
+			{
+				customData: customData
+			},
+			success,
+			error
+		);
+	},
+	
+	getUnreadMessageCount: function (success, error) {
+		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
+	},
+
+	engage: function (success, error, event) {
+		forge.internal.call(
+			'apptentive.engage', {
+				event: event
+			}, 
+			success, 
+			error
+		);
+	},
+	
+	engage: function (success, error, event, customData) {
+		forge.internal.call(
+			'apptentive.engage', {
+				event: event,
+				customData: customData
+			}, 
+			success, 
+			error
+		);
+	},
+	
+	engage: function (success, error, event, customData, extendedData) {
+		forge.internal.call(
+			'apptentive.engage', {
+				event: event,
+				customData: customData,
+				extendedData: extendedData
+			}, 
+			success, 
+			error
+		);
+	},
 
 	// ************************************************************************************************************************************************
 	// Initialization
@@ -119,33 +175,10 @@ forge.apptentive = {
 			key: key
 		}, success, error);
 	},
-
-
-	// ************************************************************************************************************************************************
-	// Message Center
-	// ************************************************************************************************************************************************
-
-	showMessageCenter: function (success, error) {
-		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
-	},
-	showMessageCenterWithCustomData: function (success, error, customData) {
-		forge.internal.call('apptentive.showMessageCenterWithCustomData', {customData: customData}, success, error);
-	},
-	getUnreadMessageCount: function (success, error) {
-		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
-	},
 	
 	// ************************************************************************************************************************************************
 	// Engagement
 	// ************************************************************************************************************************************************
-	
-	engage: function (success, error, event) {
-		forge.logging.warning("About to call engage()");
-		forge.internal.call('apptentive.engage', {
-			event: event
-		}, success, error);
-		forge.logging.warning("engage() returned", error);
-	},
 	
 	log: function (success, error) {
 		forge.logging.warning("log()");
