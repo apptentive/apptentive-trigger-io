@@ -1,4 +1,72 @@
 forge.apptentive = {
+	
+	// ************************************************************************************************************************************************
+	// Basic Usage
+	// ************************************************************************************************************************************************
+	
+	// API key and App Store ID are set automatically from module config.
+	
+	// ************************************************************************************************************************************************
+	// Interface Customization
+	// ************************************************************************************************************************************************
+	
+	setShowEmailField: function (success, error, showEmailField) {
+		forge.internal.call(
+			'apptentive.setShowEmailField',
+			{
+				showEmailField: showEmailField
+			},
+			success,
+			error
+		);
+	},
+		
+	setCustomPlaceholderText: function (success, error, customPlaceholderText) {
+		forge.internal.call(
+			'apptentive.setCustomPlaceholderText',
+			{
+				customPlaceholderText: customPlaceholderText
+			},
+			success,
+			error
+		);
+	},
+	
+	setInitiallyUseMessageCenter: function (success, error, initiallyUseMessageCenter) {
+		forge.internal.call(
+			'apptentive.setInitiallyUseMessageCenter',
+			{
+				initiallyUseMessageCenter: initiallyUseMessageCenter
+			},
+			success,
+			error
+		);
+	},
+	
+	setInitiallyHideBranding: function (success, error, initiallyHideBranding) {
+		forge.internal.call(
+			'apptentive.setInitiallyHideBranding',
+			{
+				initiallyHideBranding: initiallyHideBranding
+			},
+			success,
+			error
+		);
+	},
+	
+	setTintColor: function (success, error, red, green, blue, alpha) {
+		forge.internal.call(
+			'apptentive.setTintColor',
+			{
+				red: red,
+				blue: blue,
+				green: green,
+				alpha: alpha
+			},
+			success,
+			error
+		);
+	},
 
 	// ************************************************************************************************************************************************
 	// Initialization
