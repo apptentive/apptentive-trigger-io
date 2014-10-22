@@ -176,6 +176,44 @@ forge.apptentive = {
 	},
 
 	// ************************************************************************************************************************************************
+	// Attach Text, Images, and Files
+	// ************************************************************************************************************************************************
+	
+	sendAttachment: function (success, error, text) {
+		forge.internal.call(
+			'apptentive.sendAttachment',
+			{
+				text: text
+			},
+			success,
+			error
+		);
+	},
+		
+	sendAttachment: function (success, error, imagePath) {
+		forge.internal.call(
+			'apptentive.sendAttachment',
+			{
+				imagePath: imagePath
+			},
+			success,
+			error
+		);
+	},
+		
+	sendAttachment: function (success, error, filePath, mimeType) {
+		forge.internal.call(
+			'apptentive.sendAttachment',
+			{
+				filePath: filePath,
+				mimeType: mimeType
+			},
+			success,
+			error
+		);
+	},
+
+	// ************************************************************************************************************************************************
 	// Initialization
 	// ************************************************************************************************************************************************
 
