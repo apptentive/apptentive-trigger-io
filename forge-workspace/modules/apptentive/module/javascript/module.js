@@ -123,6 +123,57 @@ forge.apptentive = {
 			error
 		);
 	},
+	
+
+	// ************************************************************************************************************************************************
+	// Extended Data for Events
+	// ************************************************************************************************************************************************
+	
+	extendedDataDate: function (success, error, timeIntervalSince1970) {
+		forge.internal.call(
+			'apptentive.extendedDataDate',
+			{
+				timeIntervalSince1970: timeIntervalSince1970
+			},
+			success,
+			error
+		);
+	},
+	
+	extendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
+		forge.internal.call(
+			'apptentive.extendedDataCommerce',
+			{
+				success: success,
+				error: error,
+				transactionID: transactionID,
+				affiliation: affiliation,
+				revenue: revenue,
+				shipping: shipping,
+				tax: tax,
+				currency: currency,
+				commerceItems: commerceItems
+			},
+			success,
+			error
+		);
+	},
+
+	extendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
+		forge.internal.call(
+			'apptentive.extendedDataCommerceItem',
+			{
+				itemID: itemID,
+				name: name,
+				category: category,
+				price: price,
+				quantity: quantity,
+				currency: currency
+			},
+			success,
+			error
+		);
+	},
 
 	// ************************************************************************************************************************************************
 	// Initialization
