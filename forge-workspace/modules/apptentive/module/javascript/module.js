@@ -291,6 +291,78 @@ forge.apptentive = {
 		forge.logging.info("Added surveyFinished Listener.");
 		forge.internal.addEventListener("apptentive.surveyFinished", listener);
 	},
+	
+	// ************************************************************************************************************************************************
+	// Integrate With Other Services
+	// ************************************************************************************************************************************************
+
+	addIntegration: function (success, error, integration, configuration) {
+		forge.internal.call(
+			'apptentive.addIntegration',
+			{
+				integration: integration,
+				configuration: configuration
+			},
+			success,
+			error
+		);
+	},
+	
+	addIntegration: function (success, error, integration, deviceToken) {
+		forge.internal.call(
+			'apptentive.addIntegration',
+			{
+				integration: integration,
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
+	},
+	
+	removeIntegration: function (success, error, integration) {
+		forge.internal.call(
+			'apptentive.removeIntegration',
+			{
+				integration: integration
+			},
+			success,
+			error
+		);
+	},
+
+	addUrbanAirshipIntegration: function (success, error, deviceToken) {
+		forge.internal.call(
+			'apptentive.addUrbanAirshipIntegration',
+			{
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
+	},
+
+	addAmazonSNSIntegration: function (success, error, deviceToken) {
+		forge.internal.call(
+			'apptentive.addAmazonSNSIntegration',
+			{
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
+	},
+	
+	addParseIntegration: function (success, error, deviceToken) {
+		forge.internal.call(
+			'apptentive.addParseIntegration',
+			{
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
+	},
 
 	// ************************************************************************************************************************************************
 	// Debug only
