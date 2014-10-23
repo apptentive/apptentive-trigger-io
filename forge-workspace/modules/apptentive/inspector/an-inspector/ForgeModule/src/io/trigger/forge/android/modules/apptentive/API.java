@@ -39,18 +39,22 @@ public class API {
 	
 	public static void addCustomDeviceData(final ForgeTask task, @ForgeParam("key") final String key, @ForgeParam("value") final String value) {
 		Apptentive.addCustomDeviceData(ForgeApp.getActivity(), key, value);
+		task.success();
 	}
 	
 	public static void removeCustomDeviceData(final ForgeTask task, @ForgeParam("key") final String key) {
 		Apptentive.removeCustomDeviceData(ForgeApp.getActivity(), key);
+		task.success();
 	}
 
 	public static void addCustomPersonData(final ForgeTask task, @ForgeParam("key") final String key, @ForgeParam("value") final String value) {
 		Apptentive.addCustomPersonData(ForgeApp.getActivity(), key, value);
+		task.success();
 	}
 	
 	public static void removeCustomPersonData(final ForgeTask task, @ForgeParam("key") final String key) {
 		Apptentive.removeCustomPersonData(ForgeApp.getActivity(), key);
+		task.success();
 	}
 
 	

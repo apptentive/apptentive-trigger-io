@@ -29,10 +29,14 @@ forge.apptentive = {
 	},
 
 	addCustomDeviceData: function (success, error, key, value) {
-		forge.internal.call('apptentive.addCustomDeviceData', {
-			key: key,
-			value: value
-		}, success, error);
+		forge.internal.call(
+			'apptentive.addCustomDeviceData', {
+				key: key,
+				value: value
+			},
+			success,
+			error
+		);
 	},
 
 	removeCustomDeviceData: function (success, error, key) {
