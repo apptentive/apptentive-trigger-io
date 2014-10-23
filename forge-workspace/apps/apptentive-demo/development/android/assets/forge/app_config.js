@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "6263891e62c8872235aacde429e1272c197ab5d4", 
+    "config_hash": "467f0090097369395b3a78b7eeb6816eaef1446b", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -33,27 +33,27 @@ window.forge = {}; window.forge.config = {
     "modules": {
         "apptentive": {
             "config": {
-                "API_Key": "00a38f52cc737cbd02a14172ccbf1c67ee8ab8a1b64c6d7671954716fd34f1e6", 
+                "API_Key": "c28cf4f1709260fcd0cf8f84c375a3eabbd97ccf0b6cc88bee80e94371dffddc", 
                 "App_ID": "294047845", 
                 "Debug_Mode": true
             }, 
-            "version": "0.0.20"
+            "version": "0.0.23"
         }, 
         "contact": {
-            "version": "2.0"
+            "version": "2.6"
         }, 
         "file": {
-            "version": "2.0"
+            "version": "2.5"
         }, 
         "media": {
             "config": {}, 
-            "version": "2.0"
+            "version": "2.4"
         }, 
         "notification": {
-            "version": "2.0"
+            "version": "2.6"
         }, 
         "prefs": {
-            "version": "2.0"
+            "version": "2.1"
         }, 
         "request": {
             "config": {
@@ -62,11 +62,11 @@ window.forge = {}; window.forge.config = {
                     "https://*/*"
                 ]
             }, 
-            "version": "2.0"
+            "version": "2.6"
         }
     }, 
     "name": "Apptentive Demo", 
-    "platform_version": "v2.2.3", 
+    "platform_version": "v2.2.5", 
     "trigger_domain": "https://trigger.io", 
     "uuid": "62a29794c26911e2b36c12313d00dc45", 
     "version": "0.1"

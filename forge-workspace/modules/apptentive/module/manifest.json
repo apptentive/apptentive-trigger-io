@@ -1,7 +1,7 @@
 {
 	"description": "Apptentive module for Trigger.io",
 	"namespace": "apptentive",
-	"platform_version": "v2.2.3",
-	"min_platform_version": "v2.2.3",
-	"version": "0.0.21"
+	"platform_version": "v2.2.5",
+	"min_platform_version": "v2.2.5",
+	"version": "0.0.24"
 }
