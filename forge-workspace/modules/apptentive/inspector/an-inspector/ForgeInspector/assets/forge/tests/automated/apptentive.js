@@ -1,34 +1,5 @@
 module("apptentive");
 
-if (forge.is.ios()) {
-	var myAPIKey = "940aa47d4c3eb99d07537ddf0866cefff3a37d184427cfe382a98e2fef5d55d2";
-	asyncTest("Test setting API key", 1, function() {
-		forge.apptentive.setApiKey(myAPIKey,
-			function(success) {
-				ok(true, "Set API Key");
-				start();
-			},
-			function(error) {
-				ok(false, "Unable to set API key");
-				start();
-			}
-		);
-	});
-	
-	asyncTest("Test getting API key", 1, function() {
-		forge.apptentive.apiKey(
-			function(success) {
-				deepEqual(success, myAPIKey, "API Key should be set");
-				start();
-			},
-			function(error) {
-				ok(false, "Error getting API key.");
-				start();
-			}
-		);
-	});
-}
-
 var name = "Peter";
 asyncTest("Test setting Apptentive Initial User Name", 1, function() {
 	forge.apptentive.setInitialUserName(name,
@@ -71,21 +42,6 @@ asyncTest("Test setting Apptentive Initial User Email Address", 1, function() {
 		}
 	);
 });
-
-if (forge.is.ios()) {
-	asyncTest("Test getting Apptentive Initial User Email Address", 1, function() {
-		forge.apptentive.initialUserEmailAddress(
-			function(success) {
-				deepEqual(success, email, "User email address should be set");
-	            start();
-			},
-			function(error) {
-				ok(false, "Error getting user email address.");
-				start();
-			}
-		);
-	});
-}
 
 var customDeviceDataKey = "city";
 var customDeviceDataValue = "Seattle";
@@ -162,32 +118,4 @@ asyncTest("Test unread message count", 1, function() {
 	);
 });
 
-if (forge.is.ios()) {
-	var myAppID = 343200656;
-	asyncTest("Test setting app ID", 1, function() {
-		forge.apptentive.setAppID(myAppID,
-			function(success) {
-				ok(true, "Set App ID");
-				start();
-			},
-			function(error) {
-				ok(false, "Unable to set App ID");
-				start();
-			}
-		);
-	});
-	
-	asyncTest("Test getting app ID", 1, function() {
-		forge.apptentive.appID(
-			function(success) {
-				deepEqual(success, myAppID, "App ID should be set");
-				start();
-			},
-			function(error) {
-				ok(false, "Unable to get App ID");
-				start();
-			}
-		);
-	});
-}
 

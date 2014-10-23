@@ -1,6 +1,6 @@
 window.forge = {}; window.forge.config = {
     "author": "peter@apptentive.com", 
-    "config_hash": "69f06de165ca5dbf46b55812f02e9b10082e9714", 
+    "config_hash": "ddc0066aa146d11dcf27322d383b53296d206258", 
     "config_version": "4", 
     "core": {
         "android": {
@@ -37,7 +37,7 @@ window.forge = {}; window.forge.config = {
                 "App_ID": "294047845", 
                 "Debug_Mode": true
             }, 
-            "version": "0.0.24"
+            "version": "0.0.25"
         }, 
         "contact": {
             "version": "2.6"
