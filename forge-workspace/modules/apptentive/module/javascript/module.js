@@ -54,14 +54,13 @@ forge.apptentive = {
 		);
 	},
 	
-	setTintColor: function (success, error, red, green, blue, alpha) {
+	setTintColor: function (success, error, red, green, blue) {
 		forge.internal.call(
 			'apptentive.setTintColor',
 			{
 				red: red,
 				blue: blue,
-				green: green,
-				alpha: alpha
+				green: green
 			},
 			success,
 			error

@@ -46,8 +46,8 @@
     [task success:nil];
 }
 
-+ (void)setTintColor:(ForgeTask *)task red:(NSNumber *)red green:(NSNumber *)green blue:(NSNumber *)blue alpha:(NSNumber *)alpha  {
-    UIColor *tintColor = [UIColor colorWithRed:[red floatValue] green:[green floatValue] blue:[blue floatValue] alpha:[alpha floatValue]];
++ (void)setTintColor:(ForgeTask *)task red:(NSNumber *)red green:(NSNumber *)green blue:(NSNumber *)blue {
+    UIColor *tintColor = [UIColor colorWithRed:[red floatValue]/255.0 green:[green floatValue]/255.0 blue:[blue floatValue]/255.0 alpha:1.0];
     [[ATConnect sharedConnection] setTintColor:tintColor];
     [task success:nil];
 }
