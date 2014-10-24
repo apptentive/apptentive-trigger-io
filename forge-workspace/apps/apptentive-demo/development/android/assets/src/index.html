@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head><script src='../forge/app_config.js'></script><script src='../forge/all.js'></script>
+		<meta charset="utf-8">
+		<script src="js/jquery-2.0.0.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/main.js"></script>
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<style type="text/css">
+			.container-narrow {
+				margin: 0 auto;
+				max-width: 700px;
+				padding: 20px;
+			}
+			.container-narrow > hr {
+				margin: 30px 0;
+			}
+
+			.jumbotron {
+				margin: 60px 0;
+				text-align: left;
+			}
+			.jumbotron h1 {
+				font-size: 50px;
+				line-height: 1;
+			}
+
+			p {
+				font-size: 1.2em;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="navbar navbar-static-top navbar-inverse">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a class="brand" href="#">Apptentive</a>
+				</div>
+			</div>
+		</div>
+		<div class="container-narrow">
+			<h1>Apptentive Plugin</h1>
+			<h2>Instructions</h2>
+			<p>This app is for development purposes only. It is not an example app. 
+			<hr>
+			
+
+			<!-- *********************************************************************************************** -->
+			<h3>Initialization</h3>
+			<!-- *********************************************************************************************** -->
+			
+			<strong>setInitialUserName</strong>
+			<input type="text" class="setInitialUserName" placeholder="User name&hellip;"></input>
+			<button class="setInitialUserName">Submit</button>
+
+			<strong>setInitialUserEmailAddress</strong>
+			<input type="text" class="setInitialUserEmailAddress" placeholder="Email&hellip;"></input>
+			<button class="setInitialUserEmailAddress">Submit</button>
+			
+			<strong>addCustomDeviceData</strong>
+			<input type="text" class="addCustomDeviceData key" placeholder="Key&hellip;"></input>
+			<input type="text" class="addCustomDeviceData value" placeholder="Value&hellip;"></input>
+			<button class="addCustomDeviceData">Add</button>
+			
+			<strong>removeCustomDeviceData</strong>
+			<input type="text" class="removeCustomDeviceData" placeholder="Key&hellip;"></input>
+			<button class="removeCustomDeviceData">Remove</button>
+			<hr>
+			
+			<strong>addCustomPersonData</strong>
+			<input type="text" class="addCustomPersonData key" placeholder="Key&hellip;"></input>
+			<input type="text" class="addCustomPersonData value" placeholder="Value&hellip;"></input>
+			<button class="addCustomPersonData">Add</button>
+			
+			<strong>removeCustomPersonData</strong>
+			<input type="text" class="removeCustomPersonData" placeholder="Key&hellip;"></input>
+			<button class="removeCustomPersonData">Remove</button>
+			<hr>
+			
+
+			<!-- *********************************************************************************************** -->
+			<h3>Events</h3>
+			<!-- *********************************************************************************************** -->
+			
+			<strong>engage()</strong>
+			<input type="text" class="engage event" placeholder="Event&hellip;"></input>
+			<button class="engage">Engage</button>
+
+
+			<!-- *********************************************************************************************** -->
+			<h3>Message Center</h3>
+			<!-- *********************************************************************************************** -->
+			
+			<strong>showMessageCenter</strong>
+			<button class="showMessageCenter">Show</button>
+			
+			<strong>showMessageCenterWithCustomData</strong>
+			<button class="showMessageCenterWithCustomData">Show</button>
+			
+			<strong>getUnreadMessageCount</strong>
+			<button class="getUnreadMessageCount">Get Count</button>
+			<p class="getUnreadMessageCount"></p>
+			<hr>
+			
+		</div> 
+	</body>
+</html>
