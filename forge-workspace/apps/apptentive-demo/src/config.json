@@ -48,6 +48,11 @@
 		},
 		"android": {
 			"minimum_version": "7"
+		},
+		"ios": {
+			"minimum_version": "8.0",
+			"device_family": "iphone",
+			"webview": "UIWebView"
 		}
 	},
 	"description": "An empty app created by default"
