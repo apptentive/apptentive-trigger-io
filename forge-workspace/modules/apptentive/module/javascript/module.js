@@ -1,7 +1,231 @@
 forge.apptentive = {
+	
+	// ************************************************************************************************************************************************
+	// Basic Usage
+	// ************************************************************************************************************************************************
+	
+	// API key and App Store ID are set automatically from module config.
+	
+	// ************************************************************************************************************************************************
+	// Interface Customization
+	// ************************************************************************************************************************************************
+	
+	setShowEmailField: function (success, error, showEmailField) {
+		forge.internal.call(
+			'apptentive.setShowEmailField',
+			{
+				showEmailField: showEmailField
+			},
+			success,
+			error
+		);
+	},
+		
+	setCustomPlaceholderText: function (success, error, customPlaceholderText) {
+		forge.internal.call(
+			'apptentive.setCustomPlaceholderText',
+			{
+				customPlaceholderText: customPlaceholderText
+			},
+			success,
+			error
+		);
+	},
+	
+	setInitiallyUseMessageCenter: function (success, error, initiallyUseMessageCenter) {
+		forge.internal.call(
+			'apptentive.setInitiallyUseMessageCenter',
+			{
+				initiallyUseMessageCenter: initiallyUseMessageCenter
+			},
+			success,
+			error
+		);
+	},
+	
+	setInitiallyHideBranding: function (success, error, initiallyHideBranding) {
+		forge.internal.call(
+			'apptentive.setInitiallyHideBranding',
+			{
+				initiallyHideBranding: initiallyHideBranding
+			},
+			success,
+			error
+		);
+	},
+	
+	setTintColor: function (success, error, red, green, blue, alpha) {
+		forge.internal.call(
+			'apptentive.setTintColor',
+			{
+				red: red,
+				blue: blue,
+				green: green,
+				alpha: alpha
+			},
+			success,
+			error
+		);
+	},
+	
+	// ************************************************************************************************************************************************
+	// Presenting UI
+	// ************************************************************************************************************************************************
+
+	showMessageCenter: function (success, error) {
+		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
+	},
+		
+	showMessageCenterWithCustomData: function (success, error, customData) {
+		forge.internal.call(
+			'apptentive.showMessageCenterWithCustomData',
+			{
+				customData: customData
+			},
+			success,
+			error
+		);
+	},
+	
+	getUnreadMessageCount: function (success, error) {
+		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
+	},
+
+	didReceiveRemoteNotification: function (success, error, notificationUserInfo) {
+		forge.internal.call(
+			'apptentive.didReceiveRemoteNotification',
+			{
+				notificationUserInfo: notificationUserInfo
+			},
+			success,
+			error
+		);
+	},
+
+	engage: function (success, error, event) {
+		forge.internal.call(
+			'apptentive.engage', {
+				event: event
+			}, 
+			success, 
+			error
+		);
+	},
+	
+	engage: function (success, error, event, customData) {
+		forge.internal.call(
+			'apptentive.engage', {
+				event: event,
+				customData: customData
+			}, 
+			success, 
+			error
+		);
+	},
+	
+	engage: function (success, error, event, customData, extendedData) {
+		forge.internal.call(
+			'apptentive.engage', {
+				event: event,
+				customData: customData,
+				extendedData: extendedData
+			}, 
+			success, 
+			error
+		);
+	},
+	
 
 	// ************************************************************************************************************************************************
-	// Initialization
+	// Extended Data for Events
+	// ************************************************************************************************************************************************
+	
+	extendedDataDate: function (success, error, timeIntervalSince1970) {
+		forge.internal.call(
+			'apptentive.extendedDataDate',
+			{
+				timeIntervalSince1970: timeIntervalSince1970
+			},
+			success,
+			error
+		);
+	},
+	
+	extendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
+		forge.internal.call(
+			'apptentive.extendedDataCommerce',
+			{
+				success: success,
+				error: error,
+				transactionID: transactionID,
+				affiliation: affiliation,
+				revenue: revenue,
+				shipping: shipping,
+				tax: tax,
+				currency: currency,
+				commerceItems: commerceItems
+			},
+			success,
+			error
+		);
+	},
+
+	extendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
+		forge.internal.call(
+			'apptentive.extendedDataCommerceItem',
+			{
+				itemID: itemID,
+				name: name,
+				category: category,
+				price: price,
+				quantity: quantity,
+				currency: currency
+			},
+			success,
+			error
+		);
+	},
+
+	// ************************************************************************************************************************************************
+	// Attach Text, Images, and Files
+	// ************************************************************************************************************************************************
+	
+	sendAttachment: function (success, error, text) {
+		forge.internal.call(
+			'apptentive.sendAttachment',
+			{
+				text: text
+			},
+			success,
+			error
+		);
+	},
+		
+	sendAttachment: function (success, error, imagePath) {
+		forge.internal.call(
+			'apptentive.sendAttachment',
+			{
+				imagePath: imagePath
+			},
+			success,
+			error
+		);
+	},
+		
+	sendAttachment: function (success, error, filePath, mimeType) {
+		forge.internal.call(
+			'apptentive.sendAttachment',
+			{
+				filePath: filePath,
+				mimeType: mimeType
+			},
+			success,
+			error
+		);
+	},
+
+	// ************************************************************************************************************************************************
+	// Add Custom Device or Person Data
 	// ************************************************************************************************************************************************
 
 	setInitialUserName: function (success, error, initialUserName) {
@@ -55,50 +279,20 @@ forge.apptentive = {
 			key: key
 		}, success, error);
 	},
-
-
-	// ************************************************************************************************************************************************
-	// Message Center
-	// ************************************************************************************************************************************************
-
-	showMessageCenter: function (success, error) {
-		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
-	},
-	showMessageCenterWithCustomData: function (success, error, customData) {
-		forge.internal.call('apptentive.showMessageCenterWithCustomData', {customData: customData}, success, error);
-	},
-	getUnreadMessageCount: function (success, error) {
-		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
-	},
 	
 	// ************************************************************************************************************************************************
-	// Engagement
+	// Open App Store
 	// ************************************************************************************************************************************************
 	
-	engage: function (success, error, event) {
-		forge.logging.warning("About to call engage()");
-		forge.internal.call('apptentive.engage', {
-			event: event
-		}, success, error);
-		forge.logging.warning("engage() returned", error);
+	openAppStore: function (success, error) {
+		forge.internal.call(
+			'apptentive.openAppStore',
+			{},
+			success,
+			error
+		);
 	},
 	
-	log: function (success, error) {
-		forge.logging.warning("log()");
-	},
-	
-/*
-	// ************************************************************************************************************************************************
-	// Survey
-	// ************************************************************************************************************************************************
-	isSurveyAvailable: function (success, error, tags) {
-		forge.internal.call('apptentive.isSurveyAvailable', {tags: tags}, success, error);
-	},
-
-	showSurvey: function (success, error, tags) {
-		forge.internal.call('apptentive.showSurvey', {tags: tags}, success, error);
-	},
-*/
 	// ************************************************************************************************************************************************
 	// SDK Events
 	// ************************************************************************************************************************************************
@@ -111,6 +305,78 @@ forge.apptentive = {
 	addSurveyFinishedListener: function (listener) {
 		forge.logging.info("Added surveyFinished Listener.");
 		forge.internal.addEventListener("apptentive.surveyFinished", listener);
+	},
+	
+	// ************************************************************************************************************************************************
+	// Integrate With Other Services
+	// ************************************************************************************************************************************************
+
+	addIntegration: function (success, error, integration, configuration) {
+		forge.internal.call(
+			'apptentive.addIntegration',
+			{
+				integration: integration,
+				configuration: configuration
+			},
+			success,
+			error
+		);
+	},
+	
+	addIntegration: function (success, error, integration, deviceToken) {
+		forge.internal.call(
+			'apptentive.addIntegration',
+			{
+				integration: integration,
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
+	},
+	
+	removeIntegration: function (success, error, integration) {
+		forge.internal.call(
+			'apptentive.removeIntegration',
+			{
+				integration: integration
+			},
+			success,
+			error
+		);
+	},
+
+	addUrbanAirshipIntegration: function (success, error, deviceToken) {
+		forge.internal.call(
+			'apptentive.addUrbanAirshipIntegration',
+			{
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
+	},
+
+	addAmazonSNSIntegration: function (success, error, deviceToken) {
+		forge.internal.call(
+			'apptentive.addAmazonSNSIntegration',
+			{
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
+	},
+	
+	addParseIntegration: function (success, error, deviceToken) {
+		forge.internal.call(
+			'apptentive.addParseIntegration',
+			{
+				deviceToken: deviceToken
+			},
+			success,
+			error
+		);
 	},
 
 	// ************************************************************************************************************************************************
