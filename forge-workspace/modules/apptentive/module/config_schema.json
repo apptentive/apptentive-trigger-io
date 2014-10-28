@@ -7,15 +7,21 @@
 			"type": "string",
 			"description": "The Apptentive API key for your app. This key can be found under the Settings tab for your app on www.apptentive.com."
 		},
+		"Debug_Mode": {
+			"required": false,
+			"type": "boolean",
+			"description": "Enables verbose logging. Leaving this on in production can affect performance."
+		},
 		"App_ID": {
 			"required": false,
 			"type": "string",
 			"description": "The Apple iOS App Store ID. If you are building for iOS, this is required."
 		},
-		"Debug_Mode": {
+		"iOS_Tint_Color": {
 			"required": false,
-			"type": "boolean",
-			"description": "Enables verbose logging. Leaving this on in production can affect performance."
-		}
+			"type": "string",
+			"description": "An optional hex color string consisting of one byte each for alpha-layer, red, green, and blue. For example, here is semi-transparent yellow: #7FFFFF00.",
+			"pattern": "^#[\\da-fA-F]{8}$"
+		},
 	}
 }
