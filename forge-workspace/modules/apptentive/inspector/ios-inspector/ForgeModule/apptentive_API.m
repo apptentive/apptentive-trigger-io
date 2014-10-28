@@ -46,12 +46,6 @@
     [task success:nil];
 }
 
-+ (void)setTintColor:(ForgeTask *)task red:(NSNumber *)red green:(NSNumber *)green blue:(NSNumber *)blue {
-    UIColor *tintColor = [UIColor colorWithRed:[red floatValue]/255.0 green:[green floatValue]/255.0 blue:[blue floatValue]/255.0 alpha:1.0];
-    [[ATConnect sharedConnection] setTintColor:tintColor];
-    [task success:nil];
-}
-
 ///--------------------
 /// @name Presenting UI
 ///--------------------
@@ -95,37 +89,37 @@
 /// @name Extended Data for Events
 ///-------------------------------
 
-+ (void)extendedDataDate:(ForgeTask *)task timeIntervalSince1970:(NSNumber *)timeInterval {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[timeInterval doubleValue]];
-    NSDictionary *extendedData = [ATConnect extendedDataDate:date];
++ (void)makeExtendedDataDate:(ForgeTask *)task date:(NSNumber *)date {
+    NSDate *dateObject = [NSDate dateWithTimeIntervalSince1970:[date doubleValue]];
+    NSDictionary *extendedData = [ATConnect extendedDataDate:dateObject];
     [task success:extendedData];
 }
 
-+ (void)extendedDataLocation:(ForgeTask *)task latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
++ (void)makeExtendedDataLocation:(ForgeTask *)task longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude {
     NSDictionary *extendedData = [ATConnect extendedDataLocationForLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
     [task success:extendedData];
 }
 
-+ (void)extendedDataCommerce:(ForgeTask *)task
-               transactionID:(NSString *)transactionID
-                 affiliation:(NSString *)affiliation
-                     revenue:(NSNumber *)revenue
-                    shipping:(NSNumber *)shipping
-                         tax:(NSNumber *)tax
-                    currency:(NSString *)currency
-               commerceItems:(NSArray *)commerceItems
++ (void)makeExtendedDataCommerce:(ForgeTask *)task
+                   transactionID:(NSString *)transactionID
+                     affiliation:(NSString *)affiliation
+                         revenue:(NSNumber *)revenue
+                        shipping:(NSNumber *)shipping
+                             tax:(NSNumber *)tax
+                        currency:(NSString *)currency
+                   commerceItems:(NSArray *)commerceItems
 {
     NSDictionary *extendedData = [ATConnect extendedDataCommerceWithTransactionID:transactionID affiliation:affiliation revenue:revenue shipping:shipping tax:tax currency:currency commerceItems:commerceItems];
     [task success:extendedData];
 }
 
-+ (void)extendedDataCommerceItem:(ForgeTask *)task
-                          itemID:(NSString *)itemID
-                            name:(NSString *)name
-                        category:(NSString *)category
-                           price:(NSNumber *)price
-                        quantity:(NSNumber *)quantity
-                        currency:(NSString *)currency
++ (void)makeExtendedDataCommerceItem:(ForgeTask *)task
+                              itemID:(NSString *)itemID
+                                name:(NSString *)name
+                            category:(NSString *)category
+                               price:(NSNumber *)price
+                            quantity:(NSNumber *)quantity
+                            currency:(NSString *)currency
 {
     NSDictionary *extendedData = [ATConnect extendedDataCommerceItemWithItemID:itemID name:name category:category price:price quantity:quantity currency:currency];
     [task success:extendedData];
