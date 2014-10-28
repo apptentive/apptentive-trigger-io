@@ -51,26 +51,26 @@
 /// @name Extended Data for Events
 ///-------------------------------
 
-+ (void)extendedDataDate:(ForgeTask *)task timeIntervalSince1970:(NSNumber *)timeInterval;
++ (void)makeExtendedDataDate:(ForgeTask *)task timeIntervalSince1970:(NSNumber *)timeInterval;
 
-+ (void)extendedDataLocation:(ForgeTask *)task latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude;
++ (void)makeExtendedDataLocation:(ForgeTask *)task longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude;
 
-+ (void)extendedDataCommerce:(ForgeTask *)task
-               transactionID:(NSString *)transactionID
-                 affiliation:(NSString *)affiliation
-                     revenue:(NSNumber *)revenue
-                    shipping:(NSNumber *)shipping
-                         tax:(NSNumber *)tax
-                    currency:(NSString *)currency
-               commerceItems:(NSArray *)commerceItems;
++ (void)makeExtendedDataCommerce:(ForgeTask *)task
+                   transactionID:(NSString *)transactionID
+                     affiliation:(NSString *)affiliation
+                         revenue:(NSNumber *)revenue
+                        shipping:(NSNumber *)shipping
+                             tax:(NSNumber *)tax
+                        currency:(NSString *)currency
+                   commerceItems:(NSArray *)commerceItems;
 
-+ (void)extendedDataCommerceItem:(ForgeTask *)task
-                          itemID:(NSString *)itemID
-                            name:(NSString *)name
-                        category:(NSString *)category
-                           price:(NSNumber *)price
-                        quantity:(NSNumber *)quantity
-                        currency:(NSString *)currency;
++ (void)makeExtendedDataCommerceItem:(ForgeTask *)task
+                              itemID:(NSString *)itemID
+                                name:(NSString *)name
+                            category:(NSString *)category
+                               price:(NSNumber *)price
+                            quantity:(NSNumber *)quantity
+                            currency:(NSString *)currency;
 
 ///-------------------------------------
 /// @name Attach Text, Images, and Files
