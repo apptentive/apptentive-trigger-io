@@ -31,9 +31,15 @@
 		"apptentive": {
 			"version": "0.0.30",
 			"config": {
-				"API_Key": "48e42b1ddab437325f38727ea84bc69ffab4789277f335b52ce7471c4c4d1c54",
+				"API_Key": "595c96bb19ac0487b262958dd8927f654eedcdc2107cd4f2329573b711ff5a5b",
 				"App_ID": "294047845",
 				"Debug_Mode": true
+			}
+		},
+		"launchimage": {
+			"version": "2.8",
+			"config": {
+				"background-size": "auto"
 			}
 		}
 	},

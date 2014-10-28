@@ -1,7 +1,13 @@
 package io.trigger.forge.android.modules.apptentive;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.apptentive.android.sdk.Apptentive;
 import com.apptentive.android.sdk.Log;
@@ -61,14 +67,37 @@ public class API {
 	// ************************************************************************************************************************************************
 	// Events
 	// ************************************************************************************************************************************************
-	public static boolean engage(final ForgeTask task, @ForgeParam("event") final String event) {
+	public static void engage(final ForgeTask task, @ForgeParam("event") final String event) {
 		Log.e("Engage(\"%s\")", event);
-		return Apptentive.engage(ForgeApp.getActivity(), event);
-//		task.performUI(new Runnable() {
-//			public void run() {
-//				Apptentive.showRatingFlowIfConditionsAreMet(ForgeApp.getActivity());
-//			}
-//		});
+		task.performUI(new Runnable() {
+			public void run() {
+				boolean invokedInteraction = Apptentive.engage(ForgeApp.getActivity(), event);
+				task.success(new JsonPrimitive(invokedInteraction)); 
+			}
+		});
+	}
+
+	public static void engage(final ForgeTask task, @ForgeParam("event") final String event, @ForgeParam("customData") final JSONObject customData) {
+		Log.e("Engage(\"%s\")", event);
+		task.performUI(new Runnable() {
+			public void run() {
+				Map<String, Object> customDataMap = new HashMap<String, Object>();
+				if (customData != null && customData.length() != 0) {
+					try {
+						Iterator<String> keys = customData.keys();
+						if (keys.hasNext()){
+							String key = keys.next();
+							customDataMap.put(key, customData.get(key));
+						}
+					} catch (JSONException e) {
+						task.error(e.getLocalizedMessage());
+						return;
+					}
+				}
+				boolean invokedInteraction = Apptentive.engage(ForgeApp.getActivity(), event, customDataMap);
+				task.success(new JsonPrimitive(invokedInteraction)); 
+			}
+		});
 	}
 
 
@@ -89,46 +118,6 @@ public class API {
 		int count = Apptentive.getUnreadMessageCount(ForgeApp.getActivity());
 		task.success(new JsonPrimitive(count));
 	}
-
-
-//	 ************************************************************************************************************************************************
-//	 Surveys
-//	 ************************************************************************************************************************************************
-//	
-//	public static void isSurveyAvailable(final ForgeTask task, @ForgeParam("tags") final JsonArray surveyTags) {
-//		Log.e("Tags: " + surveyTags.toString());
-//		String[] tags = new String[surveyTags.size()];
-//		for (int i = 0; i < surveyTags.size(); i++) {
-//			tags[i] = surveyTags.get(i).getAsString();
-//		}
-//		boolean available = Apptentive.isSurveyAvailable(ForgeApp.getActivity(), tags);
-//		task.success(available);
-//	}
-//
-//	public static void showSurvey(final ForgeTask task, @ForgeParam("tags") final JsonArray surveyTags) {
-//		Log.e("Tags: " + surveyTags.toString());
-//		// Remove duplicates and empty string tags.
-//		Set<String> tagSet = new HashSet<String>();
-//		for (int i = 0; i < surveyTags.size(); i++) {
-//			String tag = surveyTags.get(i).getAsString();
-//			if(tag.length() > 0) {
-//				tagSet.add(tag);
-//			}
-//		}
-//		final String[] tags = tagSet.toArray(new String[]{});
-//		task.performUI(new Runnable() {
-//			public void run() {
-//				Apptentive.showSurvey(ForgeApp.getActivity(), new OnSurveyFinishedListener() {
-//					@Override
-//					public void onSurveyFinished(boolean completed) {
-//						Log.d("Firing apptentive.surveyFinishedsurvey event with parameter {%b}", completed);
-//						ForgeApp.event("apptentive.surveyFinished", new JsonPrimitive(completed));
-//					}
-//				}, tags);
-//			}
-//		});
-//	}
-
 	
 	// ************************************************************************************************************************************************
 	// DEBUG

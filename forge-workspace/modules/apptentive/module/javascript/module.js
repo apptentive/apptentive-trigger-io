@@ -10,28 +10,7 @@ forge.apptentive = {
 	// Interface Customization
 	// ************************************************************************************************************************************************
 	
-	setShowEmailField: function (success, error, showEmailField) {
-		forge.internal.call(
-			'apptentive.setShowEmailField',
-			{
-				showEmailField: showEmailField
-			},
-			success,
-			error
-		);
-	},
-		
-	setCustomPlaceholderText: function (success, error, customPlaceholderText) {
-		forge.internal.call(
-			'apptentive.setCustomPlaceholderText',
-			{
-				customPlaceholderText: customPlaceholderText
-			},
-			success,
-			error
-		);
-	},
-	
+// TODO: MOVE TO SETTINGS?
 	setInitiallyUseMessageCenter: function (success, error, initiallyUseMessageCenter) {
 		forge.internal.call(
 			'apptentive.setInitiallyUseMessageCenter',
@@ -43,6 +22,7 @@ forge.apptentive = {
 		);
 	},
 	
+// TODO: MOVE TO SETTINGS?
 	setInitiallyHideBranding: function (success, error, initiallyHideBranding) {
 		forge.internal.call(
 			'apptentive.setInitiallyHideBranding',
@@ -90,6 +70,7 @@ forge.apptentive = {
 		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
 	},
 
+// iOS Only?
 	didReceiveRemoteNotification: function (success, error, notificationUserInfo) {
 		forge.internal.call(
 			'apptentive.didReceiveRemoteNotification',
@@ -105,8 +86,8 @@ forge.apptentive = {
 		forge.internal.call(
 			'apptentive.engage', {
 				event: event
-			}, 
-			success, 
+			},
+			success,
 			error
 		);
 	},
@@ -116,8 +97,8 @@ forge.apptentive = {
 			'apptentive.engage', {
 				event: event,
 				customData: customData
-			}, 
-			success, 
+			},
+			success,
 			error
 		);
 	},
@@ -129,7 +110,7 @@ forge.apptentive = {
 				customData: customData,
 				extendedData: extendedData
 			}, 
-			success, 
+			success,
 			error
 		);
 	},
@@ -138,21 +119,21 @@ forge.apptentive = {
 	// ************************************************************************************************************************************************
 	// Extended Data for Events
 	// ************************************************************************************************************************************************
-	
-	extendedDataDate: function (success, error, timeIntervalSince1970) {
+
+	makeExtendedDataDate: function (success, error, date) {
 		forge.internal.call(
 			'apptentive.extendedDataDate',
 			{
-				timeIntervalSince1970: timeIntervalSince1970
+				date: date.getTime() / 1000
 			},
 			success,
 			error
 		);
 	},
 	
-	extendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
+	makeExtendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
 		forge.internal.call(
-			'apptentive.extendedDataCommerce',
+			'apptentive.makeExtendedDataCommerce',
 			{
 				success: success,
 				error: error,
@@ -169,9 +150,9 @@ forge.apptentive = {
 		);
 	},
 
-	extendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
+	makeExtendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
 		forge.internal.call(
-			'apptentive.extendedDataCommerceItem',
+			'apptentive.makeExtendedDataCommerceItem',
 			{
 				itemID: itemID,
 				name: name,
@@ -185,9 +166,24 @@ forge.apptentive = {
 		);
 	},
 
+	makeExtendedDataLocation: function (success, error, longitude, latitude) {
+		forge.internal.call(
+			'apptentive.makeExtendedDataLocation',
+			{
+				longitude: longitude,
+				latitude: latitude
+			},
+			success,
+			error
+		);
+	},
+
+
 	// ************************************************************************************************************************************************
 	// Attach Text, Images, and Files
 	// ************************************************************************************************************************************************
+	
+	// TODO: Figure out what trigger devs will have access to in regards to files.
 	
 	sendAttachment: function (success, error, text) {
 		forge.internal.call(
@@ -282,7 +278,8 @@ forge.apptentive = {
 	// ************************************************************************************************************************************************
 	// Open App Store
 	// ************************************************************************************************************************************************
-	
+
+/*
 	openAppStore: function (success, error) {
 		forge.internal.call(
 			'apptentive.openAppStore',
@@ -291,7 +288,8 @@ forge.apptentive = {
 			error
 		);
 	},
-	
+*/
+
 	// ************************************************************************************************************************************************
 	// SDK Events
 	// ************************************************************************************************************************************************
@@ -345,6 +343,7 @@ forge.apptentive = {
 		);
 	},
 
+// Maybe 
 	addUrbanAirshipIntegration: function (success, error, deviceToken) {
 		forge.internal.call(
 			'apptentive.addUrbanAirshipIntegration',
