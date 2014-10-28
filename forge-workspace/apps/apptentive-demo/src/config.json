@@ -29,11 +29,12 @@
 			"version": "2.1"
 		},
 		"apptentive": {
-			"version": "0.0.30",
+			"version": "0.0.32",
 			"config": {
 				"API_Key": "595c96bb19ac0487b262958dd8927f654eedcdc2107cd4f2329573b711ff5a5b",
 				"App_ID": "294047845",
-				"Debug_Mode": true
+				"Debug_Mode": true,
+				"Initially_Hide_Apptentive_Branding": true
 			}
 		},
 		"launchimage": {
