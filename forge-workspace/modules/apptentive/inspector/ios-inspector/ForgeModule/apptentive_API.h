@@ -33,8 +33,6 @@
 
 + (void)setInitiallyHideBranding:(ForgeTask *)task initiallyHideBranding:(NSNumber *)initiallyHideBranding;
 
-+ (void)setTintColor:(ForgeTask *)task red:(NSNumber *)red green:(NSNumber *)green blue:(NSNumber *)blue;
-
 ///--------------------
 /// @name Presenting UI
 ///--------------------

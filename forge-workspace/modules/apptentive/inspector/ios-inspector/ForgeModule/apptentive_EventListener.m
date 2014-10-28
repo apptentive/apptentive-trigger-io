@@ -26,6 +26,21 @@
         
     // Survey Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(surveyWasSent:) name:ATSurveySentNotification object:nil];
+    
+    // Tint Color (#AARRGGBB)
+    NSString *tintColor = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"iOS_Tint_Color"];
+    if (tintColor && tintColor.length == 9 && [tintColor substringToIndex:1] isEqualToString:@"#") {
+        unsigned rgbValue = 0;
+        NSScanner *scanner = [NSScanner scannerWithString:hexString];
+        [scanner setScanLocation:1]; // bypass '#' character
+        [scanner scanHexInt:&rgbValue];
+        CGFloat alpha = ((rgbValue & 0xFF000000) >> 24);
+        CGFloat red = ((rgbValue & 0xFF0000) >> 16);
+        CGFloat green = ((rgbValue & 0xFF00) >> 8);
+        CGFloat blue = (rgbValue & 0xFF);
+        UIColor *hexColor = [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:alpha];
+        [[ATConnect sharedConnection] setTintColor:hexColor];
+    }
 }
 
 + (void)unreadMessageCountChanged:(NSNotification *)notification
