@@ -13,12 +13,12 @@
 			"description": "Enables verbose logging. Leaving this on in production can affect performance."
 		},
 		"Initially_Use_Message_Center": {
-			"required": true,
+			"required": false,
 			"type": "boolean",
 			"description": "If you choose to disable Message Center from the server, you can un-check this setting to make sure Message Center cannot be displayed until after the client checks with the server."
 		},
 		"Initially_Hide_Apptentive_Branding": {
-			"required": true,
+			"required": false,
 			"type": "boolean",
 			"description": "If you choose to hide Apptentive branding from the server, you can check this setting to make sure branding is not displayed until after the client checks with the server."
 		},

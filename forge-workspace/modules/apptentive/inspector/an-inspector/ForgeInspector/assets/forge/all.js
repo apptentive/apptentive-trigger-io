@@ -37,6 +37,7 @@ forge.apptentive = {
 		);
 	},
 
+/*
 	engage: function (success, error, event) {
 		forge.internal.call(
 			'apptentive.engage', {
@@ -48,6 +49,7 @@ forge.apptentive = {
 	},
 	
 	engage: function (success, error, event, customData) {
+		forge.logging.info("Event: " + event);
 		forge.internal.call(
 			'apptentive.engage', {
 				event: event,
@@ -57,8 +59,12 @@ forge.apptentive = {
 			error
 		);
 	},
-	
+*/
+
 	engage: function (success, error, event, customData, extendedData) {
+		forge.logging.info("Event: " + event);
+		forge.logging.info("customData: " + customData);
+		forge.logging.info("extendedData: " + extendedData);
 		forge.internal.call(
 			'apptentive.engage', {
 				event: event,
@@ -69,70 +75,6 @@ forge.apptentive = {
 			error
 		);
 	},
-	
-
-	// ************************************************************************************************************************************************
-	// Extended Data for Events
-	// ************************************************************************************************************************************************
-
-	makeExtendedDataDate: function (success, error, date) {
-		forge.internal.call(
-			'apptentive.extendedDataDate',
-			{
-				date: date.getTime() / 1000
-			},
-			success,
-			error
-		);
-	},
-	
-	makeExtendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
-		forge.internal.call(
-			'apptentive.makeExtendedDataCommerce',
-			{
-				success: success,
-				error: error,
-				transactionID: transactionID,
-				affiliation: affiliation,
-				revenue: revenue,
-				shipping: shipping,
-				tax: tax,
-				currency: currency,
-				commerceItems: commerceItems
-			},
-			success,
-			error
-		);
-	},
-
-	makeExtendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
-		forge.internal.call(
-			'apptentive.makeExtendedDataCommerceItem',
-			{
-				itemID: itemID,
-				name: name,
-				category: category,
-				price: price,
-				quantity: quantity,
-				currency: currency
-			},
-			success,
-			error
-		);
-	},
-
-	makeExtendedDataLocation: function (success, error, longitude, latitude) {
-		forge.internal.call(
-			'apptentive.makeExtendedDataLocation',
-			{
-				longitude: longitude,
-				latitude: latitude
-			},
-			success,
-			error
-		);
-	},
-
 
 	// ************************************************************************************************************************************************
 	// Attach Text, Images, and Files

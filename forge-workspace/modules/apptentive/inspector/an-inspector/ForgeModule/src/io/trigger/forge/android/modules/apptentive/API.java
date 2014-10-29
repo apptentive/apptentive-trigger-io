@@ -1,18 +1,20 @@
 package io.trigger.forge.android.modules.apptentive;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.apptentive.android.sdk.Apptentive;
 import com.apptentive.android.sdk.Log;
+import com.apptentive.android.sdk.model.ExtendedData;
 import com.apptentive.android.sdk.module.survey.OnSurveyFinishedListener;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import io.trigger.forge.android.core.ForgeApp;
@@ -30,7 +32,7 @@ public class API {
 	}
 
 	// ************************************************************************************************************************************************
-	// Data
+	// Custom Data / Extended Data
 	// ************************************************************************************************************************************************
 
 	public static void setInitialUserName(final ForgeTask task, @ForgeParam("initialUserName") final String initialUserName) {
@@ -62,11 +64,12 @@ public class API {
 		Apptentive.removeCustomPersonData(ForgeApp.getActivity(), key);
 		task.success();
 	}
-
 	
 	// ************************************************************************************************************************************************
 	// Events
 	// ************************************************************************************************************************************************
+
+/*
 	public static void engage(final ForgeTask task, @ForgeParam("event") final String event) {
 		Log.e("Engage(\"%s\")", event);
 		task.performUI(new Runnable() {
@@ -76,26 +79,46 @@ public class API {
 			}
 		});
 	}
+*/
 
-	public static void engage(final ForgeTask task, @ForgeParam("event") final String event, @ForgeParam("customData") final JSONObject customData) {
-		Log.e("Engage(\"%s\")", event);
+	public static void engage(final ForgeTask task, @ForgeParam("event") final String event, @ForgeParam("customData") final JsonObject customData, @ForgeParam("extendedData") final JsonArray extendedData) {
+		Log.e("Engage(\"%s\", \"%s\", \"%s\")", event, customData, extendedData);
 		task.performUI(new Runnable() {
 			public void run() {
+				
 				Map<String, Object> customDataMap = new HashMap<String, Object>();
-				if (customData != null && customData.length() != 0) {
-					try {
-						Iterator<String> keys = customData.keys();
-						if (keys.hasNext()){
-							String key = keys.next();
-							customDataMap.put(key, customData.get(key));
+				List<ExtendedData> extendedDataList = new ArrayList<ExtendedData>();
+				if (customData != null) { 
+					Set<Map.Entry<String, JsonElement>> entrySet = customData.entrySet();
+					if (entrySet != null) {
+						Iterator<Map.Entry<String, JsonElement>> it = (Iterator<Map.Entry<String, JsonElement>>) entrySet.iterator();
+						while(it.hasNext()) {
+							Map.Entry<String, JsonElement> next = it.next();
+							String key = next.getKey();
+							JsonElement jsonElement = next.getValue();
+							if (!jsonElement.isJsonPrimitive()) {
+								Log.w("CustomData cannot contain nested arrays or objects.");
+								continue;
+							} else {
+								JsonPrimitive primitive = jsonElement.getAsJsonPrimitive();
+								Object value = null;
+								if (primitive.isBoolean()) {
+									value = primitive.getAsBoolean();
+								} else if (primitive.isNumber()) {
+									value = primitive.getAsNumber();
+								} else if (primitive.isString()) {
+									value = primitive.getAsString();
+								}
+								if (value != null) {
+									customDataMap.put(key, value);
+								}
+							}
 						}
-					} catch (JSONException e) {
-						task.error(e.getLocalizedMessage());
-						return;
 					}
 				}
 				boolean invokedInteraction = Apptentive.engage(ForgeApp.getActivity(), event, customDataMap);
-				task.success(new JsonPrimitive(invokedInteraction)); 
+				task.success(new JsonPrimitive(invokedInteraction));
+
 			}
 		});
 	}

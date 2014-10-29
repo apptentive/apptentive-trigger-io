@@ -1,5 +1,7 @@
 module("apptentive");
 
+// This automated test script uses the QUnit API: http://api.qunitjs.com/category/assert/
+ 
 var name = "Peter";
 asyncTest("Test setting Apptentive Initial User Name", 1, function() {
 	forge.apptentive.setInitialUserName(name,
@@ -118,4 +120,36 @@ asyncTest("Test unread message count", 1, function() {
 	);
 });
 
+asyncTest("Test engage(\"aaa\"). Should return false.", 1, function() {
+	forge.apptentive.engage(
+		function(success) {
+			forge.logging.info("engage() returned: " + (typeof success) + " -> " + success);
+			equal(success, false, "Showed Interaction? " + success);
+			start();
+		},
+		function(error) {
+			ok(false, "Error: " + error);
+			start();
+		},
+		"aaa",
+		{"foo": "bar"},
+		[]
+	);
+});
 
+asyncTest("Test engage(\"event_1\"). Should return true.", 1, function() {
+	forge.apptentive.engage(
+		function(success) {
+			forge.logging.info("engage() returned: " + (typeof success) + " -> " + success);
+			equal(success, true, "Showed Interaction? " + success);
+			start();
+		},
+		function(error) {
+			ok(false, "Error: " + error);
+			start();
+		},
+		"event_1",
+		{"foo": "bar"},
+		[]
+	);
+});
