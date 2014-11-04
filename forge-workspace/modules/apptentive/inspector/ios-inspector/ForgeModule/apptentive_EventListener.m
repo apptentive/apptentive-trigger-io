@@ -29,9 +29,9 @@
     
     // Tint Color (#AARRGGBB)
     NSString *tintColor = [[[ForgeApp sharedApp] configForModule:@"apptentive"] objectForKey:@"iOS_Tint_Color"];
-    if (tintColor && tintColor.length == 9 && [tintColor substringToIndex:1] isEqualToString:@"#") {
+    if (tintColor && tintColor.length == 9 && [[tintColor substringToIndex:1] isEqualToString:@"#"]) {
         unsigned rgbValue = 0;
-        NSScanner *scanner = [NSScanner scannerWithString:hexString];
+        NSScanner *scanner = [NSScanner scannerWithString:tintColor];
         [scanner setScanLocation:1]; // bypass '#' character
         [scanner scanHexInt:&rgbValue];
         CGFloat alpha = ((rgbValue & 0xFF000000) >> 24);
