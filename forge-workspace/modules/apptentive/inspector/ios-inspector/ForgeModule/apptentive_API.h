@@ -43,6 +43,8 @@
 
 + (void)didReceiveRemoteNotification:(ForgeTask *)task notificationUserInfo:(NSDictionary *)notificationUserInfo;
 
++ (void)willShowInteraction:(ForgeTask *)task event:(NSString *)event;
+
 + (void)engage:(ForgeTask *)task event:(NSString *)event;
 + (void)engage:(ForgeTask *)task event:(NSString *)event customData:(NSDictionary *)customData;
 + (void)engage:(ForgeTask *)task event:(NSString *)event customData:(NSDictionary *)customData extendedData:(NSArray *)extendedData;

@@ -70,6 +70,11 @@
     [task success:nil];
 }
 
++ (void)willShowInteraction:(ForgeTask *)task event:(NSString *)event {
+    BOOL willShow = [[ATConnect sharedConnection] willShowInteractionForEvent:event];
+    [task success:@(willShow)];
+}
+
 + (void)engage:(ForgeTask *)task event:(NSString *)event {
     BOOL didEngage = [[ATConnect sharedConnection] engage:event fromViewController:[[ForgeApp sharedApp] viewController]];
     [task success:@(didEngage)];
