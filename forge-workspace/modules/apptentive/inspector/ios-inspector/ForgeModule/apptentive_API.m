@@ -75,16 +75,6 @@
     [task success:@(willShow)];
 }
 
-+ (void)engage:(ForgeTask *)task event:(NSString *)event {
-    BOOL didEngage = [[ATConnect sharedConnection] engage:event fromViewController:[[ForgeApp sharedApp] viewController]];
-    [task success:@(didEngage)];
-}
-
-+ (void)engage:(ForgeTask *)task event:(NSString *)event customData:(NSDictionary *)customData {
-    BOOL didEngage = [[ATConnect sharedConnection] engage:event withCustomData:customData fromViewController:[[ForgeApp sharedApp] viewController]];
-    [task success:@(didEngage)];
-}
-
 + (void)engage:(ForgeTask *)task event:(NSString *)event customData:(NSDictionary *)customData extendedData:(NSArray *)extendedData {
     BOOL didEngage = [[ATConnect sharedConnection] engage:event withCustomData:customData withExtendedData:extendedData fromViewController:[[ForgeApp sharedApp] viewController]];
     [task success:@(didEngage)];
