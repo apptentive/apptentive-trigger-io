@@ -10,7 +10,10 @@ import java.util.Set;
 
 import com.apptentive.android.sdk.Apptentive;
 import com.apptentive.android.sdk.Log;
+import com.apptentive.android.sdk.model.CommerceExtendedData;
 import com.apptentive.android.sdk.model.ExtendedData;
+import com.apptentive.android.sdk.model.LocationExtendedData;
+import com.apptentive.android.sdk.model.TimeExtendedData;
 import com.apptentive.android.sdk.module.survey.OnSurveyFinishedListener;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -84,22 +87,21 @@ public class API {
 	public static void engage(final ForgeTask task, @ForgeParam("event") final String event, @ForgeParam("customData") final JsonObject customData, @ForgeParam("extendedData") final JsonArray extendedData) {
 		Log.e("Engage(\"%s\", \"%s\", \"%s\")", event, customData, extendedData);
 		task.performUI(new Runnable() {
+			/**
+			 * 
+			 */
 			public void run() {
 				
 				Map<String, Object> customDataMap = new HashMap<String, Object>();
-				List<ExtendedData> extendedDataList = new ArrayList<ExtendedData>();
-				if (customData != null) { 
+				if (customData != null) {
 					Set<Map.Entry<String, JsonElement>> entrySet = customData.entrySet();
 					if (entrySet != null) {
-						Iterator<Map.Entry<String, JsonElement>> it = (Iterator<Map.Entry<String, JsonElement>>) entrySet.iterator();
-						while(it.hasNext()) {
+						Iterator<Map.Entry<String, JsonElement>> it = entrySet.iterator();
+						while (it.hasNext()) {
 							Map.Entry<String, JsonElement> next = it.next();
 							String key = next.getKey();
 							JsonElement jsonElement = next.getValue();
-							if (!jsonElement.isJsonPrimitive()) {
-								Log.w("CustomData cannot contain nested arrays or objects.");
-								continue;
-							} else {
+							if (jsonElement.isJsonPrimitive()) {
 								JsonPrimitive primitive = jsonElement.getAsJsonPrimitive();
 								Object value = null;
 								if (primitive.isBoolean()) {
@@ -112,13 +114,54 @@ public class API {
 								if (value != null) {
 									customDataMap.put(key, value);
 								}
+							} else {
+								Log.w("CustomData cannot contain nested arrays or objects.");
 							}
 						}
 					}
 				}
-				boolean invokedInteraction = Apptentive.engage(ForgeApp.getActivity(), event, customDataMap);
-				task.success(new JsonPrimitive(invokedInteraction));
 
+
+				List<ExtendedData> extendedDataList = new ArrayList<ExtendedData>();
+
+				if (extendedData != null) {
+					Log.e("extendedData was supplied.");
+					Iterator<JsonElement> it = extendedData.iterator();
+					while (it.hasNext()) {
+						Log.e("Got a piece of extendedData.");
+						JsonObject wrapperObject = it.next().getAsJsonObject();
+						if (wrapperObject.has(ExtendedData.Type.time.name())) {
+							Log.e("Got a TimeExtendedData.");
+							try {
+								JsonObject timeObject = wrapperObject.get(ExtendedData.Type.time.name()).getAsJsonObject();
+								TimeExtendedData time = new TimeExtendedData(timeObject.toString());
+								extendedDataList.add(time);
+							} catch (Exception e) {
+								Log.e("Error parsing Extended Data.", e);
+							}
+						} else if (wrapperObject.has(ExtendedData.Type.location.name())) {
+							Log.e("Got a LocationExtendedData.");
+							try {
+								JsonObject locationObject = wrapperObject.get(ExtendedData.Type.location.name()).getAsJsonObject();
+								LocationExtendedData location = new LocationExtendedData (locationObject.toString());
+								extendedDataList.add(location);
+							} catch (Exception e) {
+								Log.e("Error parsing Extended Data.", e);
+							}
+						} else if (wrapperObject.has(ExtendedData.Type.commerce.name())) {
+							Log.e("Got a CommerceExtendedData.");
+							try {
+								JsonObject commerceObject = wrapperObject.get(ExtendedData.Type.commerce.name()).getAsJsonObject();
+								CommerceExtendedData commerce = new CommerceExtendedData (commerceObject.toString());
+								extendedDataList.add(commerce);
+							} catch (Exception e) {
+								Log.e("Error parsing Extended Data.", e);
+							}
+						}
+					}
+				}
+				boolean invokedInteraction = Apptentive.engage(ForgeApp.getActivity(), event, customDataMap, extendedDataList.toArray(new ExtendedData[extendedDataList.size()]));
+				task.success(new JsonPrimitive(invokedInteraction));
 			}
 		});
 	}
