@@ -54,11 +54,11 @@ forge.apptentive = {
 	// Extended Data for Events
 	// ************************************************************************************************************************************************
 
-	extendedDataDate: function (success, error, timeIntervalSince1970) {
+	makeExtendedDataTime: function (success, error, time) {
 		forge.internal.call(
-			'apptentive.extendedDataDate',
+			'apptentive.makeExtendedDataTime',
 			{
-				timeIntervalSince1970: timeIntervalSince1970
+				time: (time / 1000)
 			},
 			success,
 			error
@@ -85,19 +85,19 @@ forge.apptentive = {
 	},
 
 	extendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
-	forge.internal.call(
-	'apptentive.extendedDataCommerceItem',
-	{
-	itemID: itemID,
-	name: name,
-	category: category,
-	price: price,
-	quantity: quantity,
-	currency: currency
-	},
-	success,
-	error
-	);
+		forge.internal.call(
+			'apptentive.extendedDataCommerceItem',
+			{
+				itemID: itemID,
+				name: name,
+				category: category,
+				price: price,
+				quantity: quantity,
+				currency: currency
+			},
+			success,
+			error
+		);
 	},
 
 	// ************************************************************************************************************************************************

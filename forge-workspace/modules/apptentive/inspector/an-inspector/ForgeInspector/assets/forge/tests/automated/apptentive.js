@@ -1,7 +1,7 @@
 module("apptentive");
 
 // This automated test script uses the QUnit API: http://api.qunitjs.com/category/assert/
- 
+/*
 var name = "Peter";
 asyncTest("Test setting Apptentive Initial User Name", 1, function() {
 	forge.apptentive.setInitialUserName(name,
@@ -276,6 +276,51 @@ asyncTest("Test engage(\"event_3\") with empty custom data and complete extended
 				}
 			}
 		]
+	);
+});
+
+asyncTest("Test makeExtendedDataTime().", 1, function() {
+	forge.apptentive.makeExtendedDataTime(
+		function(success) {
+			ok(true, "Did it worked?");
+			start();
+		},
+		function(error) {
+			ok(false, "Error: " + error);
+			start();
+		},
+		new Date().getTime()
+	);
+});
+*/
+
+asyncTest("Test engageWithExtendedDataEndToEnd().", 1, function() {
+	var timeExtendedData;
+	forge.apptentive.makeExtendedDataTime(
+		function(success) {
+			timeExtendedData = success;
+			forge.logging.info("TimeExtendedData: " + timeExtendedData);
+
+			forge.apptentive.engage(
+				function(success) {
+					forge.logging.info("engage() returned: " + (typeof success) + " -> " + success);
+					equal(success, true, "Showed Interaction? " + success);
+					start();
+				},
+				function(error) {
+					ok(false, "Error: " + error);
+					start();
+				},
+				"event_1",
+				{},
+				[timeExtendedData]
+			);
+		},
+		function(error) {
+			ok(false, "Error: " + error);
+			start();
+		},
+		new Date().getTime()
 	);
 });
 
