@@ -35,30 +35,6 @@ forge.apptentive = {
 		);
 	},
 
-/*
-	engage: function (success, error, event) {
-		forge.internal.call(
-			'apptentive.engage', {
-				event: event
-			},
-			success,
-			error
-		);
-	},
-	
-	engage: function (success, error, event, customData) {
-		forge.logging.info("Event: " + event);
-		forge.internal.call(
-			'apptentive.engage', {
-				event: event,
-				customData: customData
-			},
-			success,
-			error
-		);
-	},
-*/
-
 	engage: function (success, error, event, customData, extendedData) {
 		forge.logging.info("Event: " + event);
 		forge.logging.info("customData: " + customData);
@@ -66,9 +42,59 @@ forge.apptentive = {
 		forge.internal.call(
 			'apptentive.engage', {
 				event: event,
-				customData: customData,
-				extendedData: extendedData
+				customData: (!customData || customData == "") ? {} : customData,
+				extendedData: (!extendedData || extendedData == "") ? [] : extendedData
 			}, 
+			success,
+			error
+		);
+	},
+
+	// ************************************************************************************************************************************************
+	// Extended Data for Events
+	// ************************************************************************************************************************************************
+
+	makeExtendedDataTime: function (success, error, time) {
+		forge.internal.call(
+			'apptentive.makeExtendedDataTime',
+			{
+				time: (time / 1000)
+			},
+			success,
+			error
+		);
+	},
+
+	extendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
+		forge.internal.call(
+			'apptentive.extendedDataCommerce',
+			{
+				success: success,
+				error: error,
+				transactionID: transactionID,
+				affiliation: affiliation,
+				revenue: revenue,
+				shipping: shipping,
+				tax: tax,
+				currency: currency,
+				commerceItems: commerceItems
+			},
+			success,
+			error
+		);
+	},
+
+	extendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
+		forge.internal.call(
+			'apptentive.extendedDataCommerceItem',
+			{
+				itemID: itemID,
+				name: name,
+				category: category,
+				price: price,
+				quantity: quantity,
+				currency: currency
+			},
 			success,
 			error
 		);
