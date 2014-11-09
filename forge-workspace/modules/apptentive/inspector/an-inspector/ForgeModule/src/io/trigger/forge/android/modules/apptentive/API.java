@@ -18,6 +18,7 @@ import com.apptentive.android.sdk.module.survey.OnSurveyFinishedListener;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
 import io.trigger.forge.android.core.ForgeApp;
@@ -68,21 +69,133 @@ public class API {
 		task.success();
 	}
 	
+	public static void makeExtendedDataTime(final ForgeTask task, @ForgeParam("time") final double time) {
+		Log.e("makeExtendedDataTime(\"%f\"", time);
+		try {
+			TimeExtendedData timeExtendedData = new TimeExtendedData(time);
+
+			
+			JsonParser parser = new JsonParser();
+			JsonObject timeJsonObject = (JsonObject)parser.parse(timeExtendedData.toString());
+			JsonObject wrapper = new JsonObject();
+			wrapper.add("location", timeJsonObject);
+			task.success(wrapper);
+		} catch (Exception e) {
+			task.error(e);
+		}
+	}
+
+	public static void makeExtendedDataLocation(final ForgeTask task, @ForgeParam("longitude") final Number longitude, @ForgeParam("latitude") final Number latitude) {
+		Log.e("makeExtendedDataLocation(\"%s\", \"%s\"", longitude.toString(), latitude.toString());
+		try {
+			ExtendedData location = new LocationExtendedData(longitude.doubleValue(), latitude.doubleValue());
+
+			JsonParser parser = new JsonParser();
+			JsonObject locationJsonObject = (JsonObject)parser.parse(location.toString());
+			JsonObject wrapper = new JsonObject();
+			wrapper.add("time", locationJsonObject);
+			task.success(wrapper);
+		} catch (Exception e) {
+			task.error(e);
+		}
+	}
+
+	public static void makeExtendedDataCommerce(final ForgeTask task) {
+		Log.e("makeExtendedDataCommerce(\"%s\"", task.params.toString());
+		try {
+			CommerceExtendedData commerce = new CommerceExtendedData();
+
+			// ID
+			JsonPrimitive id = task.params.get("id").getAsJsonPrimitive();
+			if (id.isNumber()) {
+				commerce.setId(id.getAsNumber());
+			} else {
+				commerce.setId(id.getAsString());
+			}
+
+			// Affiliation
+			JsonPrimitive affiliation = task.params.get("affiliation").getAsJsonPrimitive();
+			if (affiliation.isNumber()) {
+				commerce.setId(affiliation.getAsNumber());
+			} else {
+				commerce.setId(affiliation.getAsString());
+			}
+			
+			// Revenue
+			commerce.setRevenue(task.params.get("revenue").getAsNumber());
+			
+			// Shipping
+			commerce.setShipping(task.params.get("shipping").getAsNumber());
+			
+			// Tax
+			commerce.setTax(task.params.get("tax").getAsNumber());
+
+			// Currency
+			commerce.setCurrency(task.params.get("currency").getAsString());
+
+			// Items
+			JsonArray items = task.params.get("items").getAsJsonArray();
+			Iterator<JsonElement> it = items.iterator();
+			while(it.hasNext()) {
+				JsonObject item = it.next().getAsJsonObject();
+				commerce.addItem(new CommerceExtendedData.Item(item.toString()));
+			}
+			
+			JsonParser parser = new JsonParser();
+			JsonObject commerceJsonObject = (JsonObject)parser.parse(commerce.toString());
+			JsonObject wrapper = new JsonObject();
+			wrapper.add("commerce", commerceJsonObject);
+			task.success(wrapper);
+		} catch (Exception e) {
+			task.error(e);
+		}
+	}
+
+	public static void makeExtendedDataCommerceItem(final ForgeTask task) {
+		Log.e("makeExtendedDataCommerceItem(\"%s\"", task.params.toString());
+		try {
+			CommerceExtendedData.Item item = new CommerceExtendedData.Item();
+
+			// ID
+			JsonPrimitive id = task.params.get("id").getAsJsonPrimitive();
+			if (id.isNumber()) {
+				item.setId(id.getAsNumber());
+			} else {
+				item.setId(id.getAsString());
+			}
+
+			// Name
+			JsonPrimitive name = task.params.get("name").getAsJsonPrimitive();
+			if (name.isNumber()) {
+				item.setName(name.getAsNumber());
+			} else {
+				item.setName(name.getAsString());
+			}
+			
+			// Category
+			item.setCategory(task.params.get("category").getAsString());
+
+			// Price
+			item.setPrice(task.params.get("category").getAsNumber());
+			
+			// Quantity
+			item.setQuantity(task.params.get("quantity").getAsNumber());
+			
+			// Currency
+			item.setCurrency(task.params.get("currency").getAsString());
+
+			JsonParser parser = new JsonParser();
+			JsonObject commerceItemJsonObject = (JsonObject)parser.parse(item.toString());
+			task.success(commerceItemJsonObject);
+		} catch (Exception e) {
+			task.error(e);
+		}
+	}
+
+
 	// ************************************************************************************************************************************************
 	// Events
 	// ************************************************************************************************************************************************
-
-/*
-	public static void engage(final ForgeTask task, @ForgeParam("event") final String event) {
-		Log.e("Engage(\"%s\")", event);
-		task.performUI(new Runnable() {
-			public void run() {
-				boolean invokedInteraction = Apptentive.engage(ForgeApp.getActivity(), event);
-				task.success(new JsonPrimitive(invokedInteraction)); 
-			}
-		});
-	}
-*/
 
 	public static void engage(final ForgeTask task, @ForgeParam("event") final String event, @ForgeParam("customData") final JsonObject customData, @ForgeParam("extendedData") final JsonArray extendedData) {
 		Log.e("Engage(\"%s\", \"%s\", \"%s\")", event, customData, extendedData);

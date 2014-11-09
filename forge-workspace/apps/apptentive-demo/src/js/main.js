@@ -160,16 +160,34 @@ $(function () {
 	// Engagement
 	// ************************************************************************************************************************************************
 	
-	$('button.engage').click(function () {	
-		forge.apptentive.engage(
-			function() {
+	$('button.engage').click(function () {
+
+		forge.apptentive.makeExtendedDataTime(
+			function(timeExtendedData) {
+				forge.logging.info("Generated TimeExtendedData: " + timeExtendedData);
+	
+				forge.apptentive.engage(
+					function(success) {
+						forge.logging.info("Interaction was shown? " + success);
+					},
+					function(error) {
+						forge.logging.error(error.message);
+					},
+					$('input.engage.event').val(),
+					{
+						"string": "value",
+						"number": 1234567890
+					},
+					[
+						timeExtendedData
+					]
+				);
 			},
 			function(error) {
 				forge.logging.error(error.message);
 			},
-			$('input.engage.event').val(),
-			{},
-			[]
-		);
-	});	
+			new Date().getTime()
+		);	
+	});
 });
+	
