@@ -1,7 +1,7 @@
 module("apptentive");
 
 // This automated test script uses the QUnit API: http://api.qunitjs.com/category/assert/
-/*
+
 var name = "Peter";
 asyncTest("Test setting Apptentive Initial User Name", 1, function() {
 	forge.apptentive.setInitialUserName(name,
@@ -292,7 +292,7 @@ asyncTest("Test makeExtendedDataTime().", 1, function() {
 		new Date().getTime()
 	);
 });
-*/
+
 
 asyncTest("Test engageWithExtendedDataEndToEnd().", 1, function() {
 	var timeExtendedData;
