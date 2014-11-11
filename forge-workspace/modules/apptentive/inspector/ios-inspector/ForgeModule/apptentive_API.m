@@ -85,38 +85,40 @@
 ///-------------------------------
 
 + (void)makeExtendedDataDate:(ForgeTask *)task date:(NSNumber *)date {
-    NSDate *dateObject = [NSDate dateWithTimeIntervalSince1970:[date doubleValue]];
+    NSDictionary *parameters = task.params;
+    NSDate *dateObject = [NSDate dateWithTimeIntervalSince1970:[parameters[@"date"] doubleValue]];
     NSDictionary *extendedData = [ATConnect extendedDataDate:dateObject];
+    
     [task success:extendedData];
 }
 
-+ (void)makeExtendedDataLocation:(ForgeTask *)task longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude {
-    NSDictionary *extendedData = [ATConnect extendedDataLocationForLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
++ (void)makeExtendedDataLocation:(ForgeTask *)task {
+    NSDictionary *parameters = task.params;
+    NSDictionary *extendedData = [ATConnect extendedDataLocationForLatitude:[parameters[@"latitude"] doubleValue] longitude:[parameters[@"longitude"] doubleValue]];
+    
     [task success:extendedData];
 }
 
-+ (void)makeExtendedDataCommerce:(ForgeTask *)task
-                   transactionID:(NSString *)transactionID
-                     affiliation:(NSString *)affiliation
-                         revenue:(NSNumber *)revenue
-                        shipping:(NSNumber *)shipping
-                             tax:(NSNumber *)tax
-                        currency:(NSString *)currency
-                   commerceItems:(NSArray *)commerceItems
-{
-    NSDictionary *extendedData = [ATConnect extendedDataCommerceWithTransactionID:transactionID affiliation:affiliation revenue:revenue shipping:shipping tax:tax currency:currency commerceItems:commerceItems];
++ (void)makeExtendedDataCommerce:(ForgeTask *)task {
+    NSDictionary *parameters = task.params;
+    NSDictionary *extendedData = [ATConnect extendedDataCommerceWithTransactionID:parameters[@"transactionID"]
+                                                                      affiliation:parameters[@"affiliation"]
+                                                                          revenue:parameters[@"revenue"]
+                                                                         shipping:parameters[@"shipping"]
+                                                                              tax:parameters[@"tax"]
+                                                                         currency:parameters[@"currency"]
+                                                                    commerceItems:parameters[@"commerceItems"]];
     [task success:extendedData];
 }
 
-+ (void)makeExtendedDataCommerceItem:(ForgeTask *)task
-                              itemID:(NSString *)itemID
-                                name:(NSString *)name
-                            category:(NSString *)category
-                               price:(NSNumber *)price
-                            quantity:(NSNumber *)quantity
-                            currency:(NSString *)currency
-{
-    NSDictionary *extendedData = [ATConnect extendedDataCommerceItemWithItemID:itemID name:name category:category price:price quantity:quantity currency:currency];
++ (void)makeExtendedDataCommerceItem:(ForgeTask *)task {
+    NSDictionary *parameters = task.params;
+    NSDictionary *extendedData = [ATConnect extendedDataCommerceItemWithItemID:parameters[@"itemID"]
+                                                                          name:parameters[@"name"]
+                                                                      category:parameters[@"category"]
+                                                                         price:parameters[@"price"]
+                                                                      quantity:parameters[@"quantity"]
+                                                                      currency:parameters[@"currency"]];
     [task success:extendedData];
 }
 
