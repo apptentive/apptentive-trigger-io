@@ -1,33 +1,29 @@
 # Apptentive Trigger.io Module
-
-The Apptentive Trigger.io module allows you to add a quick and easy in-app-feedback mechanism to your Trigger.io applications. Feedback is sent to the Apptentive web service.
+The Apptentive Trigger.io module allows you to add quick and easy in-app feedback, ratings, surveys, and more to your Trigger.io applications.
 
 ## Install Guide
-
-The following steps will help guide you through implementing Apptentive in your app through Trigger.io. This guide assumes you have your app implemented in Trigger.io already.
+The following steps will help guide you through integrating the Apptentive Trigger.io module into your app.
 
 ### Get the Apptentive Module
-
 The official Apptentive module is available via the [Trigger.io Forge](https://trigger.io/modules/apptentive/).
+
+To add the Apptentive Trigger.io module to your app, follow these steps:
 
 *Note: v1.2.5 is the current version. Due to a release discrepancy, v1.7 was released prematurely. Please ignore 1.7, or upgrade to 1.2.5.*
 
 ### Configure the Apptentive Module
-
 The Apptentive Trigger Module requires configuration after you add it to your Trigger app. You must supply your Apptentive API Key. If you are building for iOS, you must also specify your Apple App Store App ID.
 
 
 You can configure your app through the Trigger Toolkit web app.
 
 1. In a browser, open Trigger Toolkit and Navigate to your Trigger app
-2. On the left hand side, click the `Public` link under `Modules`
+2. On the left hand side, click **Modules**, under the **Public** section.
 3. Scroll to the Apptentive module
-4. Fill in the apiKey and appId fields
+4. Yo must supply your app's API Key. Your API Key is located on our [website](https://be.apptentive.com) under _**Settings -> API & Development -> API Token**_.
+5. If you are building an iOS version of your app, supply your app's **App ID**. This is not used for Android
 
-Note: Your Apptentive API Key is found in your app's settings page at [Apptentive](https://www.apptentive.com)
-
-### Setup the Apptentive Module
-
+### Set Up the Apptentive Module
 To make an Apptentive API call from JavaScript, you will make method calls in the following fashion.
 
 ```javascript
