@@ -51,7 +51,7 @@
 /// @name Extended Data for Events
 ///-------------------------------
 
-+ (void)makeExtendedDataDate:(ForgeTask *)task;
++ (void)makeExtendedDataTime:(ForgeTask *)task;
 + (void)makeExtendedDataLocation:(ForgeTask *)task;
 + (void)makeExtendedDataCommerce:(ForgeTask *)task;
 + (void)makeExtendedDataCommerceItem:(ForgeTask *)task;

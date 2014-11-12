@@ -84,7 +84,7 @@
 /// @name Extended Data for Events
 ///-------------------------------
 
-+ (void)makeExtendedDataDate:(ForgeTask *)task date:(NSNumber *)date {
++ (void)makeExtendedDataTime:(ForgeTask *)task date:(NSNumber *)date {
     NSDictionary *parameters = task.params;
     NSDate *dateObject = [NSDate dateWithTimeIntervalSince1970:[parameters[@"date"] doubleValue]];
     NSDictionary *extendedData = [ATConnect extendedDataDate:dateObject];
