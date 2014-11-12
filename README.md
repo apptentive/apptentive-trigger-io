@@ -23,7 +23,7 @@ You can configure your app through the Trigger Toolkit web app.
 4. Yo must supply your app's API Key. Your API Key is located on our [website](https://be.apptentive.com) under _**Settings -> API & Development -> API Token**_.
 5. If you are building an iOS version of your app, supply your app's **App ID**. This is not used for Android
 
-### Set Up the Apptentive Module
+### Calling Apptentive API Methods
 To make an Apptentive API call from JavaScript, you will make method calls in the following fashion.
 
 ```javascript
@@ -74,21 +74,21 @@ Message Center can also be presented with custom data:
 
 ```javascript
 forge.apptentive.showMessageCenterWithCustomData(
-	{},
+    {},
     function(error) {
         forge.logging.info("Error: " + error.message);
     },
-	{
-		'customDataKey': 'customDataValue',
-		'module': 'trigger.io'
-	}
+    {
+        'customDataKey': 'customDataValue',
+        'module': 'trigger.io'
+    }
 );
 ```
 
-Use `getUnreadMessageCount` to check for messages that the user has not yet read.
+Use `getUnreadMessageCount()` to check for messages that the user has not yet read.
 
 ```javascript
-forge.apptentive.unreadMessageCount(success, error);
+forge.apptentive.getUnreadMessageCount(success, error);
 ```
 
 ###### Example
@@ -105,7 +105,7 @@ forge.apptentive.getUnreadMessageCount(
 );
 ```
 
-You can also listen for our `unreadMessageCountChanged` notification.
+You can also register a listener that will be notifid when the number of unread messages changes.
 
 ```javascript
 forge.apptentive.addUnreadMessageCountChangedListener(callback);
@@ -121,122 +121,29 @@ forge.apptentive.addUnreadMessageCountChangedListener(
 );
 ```
 
-#### Ratings
+#### Events and Interactions
 
-Apptentive also provides an App Store rating flow. A ratings dialog will be displayed based on the number of launches of your application, the amount of time the user has been using it, and the number of significant events the user has completed (for example, levels passed). All of these variables can be modified in your [Apptentive](https://www.apptentive.com) settings.
-
-Display the rating flow at a certain point in your code with:
+Apptentive provides the `engage()` method, which allows you to record actions (**Events**) taken by the user, while also driving a powerful system of **Interactions**. Each call to `engage()` will record an **Event**. On the Apptentice website, you can configure **Interactions** to display at specific **Events**, and you can also construct logic that determines whether or not an **Interaction** will display based on previously recorded **Events**.
 
 ```javascript
-forge.apptentive.showRatingFlowIfConditionsAreMet(success, error);
+// event - A string that you pick to represent the place in your code that you are calling this method from.
+// Success function returns true if an Interaction was displayed.
+forge.apptentive.engage(success, error, event);
 ```
 
 ###### Example
-
-```javascript
-forge.apptentive.showRatingFlowIfConditionsAreMet(
-    {},
-    function (error) {
-        forge.logging.info("Error: " + error.message);
-    }
-);
-```
-
-The rating flow will only be shown if all conditions (number of launches, significant events, etc.) have been met.
-
-Log significant events, such as completing a level, with:
-
-```javascript
-forge.apptentive.logSignificantEvent(success, error);
-```
-
-###### Example
-
-```javascript
-forge.apptentive.logSignificantEvent(
-    {},
-    function (error) {
-        forge.logging.info("Error: " + error.message);
-    }
-);
-```
-
-#### Surveys
-
-Surveys can be created on our website and presented, in-app, to users.
-
-You can check if there are any available surveys that have been downloaded from the server:
-
-```javascript
-forge.apptentive.isSurveyAvailable(success, error, tags);
-```
-
-###### Example
-
-```javascript
-forge.apptentive.isSurveyAvailable(
-    function(surveyIsAvailable) {
-        alert("Survey is available? " + surveyIsAvailable);
-    },
-    function(error) {
-        forge.logging.info("Error: " + error.message);
-    },
-    ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
-);
-```
-
-If surveys are available, present the surveys in the app:
-
-```javascript
-forge.apptentive.showSurvey(success, error, tags);
-```
-
-###### Example
-
-```javascript
-forge.apptentive.showSurvey(
-    {},
-    function(error) {
-        forge.logging.info("Error: " + error.message);
-    },
-    ["tag1", "tag2"] // If you do not have any tagged surveys, leave this array empty.
-);
-```
-
-We will then send a notification when the survey has been finished by the app user.
-
-```javascript
-forge.apptentive.addSurveySentListener(callback);
-```
-
-###### Example
-
-```javascript
-forge.apptentive.addSurveySentListener(
-    function (completed) {
-        alert("Survey was " + (completed ? "completed", "skipped") + ", and sent to Apptentive");
-    }
-);
-```
-
-#### Upgrade Messages
-
-Apptentive's Upgrade Message feature allows you to display a brief message when your app has been updated. You can speak directly to your users and let them know what has changed in the release.
-
-To present an upgrade message, engage the code point `app.launch` when your application becomes active:
 
 ```javascript
 forge.apptentive.engage(
-	function() {
-	},
-	function(error) {
-		forge.logging.error(error.message);
-	},
-	'app.launch'
+    function (showedInteraction) {
+        forge.logging.info((showedInteraction ? "Showed" : "Did not show") + " interaction.");
+    },
+    function (error) {
+        forge.logging.error("Error: " + error.message);
+    },
+    "event_name"
 );
 ```
-
-Upgrade Messages are created and configured online via your Apptentive dashboard.
 
 #### User Info
 
@@ -256,7 +163,9 @@ forge.apptentive.setInitialUserName(
     },
     "John Doe"
 );
+```
 
+```javascript
 forge.apptentive.setInitialUserEmailAddress(success, error, initialUserEmailAddress);
 ```
 
