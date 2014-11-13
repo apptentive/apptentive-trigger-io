@@ -31,7 +31,8 @@ build_steps_json = [
     {'do': { "add_ios_system_framework" : {"framework":"QuartzCore.framework"}}},
     {'do': { "add_ios_system_framework" : {"framework":"StoreKit.framework"}}},
     {'do': { "add_ios_system_framework" : {"framework":"SystemConfiguration.framework"}}},
-    {'do': { "add_ios_system_framework" : {"framework":"UIKit.framework"}}}
+    {'do': { "add_ios_system_framework" : {"framework":"UIKit.framework"}}},
+    {'do': { "add_ios_system_framework" : {"framework":"Accelerate.framework"}}}
 ]
 
 with open("build_steps.json", "w") as f:
