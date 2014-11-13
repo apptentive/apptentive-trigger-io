@@ -65,30 +65,30 @@ forge.apptentive = {
 		);
 	},
 
-	extendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
+	makeExtendedDataCommerce: function (success, error, id, affiliation, revenue, shipping, tax, currency, items) {
 		forge.internal.call(
-			'apptentive.extendedDataCommerce',
+			'apptentive.makeExtendedDataCommerce',
 			{
 				success: success,
 				error: error,
-				transactionID: transactionID,
+				id: id,
 				affiliation: affiliation,
 				revenue: revenue,
 				shipping: shipping,
 				tax: tax,
 				currency: currency,
-				commerceItems: commerceItems
+				items: items
 			},
 			success,
 			error
 		);
 	},
 
-	extendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
+	makextendedDataCommerceItem: function (success, error, id, name, category, price, quantity, currency) {
 		forge.internal.call(
-			'apptentive.extendedDataCommerceItem',
+			'apptentive.makeExtendedDataCommerceItem',
 			{
-				itemID: itemID,
+				id: id,
 				name: name,
 				category: category,
 				price: price,
