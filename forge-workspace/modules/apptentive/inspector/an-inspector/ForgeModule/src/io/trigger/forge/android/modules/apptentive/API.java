@@ -78,7 +78,7 @@ public class API {
 			JsonParser parser = new JsonParser();
 			JsonObject timeJsonObject = (JsonObject)parser.parse(timeExtendedData.toString());
 			JsonObject wrapper = new JsonObject();
-			wrapper.add("location", timeJsonObject);
+			wrapper.add("time", timeJsonObject);
 			task.success(wrapper);
 		} catch (Exception e) {
 			task.error(e);
@@ -93,7 +93,7 @@ public class API {
 			JsonParser parser = new JsonParser();
 			JsonObject locationJsonObject = (JsonObject)parser.parse(location.toString());
 			JsonObject wrapper = new JsonObject();
-			wrapper.add("time", locationJsonObject);
+			wrapper.add("location", locationJsonObject);
 			task.success(wrapper);
 		} catch (Exception e) {
 			task.error(e);
