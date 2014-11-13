@@ -84,7 +84,7 @@ forge.apptentive = {
 		);
 	},
 
-	makextendedDataCommerceItem: function (success, error, id, name, category, price, quantity, currency) {
+	makeExtendedDataCommerceItem: function (success, error, id, name, category, price, quantity, currency) {
 		forge.internal.call(
 			'apptentive.makeExtendedDataCommerceItem',
 			{
