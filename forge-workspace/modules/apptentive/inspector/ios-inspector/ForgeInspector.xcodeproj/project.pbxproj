@@ -178,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				B3E58384162714AD00BD59DD /* libForgeModule.a */,
-				B3E58386162714AD00BD59DD /* templatemodule.bundle */,
+				B3E58386162714AD00BD59DD /* apptentive.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -329,7 +329,7 @@
 			remoteRef = B3E58383162714AD00BD59DD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B3E58386162714AD00BD59DD /* templatemodule.bundle */ = {
+		B3E58386162714AD00BD59DD /* apptentive.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = apptentive.bundle;
@@ -383,7 +383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = ./apptentive_module_build_script.sh;
 		};
 		B3E9B87815C2EDC300590095 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
