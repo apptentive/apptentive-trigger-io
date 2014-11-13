@@ -51,26 +51,10 @@
 /// @name Extended Data for Events
 ///-------------------------------
 
-+ (void)makeExtendedDataDate:(ForgeTask *)task timeIntervalSince1970:(NSNumber *)timeInterval;
-
-+ (void)makeExtendedDataLocation:(ForgeTask *)task longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude;
-
-+ (void)makeExtendedDataCommerce:(ForgeTask *)task
-                   transactionID:(NSString *)transactionID
-                     affiliation:(NSString *)affiliation
-                         revenue:(NSNumber *)revenue
-                        shipping:(NSNumber *)shipping
-                             tax:(NSNumber *)tax
-                        currency:(NSString *)currency
-                   commerceItems:(NSArray *)commerceItems;
-
-+ (void)makeExtendedDataCommerceItem:(ForgeTask *)task
-                              itemID:(NSString *)itemID
-                                name:(NSString *)name
-                            category:(NSString *)category
-                               price:(NSNumber *)price
-                            quantity:(NSNumber *)quantity
-                            currency:(NSString *)currency;
++ (void)makeExtendedDataTime:(ForgeTask *)task;
++ (void)makeExtendedDataLocation:(ForgeTask *)task;
++ (void)makeExtendedDataCommerce:(ForgeTask *)task;
++ (void)makeExtendedDataCommerceItem:(ForgeTask *)task;
 
 ///-------------------------------------
 /// @name Attach Text, Images, and Files
