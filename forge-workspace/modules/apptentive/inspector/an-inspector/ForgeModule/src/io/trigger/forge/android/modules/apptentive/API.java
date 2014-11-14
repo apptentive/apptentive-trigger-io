@@ -108,7 +108,7 @@ public class API {
 			// ID
 			JsonPrimitive id = task.params.get("id").getAsJsonPrimitive();
 			if (id.isNumber()) {
-				commerce.setId(id.getAsNumber());
+				commerce.setId(id.getAsDouble());
 			} else {
 				commerce.setId(id.getAsString());
 			}
@@ -116,19 +116,19 @@ public class API {
 			// Affiliation
 			JsonPrimitive affiliation = task.params.get("affiliation").getAsJsonPrimitive();
 			if (affiliation.isNumber()) {
-				commerce.setId(affiliation.getAsNumber());
+				commerce.setId(affiliation.getAsDouble());
 			} else {
 				commerce.setId(affiliation.getAsString());
 			}
 			
 			// Revenue
-			commerce.setRevenue(task.params.get("revenue").getAsNumber());
+			commerce.setRevenue(task.params.get("revenue").getAsDouble());
 			
 			// Shipping
-			commerce.setShipping(task.params.get("shipping").getAsNumber());
+			commerce.setShipping(task.params.get("shipping").getAsDouble());
 			
 			// Tax
-			commerce.setTax(task.params.get("tax").getAsNumber());
+			commerce.setTax(task.params.get("tax").getAsDouble());
 
 			// Currency
 			commerce.setCurrency(task.params.get("currency").getAsString());
@@ -159,7 +159,7 @@ public class API {
 			// ID
 			JsonPrimitive id = task.params.get("id").getAsJsonPrimitive();
 			if (id.isNumber()) {
-				item.setId(id.getAsNumber());
+				item.setId(id.getAsDouble());
 			} else {
 				item.setId(id.getAsString());
 			}
@@ -167,7 +167,7 @@ public class API {
 			// Name
 			JsonPrimitive name = task.params.get("name").getAsJsonPrimitive();
 			if (name.isNumber()) {
-				item.setName(name.getAsNumber());
+				item.setName(name.getAsDouble());
 			} else {
 				item.setName(name.getAsString());
 			}
@@ -176,10 +176,10 @@ public class API {
 			item.setCategory(task.params.get("category").getAsString());
 
 			// Price
-			item.setPrice(task.params.get("category").getAsNumber());
+			item.setPrice(task.params.get("price").getAsDouble());
 			
 			// Quantity
-			item.setQuantity(task.params.get("quantity").getAsNumber());
+			item.setQuantity(task.params.get("quantity").getAsDouble());
 			
 			// Currency
 			item.setCurrency(task.params.get("currency").getAsString());
@@ -220,7 +220,7 @@ public class API {
 								if (primitive.isBoolean()) {
 									value = primitive.getAsBoolean();
 								} else if (primitive.isNumber()) {
-									value = primitive.getAsNumber();
+									value = primitive.getAsDouble();
 								} else if (primitive.isString()) {
 									value = primitive.getAsString();
 								}
@@ -327,5 +327,20 @@ public class API {
 				alert.show();
 			}
 		});
+	}
+	
+	private static Number getAsJavaNumber(JsonPrimitive number) {		
+		try {
+			return number.getAsLong();
+		} catch (NumberFormatException e) {
+			//
+		}		
+		try {
+			return number.getAsDouble();
+		} catch (NumberFormatException e) {
+			Log.e("Error: ", e);
+		}		
+		Log.e("Returning null!");
+		return null;
 	}
 }

@@ -1,7 +1,7 @@
 module("apptentive");
 
 // This automated test script uses the QUnit API: http://api.qunitjs.com/category/assert/
-
+/*
 var name = "Peter";
 asyncTest("Test setting Apptentive Initial User Name", 1, function() {
 	forge.apptentive.setInitialUserName(name,
@@ -324,3 +324,65 @@ asyncTest("Test engageWithExtendedDataEndToEnd().", 1, function() {
 	);
 });
 
+asyncTest("Test makeExtendedDataCommerceItem().", 1, function() {
+	forge.apptentive.makeExtendedDataCommerceItem(
+		function(extendedData) {
+			forge.logging.info("CommerceItemExtendedData: " + extendedData);
+			ok(extendedData, "Failed to create CommerceItemExtendedData.");
+			start();
+		},
+		function(error) {
+			ok(false, error);
+			start();
+		},
+        22222222,
+        "Item Name",
+        "Category",
+        20,
+        5,
+        "USD"
+	);
+});
+*/
+asyncTest("Test makeExtendedDataCommerce().", 2, function() {
+	function makeExtendedDataCommerce(item) {
+		forge.apptentive.makeExtendedDataCommerce(
+			function(extendedData) {
+				ok(true, "Made CommerceExtendedData");
+				forge.logging.info("CommerceExtendedData: " + JSON.stringify(extendedData));
+				start();
+			},
+			function(error) {
+				ok(false, "Making CommerceExtendedData");
+				forge.logging.error(JSON.stringify(error));
+				start();
+			},
+		    "commerce_id",
+		    1111111111,
+		    99.99,
+		    5,
+		    4.38,
+		    "USD",
+		    [item]
+		);
+	}
+
+	forge.apptentive.makeExtendedDataCommerceItem(
+		function(extendedData) {
+			ok(true, "Made CommerceItemExtendedData");
+			forge.logging.info("CommerceItemExtendedData: " + JSON.stringify(extendedData));
+			makeExtendedDataCommerce(extendedData);
+		},
+		function(error) {
+			ok(false, "Making CommerceItemExtendedData");
+			forge.logging.error(JSON.stringify(error));
+			start();
+		},
+        22222222,
+        "Item Name",
+        "Category",
+        19.99,
+        5.00,
+        "USD"
+	);
+});

@@ -161,11 +161,9 @@ $(function () {
 	// ************************************************************************************************************************************************
 	
 	$('button.engage').click(function () {
-
-		forge.apptentive.makeExtendedDataTime(
+		forge.apptentive.makeExtendedDataCommerce(
 			function(timeExtendedData) {
 				forge.logging.info("Generated TimeExtendedData: " + timeExtendedData);
-	
 				forge.apptentive.engage(
 					function(success) {
 						forge.logging.info("Interaction was shown? " + success);
@@ -186,8 +184,13 @@ $(function () {
 			function(error) {
 				forge.logging.error(error.message);
 			},
-			new Date().getTime()
-		);	
+			"commerce_id",
+			1111111111,
+			100,
+			5,
+			4.38,
+			"USD"
+		);
 	});
 });
 	
