@@ -70,7 +70,7 @@ public class API {
 	}
 	
 	public static void makeExtendedDataTime(final ForgeTask task, @ForgeParam("time") final double time) {
-		Log.e("makeExtendedDataTime(\"%f\"", time);
+		Log.v("makeExtendedDataTime(\"%f\"", time);
 		try {
 			TimeExtendedData timeExtendedData = new TimeExtendedData(time);
 
@@ -78,22 +78,22 @@ public class API {
 			JsonParser parser = new JsonParser();
 			JsonObject timeJsonObject = (JsonObject)parser.parse(timeExtendedData.toString());
 			JsonObject wrapper = new JsonObject();
-			wrapper.add("location", timeJsonObject);
+			wrapper.add("time", timeJsonObject);
 			task.success(wrapper);
 		} catch (Exception e) {
 			task.error(e);
 		}
 	}
 
-	public static void makeExtendedDataLocation(final ForgeTask task, @ForgeParam("longitude") final Number longitude, @ForgeParam("latitude") final Number latitude) {
-		Log.e("makeExtendedDataLocation(\"%s\", \"%s\"", longitude.toString(), latitude.toString());
+	public static void makeExtendedDataLocation(final ForgeTask task) {
+		Log.v("makeExtendedDataLocation(\"%s\"", task.params.toString());
 		try {
-			ExtendedData location = new LocationExtendedData(longitude.doubleValue(), latitude.doubleValue());
+			ExtendedData location = new LocationExtendedData(task.params.get("longitude").getAsDouble(), task.params.get("latitude").getAsDouble());
 
 			JsonParser parser = new JsonParser();
 			JsonObject locationJsonObject = (JsonObject)parser.parse(location.toString());
 			JsonObject wrapper = new JsonObject();
-			wrapper.add("time", locationJsonObject);
+			wrapper.add("location", locationJsonObject);
 			task.success(wrapper);
 		} catch (Exception e) {
 			task.error(e);
@@ -101,7 +101,7 @@ public class API {
 	}
 
 	public static void makeExtendedDataCommerce(final ForgeTask task) {
-		Log.e("makeExtendedDataCommerce(\"%s\"", task.params.toString());
+		Log.v("makeExtendedDataCommerce(\"%s\"", task.params.toString());
 		try {
 			CommerceExtendedData commerce = new CommerceExtendedData();
 
@@ -116,9 +116,9 @@ public class API {
 			// Affiliation
 			JsonPrimitive affiliation = task.params.get("affiliation").getAsJsonPrimitive();
 			if (affiliation.isNumber()) {
-				commerce.setId(affiliation.getAsDouble());
+				commerce.setAffiliation(affiliation.getAsDouble());
 			} else {
-				commerce.setId(affiliation.getAsString());
+				commerce.setAffiliation(affiliation.getAsString());
 			}
 			
 			// Revenue
@@ -152,7 +152,7 @@ public class API {
 	}
 
 	public static void makeExtendedDataCommerceItem(final ForgeTask task) {
-		Log.e("makeExtendedDataCommerceItem(\"%s\"", task.params.toString());
+		Log.v("makeExtendedDataCommerceItem(\"%s\"", task.params.toString());
 		try {
 			CommerceExtendedData.Item item = new CommerceExtendedData.Item();
 
@@ -198,7 +198,7 @@ public class API {
 	// ************************************************************************************************************************************************
 
 	public static void engage(final ForgeTask task, @ForgeParam("event") final String event, @ForgeParam("customData") final JsonObject customData, @ForgeParam("extendedData") final JsonArray extendedData) {
-		Log.e("Engage(\"%s\", \"%s\", \"%s\")", event, customData, extendedData);
+		Log.v("Engage(\"%s\", \"%s\", \"%s\")", event, customData, extendedData);
 		task.performUI(new Runnable() {
 			/**
 			 * 
@@ -238,13 +238,10 @@ public class API {
 				List<ExtendedData> extendedDataList = new ArrayList<ExtendedData>();
 
 				if (extendedData != null) {
-					Log.e("extendedData was supplied.");
 					Iterator<JsonElement> it = extendedData.iterator();
 					while (it.hasNext()) {
-						Log.e("Got a piece of extendedData.");
 						JsonObject wrapperObject = it.next().getAsJsonObject();
 						if (wrapperObject.has(ExtendedData.Type.time.name())) {
-							Log.e("Got a TimeExtendedData.");
 							try {
 								JsonObject timeObject = wrapperObject.get(ExtendedData.Type.time.name()).getAsJsonObject();
 								TimeExtendedData time = new TimeExtendedData(timeObject.toString());
@@ -253,7 +250,6 @@ public class API {
 								Log.e("Error parsing Extended Data.", e);
 							}
 						} else if (wrapperObject.has(ExtendedData.Type.location.name())) {
-							Log.e("Got a LocationExtendedData.");
 							try {
 								JsonObject locationObject = wrapperObject.get(ExtendedData.Type.location.name()).getAsJsonObject();
 								LocationExtendedData location = new LocationExtendedData (locationObject.toString());
@@ -262,7 +258,6 @@ public class API {
 								Log.e("Error parsing Extended Data.", e);
 							}
 						} else if (wrapperObject.has(ExtendedData.Type.commerce.name())) {
-							Log.e("Got a CommerceExtendedData.");
 							try {
 								JsonObject commerceObject = wrapperObject.get(ExtendedData.Type.commerce.name()).getAsJsonObject();
 								CommerceExtendedData commerce = new CommerceExtendedData (commerceObject.toString());
@@ -303,12 +298,6 @@ public class API {
 	// These are debug methods. They are not intended for use in a deployed application. They are only for development and testing purposes.
 	// ************************************************************************************************************************************************
 
-	// getApiKey()?
-	// setApiKey()?
-	// getInitialUserName()?
-	// setInitialUserName()?
-	// getInitialUserEmailAddress()?
-
 	public static void showAlert(final ForgeTask task, @ForgeParam("text") final String text) {
 		if (text.length() == 0) {
 			// Error if there is no text to show
@@ -327,20 +316,5 @@ public class API {
 				alert.show();
 			}
 		});
-	}
-	
-	private static Number getAsJavaNumber(JsonPrimitive number) {		
-		try {
-			return number.getAsLong();
-		} catch (NumberFormatException e) {
-			//
-		}		
-		try {
-			return number.getAsDouble();
-		} catch (NumberFormatException e) {
-			Log.e("Error: ", e);
-		}		
-		Log.e("Returning null!");
-		return null;
 	}
 }

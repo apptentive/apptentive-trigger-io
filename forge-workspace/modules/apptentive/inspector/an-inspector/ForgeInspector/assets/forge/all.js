@@ -38,9 +38,9 @@ forge.apptentive = {
 	},
 
 	engage: function (success, error, event, customData, extendedData) {
-		forge.logging.info("Event: " + event);
-		forge.logging.info("customData: " + customData);
-		forge.logging.info("extendedData: " + extendedData);
+		forge.logging.debug("Event: " + event);
+		forge.logging.debug("customData: " + JSON.stringify(customData));
+		forge.logging.debug("extendedData: " + JSON.stringify(extendedData));
 		forge.internal.call(
 			'apptentive.engage', {
 				event: event,
@@ -67,30 +67,42 @@ forge.apptentive = {
 		);
 	},
 
-	extendedDataCommerce: function (success, error, transactionID, affiliation, revenue, shipping, tax, currency, commerceItems) {
+	makeExtendedDataLocation: function (success, error, longitude, latitude) {
 		forge.internal.call(
-			'apptentive.extendedDataCommerce',
+			'apptentive.makeExtendedDataLocation',
 			{
-				success: success,
-				error: error,
-				transactionID: transactionID,
-				affiliation: affiliation,
-				revenue: revenue,
-				shipping: shipping,
-				tax: tax,
-				currency: currency,
-				commerceItems: commerceItems
+				longitude: longitude,
+				latitude: latitude
 			},
 			success,
 			error
 		);
 	},
 
-	extendedDataCommerceItem: function (success, error, itemID, name, category, price, quantity, currency) {
+	makeExtendedDataCommerce: function (success, error, id, affiliation, revenue, shipping, tax, currency, items) {
 		forge.internal.call(
-			'apptentive.extendedDataCommerceItem',
+			'apptentive.makeExtendedDataCommerce',
 			{
-				itemID: itemID,
+				success: success,
+				error: error,
+				id: id,
+				affiliation: affiliation,
+				revenue: revenue,
+				shipping: shipping,
+				tax: tax,
+				currency: currency,
+				items: items
+			},
+			success,
+			error
+		);
+	},
+
+	makeExtendedDataCommerceItem: function (success, error, id, name, category, price, quantity, currency) {
+		forge.internal.call(
+			'apptentive.makeExtendedDataCommerceItem',
+			{
+				id: id,
 				name: name,
 				category: category,
 				price: price,

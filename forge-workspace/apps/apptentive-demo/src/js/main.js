@@ -161,35 +161,19 @@ $(function () {
 	// ************************************************************************************************************************************************
 	
 	$('button.engage').click(function () {
-		forge.apptentive.makeExtendedDataCommerce(
-			function(timeExtendedData) {
-				forge.logging.info("Generated TimeExtendedData: " + timeExtendedData);
-				forge.apptentive.engage(
-					function(success) {
-						forge.logging.info("Interaction was shown? " + success);
-					},
-					function(error) {
-						forge.logging.error(error.message);
-					},
-					$('input.engage.event').val(),
-					{
-						"string": "value",
-						"number": 1234567890
-					},
-					[
-						timeExtendedData
-					]
-				);
+		forge.apptentive.engage(
+			function(success) {
+				forge.logging.info("Interaction was shown? " + success);
 			},
 			function(error) {
 				forge.logging.error(error.message);
 			},
-			"commerce_id",
-			1111111111,
-			100,
-			5,
-			4.38,
-			"USD"
+			$('input.engage.event').val(),
+			{
+				"string": "value",
+				"number": 1234567890
+			},
+			[]
 		);
 	});
 });

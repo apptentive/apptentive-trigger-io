@@ -36,9 +36,9 @@ forge.apptentive = {
 	},
 
 	engage: function (success, error, event, customData, extendedData) {
-		forge.logging.info("Event: " + event);
-		forge.logging.info("customData: " + customData);
-		forge.logging.info("extendedData: " + extendedData);
+		forge.logging.debug("Event: " + event);
+		forge.logging.debug("customData: " + JSON.stringify(customData));
+		forge.logging.debug("extendedData: " + JSON.stringify(extendedData));
 		forge.internal.call(
 			'apptentive.engage', {
 				event: event,
@@ -59,6 +59,18 @@ forge.apptentive = {
 			'apptentive.makeExtendedDataTime',
 			{
 				time: (time / 1000)
+			},
+			success,
+			error
+		);
+	},
+
+	makeExtendedDataLocation: function (success, error, longitude, latitude) {
+		forge.internal.call(
+			'apptentive.makeExtendedDataLocation',
+			{
+				longitude: longitude,
+				latitude: latitude
 			},
 			success,
 			error

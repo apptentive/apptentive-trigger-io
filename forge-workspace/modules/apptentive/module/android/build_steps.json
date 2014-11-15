@@ -11,7 +11,8 @@
 				"permission": "android.permission.GET_ACCOUNTS"
 			}
 		}
-	}, {
+	},
+	{
 		"do": {
 			"android_add_to_application_manifest": {
 				"element": {
@@ -23,7 +24,8 @@
 				}
 			}
 		}
-	}, {
+	},
+	{
 		"do": {
 			"android_add_to_application_manifest": {
 				"element": {
@@ -35,7 +37,8 @@
 				}
 			}
 		}
-	}, {
+	},
+	{
 		"do": {
 			"android_add_to_application_manifest": {
 				"element": {
@@ -47,7 +50,8 @@
 				}
 			}
 		}
-	}, {
+	},
+	{
 		"do": {
 			"android_add_to_application_manifest": {
 				"element": {
@@ -59,7 +63,8 @@
 				}
 			}
 		}
-	}, {
+	},
+	{
 		"do": {
 			"android_add_to_application_manifest": {
 				"element": {
@@ -71,7 +76,8 @@
 				}
 			}
 		}
-	}, {
+	},
+	{
 		"do": {
 			"android_add_to_application_manifest": {
 				"element": {
@@ -83,17 +89,33 @@
 				}
 			}
 		}
-	}, {
+	},
+	{
 		"do": {
 			"android_add_to_application_manifest": {
 				"element": {
 					"tag": "meta-data",
 					"attributes": {
 						"android:name": "apptentive_message_center_enabled",
-						"android:value": "{{modules.apptentive.config.Initially_Use_Message_Center}}"  
+						"android:value": "{{modules.apptentive.config.Initially_Use_Message_Center}}"
 					}
 				}
 			}
+		}
+	},
+	{
+		"do": {
+			"android_add_proguard_rule": "-keepattributes Signature"
+		}
+	},
+	{
+		"do": {
+			"android_add_proguard_rule": "-dontwarn com.apptentive.**"
+		}
+	},
+	{
+		"do": {
+			"android_add_proguard_rule": "-keep class ** { *; }"
 		}
 	}
 ]
