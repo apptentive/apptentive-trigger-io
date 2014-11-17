@@ -17,21 +17,6 @@ asyncTest("Test setting Apptentive Initial User Name", 1, function() {
 	);
 });
 
-if (forge.is.ios()) {
-	asyncTest("Test getting Apptentive Initial User Name", 1, function() {
-		forge.apptentive.initialUserName(
-			function(success) {
-				deepEqual(success, initialUserName, "User name should be set");
-				start();
-			},
-			function(error) {
-				ok(false, "Error getting user name.");
-				start();
-			}
-		);
-	});
-}
-
 var initialUserEmail = "peter@apptentive.com";
 asyncTest("Test setting Apptentive Initial User Email Address", 1, function() {
 	forge.apptentive.setInitialUserEmailAddress(
