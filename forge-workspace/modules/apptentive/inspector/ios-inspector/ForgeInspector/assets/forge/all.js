@@ -38,9 +38,9 @@ forge.apptentive = {
 	},
 
 	engage: function (success, error, event, customData, extendedData) {
-		forge.logging.info("Event: " + event);
-		forge.logging.info("customData: " + customData);
-		forge.logging.info("extendedData: " + extendedData);
+		forge.logging.debug("Event: " + event);
+		forge.logging.debug("customData: " + JSON.stringify(customData));
+		forge.logging.debug("extendedData: " + JSON.stringify(extendedData));
 		forge.internal.call(
 			'apptentive.engage', {
 				event: event,
@@ -67,6 +67,18 @@ forge.apptentive = {
 		);
 	},
 
+	makeExtendedDataLocation: function (success, error, longitude, latitude) {
+		forge.internal.call(
+			'apptentive.makeExtendedDataLocation',
+			{
+				longitude: longitude,
+				latitude: latitude
+			},
+			success,
+			error
+		);
+	},
+
 	makeExtendedDataCommerce: function (success, error, id, affiliation, revenue, shipping, tax, currency, items) {
 		forge.internal.call(
 			'apptentive.makeExtendedDataCommerce',
@@ -86,7 +98,7 @@ forge.apptentive = {
 		);
 	},
 
-	makextendedDataCommerceItem: function (success, error, id, name, category, price, quantity, currency) {
+	makeExtendedDataCommerceItem: function (success, error, id, name, category, price, quantity, currency) {
 		forge.internal.call(
 			'apptentive.makeExtendedDataCommerceItem',
 			{
