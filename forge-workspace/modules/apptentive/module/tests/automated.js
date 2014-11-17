@@ -2,9 +2,9 @@ module("apptentive");
 
 // This automated test script uses the QUnit API: http://api.qunitjs.com/category/assert/
 
-var name = "Peter";
+var initialUserName = "Peter";
 asyncTest("Test setting Apptentive Initial User Name", 1, function() {
-	forge.apptentive.setInitialUserName(name,
+	forge.apptentive.setInitialUserName(
 		function(success) {
 			ok(true, "Set user name");
 			start();
@@ -12,7 +12,8 @@ asyncTest("Test setting Apptentive Initial User Name", 1, function() {
 		function(error) {
 			ok(false, "Unable to set user name");
 			start();
-		}
+		},
+		initialUserName
 	);
 });
 
@@ -20,7 +21,7 @@ if (forge.is.ios()) {
 	asyncTest("Test getting Apptentive Initial User Name", 1, function() {
 		forge.apptentive.initialUserName(
 			function(success) {
-				deepEqual(success, name, "User name should be set");
+				deepEqual(success, initialUserName, "User name should be set");
 				start();
 			},
 			function(error) {
@@ -31,9 +32,9 @@ if (forge.is.ios()) {
 	});
 }
 
-var email = "peter@apptentive.com";
+var initialUserEmail = "peter@apptentive.com";
 asyncTest("Test setting Apptentive Initial User Email Address", 1, function() {
-	forge.apptentive.setInitialUserEmailAddress(email,
+	forge.apptentive.setInitialUserEmailAddress(
 		function(success) {
 			ok(true, "Set user email");
 			start();
@@ -41,7 +42,8 @@ asyncTest("Test setting Apptentive Initial User Email Address", 1, function() {
 		function(error) {
 			ok(false, "Unable to set user email");
 			start();
-		}
+		},
+		initialUserEmail
 	);
 });
 
