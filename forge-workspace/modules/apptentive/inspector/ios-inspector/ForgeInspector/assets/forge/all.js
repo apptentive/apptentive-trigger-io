@@ -6,15 +6,11 @@ forge.apptentive = {
 	// Presenting UI
 	// ************************************************************************************************************************************************
 
-	showMessageCenter: function (success, error) {
-		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
-	},
-		
-	showMessageCenterWithCustomData: function (success, error, customData) {
+	showMessageCenter: function (success, error, customData) {
 		forge.internal.call(
-			'apptentive.showMessageCenterWithCustomData',
+			'apptentive.showMessageCenter',
 			{
-				customData: customData
+				customData: (!customData || customData == "") ? {} : customData
 			},
 			success,
 			error
@@ -25,7 +21,8 @@ forge.apptentive = {
 		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
 	},
 
-// iOS Only?
+	// Apptentive remote notifications are disabled in Trigger.io for the time being.
+	/*
 	didReceiveRemoteNotification: function (success, error, notificationUserInfo) {
 		forge.internal.call(
 			'apptentive.didReceiveRemoteNotification',
@@ -36,6 +33,7 @@ forge.apptentive = {
 			error
 		);
 	},
+	*/
 
 	engage: function (success, error, event, customData, extendedData) {
 		forge.logging.debug("Event: " + event);
@@ -239,6 +237,8 @@ forge.apptentive = {
 		forge.internal.addEventListener("apptentive.surveyFinished", listener);
 	},
 	
+// Apptentive 3rd Party Integrations are disabled in Trigger.io for the time being.
+/*	
 	// ************************************************************************************************************************************************
 	// Integrate With Other Services
 	// ************************************************************************************************************************************************
@@ -311,6 +311,7 @@ forge.apptentive = {
 			error
 		);
 	},
+*/
 
 	// ************************************************************************************************************************************************
 	// Debug only
