@@ -12,7 +12,7 @@ forge.apptentive = {
 		forge.internal.call(
 			'apptentive.showMessageCenterWithCustomData',
 			{
-				customData: customData
+				(!customData || customData == "") ? {} : customData
 			},
 			success,
 			error
