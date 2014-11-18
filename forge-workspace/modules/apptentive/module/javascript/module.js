@@ -19,7 +19,8 @@ forge.apptentive = {
 		forge.internal.call('apptentive.getUnreadMessageCount', {}, success, error);
 	},
 
-// iOS Only?
+	// Apptentive remote notifications are disabled in Trigger.io for the time being.
+	/*
 	didReceiveRemoteNotification: function (success, error, notificationUserInfo) {
 		forge.internal.call(
 			'apptentive.didReceiveRemoteNotification',
@@ -30,6 +31,7 @@ forge.apptentive = {
 			error
 		);
 	},
+	*/
 
 	engage: function (success, error, event, customData, extendedData) {
 		forge.logging.debug("Event: " + event);
