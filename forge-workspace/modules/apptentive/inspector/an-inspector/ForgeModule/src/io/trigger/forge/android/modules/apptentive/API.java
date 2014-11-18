@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.apptentive.android.sdk.Apptentive;
 import com.apptentive.android.sdk.Log;
 import com.apptentive.android.sdk.model.CommerceExtendedData;
@@ -279,10 +282,40 @@ public class API {
 	// Message Center
 	// ************************************************************************************************************************************************
 
-	public static void showMessageCenter(final ForgeTask task) {
+	public static void showMessageCenter(final ForgeTask task, @ForgeParam("customData") final JsonObject customData) {
 		task.performUI(new Runnable() {
 			public void run() {
-				Apptentive.showMessageCenter(ForgeApp.getActivity());
+
+				Map<String, String> customDataMap = new HashMap<String, String>();
+				if (customData != null) {
+					Set<Map.Entry<String, JsonElement>> entrySet = customData.entrySet();
+					if (entrySet != null) {
+						Iterator<Map.Entry<String, JsonElement>> it = entrySet.iterator();
+						while (it.hasNext()) {
+							Map.Entry<String, JsonElement> next = it.next();
+							String key = next.getKey();
+							JsonElement jsonElement = next.getValue();
+							if (jsonElement.isJsonPrimitive()) {
+								JsonPrimitive primitive = jsonElement.getAsJsonPrimitive();
+								String value = null;
+								if (primitive.isString()) {
+									value = primitive.getAsString();
+								} else {
+									task.error("Custom Data must be string: " + key);
+									return;
+								}
+								if (value != null) {
+									customDataMap.put(key, value);
+								}
+							} else {
+								task.error("Custom Data cannot contain nested arrays or objects.");
+								return;
+							}
+						}
+					}
+				}
+				
+				Apptentive.showMessageCenter(ForgeApp.getActivity(), customDataMap);
 				task.success();
 			}
 		});
