@@ -94,6 +94,42 @@ asyncTest("Test removing custom person data", 1, function() {
 	);
 });
 
+if (forge.is.android()) {
+	asyncTest("Test showMessageCenter() with bad custom data.", 1, function() {
+		forge.apptentive.showMessageCenter(
+			function(success) {
+				ok(false, "Showed Message Center.");
+				start();
+			},
+			function(error) {
+				ok(true, "Did not show Message Center.");
+				start();
+			},
+			{
+				"number": 12345
+			}
+		);
+	});
+	
+	asyncTest("Test showMessageCenter() with bad custom data.", 1, function() {
+		forge.apptentive.showMessageCenter(
+			function(success) {
+				ok(false, "Showed Message Center.");
+				start();
+			},
+			function(error) {
+				ok(true, "Did not show Message Center.");
+				start();
+			},
+			{
+				"object": {
+					"foo": "bar"
+				}
+			}
+		);
+	});
+}
+
 asyncTest("Test unread message count", 1, function() {
 	forge.apptentive.getUnreadMessageCount(
 		function(success) {
