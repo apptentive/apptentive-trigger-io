@@ -38,7 +38,7 @@
 ///--------------------
 
 + (void)showMessageCenter:(ForgeTask *)task;
-+ (void)showMessageCenterWithCustomData:(ForgeTask *)task customData:(NSDictionary *)customData;
+
 + (void)getUnreadMessageCount:(ForgeTask *)task;
 
 + (void)didReceiveRemoteNotification:(ForgeTask *)task notificationUserInfo:(NSDictionary *)notificationUserInfo;

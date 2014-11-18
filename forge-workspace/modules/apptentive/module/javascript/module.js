@@ -4,13 +4,9 @@ forge.apptentive = {
 	// Presenting UI
 	// ************************************************************************************************************************************************
 
-	showMessageCenter: function (success, error) {
-		forge.internal.call('apptentive.showMessageCenter', {}, success, error);
-	},
-		
-	showMessageCenterWithCustomData: function (success, error, customData) {
+	showMessageCenter: function (success, error, customData) {
 		forge.internal.call(
-			'apptentive.showMessageCenterWithCustomData',
+			'apptentive.showMessageCenter',
 			{
 				(!customData || customData == "") ? {} : customData
 			},

@@ -51,11 +51,7 @@
 ///--------------------
 
 + (void)showMessageCenter:(ForgeTask *)task {
-    [[ATConnect sharedConnection] presentMessageCenterFromViewController:[[ForgeApp sharedApp] viewController]];
-    [task success:nil];
-}
-
-+ (void)showMessageCenterWithCustomData:(ForgeTask *)task customData:(NSDictionary *)customData {
+    NSDictionary *customData = task.params[@"customData"];
     [[ATConnect sharedConnection] presentMessageCenterFromViewController:[[ForgeApp sharedApp] viewController] withCustomData:customData];
     [task success:nil];
 }
