@@ -1,3 +1,11 @@
+# Notice!
+
+**Hello**.  The Apptentive Trigger.io Module has been discontinued and is no longer supported. We are still actively maintaining our [iOS](http://github.com/apptentive/apptentive-ios) and [Android](http://github.com/apptentive/apptentive-android) SDKs. If you have any questions, please contact us at [support@apptentive.com](mailto:support@apptentive.com?subject=Trigger%20Module).
+
+
+---
+---
+
 # Apptentive Trigger.io Module
 The Apptentive Trigger.io module allows you to add quick and easy in-app feedback, ratings, surveys, and more to your Trigger.io applications.
 
